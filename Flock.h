@@ -11,10 +11,6 @@ public:
     Flock();
 
     void AddBoid(Boids* new_boid);
-
-
-
-
 };
 
 
