@@ -1,4 +1,4 @@
-THE MAIN PROJECT DIRECTORY MUST BE CALLED "Boids"
+THE MAIN PROJECT DIRECTORY MUST BE CALLED "EC327-Boids"
 
 For the visual part, how you run it is a bit complicated because you need to use cmake
 

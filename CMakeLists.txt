@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(Boids)
+project(EC327-Boids)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -26,7 +26,7 @@ file(GLOB IMGUI_SOURCES
 )
 
 # Define the executable and its source files
-add_executable(Boids 
+add_executable(EC327-Boids 
     src/main.cpp 
     src/BoidGenTemp.cpp
     
@@ -43,7 +43,7 @@ add_executable(Boids
 )
 
 # Link the libraries to executable
-target_link_libraries(Boids 
+target_link_libraries(EC327-Boids 
     glfw 
     OpenGL::GL 
 )
