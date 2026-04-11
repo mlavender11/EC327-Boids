@@ -1,3 +1,5 @@
+THE MAIN PROJECT DIRECTORY MUST BE CALLED "Boids"
+
 For the visual part, how you run it is a bit complicated because you need to use cmake
 
 Here are the steps:
