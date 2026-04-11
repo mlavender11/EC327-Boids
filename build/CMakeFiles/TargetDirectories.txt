@@ -1,0 +1,3 @@
+/Users/tzezn/Desktop/ec327/Boids/build/CMakeFiles/Boids.dir
+/Users/tzezn/Desktop/ec327/Boids/build/CMakeFiles/edit_cache.dir
+/Users/tzezn/Desktop/ec327/Boids/build/CMakeFiles/rebuild_cache.dir
