@@ -46,21 +46,39 @@ int main()
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 0.1f, 100.0f);
         glm::mat4 model = glm::mat4(1.0f);
 
+        // RENDERING SECTION
         // Clear screen
         glClearColor(0.05f, 0.05f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        // Define our Light (e.g., coming from the top-right-front)
+        glm::vec3 sunDirection(-0.2f, -1.0f, -0.3f);
+        glm::vec3 sunColor(1.0f, 0.95f, 0.9f); // Slightly warm white
+        glm::vec3 ambient(1.0f, 1.0f, 1.0f);   // White ambient base
 
         // Draw Earth
         earthShader.use();
         earthShader.setMat4("view", view);
         earthShader.setMat4("projection", projection);
         earthShader.setMat4("model", glm::mat4(1.0f));
+
+        // Send lighting uniforms
+        glUniform3fv(glGetUniformLocation(earthShader.ID, "lightDir"), 1, glm::value_ptr(sunDirection));
+        glUniform3fv(glGetUniformLocation(earthShader.ID, "lightColor"), 1, glm::value_ptr(sunColor));
+        glUniform3fv(glGetUniformLocation(earthShader.ID, "ambientColor"), 1, glm::value_ptr(ambient));
+
         earthModel.Draw();
 
-        // Draw the 5000 boids
+        // Draw Boids
         boidShader.use();
         boidShader.setMat4("view", view);
         boidShader.setMat4("projection", projection);
+
+        // Send lighting uniforms to the boid shader
+        glUniform3fv(glGetUniformLocation(boidShader.ID, "lightDir"), 1, glm::value_ptr(sunDirection));
+        glUniform3fv(glGetUniformLocation(boidShader.ID, "lightColor"), 1, glm::value_ptr(sunColor));
+        glUniform3fv(glGetUniformLocation(boidShader.ID, "ambientColor"), 1, glm::value_ptr(ambient));
+
         boidRenderer.DrawInstanced(boidData);
 
         glfwSwapBuffers(window);

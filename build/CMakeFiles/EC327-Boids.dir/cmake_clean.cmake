@@ -1,0 +1,39 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.o"
+  "CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.o.d"
+  "CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.o"
+  "CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.o.d"
+  "CMakeFiles/EC327-Boids.dir/external/imgui/imgui.cpp.o"
+  "CMakeFiles/EC327-Boids.dir/external/imgui/imgui.cpp.o.d"
+  "CMakeFiles/EC327-Boids.dir/external/imgui/imgui_demo.cpp.o"
+  "CMakeFiles/EC327-Boids.dir/external/imgui/imgui_demo.cpp.o.d"
+  "CMakeFiles/EC327-Boids.dir/external/imgui/imgui_draw.cpp.o"
+  "CMakeFiles/EC327-Boids.dir/external/imgui/imgui_draw.cpp.o.d"
+  "CMakeFiles/EC327-Boids.dir/external/imgui/imgui_tables.cpp.o"
+  "CMakeFiles/EC327-Boids.dir/external/imgui/imgui_tables.cpp.o.d"
+  "CMakeFiles/EC327-Boids.dir/external/imgui/imgui_widgets.cpp.o"
+  "CMakeFiles/EC327-Boids.dir/external/imgui/imgui_widgets.cpp.o.d"
+  "CMakeFiles/EC327-Boids.dir/shaders/Shader.cpp.o"
+  "CMakeFiles/EC327-Boids.dir/shaders/Shader.cpp.o.d"
+  "CMakeFiles/EC327-Boids.dir/src/BoidGenTemp.cpp.o"
+  "CMakeFiles/EC327-Boids.dir/src/BoidGenTemp.cpp.o.d"
+  "CMakeFiles/EC327-Boids.dir/src/main.cpp.o"
+  "CMakeFiles/EC327-Boids.dir/src/main.cpp.o.d"
+  "CMakeFiles/EC327-Boids.dir/src/visual/BoidRenderer.cpp.o"
+  "CMakeFiles/EC327-Boids.dir/src/visual/BoidRenderer.cpp.o.d"
+  "CMakeFiles/EC327-Boids.dir/src/visual/Callbacks.cpp.o"
+  "CMakeFiles/EC327-Boids.dir/src/visual/Callbacks.cpp.o.d"
+  "CMakeFiles/EC327-Boids.dir/src/visual/Camera.cpp.o"
+  "CMakeFiles/EC327-Boids.dir/src/visual/Camera.cpp.o.d"
+  "CMakeFiles/EC327-Boids.dir/src/visual/Earth.cpp.o"
+  "CMakeFiles/EC327-Boids.dir/src/visual/Earth.cpp.o.d"
+  "CMakeFiles/EC327-Boids.dir/src/visual/Window.cpp.o"
+  "CMakeFiles/EC327-Boids.dir/src/visual/Window.cpp.o.d"
+  "EC327-Boids"
+  "EC327-Boids.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang C CXX)
+  include(CMakeFiles/EC327-Boids.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

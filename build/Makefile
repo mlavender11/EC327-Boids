@@ -57,10 +57,10 @@ RM = /opt/homebrew/Cellar/cmake/3.28.1/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/tzezn/Desktop/ec327/Boids
+CMAKE_SOURCE_DIR = /Users/tzezn/Desktop/ec327/EC327-Boids
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/tzezn/Desktop/ec327/Boids/build
+CMAKE_BINARY_DIR = /Users/tzezn/Desktop/ec327/EC327-Boids/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tzezn/Desktop/ec327/Boids/build/CMakeFiles /Users/tzezn/Desktop/ec327/Boids/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles /Users/tzezn/Desktop/ec327/EC327-Boids/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tzezn/Desktop/ec327/Boids/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -117,24 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Boids
+# Target rules for targets named EC327-Boids
 
 # Build rule for target.
-Boids: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Boids
-.PHONY : Boids
+EC327-Boids: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 EC327-Boids
+.PHONY : EC327-Boids
 
 # fast build rule for target.
-Boids/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/build
-.PHONY : Boids/fast
+EC327-Boids/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/build
+.PHONY : EC327-Boids/fast
 
 external/glad/src/glad.o: external/glad/src/glad.c.o
 .PHONY : external/glad/src/glad.o
 
 # target to build an object file
 external/glad/src/glad.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/glad/src/glad.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.o
 .PHONY : external/glad/src/glad.c.o
 
 external/glad/src/glad.i: external/glad/src/glad.c.i
@@ -142,7 +142,7 @@ external/glad/src/glad.i: external/glad/src/glad.c.i
 
 # target to preprocess a source file
 external/glad/src/glad.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/glad/src/glad.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.i
 .PHONY : external/glad/src/glad.c.i
 
 external/glad/src/glad.s: external/glad/src/glad.c.s
@@ -150,7 +150,7 @@ external/glad/src/glad.s: external/glad/src/glad.c.s
 
 # target to generate assembly for a file
 external/glad/src/glad.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/glad/src/glad.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.s
 .PHONY : external/glad/src/glad.c.s
 
 external/imgui/backends/imgui_impl_opengl3.o: external/imgui/backends/imgui_impl_opengl3.cpp.o
@@ -158,7 +158,7 @@ external/imgui/backends/imgui_impl_opengl3.o: external/imgui/backends/imgui_impl
 
 # target to build an object file
 external/imgui/backends/imgui_impl_opengl3.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.o
 .PHONY : external/imgui/backends/imgui_impl_opengl3.cpp.o
 
 external/imgui/backends/imgui_impl_opengl3.i: external/imgui/backends/imgui_impl_opengl3.cpp.i
@@ -166,7 +166,7 @@ external/imgui/backends/imgui_impl_opengl3.i: external/imgui/backends/imgui_impl
 
 # target to preprocess a source file
 external/imgui/backends/imgui_impl_opengl3.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.i
 .PHONY : external/imgui/backends/imgui_impl_opengl3.cpp.i
 
 external/imgui/backends/imgui_impl_opengl3.s: external/imgui/backends/imgui_impl_opengl3.cpp.s
@@ -174,7 +174,7 @@ external/imgui/backends/imgui_impl_opengl3.s: external/imgui/backends/imgui_impl
 
 # target to generate assembly for a file
 external/imgui/backends/imgui_impl_opengl3.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.s
 .PHONY : external/imgui/backends/imgui_impl_opengl3.cpp.s
 
 external/imgui/imgui.o: external/imgui/imgui.cpp.o
@@ -182,7 +182,7 @@ external/imgui/imgui.o: external/imgui/imgui.cpp.o
 
 # target to build an object file
 external/imgui/imgui.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/imgui/imgui.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/imgui.cpp.o
 .PHONY : external/imgui/imgui.cpp.o
 
 external/imgui/imgui.i: external/imgui/imgui.cpp.i
@@ -190,7 +190,7 @@ external/imgui/imgui.i: external/imgui/imgui.cpp.i
 
 # target to preprocess a source file
 external/imgui/imgui.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/imgui/imgui.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/imgui.cpp.i
 .PHONY : external/imgui/imgui.cpp.i
 
 external/imgui/imgui.s: external/imgui/imgui.cpp.s
@@ -198,7 +198,7 @@ external/imgui/imgui.s: external/imgui/imgui.cpp.s
 
 # target to generate assembly for a file
 external/imgui/imgui.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/imgui/imgui.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/imgui.cpp.s
 .PHONY : external/imgui/imgui.cpp.s
 
 external/imgui/imgui_demo.o: external/imgui/imgui_demo.cpp.o
@@ -206,7 +206,7 @@ external/imgui/imgui_demo.o: external/imgui/imgui_demo.cpp.o
 
 # target to build an object file
 external/imgui/imgui_demo.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/imgui/imgui_demo.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/imgui_demo.cpp.o
 .PHONY : external/imgui/imgui_demo.cpp.o
 
 external/imgui/imgui_demo.i: external/imgui/imgui_demo.cpp.i
@@ -214,7 +214,7 @@ external/imgui/imgui_demo.i: external/imgui/imgui_demo.cpp.i
 
 # target to preprocess a source file
 external/imgui/imgui_demo.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/imgui/imgui_demo.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/imgui_demo.cpp.i
 .PHONY : external/imgui/imgui_demo.cpp.i
 
 external/imgui/imgui_demo.s: external/imgui/imgui_demo.cpp.s
@@ -222,7 +222,7 @@ external/imgui/imgui_demo.s: external/imgui/imgui_demo.cpp.s
 
 # target to generate assembly for a file
 external/imgui/imgui_demo.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/imgui/imgui_demo.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/imgui_demo.cpp.s
 .PHONY : external/imgui/imgui_demo.cpp.s
 
 external/imgui/imgui_draw.o: external/imgui/imgui_draw.cpp.o
@@ -230,7 +230,7 @@ external/imgui/imgui_draw.o: external/imgui/imgui_draw.cpp.o
 
 # target to build an object file
 external/imgui/imgui_draw.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/imgui/imgui_draw.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/imgui_draw.cpp.o
 .PHONY : external/imgui/imgui_draw.cpp.o
 
 external/imgui/imgui_draw.i: external/imgui/imgui_draw.cpp.i
@@ -238,7 +238,7 @@ external/imgui/imgui_draw.i: external/imgui/imgui_draw.cpp.i
 
 # target to preprocess a source file
 external/imgui/imgui_draw.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/imgui/imgui_draw.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/imgui_draw.cpp.i
 .PHONY : external/imgui/imgui_draw.cpp.i
 
 external/imgui/imgui_draw.s: external/imgui/imgui_draw.cpp.s
@@ -246,7 +246,7 @@ external/imgui/imgui_draw.s: external/imgui/imgui_draw.cpp.s
 
 # target to generate assembly for a file
 external/imgui/imgui_draw.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/imgui/imgui_draw.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/imgui_draw.cpp.s
 .PHONY : external/imgui/imgui_draw.cpp.s
 
 external/imgui/imgui_tables.o: external/imgui/imgui_tables.cpp.o
@@ -254,7 +254,7 @@ external/imgui/imgui_tables.o: external/imgui/imgui_tables.cpp.o
 
 # target to build an object file
 external/imgui/imgui_tables.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/imgui/imgui_tables.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/imgui_tables.cpp.o
 .PHONY : external/imgui/imgui_tables.cpp.o
 
 external/imgui/imgui_tables.i: external/imgui/imgui_tables.cpp.i
@@ -262,7 +262,7 @@ external/imgui/imgui_tables.i: external/imgui/imgui_tables.cpp.i
 
 # target to preprocess a source file
 external/imgui/imgui_tables.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/imgui/imgui_tables.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/imgui_tables.cpp.i
 .PHONY : external/imgui/imgui_tables.cpp.i
 
 external/imgui/imgui_tables.s: external/imgui/imgui_tables.cpp.s
@@ -270,7 +270,7 @@ external/imgui/imgui_tables.s: external/imgui/imgui_tables.cpp.s
 
 # target to generate assembly for a file
 external/imgui/imgui_tables.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/imgui/imgui_tables.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/imgui_tables.cpp.s
 .PHONY : external/imgui/imgui_tables.cpp.s
 
 external/imgui/imgui_widgets.o: external/imgui/imgui_widgets.cpp.o
@@ -278,7 +278,7 @@ external/imgui/imgui_widgets.o: external/imgui/imgui_widgets.cpp.o
 
 # target to build an object file
 external/imgui/imgui_widgets.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/imgui/imgui_widgets.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/imgui_widgets.cpp.o
 .PHONY : external/imgui/imgui_widgets.cpp.o
 
 external/imgui/imgui_widgets.i: external/imgui/imgui_widgets.cpp.i
@@ -286,7 +286,7 @@ external/imgui/imgui_widgets.i: external/imgui/imgui_widgets.cpp.i
 
 # target to preprocess a source file
 external/imgui/imgui_widgets.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/imgui/imgui_widgets.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/imgui_widgets.cpp.i
 .PHONY : external/imgui/imgui_widgets.cpp.i
 
 external/imgui/imgui_widgets.s: external/imgui/imgui_widgets.cpp.s
@@ -294,7 +294,7 @@ external/imgui/imgui_widgets.s: external/imgui/imgui_widgets.cpp.s
 
 # target to generate assembly for a file
 external/imgui/imgui_widgets.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/external/imgui/imgui_widgets.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/imgui_widgets.cpp.s
 .PHONY : external/imgui/imgui_widgets.cpp.s
 
 shaders/Shader.o: shaders/Shader.cpp.o
@@ -302,7 +302,7 @@ shaders/Shader.o: shaders/Shader.cpp.o
 
 # target to build an object file
 shaders/Shader.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/shaders/Shader.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/shaders/Shader.cpp.o
 .PHONY : shaders/Shader.cpp.o
 
 shaders/Shader.i: shaders/Shader.cpp.i
@@ -310,7 +310,7 @@ shaders/Shader.i: shaders/Shader.cpp.i
 
 # target to preprocess a source file
 shaders/Shader.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/shaders/Shader.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/shaders/Shader.cpp.i
 .PHONY : shaders/Shader.cpp.i
 
 shaders/Shader.s: shaders/Shader.cpp.s
@@ -318,7 +318,7 @@ shaders/Shader.s: shaders/Shader.cpp.s
 
 # target to generate assembly for a file
 shaders/Shader.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/shaders/Shader.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/shaders/Shader.cpp.s
 .PHONY : shaders/Shader.cpp.s
 
 src/BoidGenTemp.o: src/BoidGenTemp.cpp.o
@@ -326,7 +326,7 @@ src/BoidGenTemp.o: src/BoidGenTemp.cpp.o
 
 # target to build an object file
 src/BoidGenTemp.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/BoidGenTemp.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/BoidGenTemp.cpp.o
 .PHONY : src/BoidGenTemp.cpp.o
 
 src/BoidGenTemp.i: src/BoidGenTemp.cpp.i
@@ -334,7 +334,7 @@ src/BoidGenTemp.i: src/BoidGenTemp.cpp.i
 
 # target to preprocess a source file
 src/BoidGenTemp.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/BoidGenTemp.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/BoidGenTemp.cpp.i
 .PHONY : src/BoidGenTemp.cpp.i
 
 src/BoidGenTemp.s: src/BoidGenTemp.cpp.s
@@ -342,7 +342,7 @@ src/BoidGenTemp.s: src/BoidGenTemp.cpp.s
 
 # target to generate assembly for a file
 src/BoidGenTemp.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/BoidGenTemp.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/BoidGenTemp.cpp.s
 .PHONY : src/BoidGenTemp.cpp.s
 
 src/main.o: src/main.cpp.o
@@ -350,7 +350,7 @@ src/main.o: src/main.cpp.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -358,7 +358,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -366,7 +366,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 src/visual/BoidRenderer.o: src/visual/BoidRenderer.cpp.o
@@ -374,7 +374,7 @@ src/visual/BoidRenderer.o: src/visual/BoidRenderer.cpp.o
 
 # target to build an object file
 src/visual/BoidRenderer.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/visual/BoidRenderer.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/BoidRenderer.cpp.o
 .PHONY : src/visual/BoidRenderer.cpp.o
 
 src/visual/BoidRenderer.i: src/visual/BoidRenderer.cpp.i
@@ -382,7 +382,7 @@ src/visual/BoidRenderer.i: src/visual/BoidRenderer.cpp.i
 
 # target to preprocess a source file
 src/visual/BoidRenderer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/visual/BoidRenderer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/BoidRenderer.cpp.i
 .PHONY : src/visual/BoidRenderer.cpp.i
 
 src/visual/BoidRenderer.s: src/visual/BoidRenderer.cpp.s
@@ -390,7 +390,7 @@ src/visual/BoidRenderer.s: src/visual/BoidRenderer.cpp.s
 
 # target to generate assembly for a file
 src/visual/BoidRenderer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/visual/BoidRenderer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/BoidRenderer.cpp.s
 .PHONY : src/visual/BoidRenderer.cpp.s
 
 src/visual/Callbacks.o: src/visual/Callbacks.cpp.o
@@ -398,7 +398,7 @@ src/visual/Callbacks.o: src/visual/Callbacks.cpp.o
 
 # target to build an object file
 src/visual/Callbacks.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/visual/Callbacks.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Callbacks.cpp.o
 .PHONY : src/visual/Callbacks.cpp.o
 
 src/visual/Callbacks.i: src/visual/Callbacks.cpp.i
@@ -406,7 +406,7 @@ src/visual/Callbacks.i: src/visual/Callbacks.cpp.i
 
 # target to preprocess a source file
 src/visual/Callbacks.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/visual/Callbacks.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Callbacks.cpp.i
 .PHONY : src/visual/Callbacks.cpp.i
 
 src/visual/Callbacks.s: src/visual/Callbacks.cpp.s
@@ -414,7 +414,7 @@ src/visual/Callbacks.s: src/visual/Callbacks.cpp.s
 
 # target to generate assembly for a file
 src/visual/Callbacks.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/visual/Callbacks.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Callbacks.cpp.s
 .PHONY : src/visual/Callbacks.cpp.s
 
 src/visual/Camera.o: src/visual/Camera.cpp.o
@@ -422,7 +422,7 @@ src/visual/Camera.o: src/visual/Camera.cpp.o
 
 # target to build an object file
 src/visual/Camera.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/visual/Camera.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Camera.cpp.o
 .PHONY : src/visual/Camera.cpp.o
 
 src/visual/Camera.i: src/visual/Camera.cpp.i
@@ -430,7 +430,7 @@ src/visual/Camera.i: src/visual/Camera.cpp.i
 
 # target to preprocess a source file
 src/visual/Camera.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/visual/Camera.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Camera.cpp.i
 .PHONY : src/visual/Camera.cpp.i
 
 src/visual/Camera.s: src/visual/Camera.cpp.s
@@ -438,7 +438,7 @@ src/visual/Camera.s: src/visual/Camera.cpp.s
 
 # target to generate assembly for a file
 src/visual/Camera.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/visual/Camera.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Camera.cpp.s
 .PHONY : src/visual/Camera.cpp.s
 
 src/visual/Earth.o: src/visual/Earth.cpp.o
@@ -446,7 +446,7 @@ src/visual/Earth.o: src/visual/Earth.cpp.o
 
 # target to build an object file
 src/visual/Earth.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/visual/Earth.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Earth.cpp.o
 .PHONY : src/visual/Earth.cpp.o
 
 src/visual/Earth.i: src/visual/Earth.cpp.i
@@ -454,7 +454,7 @@ src/visual/Earth.i: src/visual/Earth.cpp.i
 
 # target to preprocess a source file
 src/visual/Earth.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/visual/Earth.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Earth.cpp.i
 .PHONY : src/visual/Earth.cpp.i
 
 src/visual/Earth.s: src/visual/Earth.cpp.s
@@ -462,7 +462,7 @@ src/visual/Earth.s: src/visual/Earth.cpp.s
 
 # target to generate assembly for a file
 src/visual/Earth.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/visual/Earth.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Earth.cpp.s
 .PHONY : src/visual/Earth.cpp.s
 
 src/visual/Window.o: src/visual/Window.cpp.o
@@ -470,7 +470,7 @@ src/visual/Window.o: src/visual/Window.cpp.o
 
 # target to build an object file
 src/visual/Window.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/visual/Window.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Window.cpp.o
 .PHONY : src/visual/Window.cpp.o
 
 src/visual/Window.i: src/visual/Window.cpp.i
@@ -478,7 +478,7 @@ src/visual/Window.i: src/visual/Window.cpp.i
 
 # target to preprocess a source file
 src/visual/Window.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/visual/Window.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Window.cpp.i
 .PHONY : src/visual/Window.cpp.i
 
 src/visual/Window.s: src/visual/Window.cpp.s
@@ -486,7 +486,7 @@ src/visual/Window.s: src/visual/Window.cpp.s
 
 # target to generate assembly for a file
 src/visual/Window.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Boids.dir/build.make CMakeFiles/Boids.dir/src/visual/Window.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Window.cpp.s
 .PHONY : src/visual/Window.cpp.s
 
 # Help Target
@@ -497,7 +497,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... Boids"
+	@echo "... EC327-Boids"
 	@echo "... external/glad/src/glad.o"
 	@echo "... external/glad/src/glad.i"
 	@echo "... external/glad/src/glad.s"
