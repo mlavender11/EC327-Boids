@@ -60,6 +60,33 @@ void BoidRenderer::setupMesh()
     glBindVertexArray(0);
 }
 
+/*
+std::vector<glm::mat4> BoidRenderer::BoidsToMatrices(const std::vector<Boids> &in_boids)
+{
+    std::vector<glm::mat4> matrices;
+    matrices.reserve(in_boids.size());
+
+    for (const auto &boid : in_boids)
+    {
+        // Use the struct's data to build the orientation vectors
+        glm::vec3 earthNormal = glm::normalize(boid.position);
+        glm::vec3 right = glm::normalize(glm::cross(earthNormal, boid.heading));
+        glm::vec3 localUp = glm::normalize(glm::cross(boid.heading, right));
+
+        // Build the 4x4 matrix
+        glm::mat4 model = glm::mat4(1.0f);
+        model[0] = glm::vec4(right, 0.0f);
+        model[1] = glm::vec4(localUp, 0.0f);
+        model[2] = glm::vec4(boid.heading, 0.0f);
+        model[3] = glm::vec4(boid.position, 1.0f);
+
+        model = glm::scale(model, glm::vec3(0.2f));
+        matrices.push_back(model);
+    }
+    return matrices;
+}
+*/
+
 void BoidRenderer::DrawInstanced(const std::vector<glm::mat4> &instanceTransforms)
 {
     if (instanceTransforms.empty())
@@ -73,7 +100,7 @@ void BoidRenderer::DrawInstanced(const std::vector<glm::mat4> &instanceTransform
     glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
     glBufferSubData(GL_ARRAY_BUFFER, 0, instanceTransforms.size() * sizeof(glm::mat4), &instanceTransforms[0]);
 
-    // Draw all of them in a single hardware call
+    // Draw all of them
     glDrawArraysInstanced(GL_TRIANGLES, 0, vertexCount, instanceTransforms.size());
 
     glBindVertexArray(0);
