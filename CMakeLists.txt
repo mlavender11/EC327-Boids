@@ -11,7 +11,7 @@ find_package(OpenGL REQUIRED)
 include_directories(
     src
     src/visual
-    # Include directory for behavior when added
+    src/behavior
     external/glad/include
     external
     external/imgui
@@ -29,7 +29,7 @@ file(GLOB IMGUI_SOURCES
 add_executable(EC327-Boids 
     src/main.cpp 
     src/BoidGenTemp.cpp
-    
+    # src/behavior/Boids.cpp # Add once working
     src/visual/Callbacks.cpp 
     src/visual/Earth.cpp
     src/visual/Camera.cpp
