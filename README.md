@@ -1,35 +1,25 @@
 ***THE MAIN PROJECT DIRECTORY MUST BE CALLED "EC327-Boids"***
 
 # Directory Architecture
-"->" means it's a folder
+**Important folders and files are listed here**
+Descriptions for folder contents are in *italics*.
 
-"=>" means it's files
-
-EC327-Boids/
-
-->  build/
-
-    => Stuff for CMake, as well as the executable for the program
-
-->  external/
-
-    => Downloaded external libraries
-
-->  shaders/
-
-    => Shader files
-
-->  src/
-
-    ->  behavior/
-
-        => Stuff to determine how the boids move and interact, as well as the environment (eventually)
-
-    ->  visual/
-
-        => Stuff to render everything
-
-    => main.cpp
+EC327-Boids
+├── build
+│   ├── EC327-Boids.exe
+│   ├── *Other stuff CMake needs*
+├── external
+│   ├── *A bunch of external libraries we use*
+├── shaders
+│   ├── *Shaders for boids and the earth*
+├── src
+│   ├── main.cpp
+│   ├── *Temporary boid generation files*
+│   ├── behavior
+│   │   ├── **Michael and Yicong pls put stuff here**
+│   ├── visual
+│   │   ├── *Boid rendering, camera movement, window gen, Earth model*
+├── CMakeLists.txt
 
 # How to Run
 For the visual part, how you run it is a bit complicated because you need to use cmake
