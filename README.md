@@ -2,7 +2,7 @@
 
 How to format stuff: https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
 
-## Folder Hierarchy
+# Folder Hierarchy
 Important folders and files are listed here. Descriptions for folder contents are in parentheses.
 
 ```text
@@ -24,7 +24,7 @@ EC327-Boids/
 └── CMakeLists.txt
 ```
 
-## How to Run
+# How to Run
 For the visual part, how you run it is a bit complicated because you need to use cmake
 
 Here are the steps:
@@ -35,11 +35,11 @@ Here are the steps:
 4. Go to the main folder ("cd ..")
 5. Enter "./build/EC327-Boids" (or whatever the .exe is called) in the terminal
 
-## Behavior
+# Behavior
 Michael and Yicong whatever you guys wanna put here
 
-## Visuals
-# BoidRenderer.h/cpp
+# Visuals
+## BoidRenderer.h/cpp
 These files have two important functions:
 
 ```std::vector<glm::mat4> BoidsToMatrices(const std::vector<Boids> &)```
@@ -54,8 +54,8 @@ It then returns a vector (of type `std::vector<glm::mat4>`) that contains the re
 
 The second function, `DrawInstanced`, draws all the boids from the vector returned by the first function. I did it this way because it's much more efficient than having each object draw itself like we did in PA3.
 
-# Camera.h/cpp, Callbacks.h/cpp, and Window.h/cpp
+## Camera.h/cpp, Callbacks.h/cpp, and Window.h/cpp
 ...
 
-# Earth.h/cpp
+## Earth.h/cpp
 ...
