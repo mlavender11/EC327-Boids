@@ -5,12 +5,13 @@
 
 class Flock{
 private:
-    Boids* flock[100]; //How big do we want this? Maybe we should use stdlib vectors to make it dynamic
-    int size; //Used for tracking number of boids present, not needed if we use vectors
+    vector<Boids> boids;
 public:
     Flock();
+    Flock(int n);
 
-    void AddBoid(Boids* new_boid);
+    void AddBoid(Boids& new_boid);
+    void update();
 };
 
 

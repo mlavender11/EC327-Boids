@@ -14,8 +14,8 @@ private:
     glm::vec3 position;
     glm::vec3 velocity; //Current velocity
     glm::vec3 acceleration; // Current steering force
-    double maxSpeed; //Maximum speed
-    double maxForce; //Maximum force that allowed per update
+    float maxSpeed; //Maximum speed
+    float maxForce; //Maximum force that allowed per update
     int id;
 
 public:
@@ -30,6 +30,16 @@ public:
     double distanceTo(const Boids& other_boid) const;
 
     void applyForce(const glm::vec3& force);//Apply one steering force to this boid
+
+    glm::vec3 seek(glm::vec3 target); //Head towards a position
+    glm::vec3 separate(const vector<Boids>& boids); //Seperate if boids are too close
+    glm::vec3 align(const vector<Boids>& boids); //steer towards avg velocity of neighbors
+    glm::vec3 cohere(const vector<Boids>& boids); //Steer toward average position of neighbors
+
+    void flock(const vector<Boids>& boids); //Calculate forces from all other boids in the flock
+
+
+
 
     /*Before updating the bird's motion for each frame, we need to accumulate and calculate every force acting upon it, 
     and then apply these updates collectively via the `update`*/

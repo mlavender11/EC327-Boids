@@ -48,7 +48,60 @@ glm::vec3 Boids::getPosition() const
     return position;
 }
 
+glm::vec3 Boids::getVelocity() const
+{
+    return velocity;
+}
+
 double Boids::getDistance(const Boids &boid1, const Boids &boid2)
 {
     return glm::distance(boid1.getPosition(), boid2.getPosition());
+}
+
+void Boids::applyForce(const glm::vec3 &force)
+{
+    acceleration += force;
+}
+
+glm::vec3 Boids::seek(glm::vec3 target)
+{ // not finished
+    glm::vec3 desired = target - position;
+    desired = glm::normalize(desired) * maxSpeed;
+    glm::vec3 steer = desired - velocity;
+    if (glm::length(steer) > maxForce)
+    {
+        steer = glm::normalize(steer) * maxForce;
+    }
+
+    return steer;
+}
+
+
+
+void Boids::update()
+{ // not finished
+    velocity += acceleration;
+
+    if (glm::length(velocity) > maxSpeed)
+        glm::normalize(velocity) * maxSpeed;
+    
+    position += velocity;
+    acceleration = glm::vec3(0.0f,0.0f,0.0f);
+    
+
+}
+
+void Boids::flock(const vector<Boids>& boids) {
+    glm::vec3 sep = separate(boids);
+    glm::vec3 ali = align(boids);
+    glm::vec3 coh = cohere(boids);
+
+    //Weighting for different forces
+    sep *= 1.5f;
+    ali *= 1.0f;
+    coh *= 1.0f;
+
+    applyForce(sep);
+    applyForce(ali);
+    applyForce(coh);
 }
