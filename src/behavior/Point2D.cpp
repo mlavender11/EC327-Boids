@@ -34,7 +34,7 @@ Point2D Point2D::operator+(Vector2D v)
     return Point2D(x + v.x, y + v.y);
 }
 
-Vector2D Point2D::operator-(Point2D p2)
+Vector2D Point2D::operator-(const Point2D& p2)const
 {
     return Vector2D(x - p2.x, y - p2.y);
 }

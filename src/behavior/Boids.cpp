@@ -9,14 +9,32 @@ Boids::Boids() {
     double y = distrib(gen);
 
     position = Point2D(x, y);
+    velocity = Vector2D(0.0,0.0);
+    acceleration = Vector2D(0.0,0.0);
+    maxSpeed = 3; // we can adjust it later
+    maxForce = 0.5;
+    id = 1; 
+
 
 }
 
 Boids::Boids(double in_x, double in_y) {
     position = Point2D(in_x, in_y);
+    velocity = Vector2D(0.0, 0.0);
+    acceleration = Vector2D(0.0,0.0);
+    maxSpeed = 3;
+    maxForce = 0.5;
+    id = 1;
 }
 
-
+Boids::Boids(double in_x, double in_y, Vector2D in_vel) {
+    position = Point2D(in_x, in_y);
+    velocity = in_v;
+    acceleration = Vector2D(0.0, 0.0);
+    maxSpeed = 2.0;
+    maxForce = 0.1;
+    id = 1;
+}
 
 Vector2D Boids::operator-(Boids other_boid){
     return this->position - other_boid.getPosition();
