@@ -1,25 +1,26 @@
 ***THE MAIN PROJECT DIRECTORY MUST BE CALLED "EC327-Boids"***
+https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
 
 # Directory Architecture
 **Important folders and files are listed here**
 Descriptions for folder contents are in *italics*.
 
-EC327-Boids
-├── build
-│   ├── EC327-Boids.exe
-│   ├── *Other stuff CMake needs*
-├── external
-│   ├── *A bunch of external libraries we use*
-├── shaders
-│   ├── *Shaders for boids and the earth*
-├── src
-│   ├── main.cpp
-│   ├── *Temporary boid generation files*
-│   ├── behavior
-│   │   ├── **Michael and Yicong pls put stuff here**
-│   ├── visual
-│   │   ├── *Boid rendering, camera movement, window gen, Earth model*
-├── CMakeLists.txt
+EC327-Boids\
+├── build\
+│   ├── EC327-Boids.exe\
+│   └── *Other stuff CMake needs*\
+├── external\
+│   └── *A bunch of external libraries we use*\
+├── shaders\
+│   └── *Shaders for boids and the earth*\
+├── src\
+│   ├── main.cpp\
+│   ├── *Temporary boid generation files*\
+│   ├── behavior\
+│   │   └── **Michael and Yicong pls put stuff here**\
+│   ├── visual\
+│   │   └── *Boid rendering, camera movement, window gen, Earth model*\
+└── CMakeLists.txt
 
 # How to Run
 For the visual part, how you run it is a bit complicated because you need to use cmake
