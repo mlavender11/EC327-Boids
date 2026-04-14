@@ -4,8 +4,8 @@
 #include "Boids.h"
 
 class Flock{
-private:
-    vector<Boids> boids;
+private: // should be made public or friend for my predator
+    vector<Boids> boids; // I think that for flock we should make the vector out of Friedly or make a get func- Ilias
 public:
     Flock();
     Flock(int n);
