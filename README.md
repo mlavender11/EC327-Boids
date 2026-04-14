@@ -36,7 +36,7 @@ Here are the steps:
 5. Enter "./build/EC327-Boids" (or whatever the .exe is called) in the terminal
 
 # Behavior
-Michael and Yicong whatever you guys wanna put here
+Whatever you guys wanna put here
 
 # Visuals
 ## BoidRenderer.h/cpp
@@ -55,7 +55,21 @@ It then returns a vector (of type `std::vector<glm::mat4>`) that contains the re
 The second function, `DrawInstanced`, draws all the boids from the vector returned by the first function. I did it this way because it's much more efficient than having each object draw itself like we did in PA3.
 
 ## Camera.h/cpp, Callbacks.h/cpp, and Window.h/cpp
-...
+These three modules handle the application setup and how the user interacts with the 3D world. 
+
+**Window** contains `InitializeWindow`, which handles all the messy boilerplate to start up GLFW, GLAD, and create the OpenGL window. It also has `ProcessInput` to catch continuous key presses.
+
+**Callbacks** intercepts mouse clicks, mouse movement, and scroll wheel actions. It uses these inputs to update a `CameraState` struct, which stores the camera's spherical coordinates (pitch, yaw, and radius/zoom distance). 
+
+**Camera** takes that struct and runs:
+```glm::mat4 CalculateViewMatrix(const CameraState& cam)```
+This function converts the spherical coordinates (pitch, yaw, radius) into a standard 3D view matrix. This matrix is sent to the shaders every frame so OpenGL knows exactly where the camera is and what angle we are looking from.
 
 ## Earth.h/cpp
-...
+This class generates and renders the central planet that the boids fly around.
+
+```Earth(float radius, int sectors, int stacks)```
+The constructor procedurally generates a 3D sphere using math. The `sectors` and `stacks` parameters control the resolution (longitude and latitude lines).
+
+```void Draw()```
+During setup, the generated vertices are packaged and sent over to the GPU's memory using Vertex Buffer Objects (VBOs). The `Draw` function simply tells the GPU to render those pre-loaded buffers.
