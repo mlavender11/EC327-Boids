@@ -41,14 +41,14 @@ Michael and Yicong whatever you guys wanna put here
 
 These files have two important functions:
 
-> std::vector<glm::mat4> BoidsToMatrices(const std::vector<Boids> &)
+> `std::vector<glm::mat4> BoidsToMatrices(const std::vector<Boids> &)`
 
-> void DrawInstanced(const std::vector<glm::mat4> &)
+> `void DrawInstanced(const std::vector<glm::mat4> &)`
 
-The first function, BoidsToMatrices takes in a vector of boids objects, loops through each of them, and extracts each of their position and heading values (which need to be of type glm::vec3).
+The first function, `BoidsToMatrices`, takes in a vector of boids objects, loops through each of them, and extracts each of their position and heading values (which need to be of type `glm::vec3`).
 
-Those values are then added to a 4x4 matrix (of type glm::mat4). This is the most basic form so if we want to add colors or other characteristics that would need visualization, I would probably need to increase the size of this matrix.
+Those values are then added to a 4x4 matrix (of type `glm::mat4`). This is the most basic form so if we want to add colors or other characteristics that would need visualization, I would probably need to increase the size of this matrix.
 
-It then returns a vector (of type std::vector<glm::mat4>) that contains the relevant information of all boids objects. 
+It then returns a vector (of type `std::vector<glm::mat4>`) that contains the relevant information of all boids objects. 
 
-The second function, DrawInstanced, draws all the boids from the vector returned by the first function. I did it this way because it's much more efficient than having each object draw itself like we did in PA3.
+The second function, `DrawInstanced`, draws all the boids from the vector returned by the first function. I did it this way because it's much more efficient than having each object draw itself like we did in PA3.
