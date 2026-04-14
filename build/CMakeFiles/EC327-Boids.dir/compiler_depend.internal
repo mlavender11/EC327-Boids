@@ -2178,9 +2178,6 @@ CMakeFiles/EC327-Boids.dir/src/main.cpp.o
  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/vector_relational.hpp
  /Users/tzezn/Desktop/ec327/EC327-Boids/shaders/Shader.h
  /Users/tzezn/Desktop/ec327/EC327-Boids/src/BoidGenTemp.h
- /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Boids.h
- /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Point2D.h
- /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Vector2D.h
  /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/BoidRenderer.h
  /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Callbacks.h
  /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Camera.h

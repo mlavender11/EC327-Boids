@@ -2168,9 +2168,6 @@ CMakeFiles/EC327-Boids.dir/src/main.cpp.o: /Users/tzezn/Desktop/ec327/EC327-Boid
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/vector_relational.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/shaders/Shader.h \
   /Users/tzezn/Desktop/ec327/EC327-Boids/src/BoidGenTemp.h \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Boids.h \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Point2D.h \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Vector2D.h \
   /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/BoidRenderer.h \
   /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Callbacks.h \
   /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Camera.h \
@@ -3484,10 +3481,6 @@ CMakeFiles/EC327-Boids.dir/src/visual/Window.cpp.o: /Users/tzezn/Desktop/ec327/E
 
 /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Callbacks.h:
 
-/Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Point2D.h:
-
-/Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Boids.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/random:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/numeric:
@@ -4325,8 +4318,6 @@ CMakeFiles/EC327-Boids.dir/src/visual/Window.cpp.o: /Users/tzezn/Desktop/ec327/E
 /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/locale:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__string:
-
-/Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Vector2D.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/machine/signal.h:
 

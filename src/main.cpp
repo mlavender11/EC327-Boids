@@ -31,11 +31,14 @@ int main()
     Shader earthShader("shaders/VertexShader.glsl", "shaders/FragmentShader.glsl");
     Shader boidShader("shaders/BoidVertexShader.glsl", "shaders/FragmentShader.glsl");
 
-    Earth earthModel(10.0f, 16, 16);
+    float surfaceRadius = 10.0f;
+    float atmosphereRadius = 20.0f;
+
+    Earth earthModel(surfaceRadius, 16, 16);
     BoidRenderer boidRenderer; // Boids
 
-    // Generate 5000 dummy boids flying between the surface (10.0) and the upper atmosphere (15.0)
-    std::vector<glm::mat4> boidData = GenerateTestBoids(5000, 10.0f, 15.0f);
+    // Generate 5000 coordinates to simulate boids between surfaceRadius and atmosphereRadius
+    std::vector<glm::mat4> boidData = GenerateTestBoids(5000, surfaceRadius, atmosphereRadius);
 
     while (!glfwWindowShouldClose(window))
     {
