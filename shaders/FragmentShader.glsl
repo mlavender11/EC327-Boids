@@ -25,7 +25,7 @@ void main()
     vec3 ambient = ambientStrength * ambientColor;
 
     // ATMOSPHERIC DAY/NIGHT CALCULATION
-    vec3 normLightDir = normalize(-lightDir); 
+    vec3 normLightDir = normalize(lightDir); 
     
     // Calculate the raw angle (-1.0 to 1.0)
     float sunAngle = dot(normal, normLightDir);

@@ -25,7 +25,7 @@ bool GraphicsEngine::Initialize(int width, int height, const char *title)
     glfwSetScrollCallback(window, scroll_callback);
 
     mainShader = new Shader("shaders/VertexShader.glsl", "shaders/FragmentShader.glsl");
-    sunShader = new Shader("shaders/VertexShader.glsl", "shaders/SunFragmentShader.glsl");
+    sunShader = new Shader("shaders/VertexShader.glsl", "shaders/StarFragmentShader.glsl");
     boidShader = new Shader("shaders/BoidVertexShader.glsl", "shaders/FragmentShader.glsl");
 
     earth = new CelestialBody(10.0f, 16, 16);
@@ -54,7 +54,8 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData)
     sun->Update(glfwGetTime());
 
     glm::mat4 view = CalculateViewMatrix(camera);
-    glm::mat4 projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 0.1f, 100.0f);
+    // The final parameter of perspective is the render distance
+    glm::mat4 projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 0.1f, 1000.0f);
     glm::vec3 lightDir = sun->GetDirection();
     glm::vec3 ambient(1.0f, 1.0f, 1.0f);
 
