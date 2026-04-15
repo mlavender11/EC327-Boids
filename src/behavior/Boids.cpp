@@ -5,16 +5,16 @@ Boids::Boids()
 {
     random_device rd;
     mt19937 gen(rd());
-    uniform_int_distribution<> distrib(0, COORDINATE_MAX);
-    double x = distrib(gen);
-    double y = distrib(gen);
-    double z = distrib(gen);
+    uniform_real_distribution<float> distrib(0.0f, COORDINATE_MAX);
+    float x = distrib(gen);
+    float y = distrib(gen); // changed these 3 to be floats -Ilias
+    float z = distrib(gen);
 
     position = glm::vec3(x, y, z);
     velocity = glm::vec3(0.0f, 0.0f, 0.0f);
     acceleration = glm::vec3(0.0f, 0.0f, 0.0f);
-    maxSpeed = 3; // we can adjust it later
-    maxForce = 0.5;
+    maxSpeed = 3.0f; // we can adjust it later
+    maxForce = 0.5f;
     id = 1;
 }
 
