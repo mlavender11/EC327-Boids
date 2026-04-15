@@ -67,6 +67,6 @@ void scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
     // Constrain the zoom
     if (cam->radius < 2.0f)
         cam->radius = 2.0f;
-    if (cam->radius > 50.0f)
-        cam->radius = 50.0f;
+    if (cam->radius > 100.0f)
+        cam->radius = 100.0f;
 }

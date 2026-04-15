@@ -57,13 +57,11 @@ The second function, `DrawInstanced`, draws all the boids from the vector return
 ## Camera.h/cpp, Callbacks.h/cpp, and Window.h/cpp
 These three modules handle the application setup and how the user interacts with the 3D world. 
 
-**Window** contains `InitializeWindow`, which handles all the messy boilerplate to start up GLFW, GLAD, and create the OpenGL window. It also has `ProcessInput` to catch continuous key presses.
+**Window** contains `InitializeWindow`, which starts up GLFW, GLAD, and creates the OpenGL window. It also has `ProcessInput`, which is always waiting for the user to press escape to close the window (can add more things here as well--if we do want to add more inputs, keyboard inputs would be listened for here). 
 
-**Callbacks** intercepts mouse clicks, mouse movement, and scroll wheel actions. It uses these inputs to update a `CameraState` struct, which stores the camera's spherical coordinates (pitch, yaw, and radius/zoom distance). 
+**Camera** holds a struct which stores the camera's spherical coordinates (pitch, yaw, and radius/zoom distance) as well as its previous x and y coordinates and if the mouse is being dragged. It also has `glm::mat4 CalculateViewMatrix(const CameraState& cam)`, which converts the spherical coordinates of the camera into a matrix of cartesian coordinates. This matrix is sent to the shaders every frame so OpenGL knows where the camera is and what angle it is looking from.
 
-**Camera** takes that struct and runs:
-```glm::mat4 CalculateViewMatrix(const CameraState& cam)```
-This function converts the spherical coordinates (pitch, yaw, radius) into a standard 3D view matrix. This matrix is sent to the shaders every frame so OpenGL knows exactly where the camera is and what angle we are looking from.
+**Callbacks** intercepts mouse clicks, mouse movement, and scroll wheel actions. It uses these inputs to update `Camera.h`'s `CameraState` struct. It is apparently better to use callbacks for tracking mouse and scroll inputs. The bounds for the camera position and orientation are stored here.
 
 ## Earth.h/cpp
 This class generates and renders the central planet that the boids fly around.
@@ -72,4 +70,4 @@ This class generates and renders the central planet that the boids fly around.
 The constructor procedurally generates a 3D sphere using math. The `sectors` and `stacks` parameters control the resolution (longitude and latitude lines).
 
 ```void Draw()```
-During setup, the generated vertices are packaged and sent over to the GPU's memory using Vertex Buffer Objects (VBOs). The `Draw` function simply tells the GPU to render those pre-loaded buffers.
+During setup, the generated vertices are sent over to the GPU's memory using Vertex Buffer Objects (VBOs). The `Draw` function tells the GPU to render those pre-loaded buffers. It's okay that it has a generic name because it's `Earth::Draw()`.

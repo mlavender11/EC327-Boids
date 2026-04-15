@@ -2,20 +2,7 @@
 #define CALLBACKS_H
 
 #include <GLFW/glfw3.h>
-
-// https://www.forrestthewoods.com/blog/global-variables-are-evil-and-unsafe
-// Apparently global variables shouldn't be used, so will use a struct to store "global" variables
-
-struct CameraState
-{
-    float radius = 15.0f;
-    float yaw = 0.0f;
-    float pitch = 0.0f;
-
-    bool isDragging = false; // Track if the mouse is being dragged
-    float lastX = 640.0f;    // Default is middle of the window
-    float lastY = 360.0f;    // Default is middle of the window
-};
+#include "Camera.h" // Needed to access CameraState struct
 
 // Callback declarations
 void mouse_button_callback(GLFWwindow *, int, int, int);

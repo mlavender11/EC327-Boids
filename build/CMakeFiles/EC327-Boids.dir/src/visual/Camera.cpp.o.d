@@ -337,10 +337,4 @@ CMakeFiles/EC327-Boids.dir/src/visual/Camera.cpp.o: \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/matrix_transform.inl \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../geometric.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../trigonometric.hpp \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../matrix.hpp \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Callbacks.h \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/external/GLFW/glfw3.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/OpenGL.framework/Headers/gl.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/OpenGL.framework/Headers/gltypes.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/OpenGL.framework/Headers/OpenGLAvailability.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/os/availability.h
+  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../matrix.hpp
