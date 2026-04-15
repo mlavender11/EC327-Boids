@@ -1,5 +1,5 @@
-#ifndef EARTH_H
-#define EARTH_H
+#ifndef CELESTIALBODY_H
+#define CELESTIALBODY_H
 
 #include <vector>
 #include <cmath>
@@ -11,14 +11,14 @@ struct Vertex
     glm::vec3 Position;
 };
 
-class Earth
+class CelestialBody
 {
 public:
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
     unsigned int VAO, VBO, EBO;
 
-    Earth(float, int, int);
+    CelestialBody(float, int, int);
 
     void Draw();
 

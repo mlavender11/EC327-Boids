@@ -1,19 +1,19 @@
-#include "Earth.h"
+#include "CelestialBody.h"
 
-Earth::Earth(float radius, int sectors, int stacks)
+CelestialBody::CelestialBody(float radius, int sectors, int stacks)
 {
     generateGeometry(radius, sectors, stacks);
     setupMesh();
 }
 
-void Earth::Draw()
+void CelestialBody::Draw()
 {
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
 
-void Earth::generateGeometry(float radius, int sectors, int stacks)
+void CelestialBody::generateGeometry(float radius, int sectors, int stacks)
 {
     const float PI = 3.14159265359f;
 
@@ -55,7 +55,7 @@ void Earth::generateGeometry(float radius, int sectors, int stacks)
     }
 }
 
-void Earth::setupMesh()
+void CelestialBody::setupMesh()
 {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);

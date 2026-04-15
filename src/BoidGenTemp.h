@@ -11,7 +11,7 @@
 struct BoidData
 {
     glm::vec3 position;
-    glm::vec3 velocity;
+    glm::vec3 velocity;  // Not necessary for rendering
     glm::vec3 direction; // Must be a unit vector
 };
 

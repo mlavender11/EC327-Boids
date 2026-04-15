@@ -28,16 +28,21 @@ file(GLOB IMGUI_SOURCES
 # Define the executable and its source files
 add_executable(EC327-Boids 
     src/main.cpp 
-    src/BoidGenTemp.cpp
-    # src/behavior/Boids.cpp # Add once working
+    src/Application.cpp
+
+    src/visual/GraphicsEngine.cpp
     src/visual/Callbacks.cpp 
-    src/visual/Earth.cpp
     src/visual/Camera.cpp
     src/visual/Window.cpp
     src/visual/BoidRenderer.cpp
-
     shaders/Shader.cpp
-    
+    src/visual/CelestialBody.cpp
+    src/visual/Star.cpp
+
+    # include behavior files when they work
+
+    src/BoidGenTemp.cpp
+
     external/glad/src/glad.c 
     ${IMGUI_SOURCES}
 )

@@ -321,6 +321,30 @@ shaders/Shader.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/shaders/Shader.cpp.s
 .PHONY : shaders/Shader.cpp.s
 
+src/Application.o: src/Application.cpp.o
+.PHONY : src/Application.o
+
+# target to build an object file
+src/Application.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/Application.cpp.o
+.PHONY : src/Application.cpp.o
+
+src/Application.i: src/Application.cpp.i
+.PHONY : src/Application.i
+
+# target to preprocess a source file
+src/Application.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/Application.cpp.i
+.PHONY : src/Application.cpp.i
+
+src/Application.s: src/Application.cpp.s
+.PHONY : src/Application.s
+
+# target to generate assembly for a file
+src/Application.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/Application.cpp.s
+.PHONY : src/Application.cpp.s
+
 src/BoidGenTemp.o: src/BoidGenTemp.cpp.o
 .PHONY : src/BoidGenTemp.o
 
@@ -441,29 +465,77 @@ src/visual/Camera.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Camera.cpp.s
 .PHONY : src/visual/Camera.cpp.s
 
-src/visual/Earth.o: src/visual/Earth.cpp.o
-.PHONY : src/visual/Earth.o
+src/visual/CelestialBody.o: src/visual/CelestialBody.cpp.o
+.PHONY : src/visual/CelestialBody.o
 
 # target to build an object file
-src/visual/Earth.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Earth.cpp.o
-.PHONY : src/visual/Earth.cpp.o
+src/visual/CelestialBody.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/CelestialBody.cpp.o
+.PHONY : src/visual/CelestialBody.cpp.o
 
-src/visual/Earth.i: src/visual/Earth.cpp.i
-.PHONY : src/visual/Earth.i
+src/visual/CelestialBody.i: src/visual/CelestialBody.cpp.i
+.PHONY : src/visual/CelestialBody.i
 
 # target to preprocess a source file
-src/visual/Earth.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Earth.cpp.i
-.PHONY : src/visual/Earth.cpp.i
+src/visual/CelestialBody.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/CelestialBody.cpp.i
+.PHONY : src/visual/CelestialBody.cpp.i
 
-src/visual/Earth.s: src/visual/Earth.cpp.s
-.PHONY : src/visual/Earth.s
+src/visual/CelestialBody.s: src/visual/CelestialBody.cpp.s
+.PHONY : src/visual/CelestialBody.s
 
 # target to generate assembly for a file
-src/visual/Earth.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Earth.cpp.s
-.PHONY : src/visual/Earth.cpp.s
+src/visual/CelestialBody.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/CelestialBody.cpp.s
+.PHONY : src/visual/CelestialBody.cpp.s
+
+src/visual/GraphicsEngine.o: src/visual/GraphicsEngine.cpp.o
+.PHONY : src/visual/GraphicsEngine.o
+
+# target to build an object file
+src/visual/GraphicsEngine.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/GraphicsEngine.cpp.o
+.PHONY : src/visual/GraphicsEngine.cpp.o
+
+src/visual/GraphicsEngine.i: src/visual/GraphicsEngine.cpp.i
+.PHONY : src/visual/GraphicsEngine.i
+
+# target to preprocess a source file
+src/visual/GraphicsEngine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/GraphicsEngine.cpp.i
+.PHONY : src/visual/GraphicsEngine.cpp.i
+
+src/visual/GraphicsEngine.s: src/visual/GraphicsEngine.cpp.s
+.PHONY : src/visual/GraphicsEngine.s
+
+# target to generate assembly for a file
+src/visual/GraphicsEngine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/GraphicsEngine.cpp.s
+.PHONY : src/visual/GraphicsEngine.cpp.s
+
+src/visual/Star.o: src/visual/Star.cpp.o
+.PHONY : src/visual/Star.o
+
+# target to build an object file
+src/visual/Star.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Star.cpp.o
+.PHONY : src/visual/Star.cpp.o
+
+src/visual/Star.i: src/visual/Star.cpp.i
+.PHONY : src/visual/Star.i
+
+# target to preprocess a source file
+src/visual/Star.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Star.cpp.i
+.PHONY : src/visual/Star.cpp.i
+
+src/visual/Star.s: src/visual/Star.cpp.s
+.PHONY : src/visual/Star.s
+
+# target to generate assembly for a file
+src/visual/Star.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Star.cpp.s
+.PHONY : src/visual/Star.cpp.s
 
 src/visual/Window.o: src/visual/Window.cpp.o
 .PHONY : src/visual/Window.o
@@ -522,6 +594,9 @@ help:
 	@echo "... shaders/Shader.o"
 	@echo "... shaders/Shader.i"
 	@echo "... shaders/Shader.s"
+	@echo "... src/Application.o"
+	@echo "... src/Application.i"
+	@echo "... src/Application.s"
 	@echo "... src/BoidGenTemp.o"
 	@echo "... src/BoidGenTemp.i"
 	@echo "... src/BoidGenTemp.s"
@@ -537,9 +612,15 @@ help:
 	@echo "... src/visual/Camera.o"
 	@echo "... src/visual/Camera.i"
 	@echo "... src/visual/Camera.s"
-	@echo "... src/visual/Earth.o"
-	@echo "... src/visual/Earth.i"
-	@echo "... src/visual/Earth.s"
+	@echo "... src/visual/CelestialBody.o"
+	@echo "... src/visual/CelestialBody.i"
+	@echo "... src/visual/CelestialBody.s"
+	@echo "... src/visual/GraphicsEngine.o"
+	@echo "... src/visual/GraphicsEngine.i"
+	@echo "... src/visual/GraphicsEngine.s"
+	@echo "... src/visual/Star.o"
+	@echo "... src/visual/Star.i"
+	@echo "... src/visual/Star.s"
 	@echo "... src/visual/Window.o"
 	@echo "... src/visual/Window.i"
 	@echo "... src/visual/Window.s"

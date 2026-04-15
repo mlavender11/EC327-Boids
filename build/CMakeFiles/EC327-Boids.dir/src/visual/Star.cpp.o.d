@@ -1,104 +1,26 @@
-CMakeFiles/EC327-Boids.dir/src/main.cpp.o: \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/main.cpp \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/Application.h \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/GraphicsEngine.h \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glad/include/glad/glad.h \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glad/include/KHR/khrplatform.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/stdint.h \
+CMakeFiles/EC327-Boids.dir/src/visual/Star.cpp.o: \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Star.cpp \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Star.h \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/glm.hpp \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/detail/_fixes.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/cmath \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/pthread.h \
-  /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include/stdint.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/stdint.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_int8_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_int16_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_int32_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_int64_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_types/_uint8_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_types/_uint16_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_types/_uint32_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_types/_uint64_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/math.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/math.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/cdefs.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_symbol_aliasing.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_posix_availability.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/machine/_types.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/arm/_types.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_types.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_intptr_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/machine/types.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/arm/types.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_u_int8_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_u_int16_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_u_int32_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_u_int64_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_uintptr_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_types/_intmax_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_types/_uintmax_t.h \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/external/GLFW/glfw3.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/stddef.h \
-  /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include/stddef.h \
-  /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include/__stddef_max_align_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__nullptr \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/vector \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/iosfwd \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/wchar.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/wchar.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_types.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/Availability.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/AvailabilityVersions.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/AvailabilityInternal.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_null.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_size_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_mbstate_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_ct_rune_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_rune_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_wchar_t.h \
-  /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include/stdarg.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/stdio.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/stdio.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_stdio.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_va_list.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/stdio.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_ctermid.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_off_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_ssize_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/time.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_clock_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_time_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_timespec.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_wctype.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/__wctype.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_wint_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_types/_wctype_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/ctype.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/ctype.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_ctype.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/runetype.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__bit_reference \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/bit \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/limits \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/type_traits \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/cstddef \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/version \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__undef_macros \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__debug \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/algorithm \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/initializer_list \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/cstring \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/string.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/string.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_rsize_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_errno_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/strings.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/utility \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__tuple \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/cstdint \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/memory \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/typeinfo \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/exception \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/cstdlib \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/stdlib.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/stdlib.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/machine/_types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/arm/_types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_types.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/wait.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_pid_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_id_t.h \
@@ -110,12 +32,34 @@ CMakeFiles/EC327-Boids.dir/src/main.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/arm/_mcontext.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/mach/machine/_structs.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/mach/arm/_structs.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/machine/types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/arm/types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_int8_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_int16_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_int32_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_int64_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_u_int8_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_u_int16_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_u_int32_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_u_int64_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_intptr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_uintptr_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_attr_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_sigaltstack.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_ucontext.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_sigset_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_size_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_uid_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/resource.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/stdint.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include/stdint.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/stdint.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_types/_uint8_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_types/_uint16_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_types/_uint32_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_types/_uint64_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_types/_intmax_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_types/_uintmax_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_timeval.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/machine/endian.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/arm/endian.h \
@@ -124,19 +68,26 @@ CMakeFiles/EC327-Boids.dir/src/main.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/libkern/arm/OSByteOrder.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/arm/arch.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/alloca.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_ct_rune_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_rune_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_wchar_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_null.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/malloc/_malloc.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_dev_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_mode_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/new \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/iterator \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__functional_base \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/tuple \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/stdexcept \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/atomic \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__threading_support \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/chrono \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/ctime \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/ratio \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/type_traits \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/cstddef \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/version \
+  /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include/stddef.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include/__stddef_max_align_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__nullptr \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/limits \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__undef_macros \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/detail/setup.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/cassert \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/assert.h \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/detail/../simd/platform.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/cstdint \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/climits \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/limits.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include/limits.h \
@@ -145,35 +96,6 @@ CMakeFiles/EC327-Boids.dir/src/main.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/arm/limits.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/arm/_limits.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/syslimits.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/errno.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/errno.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/errno.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/pthread/sched.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/pthread/pthread_impl.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_cond_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_condattr_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_key_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_mutex_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_mutexattr_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_once_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_rwlock_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_rwlockattr_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/pthread/qos.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/qos.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_mach_port_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sched.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/cassert \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/assert.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/functional \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__split_buffer \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/glm.hpp \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/detail/_fixes.hpp \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/cmath \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/math.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/math.h \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/detail/setup.hpp \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/detail/../simd/platform.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/cfloat \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/float.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include/float.h \
@@ -205,6 +127,75 @@ CMakeFiles/EC327-Boids.dir/src/main.cpp.o: \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/detail/type_vec3.inl \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/detail/compute_vector_relational.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/detail/compute_vector_decl.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/functional \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/typeinfo \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/exception \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/cstdlib \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/memory \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/new \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/utility \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__tuple \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/initializer_list \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/cstring \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/string.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/string.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_rsize_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_errno_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_ssize_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/strings.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__debug \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/iosfwd \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/wchar.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/stddef.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/wchar.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_mbstate_t.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include/stdarg.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/stdio.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/stdio.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_stdio.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_va_list.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/stdio.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_ctermid.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_off_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/time.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_clock_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_time_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_timespec.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_wctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/__wctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_wint_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_types/_wctype_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/ctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/ctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_ctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/runetype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/iterator \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__functional_base \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/tuple \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/stdexcept \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/atomic \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__threading_support \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/chrono \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/ctime \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/ratio \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/errno.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/errno.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/errno.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/pthread/sched.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/pthread/pthread_impl.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_cond_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_condattr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_key_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_mutex_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_mutexattr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_once_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_rwlock_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_rwlockattr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_pthread/_pthread_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/pthread/qos.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/qos.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sys/_types/_mach_port_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/sched.h \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/detail/_vectorize.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/./ext/vector_bool3_precision.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/./ext/vector_float3.hpp \
@@ -324,17 +315,28 @@ CMakeFiles/EC327-Boids.dir/src/main.cpp.o: \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/vector_relational.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/integer.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/detail/func_integer.inl \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Camera.h \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/matrix_transform.hpp \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/CelestialBody.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/vector \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__bit_reference \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/bit \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/algorithm \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__split_buffer \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glad/include/glad/glad.h \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glad/include/KHR/khrplatform.h \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/shaders/Shader.h \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/type_ptr.hpp \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../gtc/quaternion.hpp \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../gtc/constants.hpp \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../ext/scalar_constants.hpp \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/./ext/scalar_constants.inl \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/constants.inl \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../gtc/matrix_transform.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../mat4x4.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../vec2.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../vec3.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../vec4.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../ext/matrix_projection.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/./ext/../gtc/constants.hpp \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../ext/scalar_constants.hpp \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/./ext/scalar_constants.inl \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/constants.inl \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/./ext/../geometric.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/./ext/../trigonometric.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/./ext/../matrix.hpp \
@@ -348,11 +350,6 @@ CMakeFiles/EC327-Boids.dir/src/main.cpp.o: \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../geometric.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../trigonometric.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../matrix.hpp \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/shaders/Shader.h \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/type_ptr.hpp \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../gtc/quaternion.hpp \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../gtc/constants.hpp \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../gtc/matrix_transform.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/../ext/vector_relational.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/./ext/../detail/qualifier.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/./ext/vector_relational.inl \
@@ -496,8 +493,4 @@ CMakeFiles/EC327-Boids.dir/src/main.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/iomanip \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/sstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/iostream \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/CelestialBody.h \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Star.h \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/BoidRenderer.h \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Window.h \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Callbacks.h
+  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/gtc/matrix_transform.hpp
