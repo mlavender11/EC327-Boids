@@ -59,7 +59,11 @@ These three modules handle the application setup and how the user interacts with
 
 **Window** contains `InitializeWindow`, which starts up GLFW, GLAD, and creates the OpenGL window. It also has `ProcessInput`, which is always waiting for the user to press escape to close the window (can add more things here as well--if we do want to add more inputs, keyboard inputs would be listened for here). 
 
-**Camera** holds a struct which stores the camera's spherical coordinates (pitch, yaw, and radius/zoom distance) as well as its previous x and y coordinates and if the mouse is being dragged. It also has `glm::mat4 CalculateViewMatrix(const CameraState& cam)`, which converts the spherical coordinates of the camera into a matrix of cartesian coordinates. This matrix is sent to the shaders every frame so OpenGL knows where the camera is and what angle it is looking from.
+**Camera** has `CalculateViewMatrix`, which converts the spherical coordinates of the camera into a matrix of cartesian coordinates. This matrix is sent to the shaders every frame so OpenGL knows where the camera is and what angle it is looking from. It also has the `CameraState` struct, which holds the following:
+- The camera's spherical coordinates (radius, yaw, pitch)
+- The camera's minimum and maximum zooms
+- A bool of whether the mouse is being dragged
+- The mouse's last coordinates on the screen
 
 **Callbacks** intercepts mouse clicks, mouse movement, and scroll wheel actions. It uses these inputs to update `Camera.h`'s `CameraState` struct. It is apparently better to use callbacks for tracking mouse and scroll inputs. The bounds for the camera position and orientation are stored here.
 

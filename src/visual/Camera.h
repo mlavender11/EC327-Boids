@@ -13,6 +13,9 @@ struct CameraState
     float yaw = 0.0f;
     float pitch = 0.0f;
 
+    float maxZoom = 100.0f; // Default max zoom is 100, overwritten by Earth's radius when constructed
+    float minZoom = 2.0f;   // Default min zoom is 2, also overwritten by Earth's radius when constructed
+
     bool isDragging = false; // Track if the mouse is being dragged
     float lastX = 640.0f;    // Default is middle of the window
     float lastY = 360.0f;    // Default is middle of the window

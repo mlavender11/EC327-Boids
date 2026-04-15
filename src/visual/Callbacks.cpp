@@ -2,7 +2,7 @@
 
 void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
 {
-    // 1. Retrieve the CameraState pointer from the window
+    // Get the CameraState pointer from the window
     CameraState *cam = static_cast<CameraState *>(glfwGetWindowUserPointer(window));
     if (!cam)
         return; // Safety check
@@ -65,8 +65,8 @@ void scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
     cam->radius -= static_cast<float>(yoffset);
 
     // Constrain the zoom
-    if (cam->radius < 2.0f)
-        cam->radius = 2.0f;
-    if (cam->radius > 100.0f)
-        cam->radius = 100.0f;
+    if (cam->radius < cam->minZoom)
+        cam->radius = cam->minZoom;
+    if (cam->radius > cam->maxZoom)
+        cam->radius = cam->maxZoom;
 }

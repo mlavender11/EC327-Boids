@@ -31,8 +31,11 @@ int main()
     Shader earthShader("shaders/VertexShader.glsl", "shaders/FragmentShader.glsl");
     Shader boidShader("shaders/BoidVertexShader.glsl", "shaders/FragmentShader.glsl");
 
-    float surfaceRadius = 10.0f;
-    float atmosphereRadius = 20.0f;
+    float surfaceRadius = 30.0f;
+    float atmosphereRadius = 40.0f;
+
+    camState.maxZoom = atmosphereRadius * 3.0f;
+    camState.minZoom = surfaceRadius * 1.1f; // Set min zoom just above the surface radius
 
     Earth earthModel(surfaceRadius, 16, 16);
     BoidRenderer boidRenderer; // Boids

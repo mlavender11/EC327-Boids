@@ -17,7 +17,7 @@ void Earth::generateGeometry(float radius, int sectors, int stacks)
 {
     const float PI = 3.14159265359f;
 
-    // 1. Generate Vertices
+    // Generate vertices
     for (int i = 0; i <= stacks; ++i)
     {
         float V = (float)i / (float)stacks; // Latitude
@@ -36,7 +36,7 @@ void Earth::generateGeometry(float radius, int sectors, int stacks)
         }
     }
 
-    // 2. Generate Indices (connect vertices into triangles)
+    // Generate indices (connect vertices into triangles)
     for (int i = 0; i < stacks; ++i)
     {
         for (int j = 0; j < sectors; ++j)
