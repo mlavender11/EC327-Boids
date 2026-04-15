@@ -66,6 +66,9 @@ void Boids::applyForce(const glm::vec3 &force)
 glm::vec3 Boids::seek(glm::vec3 target)
 { // not finished
     glm::vec3 desired = target - position;
+    if(glm::length(desired) < 0.001f){ // just in case of normolize(desired) returns zero and error occurs
+        return glm::vec3(0.0f, 0.0f, 0.0f);
+    }
     desired = glm::normalize(desired) * maxSpeed;
     glm::vec3 steer = desired - velocity;
     if (glm::length(steer) > maxForce)
@@ -75,18 +78,15 @@ glm::vec3 Boids::seek(glm::vec3 target)
 
     return steer;
 }
-
-
-
 void Boids::update()
 { // not finished
     velocity += acceleration;
-
     if (glm::length(velocity) > maxSpeed)
-        glm::normalize(velocity) * maxSpeed;
+        velocity = glm::normalize(velocity) * maxSpeed;
     
     position += velocity;
     acceleration = glm::vec3(0.0f,0.0f,0.0f);
+
     
 
 }

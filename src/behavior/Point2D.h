@@ -18,6 +18,6 @@ public:
     // Overloaded operators
     friend ostream &operator<<(ostream &out, const Point2D &p);
     Point2D operator+(Vector2D);
-    Vector2D operator-(Point2D);
+    Vector2D operator-(const Point2D& p2) const;
 };
 #endif
