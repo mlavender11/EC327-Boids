@@ -153,6 +153,30 @@ external/glad/src/glad.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.s
 .PHONY : external/glad/src/glad.c.s
 
+external/imgui/backends/imgui_impl_glfw.o: external/imgui/backends/imgui_impl_glfw.cpp.o
+.PHONY : external/imgui/backends/imgui_impl_glfw.o
+
+# target to build an object file
+external/imgui/backends/imgui_impl_glfw.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_glfw.cpp.o
+.PHONY : external/imgui/backends/imgui_impl_glfw.cpp.o
+
+external/imgui/backends/imgui_impl_glfw.i: external/imgui/backends/imgui_impl_glfw.cpp.i
+.PHONY : external/imgui/backends/imgui_impl_glfw.i
+
+# target to preprocess a source file
+external/imgui/backends/imgui_impl_glfw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_glfw.cpp.i
+.PHONY : external/imgui/backends/imgui_impl_glfw.cpp.i
+
+external/imgui/backends/imgui_impl_glfw.s: external/imgui/backends/imgui_impl_glfw.cpp.s
+.PHONY : external/imgui/backends/imgui_impl_glfw.s
+
+# target to generate assembly for a file
+external/imgui/backends/imgui_impl_glfw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_glfw.cpp.s
+.PHONY : external/imgui/backends/imgui_impl_glfw.cpp.s
+
 external/imgui/backends/imgui_impl_opengl3.o: external/imgui/backends/imgui_impl_opengl3.cpp.o
 .PHONY : external/imgui/backends/imgui_impl_opengl3.o
 
@@ -537,6 +561,30 @@ src/visual/Star.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/Star.cpp.s
 .PHONY : src/visual/Star.cpp.s
 
+src/visual/UIManager.o: src/visual/UIManager.cpp.o
+.PHONY : src/visual/UIManager.o
+
+# target to build an object file
+src/visual/UIManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/UIManager.cpp.o
+.PHONY : src/visual/UIManager.cpp.o
+
+src/visual/UIManager.i: src/visual/UIManager.cpp.i
+.PHONY : src/visual/UIManager.i
+
+# target to preprocess a source file
+src/visual/UIManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/UIManager.cpp.i
+.PHONY : src/visual/UIManager.cpp.i
+
+src/visual/UIManager.s: src/visual/UIManager.cpp.s
+.PHONY : src/visual/UIManager.s
+
+# target to generate assembly for a file
+src/visual/UIManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/visual/UIManager.cpp.s
+.PHONY : src/visual/UIManager.cpp.s
+
 src/visual/Window.o: src/visual/Window.cpp.o
 .PHONY : src/visual/Window.o
 
@@ -573,6 +621,9 @@ help:
 	@echo "... external/glad/src/glad.o"
 	@echo "... external/glad/src/glad.i"
 	@echo "... external/glad/src/glad.s"
+	@echo "... external/imgui/backends/imgui_impl_glfw.o"
+	@echo "... external/imgui/backends/imgui_impl_glfw.i"
+	@echo "... external/imgui/backends/imgui_impl_glfw.s"
 	@echo "... external/imgui/backends/imgui_impl_opengl3.o"
 	@echo "... external/imgui/backends/imgui_impl_opengl3.i"
 	@echo "... external/imgui/backends/imgui_impl_opengl3.s"
@@ -621,6 +672,9 @@ help:
 	@echo "... src/visual/Star.o"
 	@echo "... src/visual/Star.i"
 	@echo "... src/visual/Star.s"
+	@echo "... src/visual/UIManager.o"
+	@echo "... src/visual/UIManager.i"
+	@echo "... src/visual/UIManager.s"
 	@echo "... src/visual/Window.o"
 	@echo "... src/visual/Window.i"
 	@echo "... src/visual/Window.s"

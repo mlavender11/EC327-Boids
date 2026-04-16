@@ -500,4 +500,5 @@ CMakeFiles/EC327-Boids.dir/src/main.cpp.o: \
   /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Star.h \
   /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/BoidRenderer.h \
   /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Window.h \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Callbacks.h
+  /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Callbacks.h \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/UIManager.h

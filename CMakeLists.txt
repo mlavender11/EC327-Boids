@@ -15,6 +15,7 @@ include_directories(
     external/glad/include
     external
     external/imgui
+    external/imgui/backends
     shaders
 )
 
@@ -31,6 +32,7 @@ add_executable(EC327-Boids
     src/Application.cpp
 
     src/visual/GraphicsEngine.cpp
+    src/visual/UIManager.cpp
     src/visual/Callbacks.cpp 
     src/visual/Camera.cpp
     src/visual/Window.cpp
@@ -43,7 +45,8 @@ add_executable(EC327-Boids
 
     src/BoidGenTemp.cpp
 
-    external/glad/src/glad.c 
+    # External libraries (library rn)
+    external/glad/src/glad.c
     ${IMGUI_SOURCES}
 )
 

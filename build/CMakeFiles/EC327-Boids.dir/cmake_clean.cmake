@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.o"
   "CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.o.d"
+  "CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_glfw.cpp.o"
+  "CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_glfw.cpp.o.d"
   "CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.o"
   "CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.o.d"
   "CMakeFiles/EC327-Boids.dir/external/imgui/imgui.cpp.o"
@@ -33,6 +35,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/EC327-Boids.dir/src/visual/GraphicsEngine.cpp.o.d"
   "CMakeFiles/EC327-Boids.dir/src/visual/Star.cpp.o"
   "CMakeFiles/EC327-Boids.dir/src/visual/Star.cpp.o.d"
+  "CMakeFiles/EC327-Boids.dir/src/visual/UIManager.cpp.o"
+  "CMakeFiles/EC327-Boids.dir/src/visual/UIManager.cpp.o.d"
   "CMakeFiles/EC327-Boids.dir/src/visual/Window.cpp.o"
   "CMakeFiles/EC327-Boids.dir/src/visual/Window.cpp.o.d"
   "EC327-Boids"

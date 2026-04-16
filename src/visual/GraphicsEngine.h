@@ -20,12 +20,14 @@ public:
     GraphicsEngine();
     ~GraphicsEngine();
 
-    bool Initialize(int width, int height, const char *title);
+    bool Initialize(int, int, const char *);
 
     // The main visual operations
     void ProcessInput();
     bool ShouldClose() const;
-    void Render(const std::vector<glm::mat4> &boidData);
+    void Render(const std::vector<glm::mat4> &, bool);
+    GLFWwindow *GetWindow() const;
+    void SwapBuffers();
 
 private:
     GLFWwindow *window;

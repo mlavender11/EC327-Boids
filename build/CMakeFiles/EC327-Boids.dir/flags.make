@@ -5,7 +5,7 @@
 # compile CXX with /Library/Developer/CommandLineTools/usr/bin/c++
 C_DEFINES = 
 
-C_INCLUDES = -I/Users/tzezn/Desktop/ec327/EC327-Boids/src -I/Users/tzezn/Desktop/ec327/EC327-Boids/src/visual -I/Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior -I/Users/tzezn/Desktop/ec327/EC327-Boids/external/glad/include -I/Users/tzezn/Desktop/ec327/EC327-Boids/external -I/Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui -I/Users/tzezn/Desktop/ec327/EC327-Boids/shaders -isystem /opt/homebrew/include -iframework /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks
+C_INCLUDES = -I/Users/tzezn/Desktop/ec327/EC327-Boids/src -I/Users/tzezn/Desktop/ec327/EC327-Boids/src/visual -I/Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior -I/Users/tzezn/Desktop/ec327/EC327-Boids/external/glad/include -I/Users/tzezn/Desktop/ec327/EC327-Boids/external -I/Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui -I/Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/backends -I/Users/tzezn/Desktop/ec327/EC327-Boids/shaders -isystem /opt/homebrew/include -iframework /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks
 
 C_FLAGSarm64 =  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk
 
@@ -13,7 +13,7 @@ C_FLAGS =  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/tzezn/Desktop/ec327/EC327-Boids/src -I/Users/tzezn/Desktop/ec327/EC327-Boids/src/visual -I/Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior -I/Users/tzezn/Desktop/ec327/EC327-Boids/external/glad/include -I/Users/tzezn/Desktop/ec327/EC327-Boids/external -I/Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui -I/Users/tzezn/Desktop/ec327/EC327-Boids/shaders -isystem /opt/homebrew/include -iframework /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks
+CXX_INCLUDES = -I/Users/tzezn/Desktop/ec327/EC327-Boids/src -I/Users/tzezn/Desktop/ec327/EC327-Boids/src/visual -I/Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior -I/Users/tzezn/Desktop/ec327/EC327-Boids/external/glad/include -I/Users/tzezn/Desktop/ec327/EC327-Boids/external -I/Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui -I/Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/backends -I/Users/tzezn/Desktop/ec327/EC327-Boids/shaders -isystem /opt/homebrew/include -iframework /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks
 
 CXX_FLAGSarm64 = -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk
 

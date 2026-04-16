@@ -4,23 +4,47 @@
 
 Application::Application()
 {
-    // Initialize the visual system
     graphics.Initialize(1280, 720, "Boids");
 
-    // Generate  static dummy matrices
-    dummyBoidData = GenerateTestBoids(5000, 10.0f, 15.0f);
+    // Initialize the UI using the window created by the Graphics Engine
+    uiManager.Initialize(graphics.GetWindow());
+
+    currentState = AppState::SETUP;
 }
 
 void Application::Run()
 {
     while (!graphics.ShouldClose())
     {
-        // Process OS window events
         graphics.ProcessInput();
 
-        // (Physics/Simulation goes here later)
+        // Tell ImGui a new frame is starting
+        uiManager.BeginFrame();
 
-        // Hand the computed matrices to the visual system to draw
-        graphics.Render(dummyBoidData);
+        // Handle State Logic & Rendering
+        if (currentState == AppState::SETUP)
+        {
+
+            graphics.Render(dummyBoidData, false);
+
+            // RenderSetupMenu returns true if the Start button was clicked
+            if (uiManager.RenderSetupMenu(configBoidCount, configEarthRadius, configMinAltitude, configMaxAltitude))
+            {
+                dummyBoidData = GenerateTestBoids(configBoidCount, configMinAltitude, configMaxAltitude);
+                currentState = AppState::SIMULATION;
+            }
+        }
+        else if (currentState == AppState::SIMULATION)
+        {
+            // Behavior simulation goes here later, for now just render the boids with dummy data
+
+            graphics.Render(dummyBoidData, true);
+        }
+
+        // Draw the UI on top of the 3D scene
+        uiManager.EndFrame();
+
+        // Finally, swap the buffers to display the combined frame to the monitor
+        graphics.SwapBuffers();
     }
 }

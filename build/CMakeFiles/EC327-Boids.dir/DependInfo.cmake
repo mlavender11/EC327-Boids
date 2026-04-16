@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/tzezn/Desktop/ec327/EC327-Boids/external/glad/src/glad.c" "CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.o" "gcc" "CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.o.d"
+  "/Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/backends/imgui_impl_glfw.cpp" "CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_glfw.cpp.o" "gcc" "CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_glfw.cpp.o.d"
   "/Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/backends/imgui_impl_opengl3.cpp" "CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.o" "gcc" "CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.o.d"
   "/Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/imgui.cpp" "CMakeFiles/EC327-Boids.dir/external/imgui/imgui.cpp.o" "gcc" "CMakeFiles/EC327-Boids.dir/external/imgui/imgui.cpp.o.d"
   "/Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/imgui_demo.cpp" "CMakeFiles/EC327-Boids.dir/external/imgui/imgui_demo.cpp.o" "gcc" "CMakeFiles/EC327-Boids.dir/external/imgui/imgui_demo.cpp.o.d"
@@ -25,6 +26,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/CelestialBody.cpp" "CMakeFiles/EC327-Boids.dir/src/visual/CelestialBody.cpp.o" "gcc" "CMakeFiles/EC327-Boids.dir/src/visual/CelestialBody.cpp.o.d"
   "/Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/GraphicsEngine.cpp" "CMakeFiles/EC327-Boids.dir/src/visual/GraphicsEngine.cpp.o" "gcc" "CMakeFiles/EC327-Boids.dir/src/visual/GraphicsEngine.cpp.o.d"
   "/Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Star.cpp" "CMakeFiles/EC327-Boids.dir/src/visual/Star.cpp.o" "gcc" "CMakeFiles/EC327-Boids.dir/src/visual/Star.cpp.o.d"
+  "/Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/UIManager.cpp" "CMakeFiles/EC327-Boids.dir/src/visual/UIManager.cpp.o" "gcc" "CMakeFiles/EC327-Boids.dir/src/visual/UIManager.cpp.o.d"
   "/Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Window.cpp" "CMakeFiles/EC327-Boids.dir/src/visual/Window.cpp.o" "gcc" "CMakeFiles/EC327-Boids.dir/src/visual/Window.cpp.o.d"
   )
 

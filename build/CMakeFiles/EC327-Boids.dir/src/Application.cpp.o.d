@@ -501,6 +501,7 @@ CMakeFiles/EC327-Boids.dir/src/Application.cpp.o: \
   /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/BoidRenderer.h \
   /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Window.h \
   /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Callbacks.h \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/UIManager.h \
   /Users/tzezn/Desktop/ec327/EC327-Boids/src/BoidGenTemp.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/random \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/numeric

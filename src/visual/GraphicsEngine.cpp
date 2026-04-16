@@ -17,7 +17,9 @@ bool GraphicsEngine::Initialize(int width, int height, const char *title)
 {
     window = InitializeWindow(width, height, title);
     if (!window)
+    {
         return false;
+    }
 
     glfwSetWindowUserPointer(window, &camera);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
@@ -45,40 +47,52 @@ bool GraphicsEngine::ShouldClose() const
     return glfwWindowShouldClose(window);
 }
 
-void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData)
+void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData, bool drawSimulation)
 {
     glClearColor(0.05f, 0.05f, 0.1f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // Update the visual sun (purely aesthetic, doesn't affect physics)
-    sun->Update(glfwGetTime());
+    if (drawSimulation)
+    {
+        // Update the visual sun (purely aesthetic, doesn't affect physics)
+        sun->Update(glfwGetTime());
 
-    glm::mat4 view = CalculateViewMatrix(camera);
-    // The final parameter of perspective is the render distance
-    glm::mat4 projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 0.1f, 1000.0f);
-    glm::vec3 lightDir = sun->GetDirection();
-    glm::vec3 ambient(1.0f, 1.0f, 1.0f);
+        glm::mat4 view = CalculateViewMatrix(camera);
+        // The final parameter of perspective is the render distance
+        glm::mat4 projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 0.1f, 1000.0f);
+        glm::vec3 lightDir = sun->GetDirection();
+        glm::vec3 ambient(1.0f, 1.0f, 1.0f);
 
-    // Draw Earth
-    mainShader->use();
-    mainShader->setMat4("view", view);
-    mainShader->setMat4("projection", projection);
-    mainShader->setMat4("model", glm::mat4(1.0f));
-    glUniform3fv(glGetUniformLocation(mainShader->ID, "lightDir"), 1, glm::value_ptr(lightDir));
-    glUniform3fv(glGetUniformLocation(mainShader->ID, "ambientColor"), 1, glm::value_ptr(ambient));
-    earth->Draw();
+        // Draw Earth
+        mainShader->use();
+        mainShader->setMat4("view", view);
+        mainShader->setMat4("projection", projection);
+        mainShader->setMat4("model", glm::mat4(1.0f));
+        glUniform3fv(glGetUniformLocation(mainShader->ID, "lightDir"), 1, glm::value_ptr(lightDir));
+        glUniform3fv(glGetUniformLocation(mainShader->ID, "ambientColor"), 1, glm::value_ptr(ambient));
+        earth->Draw();
 
-    // Draw boids
-    boidShader->use();
-    boidShader->setMat4("view", view);
-    boidShader->setMat4("projection", projection);
-    glUniform3fv(glGetUniformLocation(boidShader->ID, "lightDir"), 1, glm::value_ptr(lightDir));
-    glUniform3fv(glGetUniformLocation(boidShader->ID, "ambientColor"), 1, glm::value_ptr(ambient));
-    boidRenderer->DrawInstanced(boidData);
+        // Draw boids
+        boidShader->use();
+        boidShader->setMat4("view", view);
+        boidShader->setMat4("projection", projection);
+        glUniform3fv(glGetUniformLocation(boidShader->ID, "lightDir"), 1, glm::value_ptr(lightDir));
+        glUniform3fv(glGetUniformLocation(boidShader->ID, "ambientColor"), 1, glm::value_ptr(ambient));
+        boidRenderer->DrawInstanced(boidData);
 
-    // Draw Sun
-    sun->Draw(*sunShader, view, projection);
+        // Draw Sun
+        sun->Draw(*sunShader, view, projection);
+    }
+}
 
+GLFWwindow *GraphicsEngine::GetWindow() const
+{
+    return window;
+}
+
+void GraphicsEngine::SwapBuffers()
+{
+    // Application calls this after ImGui is done
     glfwSwapBuffers(window);
     glfwPollEvents();
 }
