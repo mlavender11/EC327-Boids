@@ -106,14 +106,12 @@ void Application::RunSimulationState(float deltaTime)
     // =========================================================================
     // TODO: time update for behavior simulations
     // =========================================================================
-    // 1. Update the boid physics using 'deltaTime'
-    //    [behavior simulation].Update(deltaTime);
+    // 1. Update the boids using 'deltaTime' (like how PA3 worked)
+    //    [behavior simulation or whatever the class is called].Update(deltaTime);
     //
-    // 2. Grab the raw BoidData (positions/directions) from the simulation
-    //    const std::vector<BoidData>& activeBoids = [behavior simulation].GetBoids();
-    //
-    // 3. Convert the position data into 3D matrices
-    //    std::vector<glm::mat4> boidDataToRender = BoidRenderer::BoidsToMatrices(activeBoids);
+    // 2. Convert the Boid objects into 3D matrices
+    //    (replace the input of BoidsToMatrices here with a vector of Boid objects from your simulation)
+    //    std::vector<glm::mat4> boidDataToRender = BoidRenderer::BoidsToMatrices(std::vector of Boid objects);
     // =========================================================================
 
     // TODO (Michael/Yicong/Ilias): Swap out TEMPORARY_dummyBoidData for boidDataToRender
