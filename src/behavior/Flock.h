@@ -21,7 +21,7 @@ public:
 
     void AddFriendly(Friendly& new_friendly);
     void update();
-    
+    const std::vector<Friendly>& GetAllFriendlies() const;
 
     
 

@@ -30,3 +30,7 @@ Friendly Flock::Get_Friendly(int i){
 int GetSizeOfFLock(){
     return flock.size();
 }
+
+const std::vector<Friendly>& Flock::GetAllFriendlies() const{
+    return flock;
+}

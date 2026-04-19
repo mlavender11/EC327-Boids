@@ -20,7 +20,7 @@ Boids::Boids()
 
 Boids::Boids(double in_x, double in_y, double in_z)
 {
-    position = glm::vec3(in_x, in_y, in_y);
+    position = glm::vec3(in_x, in_y, in_z); // little fix change the second in_y -> in_z
     velocity = glm::vec3(0.0f, 0.0f, 0.0f);
     acceleration = glm::vec3(0.0f, 0.0f, 0.0f);
     maxSpeed = 3;
