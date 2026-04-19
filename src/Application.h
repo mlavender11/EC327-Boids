@@ -3,8 +3,11 @@
 
 #include "visual/GraphicsEngine.h"
 #include "visual/UIManager.h"
-#include <vector>
+#include <vector> // Dont think its really needed cause flock is already a vector
 #include <glm/glm.hpp>
+
+#include "behavior/Flock.h" // Ilias
+
 
 enum class AppState
 {
@@ -24,6 +27,9 @@ private:
     void RunSetupState();
     void RunSimulationState(float deltaTime);
     void RunPausedState();
+
+
+    Flock preyFlock;  // Adding a flock - Ilias 
 
     // --- Core Engine Variables ---
     GraphicsEngine graphics;

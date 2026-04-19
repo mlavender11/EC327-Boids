@@ -5,6 +5,7 @@
 
 #include <GLFW/glfw3.h>
 
+
 Application::Application()
 {
     graphics.Initialize(1280, 720, "Boids");
@@ -92,12 +93,14 @@ void Application::RunSetupState()
     if (startClicked)
     {
         // TODO (Michael/Yicong/Ilias): Replace this with actual boid generation code one that's done
-        TEMPORARY_dummyBoidData = GenerateTestBoids(configBoidCount, configMinAltitude, configMaxAltitude);
-
+        // TEMPORARY_dummyBoidData = GenerateTestBoids(configBoidCount, configMinAltitude, configMaxAltitude);
+        preyFlock = Flock(configBoidCount);
         currentState = AppState::SIMULATION;
     }
 }
 
+
+/*
 void Application::RunSimulationState(float deltaTime)
 {
     // Advance the game clock
@@ -117,6 +120,19 @@ void Application::RunSimulationState(float deltaTime)
     // TODO (Michael/Yicong/Ilias): Swap out TEMPORARY_dummyBoidData for boidDataToRender
     // or whatever variable holds the real boid data once the simulation is ready
     graphics.Render(TEMPORARY_dummyBoidData, true, simulationTime, configMaxAltitude, configEarthRadius);
+}
+*/
+
+//Here's a finalised RunSimState func -Ilias 
+void Application::RunSimulationState(float deltaTime){
+    simulationTime += deltaTime;
+
+    preyFlock.update();
+
+    std::vector<glm::mat4> boidDataToRender =
+        BoidRenderer::BoidsToMatrices(preyFlock.GetAllFriendlies());
+
+    graphics.Render(boidDataToRender, true, simulationTime, configMaxAltitude, configEarthRadius);
 }
 
 void Application::RunPausedState()
