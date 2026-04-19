@@ -24,7 +24,6 @@ void Application::Run()
         // Handle State Logic & Rendering
         if (currentState == AppState::SETUP)
         {
-
             graphics.Render(dummyBoidData, false);
 
             // RenderSetupMenu returns true if the Start button was clicked

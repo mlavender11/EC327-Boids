@@ -16,11 +16,12 @@ EC327-Boids/
 │   └── (Shaders for boids and the earth)
 ├── src/
 │   ├── main.cpp
+│   ├── Application.cpp
 │   ├── (Temporary boid generation files)
 │   ├── behavior/
-│   │   └── (Michael, Yicong, Ilias pls put stuff here)
+│   │   └── (Behavior things)
 │   └── visual/
-│       └── (Boid rendering, camera movement, window gen, Earth model)
+│       └── (Visual things)
 └── CMakeLists.txt
 ```
 
