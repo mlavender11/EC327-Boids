@@ -1,7 +1,8 @@
 #ifndef FRIENDLY_H
 #define FRIENDLY_H
 #include "Boids.h"
-#include "Flock.h"
+// #include "Flock.h" // This was causing a circular dependency, we can forward declare Flock instead
+class Flock; // Forward declaration to avoid circular dependency
 #include "glm/glm.hpp"
 
 enum STATES

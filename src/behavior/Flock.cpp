@@ -4,7 +4,7 @@ using namespace std;
 
 Flock::Flock()
 { // How do we want to implement this?
-    // boids(0);
+  // boids(0);
 }
 
 Flock::Flock(int n)
@@ -33,7 +33,7 @@ Friendly Flock::Get_Friendly(int i)
     return flock[i];
 }
 
-int GetSizeOfFLock()
+int Flock::GetSizeOfFLock()
 {
     return flock.size();
 }
