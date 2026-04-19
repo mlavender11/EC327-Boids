@@ -50,7 +50,7 @@ bool GraphicsEngine::ShouldClose() const
     return glfwWindowShouldClose(window);
 }
 
-void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData, bool drawSimulation, float simulationTime, float maxAltitude)
+void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData, bool drawSimulation, float simulationTime, float maxAltitude, float earthRadius)
 {
     glClearColor(0.05f, 0.05f, 0.1f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -61,8 +61,15 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData, bool drawSim
         sun->Update(simulationTime);
 
         glm::mat4 view = CalculateViewMatrix(camera);
-        // The final parameter of perspective is the render distance
-        glm::mat4 projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 0.1f, 1000.0f);
+        int width, height;
+        glfwGetFramebufferSize(window, &width, &height);
+
+        // Prevent division by zero if the window is minimized
+        if (height == 0)
+        {
+            height = 1;
+        }
+        glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 1000.0f);
         glm::vec3 lightDir = sun->GetDirection();
         glm::vec3 ambient(1.0f, 1.0f, 1.0f);
 
@@ -70,9 +77,12 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData, bool drawSim
         mainShader->use();
         mainShader->setMat4("view", view);
         mainShader->setMat4("projection", projection);
-        mainShader->setMat4("model", glm::mat4(1.0f));
+        glm::mat4 earthModelMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(earthRadius / 10.0f));
+        // (Divide by 10.0f because the base CelestialBody was created with a radius of 10.0f)
+        mainShader->setMat4("model", earthModelMatrix);
         glUniform3fv(glGetUniformLocation(mainShader->ID, "lightDir"), 1, glm::value_ptr(lightDir));
         glUniform3fv(glGetUniformLocation(mainShader->ID, "ambientColor"), 1, glm::value_ptr(ambient));
+
         earth->Draw();
 
         // Draw boids

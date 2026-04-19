@@ -29,8 +29,11 @@ void Application::Run()
         float deltaTime = currentFrameTime - lastFrameTime;
         lastFrameTime = currentFrameTime;
 
-        // 2. Process OS Input (Mouse, Keyboard, Window close)
-        graphics.ProcessInput();
+        // 2. Process OS movement input when unpaused
+        if (currentState == AppState::SIMULATION)
+        {
+            graphics.ProcessInput();
+        }
 
         // 3. Handle Pause Toggle (Escape Key)
         bool escapeIsPressed = (glfwGetKey(graphics.GetWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS);
@@ -78,7 +81,7 @@ void Application::Run()
 void Application::RunSetupState()
 {
     // Draw the 3D world frozen in the background (false = no animation)
-    graphics.Render(TEMPORARY_dummyBoidData, false, simulationTime, configMaxAltitude);
+    graphics.Render(TEMPORARY_dummyBoidData, false, simulationTime, configMaxAltitude, configEarthRadius);
 
     // Draw the Setup Menu and wait for the user to click "Start"
     bool startClicked = uiManager.RenderSetupMenu(configBoidCount, configEarthRadius, configMinAltitude, configMaxAltitude);
@@ -109,13 +112,13 @@ void Application::RunSimulationState(float deltaTime)
 
     // TODO (Michael/Yicong/Ilias): Swap out TEMPORARY_dummyBoidData for boidDataToRender
     // or whatever variable holds the real boid data once the simulation is ready
-    graphics.Render(TEMPORARY_dummyBoidData, true, simulationTime, configMaxAltitude);
+    graphics.Render(TEMPORARY_dummyBoidData, true, simulationTime, configMaxAltitude, configEarthRadius);
 }
 
 void Application::RunPausedState()
 {
     // Draw everything frozen in the background
-    graphics.Render(TEMPORARY_dummyBoidData, true, simulationTime, configMaxAltitude);
+    graphics.Render(TEMPORARY_dummyBoidData, true, simulationTime, configMaxAltitude, configEarthRadius);
 
     bool resumeClicked, setupClicked, quitClicked;
     uiManager.RenderPauseMenu(resumeClicked, setupClicked, quitClicked);
