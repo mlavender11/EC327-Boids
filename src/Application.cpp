@@ -20,7 +20,7 @@ void Application::Run()
     while (!graphics.ShouldClose())
     {
 
-        // --- 1. CLOCK MATH ---
+        // --- CLOCK MATH ---
         float currentFrameTime = glfwGetTime();
         float deltaTime = currentFrameTime - lastFrameTime;
         lastFrameTime = currentFrameTime;
@@ -59,7 +59,7 @@ void Application::Run()
         if (currentState == AppState::SETUP)
         {
             // Pass simulationTime to Render
-            graphics.Render(dummyBoidData, false, simulationTime);
+            graphics.Render(dummyBoidData, false, simulationTime, configMaxAltitude);
 
             if (uiManager.RenderSetupMenu(configBoidCount, configEarthRadius, configMinAltitude, configMaxAltitude))
             {
@@ -70,12 +70,12 @@ void Application::Run()
         else if (currentState == AppState::SIMULATION)
         {
             // Pass simulationTime to Render
-            graphics.Render(dummyBoidData, true, simulationTime);
+            graphics.Render(dummyBoidData, true, simulationTime, configMaxAltitude);
         }
         else if (currentState == AppState::PAUSED)
         {
             // Pass simulationTime to Render
-            graphics.Render(dummyBoidData, true, simulationTime);
+            graphics.Render(dummyBoidData, true, simulationTime, configMaxAltitude);
 
             bool resumeClicked, setupClicked, quitClicked;
             uiManager.RenderPauseMenu(resumeClicked, setupClicked, quitClicked);

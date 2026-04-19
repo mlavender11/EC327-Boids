@@ -25,7 +25,7 @@ public:
     // The main visual operations
     void ProcessInput();
     bool ShouldClose() const;
-    void Render(const std::vector<glm::mat4> &boidData, bool drawSimulation, float simulationTime);
+    void Render(const std::vector<glm::mat4> &boidData, bool drawSimulation, float simulationTime, float maxAltitude);
     GLFWwindow *GetWindow() const;
     void SwapBuffers();
 
@@ -36,8 +36,10 @@ private:
     Shader *mainShader;
     Shader *sunShader;
     Shader *boidShader;
+    Shader *atmosphereShader;
 
     CelestialBody *earth;
+    CelestialBody *atmosphere;
     Star *sun;
     BoidRenderer *boidRenderer;
 };
