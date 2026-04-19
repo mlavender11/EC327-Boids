@@ -223,10 +223,66 @@ CMakeFiles/EC327-Boids.dir/src/visual/Star.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/EC327-Boids.dir/src/visual/Star.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Star.cpp -o CMakeFiles/EC327-Boids.dir/src/visual/Star.cpp.s
 
+CMakeFiles/EC327-Boids.dir/src/behavior/Boids.cpp.o: CMakeFiles/EC327-Boids.dir/flags.make
+CMakeFiles/EC327-Boids.dir/src/behavior/Boids.cpp.o: /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Boids.cpp
+CMakeFiles/EC327-Boids.dir/src/behavior/Boids.cpp.o: CMakeFiles/EC327-Boids.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/EC327-Boids.dir/src/behavior/Boids.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EC327-Boids.dir/src/behavior/Boids.cpp.o -MF CMakeFiles/EC327-Boids.dir/src/behavior/Boids.cpp.o.d -o CMakeFiles/EC327-Boids.dir/src/behavior/Boids.cpp.o -c /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Boids.cpp
+
+CMakeFiles/EC327-Boids.dir/src/behavior/Boids.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/EC327-Boids.dir/src/behavior/Boids.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Boids.cpp > CMakeFiles/EC327-Boids.dir/src/behavior/Boids.cpp.i
+
+CMakeFiles/EC327-Boids.dir/src/behavior/Boids.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/EC327-Boids.dir/src/behavior/Boids.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Boids.cpp -o CMakeFiles/EC327-Boids.dir/src/behavior/Boids.cpp.s
+
+CMakeFiles/EC327-Boids.dir/src/behavior/Friendly.cpp.o: CMakeFiles/EC327-Boids.dir/flags.make
+CMakeFiles/EC327-Boids.dir/src/behavior/Friendly.cpp.o: /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Friendly.cpp
+CMakeFiles/EC327-Boids.dir/src/behavior/Friendly.cpp.o: CMakeFiles/EC327-Boids.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/EC327-Boids.dir/src/behavior/Friendly.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EC327-Boids.dir/src/behavior/Friendly.cpp.o -MF CMakeFiles/EC327-Boids.dir/src/behavior/Friendly.cpp.o.d -o CMakeFiles/EC327-Boids.dir/src/behavior/Friendly.cpp.o -c /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Friendly.cpp
+
+CMakeFiles/EC327-Boids.dir/src/behavior/Friendly.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/EC327-Boids.dir/src/behavior/Friendly.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Friendly.cpp > CMakeFiles/EC327-Boids.dir/src/behavior/Friendly.cpp.i
+
+CMakeFiles/EC327-Boids.dir/src/behavior/Friendly.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/EC327-Boids.dir/src/behavior/Friendly.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Friendly.cpp -o CMakeFiles/EC327-Boids.dir/src/behavior/Friendly.cpp.s
+
+CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.o: CMakeFiles/EC327-Boids.dir/flags.make
+CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.o: /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Predator.cpp
+CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.o: CMakeFiles/EC327-Boids.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.o -MF CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.o.d -o CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.o -c /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Predator.cpp
+
+CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Predator.cpp > CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.i
+
+CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Predator.cpp -o CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.s
+
+CMakeFiles/EC327-Boids.dir/src/behavior/Flock.cpp.o: CMakeFiles/EC327-Boids.dir/flags.make
+CMakeFiles/EC327-Boids.dir/src/behavior/Flock.cpp.o: /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Flock.cpp
+CMakeFiles/EC327-Boids.dir/src/behavior/Flock.cpp.o: CMakeFiles/EC327-Boids.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/EC327-Boids.dir/src/behavior/Flock.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EC327-Boids.dir/src/behavior/Flock.cpp.o -MF CMakeFiles/EC327-Boids.dir/src/behavior/Flock.cpp.o.d -o CMakeFiles/EC327-Boids.dir/src/behavior/Flock.cpp.o -c /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Flock.cpp
+
+CMakeFiles/EC327-Boids.dir/src/behavior/Flock.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/EC327-Boids.dir/src/behavior/Flock.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Flock.cpp > CMakeFiles/EC327-Boids.dir/src/behavior/Flock.cpp.i
+
+CMakeFiles/EC327-Boids.dir/src/behavior/Flock.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/EC327-Boids.dir/src/behavior/Flock.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Flock.cpp -o CMakeFiles/EC327-Boids.dir/src/behavior/Flock.cpp.s
+
 CMakeFiles/EC327-Boids.dir/src/BoidGenTemp.cpp.o: CMakeFiles/EC327-Boids.dir/flags.make
 CMakeFiles/EC327-Boids.dir/src/BoidGenTemp.cpp.o: /Users/tzezn/Desktop/ec327/EC327-Boids/src/BoidGenTemp.cpp
 CMakeFiles/EC327-Boids.dir/src/BoidGenTemp.cpp.o: CMakeFiles/EC327-Boids.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/EC327-Boids.dir/src/BoidGenTemp.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/EC327-Boids.dir/src/BoidGenTemp.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EC327-Boids.dir/src/BoidGenTemp.cpp.o -MF CMakeFiles/EC327-Boids.dir/src/BoidGenTemp.cpp.o.d -o CMakeFiles/EC327-Boids.dir/src/BoidGenTemp.cpp.o -c /Users/tzezn/Desktop/ec327/EC327-Boids/src/BoidGenTemp.cpp
 
 CMakeFiles/EC327-Boids.dir/src/BoidGenTemp.cpp.i: cmake_force
@@ -240,7 +296,7 @@ CMakeFiles/EC327-Boids.dir/src/BoidGenTemp.cpp.s: cmake_force
 CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.o: CMakeFiles/EC327-Boids.dir/flags.make
 CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.o: /Users/tzezn/Desktop/ec327/EC327-Boids/external/glad/src/glad.c
 CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.o: CMakeFiles/EC327-Boids.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.o -MF CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.o.d -o CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.o -c /Users/tzezn/Desktop/ec327/EC327-Boids/external/glad/src/glad.c
 
 CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.i: cmake_force
@@ -254,7 +310,7 @@ CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.s: cmake_force
 CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_glfw.cpp.o: CMakeFiles/EC327-Boids.dir/flags.make
 CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_glfw.cpp.o: /Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/backends/imgui_impl_glfw.cpp
 CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_glfw.cpp.o: CMakeFiles/EC327-Boids.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_glfw.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_glfw.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_glfw.cpp.o -MF CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_glfw.cpp.o.d -o CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_glfw.cpp.o -c /Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/backends/imgui_impl_glfw.cpp
 
 CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_glfw.cpp.i: cmake_force
@@ -268,7 +324,7 @@ CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_glfw.cpp.s: cmake_
 CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.o: CMakeFiles/EC327-Boids.dir/flags.make
 CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.o: /Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/backends/imgui_impl_opengl3.cpp
 CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.o: CMakeFiles/EC327-Boids.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.o -MF CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.o.d -o CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.o -c /Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/backends/imgui_impl_opengl3.cpp
 
 CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.i: cmake_force
@@ -282,7 +338,7 @@ CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_opengl3.cpp.s: cma
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui.cpp.o: CMakeFiles/EC327-Boids.dir/flags.make
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui.cpp.o: /Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/imgui.cpp
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui.cpp.o: CMakeFiles/EC327-Boids.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/EC327-Boids.dir/external/imgui/imgui.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/EC327-Boids.dir/external/imgui/imgui.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EC327-Boids.dir/external/imgui/imgui.cpp.o -MF CMakeFiles/EC327-Boids.dir/external/imgui/imgui.cpp.o.d -o CMakeFiles/EC327-Boids.dir/external/imgui/imgui.cpp.o -c /Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/imgui.cpp
 
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui.cpp.i: cmake_force
@@ -296,7 +352,7 @@ CMakeFiles/EC327-Boids.dir/external/imgui/imgui.cpp.s: cmake_force
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui_demo.cpp.o: CMakeFiles/EC327-Boids.dir/flags.make
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui_demo.cpp.o: /Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/imgui_demo.cpp
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui_demo.cpp.o: CMakeFiles/EC327-Boids.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/EC327-Boids.dir/external/imgui/imgui_demo.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/EC327-Boids.dir/external/imgui/imgui_demo.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EC327-Boids.dir/external/imgui/imgui_demo.cpp.o -MF CMakeFiles/EC327-Boids.dir/external/imgui/imgui_demo.cpp.o.d -o CMakeFiles/EC327-Boids.dir/external/imgui/imgui_demo.cpp.o -c /Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/imgui_demo.cpp
 
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui_demo.cpp.i: cmake_force
@@ -310,7 +366,7 @@ CMakeFiles/EC327-Boids.dir/external/imgui/imgui_demo.cpp.s: cmake_force
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui_draw.cpp.o: CMakeFiles/EC327-Boids.dir/flags.make
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui_draw.cpp.o: /Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/imgui_draw.cpp
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui_draw.cpp.o: CMakeFiles/EC327-Boids.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/EC327-Boids.dir/external/imgui/imgui_draw.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/EC327-Boids.dir/external/imgui/imgui_draw.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EC327-Boids.dir/external/imgui/imgui_draw.cpp.o -MF CMakeFiles/EC327-Boids.dir/external/imgui/imgui_draw.cpp.o.d -o CMakeFiles/EC327-Boids.dir/external/imgui/imgui_draw.cpp.o -c /Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/imgui_draw.cpp
 
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui_draw.cpp.i: cmake_force
@@ -324,7 +380,7 @@ CMakeFiles/EC327-Boids.dir/external/imgui/imgui_draw.cpp.s: cmake_force
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui_tables.cpp.o: CMakeFiles/EC327-Boids.dir/flags.make
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui_tables.cpp.o: /Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/imgui_tables.cpp
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui_tables.cpp.o: CMakeFiles/EC327-Boids.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/EC327-Boids.dir/external/imgui/imgui_tables.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/EC327-Boids.dir/external/imgui/imgui_tables.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EC327-Boids.dir/external/imgui/imgui_tables.cpp.o -MF CMakeFiles/EC327-Boids.dir/external/imgui/imgui_tables.cpp.o.d -o CMakeFiles/EC327-Boids.dir/external/imgui/imgui_tables.cpp.o -c /Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/imgui_tables.cpp
 
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui_tables.cpp.i: cmake_force
@@ -338,7 +394,7 @@ CMakeFiles/EC327-Boids.dir/external/imgui/imgui_tables.cpp.s: cmake_force
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui_widgets.cpp.o: CMakeFiles/EC327-Boids.dir/flags.make
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui_widgets.cpp.o: /Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/imgui_widgets.cpp
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui_widgets.cpp.o: CMakeFiles/EC327-Boids.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/EC327-Boids.dir/external/imgui/imgui_widgets.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/EC327-Boids.dir/external/imgui/imgui_widgets.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EC327-Boids.dir/external/imgui/imgui_widgets.cpp.o -MF CMakeFiles/EC327-Boids.dir/external/imgui/imgui_widgets.cpp.o.d -o CMakeFiles/EC327-Boids.dir/external/imgui/imgui_widgets.cpp.o -c /Users/tzezn/Desktop/ec327/EC327-Boids/external/imgui/imgui_widgets.cpp
 
 CMakeFiles/EC327-Boids.dir/external/imgui/imgui_widgets.cpp.i: cmake_force
@@ -362,6 +418,10 @@ EC327__Boids_OBJECTS = \
 "CMakeFiles/EC327-Boids.dir/shaders/Shader.cpp.o" \
 "CMakeFiles/EC327-Boids.dir/src/visual/CelestialBody.cpp.o" \
 "CMakeFiles/EC327-Boids.dir/src/visual/Star.cpp.o" \
+"CMakeFiles/EC327-Boids.dir/src/behavior/Boids.cpp.o" \
+"CMakeFiles/EC327-Boids.dir/src/behavior/Friendly.cpp.o" \
+"CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.o" \
+"CMakeFiles/EC327-Boids.dir/src/behavior/Flock.cpp.o" \
 "CMakeFiles/EC327-Boids.dir/src/BoidGenTemp.cpp.o" \
 "CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.o" \
 "CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_glfw.cpp.o" \
@@ -386,6 +446,10 @@ EC327-Boids: CMakeFiles/EC327-Boids.dir/src/visual/BoidRenderer.cpp.o
 EC327-Boids: CMakeFiles/EC327-Boids.dir/shaders/Shader.cpp.o
 EC327-Boids: CMakeFiles/EC327-Boids.dir/src/visual/CelestialBody.cpp.o
 EC327-Boids: CMakeFiles/EC327-Boids.dir/src/visual/Star.cpp.o
+EC327-Boids: CMakeFiles/EC327-Boids.dir/src/behavior/Boids.cpp.o
+EC327-Boids: CMakeFiles/EC327-Boids.dir/src/behavior/Friendly.cpp.o
+EC327-Boids: CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.o
+EC327-Boids: CMakeFiles/EC327-Boids.dir/src/behavior/Flock.cpp.o
 EC327-Boids: CMakeFiles/EC327-Boids.dir/src/BoidGenTemp.cpp.o
 EC327-Boids: CMakeFiles/EC327-Boids.dir/external/glad/src/glad.c.o
 EC327-Boids: CMakeFiles/EC327-Boids.dir/external/imgui/backends/imgui_impl_glfw.cpp.o
@@ -399,7 +463,7 @@ EC327-Boids: CMakeFiles/EC327-Boids.dir/build.make
 EC327-Boids: /opt/homebrew/lib/libglfw.3.4.dylib
 EC327-Boids: /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/OpenGL.framework
 EC327-Boids: CMakeFiles/EC327-Boids.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Linking CXX executable EC327-Boids"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/tzezn/Desktop/ec327/EC327-Boids/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Linking CXX executable EC327-Boids"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/EC327-Boids.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

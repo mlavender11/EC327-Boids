@@ -393,6 +393,102 @@ src/BoidGenTemp.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/BoidGenTemp.cpp.s
 .PHONY : src/BoidGenTemp.cpp.s
 
+src/behavior/Boids.o: src/behavior/Boids.cpp.o
+.PHONY : src/behavior/Boids.o
+
+# target to build an object file
+src/behavior/Boids.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/behavior/Boids.cpp.o
+.PHONY : src/behavior/Boids.cpp.o
+
+src/behavior/Boids.i: src/behavior/Boids.cpp.i
+.PHONY : src/behavior/Boids.i
+
+# target to preprocess a source file
+src/behavior/Boids.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/behavior/Boids.cpp.i
+.PHONY : src/behavior/Boids.cpp.i
+
+src/behavior/Boids.s: src/behavior/Boids.cpp.s
+.PHONY : src/behavior/Boids.s
+
+# target to generate assembly for a file
+src/behavior/Boids.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/behavior/Boids.cpp.s
+.PHONY : src/behavior/Boids.cpp.s
+
+src/behavior/Flock.o: src/behavior/Flock.cpp.o
+.PHONY : src/behavior/Flock.o
+
+# target to build an object file
+src/behavior/Flock.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/behavior/Flock.cpp.o
+.PHONY : src/behavior/Flock.cpp.o
+
+src/behavior/Flock.i: src/behavior/Flock.cpp.i
+.PHONY : src/behavior/Flock.i
+
+# target to preprocess a source file
+src/behavior/Flock.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/behavior/Flock.cpp.i
+.PHONY : src/behavior/Flock.cpp.i
+
+src/behavior/Flock.s: src/behavior/Flock.cpp.s
+.PHONY : src/behavior/Flock.s
+
+# target to generate assembly for a file
+src/behavior/Flock.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/behavior/Flock.cpp.s
+.PHONY : src/behavior/Flock.cpp.s
+
+src/behavior/Friendly.o: src/behavior/Friendly.cpp.o
+.PHONY : src/behavior/Friendly.o
+
+# target to build an object file
+src/behavior/Friendly.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/behavior/Friendly.cpp.o
+.PHONY : src/behavior/Friendly.cpp.o
+
+src/behavior/Friendly.i: src/behavior/Friendly.cpp.i
+.PHONY : src/behavior/Friendly.i
+
+# target to preprocess a source file
+src/behavior/Friendly.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/behavior/Friendly.cpp.i
+.PHONY : src/behavior/Friendly.cpp.i
+
+src/behavior/Friendly.s: src/behavior/Friendly.cpp.s
+.PHONY : src/behavior/Friendly.s
+
+# target to generate assembly for a file
+src/behavior/Friendly.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/behavior/Friendly.cpp.s
+.PHONY : src/behavior/Friendly.cpp.s
+
+src/behavior/Predator.o: src/behavior/Predator.cpp.o
+.PHONY : src/behavior/Predator.o
+
+# target to build an object file
+src/behavior/Predator.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.o
+.PHONY : src/behavior/Predator.cpp.o
+
+src/behavior/Predator.i: src/behavior/Predator.cpp.i
+.PHONY : src/behavior/Predator.i
+
+# target to preprocess a source file
+src/behavior/Predator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.i
+.PHONY : src/behavior/Predator.cpp.i
+
+src/behavior/Predator.s: src/behavior/Predator.cpp.s
+.PHONY : src/behavior/Predator.s
+
+# target to generate assembly for a file
+src/behavior/Predator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC327-Boids.dir/build.make CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.s
+.PHONY : src/behavior/Predator.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -651,6 +747,18 @@ help:
 	@echo "... src/BoidGenTemp.o"
 	@echo "... src/BoidGenTemp.i"
 	@echo "... src/BoidGenTemp.s"
+	@echo "... src/behavior/Boids.o"
+	@echo "... src/behavior/Boids.i"
+	@echo "... src/behavior/Boids.s"
+	@echo "... src/behavior/Flock.o"
+	@echo "... src/behavior/Flock.i"
+	@echo "... src/behavior/Flock.s"
+	@echo "... src/behavior/Friendly.o"
+	@echo "... src/behavior/Friendly.i"
+	@echo "... src/behavior/Friendly.s"
+	@echo "... src/behavior/Predator.o"
+	@echo "... src/behavior/Predator.i"
+	@echo "... src/behavior/Predator.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

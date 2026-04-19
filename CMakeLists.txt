@@ -41,7 +41,10 @@ add_executable(EC327-Boids
     src/visual/CelestialBody.cpp
     src/visual/Star.cpp
 
-    # include behavior files when they work
+    src/behavior/Boids.cpp
+    src/behavior/Friendly.cpp
+    src/behavior/Predator.cpp
+    src/behavior/Flock.cpp
 
     src/BoidGenTemp.cpp
 
