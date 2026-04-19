@@ -2,26 +2,27 @@
 
 Predator::Predator(): Boids() 
 {
-    target_flock = NULL;
-    target = NULL;
+    target_flock = nullptr;
+    target = nullptr;
 }
 
-Predator::Predator(Flock::Flock new_target_flock): Boids() 
+Predator::Predator(Flock& new_target_flock): Boids() 
 {
     target_flock = &new_target_flock;
-    target = NULL;
+    target = nullptr;
 }
 
 void Predator::get_target(){
-    if(target_flock == NULL || target_flock->GetSizeOfFLock() == 0) return;
+    if(target_flock == nullptr || target_flock->GetSizeOfFLock() == 0) return;
 
-    target = &(target_flock->Get_Friendly(0));
+    target = &target_flock->Get_Friendly(0);
 
     if(target_flock->GetSizeOfFLock() == 1)return;
 
 
     for(int i = 1; i < target_flock->GetSizeOfFLock(); i++){
-        if(getDistance(*target, target_flock->Get_Friendly(i)) < getDistance(*this, *target))
-        target = &(target_flock->Get_Friendly(i));
+        if (getDistance(*this, target_flock->Get_Friendly(i)) < getDistance(*this, *target)){
+            target = &target_flock->Get_Friendly(i);
+            }
     }
 }
