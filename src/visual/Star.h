@@ -20,6 +20,7 @@ public:
     // Getters so the rest of the engine can use the light data
     glm::vec3 GetDirection() const;
     glm::vec3 GetColor() const;
+    float GetOrbitDistance() const;
 
 private:
     CelestialBody geometry;

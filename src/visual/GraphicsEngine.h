@@ -29,6 +29,9 @@ public:
     GLFWwindow *GetWindow() const;
     void SwapBuffers();
 
+    // Pass-through getter for sun distance
+    float GetSunOrbitDistance() const;
+
 private:
     GLFWwindow *window;
     CameraState camera;

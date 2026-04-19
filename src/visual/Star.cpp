@@ -12,14 +12,17 @@ Star::Star(float radius, float orbitDistance, float orbitSpeed, glm::vec3 color)
 
 void Star::Update(float time)
 {
-    // Calculate the rotating direction vector
+    // Earth's axial tilt is ~23.5 degrees
+    float tilt = glm::radians(23.5f);
+
+    // Calculate a standard circular orbit in the X/Z plane,
+    // but rotate the Y and Z coordinates by the tilt angle to simulate seasons
     currentDirection = glm::vec3(
         cos(time * speed),
-        -0.3f,
-        sin(time * speed));
-    currentDirection = glm::normalize(currentDirection);
+        -sin(time * speed) * sin(tilt),
+        sin(time * speed) * cos(tilt));
 
-    // Calculate the physical position in space
+    currentDirection = glm::normalize(currentDirection);
     currentPosition = currentDirection * distance;
 }
 
@@ -47,4 +50,9 @@ glm::vec3 Star::GetDirection() const
 glm::vec3 Star::GetColor() const
 {
     return color;
+}
+
+float Star::GetOrbitDistance() const
+{
+    return distance;
 }

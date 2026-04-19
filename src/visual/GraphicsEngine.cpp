@@ -139,3 +139,8 @@ void GraphicsEngine::SwapBuffers()
     glfwSwapBuffers(window);
     glfwPollEvents();
 }
+
+float GraphicsEngine::GetSunOrbitDistance() const
+{
+    return sun->GetOrbitDistance();
+}

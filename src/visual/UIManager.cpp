@@ -36,19 +36,49 @@ void UIManager::EndFrame()
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAlt, float &maxAlt)
+bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAlt, float &maxAlt, float sunOrbitDistance)
 {
     bool startClicked = false;
+
+    // The Sun has a radius of 2.0f => subtract 2.5f so boids don't clip into the sun's surface.
+    float maxAllowedAlt = sunOrbitDistance - 2.5f;
 
     ImGui::Begin("Simulation Setup");
     ImGui::Text("Configure your starting parameters:");
     ImGui::Spacing();
 
-    // The sliders directly modify the variables passed in by reference
     ImGui::SliderInt("Number of Boids", &boidCount, 100, 20000);
     ImGui::SliderFloat("Earth Radius", &earthRadius, 1.0f, 50.0f);
-    ImGui::SliderFloat("Min Altitude", &minAlt, earthRadius, 60.0f);
-    ImGui::SliderFloat("Max Altitude", &maxAlt, minAlt, 35.0f);
+
+    // --- CASCADING CLAMP LOGIC ---
+
+    // 1. Earth pushes Min Up
+    if (minAlt < earthRadius)
+        minAlt = earthRadius;
+
+    // 2. Min pushes Max Up
+    if (maxAlt < minAlt)
+        maxAlt = minAlt;
+
+    // 3. Max hits the Sun limit, and pushes everything BACK DOWN!
+    if (maxAlt > maxAllowedAlt)
+    {
+        maxAlt = maxAllowedAlt;
+
+        if (minAlt > maxAlt)
+        {
+            minAlt = maxAlt;
+        }
+        if (earthRadius > minAlt)
+        {
+            earthRadius = minAlt;
+        }
+    }
+
+    // By passing the dynamically checked variables into the min/max parameters
+    // of the ImGui sliders, the sliders will visually stop dragging.
+    ImGui::SliderFloat("Min Altitude", &minAlt, earthRadius, maxAlt);
+    ImGui::SliderFloat("Max Altitude", &maxAlt, minAlt, maxAllowedAlt);
 
     ImGui::Spacing();
 

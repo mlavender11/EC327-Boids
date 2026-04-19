@@ -80,11 +80,14 @@ void Application::Run()
 
 void Application::RunSetupState()
 {
-    // Draw the 3D world frozen in the background (false = no animation)
     graphics.Render(TEMPORARY_dummyBoidData, false, simulationTime, configMaxAltitude, configEarthRadius);
 
-    // Draw the Setup Menu and wait for the user to click "Start"
-    bool startClicked = uiManager.RenderSetupMenu(configBoidCount, configEarthRadius, configMinAltitude, configMaxAltitude);
+    bool startClicked = uiManager.RenderSetupMenu(
+        configBoidCount,
+        configEarthRadius,
+        configMinAltitude,
+        configMaxAltitude,
+        graphics.GetSunOrbitDistance());
 
     if (startClicked)
     {
@@ -104,10 +107,13 @@ void Application::RunSimulationState(float deltaTime)
     // TODO: time update for behavior simulations
     // =========================================================================
     // 1. Update the boid physics using 'deltaTime'
-    //    [behavior something].Update(deltaTime);
+    //    [behavior simulation].Update(deltaTime);
     //
-    // 2. Grab the newly computed positions/rotations for the graphics engine
-    //    std::vector<glm::mat4> boidDataToRender = [behavior something].GetBoidMatrices();
+    // 2. Grab the raw BoidData (positions/directions) from the simulation
+    //    const std::vector<BoidData>& activeBoids = [behavior simulation].GetBoids();
+    //
+    // 3. Convert the position data into 3D matrices
+    //    std::vector<glm::mat4> boidDataToRender = BoidRenderer::BoidsToMatrices(activeBoids);
     // =========================================================================
 
     // TODO (Michael/Yicong/Ilias): Swap out TEMPORARY_dummyBoidData for boidDataToRender
