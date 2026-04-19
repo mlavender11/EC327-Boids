@@ -20,22 +20,33 @@ public:
     void Run();
 
 private:
+    // --- State Handlers ---
+    void RunSetupState();
+    void RunSimulationState(float deltaTime);
+    void RunPausedState();
+
+    // --- Core Engine Variables ---
     GraphicsEngine graphics;
     UIManager uiManager;
 
-    std::vector<glm::mat4> dummyBoidData;
-
     AppState currentState;
-    AppState previousState; // Remember the state before pausing
-    bool escapeWasPressed;  // Track if Escape was pressed for pausing
+    AppState previousState;
+    bool escapeWasPressed;
 
-    float simulationTime; // Total time since the simulation started
-    float lastFrameTime;  // Time of the last frame, for delta time calculation
+    float simulationTime;
+    float lastFrameTime;
 
+    // --- Configuration Variables ---
     int configBoidCount = 5000;
     float configEarthRadius = 10.0f;
     float configMinAltitude = 10.0f;
     float configMaxAltitude = 15.0f;
+
+    // ==========================================
+    // TODO: TEMPORARY VARIABLES TO BE REPLACED
+    // ==========================================
+    // This holds the static boids until the behavior simulation class is built.
+    std::vector<glm::mat4> TEMPORARY_dummyBoidData;
 };
 
 #endif
