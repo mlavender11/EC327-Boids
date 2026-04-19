@@ -105,3 +105,36 @@ void BoidRenderer::DrawInstanced(const std::vector<glm::mat4> &instanceTransform
 
     glBindVertexArray(0);
 }
+
+// My BoidsToMatrices class - Ilias
+std::vector<glm::mat4> BoidRenderer::BoidsToMatrices(const std::vector<Friendly>& boids){
+    std::vector<glm::mat4> matrices;
+    matrices.reserve(boids.size());
+
+    for (const auto &boid : boids)
+    {
+        glm::vec3 position = boid.getPosition();
+        glm::vec3 velocity = boid.getVelocity();
+
+        glm::vec3 direction =
+            (glm::length(velocity) < 0.001f)
+            ? glm::vec3(0.0f, 0.0f, 1.0f)
+            : glm::normalize(velocity);
+
+        glm::vec3 up = glm::normalize(position);
+        glm::vec3 right = glm::normalize(glm::cross(up, direction));
+        glm::vec3 localUp = glm::normalize(glm::cross(direction, right));
+
+        glm::mat4 model(1.0f);
+        model[0] = glm::vec4(right, 0.0f);
+        model[1] = glm::vec4(localUp, 0.0f);
+        model[2] = glm::vec4(direction, 0.0f);
+        model[3] = glm::vec4(position, 1.0f);
+
+        model = glm::scale(model, glm::vec3(0.2f));
+
+        matrices.push_back(model);
+    }
+
+    return matrices;
+}

@@ -6,6 +6,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
 
+#include "behavior/Friendly.h" // included friendly instead
+
 // #include "Boids.h"
 
 class BoidRenderer
@@ -18,6 +20,8 @@ public:
 
     // Takes boid positioning data (in the form of a vector of transformation matrices) and draws all boids at once
     void DrawInstanced(const std::vector<glm::mat4> &);
+    static std::vector<glm::mat4> BoidsToMatrices(const std::vector<Friendly>&);
+
 
 private:
     unsigned int VAO, VBO, instanceVBO;
