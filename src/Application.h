@@ -9,7 +9,8 @@
 enum class AppState
 {
     SETUP,
-    SIMULATION
+    SIMULATION,
+    PAUSED
 };
 
 class Application
@@ -23,7 +24,13 @@ private:
     UIManager uiManager;
 
     std::vector<glm::mat4> dummyBoidData;
+
     AppState currentState;
+    AppState previousState; // Remember the state before pausing
+    bool escapeWasPressed;  // Track if Escape was pressed for pausing
+
+    float simulationTime; // Total time since the simulation started
+    float lastFrameTime;  // Time of the last frame, for delta time calculation
 
     int configBoidCount = 5000;
     float configEarthRadius = 10.0f;

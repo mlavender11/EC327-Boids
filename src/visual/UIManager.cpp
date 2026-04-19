@@ -48,7 +48,7 @@ bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAl
     ImGui::SliderInt("Number of Boids", &boidCount, 100, 20000);
     ImGui::SliderFloat("Earth Radius", &earthRadius, 1.0f, 50.0f);
     ImGui::SliderFloat("Min Altitude", &minAlt, earthRadius, 60.0f);
-    ImGui::SliderFloat("Max Altitude", &maxAlt, minAlt, 100.0f);
+    ImGui::SliderFloat("Max Altitude", &maxAlt, minAlt, 35.0f);
 
     ImGui::Spacing();
 
@@ -59,4 +59,28 @@ bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAl
     ImGui::End();
 
     return startClicked;
+}
+
+void UIManager::RenderPauseMenu(bool &resume, bool &setup, bool &quit)
+{
+    resume = false;
+    setup = false;
+    quit = false;
+
+    // Center the pause menu on the screen
+    ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+    ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+
+    ImGui::Begin("Paused", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove);
+    ImGui::Text("Simulation Paused");
+    ImGui::Spacing();
+
+    if (ImGui::Button("Resume", ImVec2(200, 50)))
+        resume = true;
+    if (ImGui::Button("Setup", ImVec2(200, 50)))
+        setup = true;
+    if (ImGui::Button("Quit", ImVec2(200, 50)))
+        quit = true;
+
+    ImGui::End();
 }

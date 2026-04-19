@@ -5,28 +5,62 @@
 Application::Application()
 {
     graphics.Initialize(1280, 720, "Boids");
-
-    // Initialize the UI using the window created by the Graphics Engine
     uiManager.Initialize(graphics.GetWindow());
 
     currentState = AppState::SETUP;
+    previousState = AppState::SETUP;
+    escapeWasPressed = false;
+
+    simulationTime = 0.0f;
+    lastFrameTime = glfwGetTime();
 }
 
 void Application::Run()
 {
     while (!graphics.ShouldClose())
     {
+
+        // --- 1. CLOCK MATH ---
+        float currentFrameTime = glfwGetTime();
+        float deltaTime = currentFrameTime - lastFrameTime;
+        lastFrameTime = currentFrameTime;
+
+        // ONLY advance the game clock if we are actively simulating!
+        if (currentState == AppState::SIMULATION)
+        {
+            simulationTime += deltaTime;
+        }
+
         graphics.ProcessInput();
 
-        // Tell ImGui a new frame is starting
+        // --- 2. ESCAPE KEY TOGGLE LOGIC ---
+        bool escapeIsPressed = (glfwGetKey(graphics.GetWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS);
+
+        // Only trigger exactly once when the key is first pressed down
+        if (escapeIsPressed && !escapeWasPressed)
+        {
+            if (currentState == AppState::PAUSED)
+            {
+                // Unpause and go back to what we were doing
+                currentState = previousState;
+            }
+            else
+            {
+                // Pause the game and remember where we came from
+                previousState = currentState;
+                currentState = AppState::PAUSED;
+            }
+        }
+        escapeWasPressed = escapeIsPressed; // Update the tracking variable
+
+        // --- 3. RENDER CYCLE ---
         uiManager.BeginFrame();
 
-        // Handle State Logic & Rendering
         if (currentState == AppState::SETUP)
         {
-            graphics.Render(dummyBoidData, false);
+            // Pass simulationTime to Render
+            graphics.Render(dummyBoidData, false, simulationTime);
 
-            // RenderSetupMenu returns true if the Start button was clicked
             if (uiManager.RenderSetupMenu(configBoidCount, configEarthRadius, configMinAltitude, configMaxAltitude))
             {
                 dummyBoidData = GenerateTestBoids(configBoidCount, configMinAltitude, configMaxAltitude);
@@ -35,15 +69,26 @@ void Application::Run()
         }
         else if (currentState == AppState::SIMULATION)
         {
-            // Behavior simulation goes here later, for now just render the boids with dummy data
+            // Pass simulationTime to Render
+            graphics.Render(dummyBoidData, true, simulationTime);
+        }
+        else if (currentState == AppState::PAUSED)
+        {
+            // Pass simulationTime to Render
+            graphics.Render(dummyBoidData, true, simulationTime);
 
-            graphics.Render(dummyBoidData, true);
+            bool resumeClicked, setupClicked, quitClicked;
+            uiManager.RenderPauseMenu(resumeClicked, setupClicked, quitClicked);
+
+            if (resumeClicked)
+                currentState = previousState;
+            if (setupClicked)
+                currentState = AppState::SETUP;
+            if (quitClicked)
+                glfwSetWindowShouldClose(graphics.GetWindow(), true);
         }
 
-        // Draw the UI on top of the 3D scene
         uiManager.EndFrame();
-
-        // Finally, swap the buffers to display the combined frame to the monitor
         graphics.SwapBuffers();
     }
 }

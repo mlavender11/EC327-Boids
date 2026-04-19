@@ -31,7 +31,7 @@ bool GraphicsEngine::Initialize(int width, int height, const char *title)
     boidShader = new Shader("shaders/BoidVertexShader.glsl", "shaders/FragmentShader.glsl");
 
     earth = new CelestialBody(10.0f, 16, 16);
-    sun = new Star(2.0f, 40.0f, 0.5f, glm::vec3(1.0f, 0.95f, 0.9f));
+    sun = new Star(2.0f, 50.0f, 0.5f, glm::vec3(1.0f, 0.95f, 0.9f));
     boidRenderer = new BoidRenderer();
 
     return true;
@@ -47,15 +47,15 @@ bool GraphicsEngine::ShouldClose() const
     return glfwWindowShouldClose(window);
 }
 
-void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData, bool drawSimulation)
+void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData, bool drawSimulation, float simulationTime)
 {
     glClearColor(0.05f, 0.05f, 0.1f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     if (drawSimulation)
     {
-        // Update the visual sun (purely aesthetic, doesn't affect physics)
-        sun->Update(glfwGetTime());
+        // Update the sun with the new time (causes it to move in its orbit)
+        sun->Update(simulationTime);
 
         glm::mat4 view = CalculateViewMatrix(camera);
         // The final parameter of perspective is the render distance
