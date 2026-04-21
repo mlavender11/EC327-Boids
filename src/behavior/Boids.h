@@ -6,9 +6,6 @@
 #include <glm/glm.hpp>
 using namespace std;
 
-// This is unnecessary bc the user defines the max (and min) altitudes for the boids in the setup menu
-const double COORDINATE_MAX = 0.0; // Maximum x and y coordinate, to be used in random placement of bird during initialziation
-
 class Boids
 {
 private:
