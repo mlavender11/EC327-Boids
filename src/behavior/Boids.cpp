@@ -63,7 +63,7 @@ void Boids::applyForce(const glm::vec3 &force)
 glm::vec3 Boids::seek(const glm::vec3 target)
 {
     glm::vec3 desired = target - position;
-    
+
     if (glm::length(desired) < 0.001f) // If already there
     {
         return glm::vec3(0.0f);
@@ -198,7 +198,6 @@ vector<const Boids *> Boids::findNeighbors(const vector<Boids> &allBoids) const
 
 void Boids::update(float dt)
 {
-
     velocity += acceleration * dt;
     velocity = limitMagnitude(velocity, maxSpeed);
     position += velocity * dt;
