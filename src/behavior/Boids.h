@@ -47,7 +47,7 @@ public:
     glm::vec3 align(const vector<const Boids *> &neighbors);                                          // steer towards avg velocity of neighbors
     glm::vec3 cohere(const vector<const Boids *> &neighbors);                                         // Steer toward average position of neighbors
     void flock(const vector<const Boids *> &neighbors);                                               // Calculate forces from neighboring boids in the flock
-    vector<const Boids *> findNeighbors(const vector<Boids> &allBoids) const; // Find neighbors within perception radius
+    vector<const Boids *> findNeighbors(const vector<Boids*> &allBoids) const; // Find neighbors within perception radius
 
     /*Before updating the bird's motion for each frame, we need to accumulate and calculate every force acting upon it,
     and then apply these updates collectively via the `update`*/

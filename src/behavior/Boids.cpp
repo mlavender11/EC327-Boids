@@ -162,6 +162,7 @@ glm::vec3 Boids::cohere(const vector<const Boids *> &neighbors)
 
 void Boids::flock(const vector<const Boids *> &neighbors)
 {
+
     glm::vec3 seperate_vec = separate(neighbors);
     glm::vec3 align_vec = align(neighbors);
     glm::vec3 cohere_vec = cohere(neighbors);
@@ -176,21 +177,21 @@ void Boids::flock(const vector<const Boids *> &neighbors)
     applyForce(cohere_vec);
 }
 
-vector<const Boids *> Boids::findNeighbors(const vector<Boids> &allBoids) const
+vector<const Boids *> Boids::findNeighbors(const vector<Boids*> &allBoids) const
 {
     vector<const Boids *> neighbors;
 
-    for (const Boids &other_boid : allBoids)
+    for (const Boids *other_boid : allBoids)
     {
-        if (other_boid.getID() == this->id)
+        if (other_boid->getID() == this->id)
         {
             continue;
         }
 
-        float distance = distanceTo(other_boid); // This may be computationally expensive, a lot of square roots - could implement DistanceToSquared function
+        float distance = distanceTo(*other_boid); // This may be computationally expensive, a lot of square roots - could implement DistanceToSquared function
         if (distance < perceptionRadius)
         {
-            neighbors.push_back(&other_boid);
+            neighbors.push_back(other_boid);
         }
     }
     return neighbors;
