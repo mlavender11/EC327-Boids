@@ -12,6 +12,7 @@ const double COORDINATE_MAX = 0.0; // Maximum x and y coordinate, to be used in 
 class Boids
 {
 private:
+    // Do we still need direction member??
     glm::vec3 position;
     glm::vec3 velocity;     // Current velocity
     glm::vec3 acceleration; // Current steering force
@@ -22,6 +23,7 @@ private:
     // Behavior params - will need to edit based on Kyle's map
     float desiredSeperation = 25.0f; // Desired distance to maintain - used in seperate func - implemenr variation in this?
     float neighborDist = 50.0f;      // Distance for alignment and cohesion - used in aligh func
+    float perceptionRadius = 50.0f; //junk value, need to fix ??
 
     glm::vec3 limitMagnitude(glm::vec3 vec, float maxMag) const; // Helper function for behavior calculations
 
@@ -43,11 +45,11 @@ public:
     glm::vec3 align(const vector<const Boids *> &neighbors);                                          // steer towards avg velocity of neighbors
     glm::vec3 cohere(const vector<const Boids *> &neighbors);                                         // Steer toward average position of neighbors
     void flock(const vector<const Boids *> &neighbors);                                               // Calculate forces from neighboring boids in the flock
-    vector<const Boids *> findNeighbors(const vector<Boids> &allBoids, float perceptionRadius) const; // Find neighbors within perception radius
+    vector<const Boids *> findNeighbors(const vector<Boids> &allBoids) const; // Find neighbors within perception radius
 
     /*Before updating the bird's motion for each frame, we need to accumulate and calculate every force acting upon it,
     and then apply these updates collectively via the `update`*/
-    void update(); // Update this boid for every single simulation step
+    void update(float dt); // Update this boid for every single simulation step
 
     void handleBoundary(double width, double length); // THIS IS FOR 2D - need to talk with kyle about 3d boundaries
 
