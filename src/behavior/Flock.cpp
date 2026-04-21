@@ -11,7 +11,7 @@ Flock::Flock(int n, float minAlt, float maxAlt)
 {
     for (size_t i = 0; i < n; i++)
     {
-        Boids* new_boid = new Boids(maxAlt, minAlt);
+        Boids* new_boid = new Friendly(maxAlt, minAlt);
         flock.push_back(new_boid);
     }
 }
@@ -33,12 +33,18 @@ void Flock::Update(double dt){
 
     for (size_t i = 0; i < flock.size(); i++)
     {
-        flock[i]->flock(allNeighbors[i]); //Call flock function on all boids
+    if (flock[i]->IsAlive())
+        {
+            flock[i]->flock(allNeighbors[i]);
+        }    
     }
 
     for (Boids* boid : flock)
     {
-        boid->update(dt); // Update all boids
+            if (boid->IsAlive())
+        {
+            boid->update(dt);
+        }
     }
 }
 

@@ -344,3 +344,8 @@ glm::vec3 Boids::limitMagnitude(glm::vec3 vec, float maxMag) const
 
     return vec;
 }
+
+bool Boids::IsAlive() const
+{
+    return true;
+}
