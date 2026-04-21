@@ -29,9 +29,12 @@ private:
 
     static int nextID;
 
+    float minAlt;
+    float maxAlt;
+
 public:
     // Will add more parameter constructors as we add more parameters (ex coherence, speed)
-    Boids();                                                        // Initializes a bird with random position
+    Boids(float maxAlt, float minAlt);                                                        // Initializes a bird with random position
     Boids(double in_x, double in_y, double in_z);                   // Initializes a bird with a given position
     Boids(double in_x, double in_y, double in_z, glm::vec3 in_vel); // Initialize a bird with goiven position and velocity
 

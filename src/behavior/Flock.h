@@ -13,7 +13,7 @@ private:                    // should be made public or friend for my predator
     vector<Boids*> flock;
 public:
     Flock();
-    Flock(int n);
+    Flock(int n, float minAlt, float maxAlt);
     Friendly &Get_Friendly(int i);
     size_t GetSizeOfFlock() const; 
 

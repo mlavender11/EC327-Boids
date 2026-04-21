@@ -5,6 +5,7 @@
 #include "visual/UIManager.h"
 #include <vector> // Dont think its really needed cause flock is already a vector
 #include <glm/glm.hpp>
+#include "Flock.h"
 
 #include "behavior/Flock.h" // Ilias
 

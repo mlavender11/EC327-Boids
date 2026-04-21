@@ -3,7 +3,7 @@ using namespace std;
 
 int Boids::nextID = 0;
 
-Boids::Boids()
+Boids::Boids(float maxAlt, float minAlt)
 {
     random_device rd;
     mt19937 gen(rd());
@@ -24,6 +24,9 @@ Boids::Boids()
     float zDir = distrib(gen);
     direction = glm::vec3(xDir, yDir, zDir);
     direction = glm::normalize(direction);
+
+    this->maxAlt = maxAlt;
+    this->minAlt = minAlt;
 }
 
 Boids::Boids(double in_x, double in_y, double in_z)

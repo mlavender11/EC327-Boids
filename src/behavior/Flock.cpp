@@ -7,11 +7,11 @@ Flock::Flock()
     // boids(0);
 }
 
-Flock::Flock(int n)
+Flock::Flock(int n, float minAlt, float maxAlt)
 {
     for (size_t i = 0; i < n; i++)
     {
-        Boids* new_boid = new Boids();
+        Boids* new_boid = new Boids(maxAlt, minAlt);
         flock.push_back(new_boid);
     }
 }
