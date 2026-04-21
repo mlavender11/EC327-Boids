@@ -7,12 +7,28 @@ Boids::Boids(float maxAlt, float minAlt)
 {
     random_device rd;
     mt19937 gen(rd());
-    uniform_real_distribution<float> distrib(0.0f, COORDINATE_MAX);
-    float x = distrib(gen);
-    float y = distrib(gen); // changed these 3 to be floats -Ilias
-    float z = distrib(gen);
+    uniform_real_distribution<float> distrib(minAlt, maxAlt);
+    // float x = distrib(gen);
+    // float y = distrib(gen);
+    // float z = distrib(gen);
+
+    // position = glm::vec3(x, y, z);
+
+    uniform_real_distribution<float> distrib_radius(minAlt, maxAlt);
+    uniform_real_distribution<float> distrib_theta(0.0f, 2.0f * M_PI);
+    uniform_real_distribution<float> distrib_cos_phi(-1.0f, 1.0f);
+
+    float r = distrib_radius(gen);
+    float theta = distrib_theta(gen);
+    float cos_phi = distrib_cos_phi(gen);
+    float sin_phi = sqrt(1.0f - cos_phi * cos_phi);
+
+    float x = r * sin_phi * cos(theta);
+    float y = r * sin_phi * sin(theta);
+    float z = r * cos_phi;
 
     position = glm::vec3(x, y, z);
+
     velocity = glm::vec3(0.0f, 0.0f, 0.0f);
     acceleration = glm::vec3(0.0f, 0.0f, 0.0f);
     maxSpeed = 3.0f; // we can adjust it later
@@ -124,8 +140,9 @@ glm::vec3 Boids::separate(const vector<const Boids *> &neighbors)
         steer *= maxSpeed;                  // Boids want to go max speed
         steer -= velocity;                  // Vector for how to steer to get to desired
         steer = limitMagnitude(steer, maxForce);
-        return steer;
+        
     }
+    return steer;
 }
 
 glm::vec3 Boids::align(const vector<const Boids *> &neighbors)
@@ -196,7 +213,7 @@ void Boids::flock(const vector<const Boids *> &neighbors)
     applyForce(cohere_vec);
 }
 
-vector<const Boids *> Boids::findNeighbors(const vector<Boids*> &allBoids) const
+vector<const Boids *> Boids::findNeighbors(const vector<Boids *> &allBoids) const
 {
     vector<const Boids *> neighbors;
 

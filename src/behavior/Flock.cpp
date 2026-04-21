@@ -21,7 +21,7 @@ Flock::Flock(int n, float minAlt, float maxAlt)
 //     flock.push_back(new_friendly);
 // }
 
-void Flock::update(double dt){
+void Flock::Update(double dt){
     vector<vector<const Boids*>> allNeighbors; // List of lists of neighbors
     allNeighbors.reserve(flock.size());
 
@@ -58,3 +58,39 @@ size_t Flock::GetSizeOfFlock() const
 // {
 //     return flock;
 // }
+
+vector<Boids*> Flock::GetFlock() const
+{
+    return flock;
+}
+
+Flock::~Flock()
+{
+    for (Boids* boid : flock)
+    {
+        delete boid;
+    }
+    flock.clear();
+}
+
+Flock::Flock(Flock&& other) noexcept
+    : flock(std::move(other.flock))
+{
+    // other.flock is now empty, so its destructor won't delete anything
+}
+
+Flock& Flock::operator=(Flock&& other) noexcept
+{
+    if (this != &other)
+    {
+        // Delete our current boids
+        for (Boids* boid : flock)
+        {
+            delete boid;
+        }
+        
+        // Take ownership of other's boids
+        flock = std::move(other.flock);
+    }
+    return *this;
+}

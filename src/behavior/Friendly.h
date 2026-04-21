@@ -1,21 +1,21 @@
-#ifndef FRIENDLY_H
-#define FRIENDLY_H
-#include "Boids.h" // CMakeFiles.txt is set up to find this header file - Kyle
-#include "glm/glm.hpp"
+// #ifndef FRIENDLY_H
+// #define FRIENDLY_H
+// #include "Boids.h" // CMakeFiles.txt is set up to find this header file - Kyle
+// #include "glm/glm.hpp"
 
-class Flock;
+// class Flock;
 
-enum class STATE
-{
-    DEAD,
-    ALIVE
-};
+// enum class STATE
+// {
+//     DEAD,
+//     ALIVE
+// };
 
-class Friendly : public Boids
-{
-public:
-    STATE state;
-    Friendly();
-};
+// class Friendly : public Boids
+// {
+// public:
+//     STATE state;
+//     Friendly();
+// };
 
-#endif
+// #endif

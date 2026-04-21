@@ -96,8 +96,10 @@ void Application::RunSetupState()
     if (startClicked)
     {
         // TODO (Michael/Yicong/Ilias): Replace this with actual boid generation code one that's done
-        TEMPORARY_dummyBoidData = GenerateTestBoids(configBoidCount, configMinAltitude, configMaxAltitude);
+        // TEMPORARY_dummyBoidData = GenerateTestBoids(configBoidCount, configMinAltitude, configMaxAltitude);
         // preyFlock = Flock(configBoidCount); // Uncomment when it works - Kyle
+
+        flock = Flock(configBoidCount, configMinAltitude, configMaxAltitude);
         currentState = AppState::SIMULATION;
     }
 }
@@ -110,13 +112,14 @@ void Application::RunSimulationState(float deltaTime)
     // preyFlock.update(); // Uncomment when it works - Kyle
 
     // Uncomment when it works - Kyle
-    /*
-    std::vector<glm::mat4> boidDataToRender =
-        BoidRenderer::BoidsToMatrices(preyFlock.GetAllFriendlies());
+    
+    std::vector<glm::mat4> boidDataToRender = BoidRenderer::BoidsToMatrices(flock.GetFlock());
 
     graphics.Render(boidDataToRender, true, simulationTime, configMaxAltitude, configEarthRadius);
-    */
-    graphics.Render(TEMPORARY_dummyBoidData, true, simulationTime, configMaxAltitude, configEarthRadius);
+
+    flock.Update(deltaTime);
+    
+    // graphics.Render(TEMPORARY_dummyBoidData, true, simulationTime, configMaxAltitude, configEarthRadius);
 }
 
 void Application::RunPausedState()

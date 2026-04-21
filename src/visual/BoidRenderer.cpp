@@ -107,14 +107,14 @@ void BoidRenderer::DrawInstanced(const std::vector<glm::mat4> &instanceTransform
 }
 
 // My BoidsToMatrices class - Ilias
-std::vector<glm::mat4> BoidRenderer::BoidsToMatrices(const std::vector<Friendly>& boids){
+std::vector<glm::mat4> BoidRenderer::BoidsToMatrices(const std::vector<Boids*>& boids){
     std::vector<glm::mat4> matrices;
     matrices.reserve(boids.size());
 
     for (const auto &boid : boids)
     {
-        glm::vec3 position = boid.getPosition();
-        glm::vec3 velocity = boid.getVelocity();
+        glm::vec3 position = boid->getPosition();
+        glm::vec3 velocity = boid->getVelocity();
 
         glm::vec3 direction =
             (glm::length(velocity) < 0.001f)

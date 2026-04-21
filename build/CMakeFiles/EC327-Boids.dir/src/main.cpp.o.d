@@ -1131,7 +1131,6 @@ CMakeFiles/EC327-Boids.dir/src/main.cpp.o: \
   /Users/michaellavender/Documents/BostonUniversity/Spring2026/ENGEC327/Boids/src/visual/CelestialBody.h \
   /Users/michaellavender/Documents/BostonUniversity/Spring2026/ENGEC327/Boids/src/visual/Star.h \
   /Users/michaellavender/Documents/BostonUniversity/Spring2026/ENGEC327/Boids/src/visual/BoidRenderer.h \
-  /Users/michaellavender/Documents/BostonUniversity/Spring2026/ENGEC327/Boids/src/behavior/Friendly.h \
   /Users/michaellavender/Documents/BostonUniversity/Spring2026/ENGEC327/Boids/src/behavior/Boids.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/random \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/bernoulli_distribution.h \
@@ -1183,6 +1182,7 @@ CMakeFiles/EC327-Boids.dir/src/main.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/student_t_distribution.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/uniform_random_bit_generator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/weibull_distribution.h \
+  /Users/michaellavender/Documents/BostonUniversity/Spring2026/ENGEC327/Boids/src/behavior/Friendly.h \
   /Users/michaellavender/Documents/BostonUniversity/Spring2026/ENGEC327/Boids/src/visual/Window.h \
   /Users/michaellavender/Documents/BostonUniversity/Spring2026/ENGEC327/Boids/src/visual/Callbacks.h \
   /Users/michaellavender/Documents/BostonUniversity/Spring2026/ENGEC327/Boids/src/visual/UIManager.h \
