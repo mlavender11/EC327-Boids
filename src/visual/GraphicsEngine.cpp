@@ -31,10 +31,10 @@ bool GraphicsEngine::Initialize(int width, int height, const char *title)
     sunShader = new Shader("shaders/VertexShader.glsl", "shaders/StarFragmentShader.glsl");
     boidShader = new Shader("shaders/BoidVertexShader.glsl", "shaders/FragmentShader.glsl");
 
+    // Radii for the Earth and atmosphere will be scaled by the user during setup
     earth = new CelestialBody(10.0f, 24, 24);
-    // Create the atmosphere with a radius of 1.0. It will be scaled up later using the model matrix
     atmosphere = new CelestialBody(1.0f, 32, 32);
-    sun = new Star(20.0f, 400.0f, 0.5f, glm::vec3(1.0f, 0.95f, 0.9f));
+    sun = new Star(50.0f, 400.0f, 0.5f, glm::vec3(1.0f, 0.95f, 0.5f));
     boidRenderer = new BoidRenderer();
 
     return true;
@@ -54,6 +54,23 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData, bool drawSim
 {
     glClearColor(0.05f, 0.05f, 0.1f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    // Update camera bounds
+    // Prevent clipping into the ground by adding a tiny buffer to the minZoom
+    camera.minZoom = earthRadius + 2.0f;
+
+    // Set max zoom to 3x the max altitude plus a buffer
+    camera.maxZoom = maxAltitude * 3.0f + 20.0f;
+
+    // Clamp the max and min zooms
+    if (camera.radius < camera.minZoom)
+    {
+        camera.radius = camera.minZoom;
+    }
+    if (camera.radius > camera.maxZoom)
+    {
+        camera.radius = camera.maxZoom;
+    }
 
     if (drawSimulation)
     {

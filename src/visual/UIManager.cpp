@@ -40,8 +40,7 @@ bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAl
 {
     bool startClicked = false;
 
-    // The Sun has a radius of 2.0f => subtract 2.5f so boids don't clip into the sun's surface.
-    float maxAllowedAlt = sunOrbitDistance - 2.5f;
+    float maxAllowedAlt = 100; // Arbitrary
 
     ImGui::Begin("Simulation Setup");
     ImGui::Text("Configure your starting parameters:");
@@ -60,7 +59,7 @@ bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAl
     if (maxAlt < minAlt)
         maxAlt = minAlt;
 
-    // 3. Max hits the Sun limit, and pushes everything BACK DOWN!
+    // 3. Max hits the limit, and pushes everything back down
     if (maxAlt > maxAllowedAlt)
     {
         maxAlt = maxAllowedAlt;
@@ -79,6 +78,18 @@ bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAl
     // of the ImGui sliders, the sliders will visually stop dragging.
     ImGui::SliderFloat("Min Altitude", &minAlt, earthRadius, maxAlt);
     ImGui::SliderFloat("Max Altitude", &maxAlt, minAlt, maxAllowedAlt);
+
+    ImGui::Spacing();
+    ImGui::Separator();
+    ImGui::Spacing();
+
+    if (ImGui::Button("Reset to Defaults", ImVec2(200, 30)))
+    {
+        boidCount = 5000;
+        earthRadius = 10.0f;
+        minAlt = 10.0f;
+        maxAlt = 15.0f;
+    }
 
     ImGui::Spacing();
 
