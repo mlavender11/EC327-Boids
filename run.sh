@@ -1,11 +1,7 @@
 #!/bin/bash
 
-echo "🧹 Clearing old CMake cache..."
-rm -rf build
-mkdir build
-cd build
-
 echo "⚙️ Configuring CMake..."
+cd build
 cmake ..
 
 echo "🔨 Building project..."
