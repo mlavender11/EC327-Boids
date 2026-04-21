@@ -1,6 +1,7 @@
-CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.o: \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Predator.cpp \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Predator.h \
+CMakeFiles/EC327-Boids.dir/src/behavior/Flock.cpp.o: \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Flock.cpp \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Flock.h \
+  /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Friendly.h \
   /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Boids.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/random \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__config \
@@ -385,6 +386,4 @@ CMakeFiles/EC327-Boids.dir/src/behavior/Predator.cpp.o: \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/matrix.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/vector_relational.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/integer.hpp \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/detail/func_integer.inl \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Friendly.h \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Flock.h
+  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/detail/func_integer.inl

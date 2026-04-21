@@ -2,5 +2,5 @@
 
 Friendly::Friendly() : Boids()
 {
-    state = ALIVE;
+    state = STATE::ALIVE; // Made this find the state - Kyle
 }
