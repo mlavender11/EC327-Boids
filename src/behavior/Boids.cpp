@@ -187,7 +187,22 @@ glm::vec3 Boids::align(const vector<const Boids *> &neighbors)
 }
 
 // glm::vec3 Boids::cohere(const vector<const Boids *> &neighbors);
-// void Boids::flock(const vector<const Boids *> &neighbors);
+void Boids::flock(const vector<const Boids *> &neighbors)
+{
+    glm::vec3 seperate_vec = separate(neighbors);
+    glm::vec3 align_vec = align(neighbors);
+    glm::vec3 cohere_vec = cohere(neighbors);
+
+    // Weighting factors - maybe we want to make sliders for these
+    seperate_vec *= 1.5f;
+    align_vec *= 1.0f;
+    cohere_vec *= 1.0f;
+
+    applyForce(seperate_vec);
+    applyForce(align_vec);
+    applyForce(cohere_vec);
+}
+
 // vector<const Boids *> Boids::findNeighbors(const vector<Boids> &allBoids, float perceptionRadius) const;
 
 
