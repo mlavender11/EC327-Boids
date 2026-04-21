@@ -1,7 +1,6 @@
-#include "src/behavior/Friendly.h"
+#include "Friendly.h"
 
-
-Friendly::Friendly() : Boids(){
+Friendly::Friendly() : Boids()
+{
     state = ALIVE;
 }
-
