@@ -31,10 +31,10 @@ bool GraphicsEngine::Initialize(int width, int height, const char *title)
     sunShader = new Shader("shaders/VertexShader.glsl", "shaders/StarFragmentShader.glsl");
     boidShader = new Shader("shaders/BoidVertexShader.glsl", "shaders/FragmentShader.glsl");
 
-    earth = new CelestialBody(10.0f, 16, 16);
+    earth = new CelestialBody(10.0f, 24, 24);
     // Create the atmosphere with a radius of 1.0. It will be scaled up later using the model matrix
     atmosphere = new CelestialBody(1.0f, 32, 32);
-    sun = new Star(2.0f, 50.0f, 0.5f, glm::vec3(1.0f, 0.95f, 0.9f));
+    sun = new Star(20.0f, 400.0f, 0.5f, glm::vec3(1.0f, 0.95f, 0.9f));
     boidRenderer = new BoidRenderer();
 
     return true;
@@ -69,7 +69,7 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData, bool drawSim
         {
             height = 1;
         }
-        glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 1000.0f);
+        glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 3000.0f);
         glm::vec3 lightDir = sun->GetDirection();
         glm::vec3 ambient(1.0f, 1.0f, 1.0f);
 
