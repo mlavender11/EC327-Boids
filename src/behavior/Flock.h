@@ -15,7 +15,7 @@ public:
     Flock();
     Flock(int n);
     Friendly &Get_Friendly(int i);
-    size_t GetSizeOfFlock() const; // Not sure if this is necesary, we can just fall flock.size() - STL function
+    size_t GetSizeOfFlock() const; 
 
     void AddFriendly(const Friendly &new_friendly);
     void update(double dt);
