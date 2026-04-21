@@ -30,11 +30,8 @@ For the visual part, how you run it is a bit complicated because you need to use
 
 Here are the steps:
 
-1. Go to the build folder (cd build)
-2. Enter "cmake .." in the terminal
-3. Enter "cmake --build ." in the terminal
-4. Go to the main folder ("cd ..")
-5. Enter "./build/EC327-Boids" (or whatever the .exe is called) in the terminal
+1. On Mac, if you haven't run it before, navigate to the main directory and enter "chmod +x run.sh"
+2. To run, use "./run.sh"
 
 # Behavior
 Whatever you guys wanna put here
