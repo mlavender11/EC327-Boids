@@ -1,3 +1,0 @@
-/Users/michaellavender/Documents/BostonUniversity/Spring2026/ENGEC327/Boids/build/CMakeFiles/EC327-Boids.dir
-/Users/michaellavender/Documents/BostonUniversity/Spring2026/ENGEC327/Boids/build/CMakeFiles/edit_cache.dir
-/Users/michaellavender/Documents/BostonUniversity/Spring2026/ENGEC327/Boids/build/CMakeFiles/rebuild_cache.dir
