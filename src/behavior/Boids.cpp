@@ -58,57 +58,6 @@ void Boids::applyForce(const glm::vec3 &force)
     acceleration += force;
 }
 
-// Old implementations
-// glm::vec3 Boids::seek(glm::vec3 target)
-// { // not finished
-//     glm::vec3 desired = target - position;
-//     if (glm::length(desired) < 0.001f)
-//     { // just in case of normolize(desired) returns zero and error occurs
-//         return glm::vec3(0.0f, 0.0f, 0.0f);
-//     }
-//     desired = glm::normalize(desired) * maxSpeed;
-//     glm::vec3 steer = desired - velocity;
-//     if (glm::length(steer) > maxForce)
-//     {
-//         steer = glm::normalize(steer) * maxForce;
-//     }
-
-//     return steer;
-// }
-
-// // glm::vec3 separate(const vector<Boids> &boids);
-// // glm::vec3 align(const vector<Boids> &boids);
-// // glm::vec3 cohere(const vector<Boids> &boids);
-// // void flock(const vector<Boids> &boids);
-
-// void Boids::flock(const vector<Boids> &boids)
-// {
-//     glm::vec3 sep = separate(boids);
-//     glm::vec3 ali = align(boids);
-//     glm::vec3 coh = cohere(boids);
-
-//     // Weighting for different forces
-//     sep *= 1.5f;
-//     ali *= 1.0f;
-//     coh *= 1.0f;
-
-//     applyForce(sep);
-//     applyForce(ali);
-//     applyForce(coh);
-// }
-
-// void Boids::update()
-// { // not finished
-//     velocity += acceleration;
-//     if (glm::length(velocity) > maxSpeed)
-//         velocity = glm::normalize(velocity) * maxSpeed;
-
-//     position += velocity;
-//     acceleration = glm::vec3(0.0f, 0.0f, 0.0f);
-// }
-
-// New implementations
-
 void Boids::applyForce(const glm::vec3 &force)
 {
     acceleration += force;
