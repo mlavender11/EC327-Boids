@@ -58,11 +58,6 @@ void Boids::applyForce(const glm::vec3 &force)
     acceleration += force;
 }
 
-void Boids::applyForce(const glm::vec3 &force)
-{
-    acceleration += force;
-}
-
 glm::vec3 Boids::seek(const glm::vec3 target)
 {
     glm::vec3 desired = target - position;
