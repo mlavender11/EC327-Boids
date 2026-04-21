@@ -37,17 +37,21 @@ void Application::Run()
 
         // 3. Handle Pause Toggle (Escape Key)
         bool escapeIsPressed = (glfwGetKey(graphics.GetWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS);
+
         if (escapeIsPressed && !escapeWasPressed)
         {
-            if (currentState == AppState::PAUSED)
+            if (currentState == AppState::SIMULATION)
             {
-                currentState = previousState; // Unpause
-            }
-            else
-            {
-                previousState = currentState; // Pause
+                // Only allow pausing if the game is actively running
+                previousState = currentState;
                 currentState = AppState::PAUSED;
             }
+            else if (currentState == AppState::PAUSED)
+            {
+                // Unpause and return to where we were
+                currentState = previousState;
+            }
+            // If the user is in the setup menu, the Escape key is completely ignored.
         }
         escapeWasPressed = escapeIsPressed;
 
