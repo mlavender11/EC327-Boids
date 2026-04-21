@@ -6,8 +6,6 @@
 #include <glm/glm.hpp>
 using namespace std;
 
-// This is unnecessary bc the user defines the max (and min) altitudes for the boids in the setup menu
-const double COORDINATE_MAX = 0.0; // Maximum x and y coordinate, to be used in random placement of bird during initialziation
 
 class Boids
 {
@@ -21,9 +19,9 @@ private:
     int id;
 
     // Behavior params - will need to edit based on Kyle's map
-    float desiredSeperation = 25.0f; // Desired distance to maintain - used in seperate func - implemenr variation in this?
-    float neighborDist = 50.0f;      // Distance for alignment and cohesion - used in aligh func
-    float perceptionRadius = 50.0f;  // junk value, need to fix ??
+    float desiredSeperation = 2.5f; // Desired distance to maintain - used in seperate func - implemenr variation in this?
+    float neighborDist = 5.0f;      // Distance for alignment and cohesion - used in aligh func
+    float perceptionRadius = 5.0f;  // junk value, need to fix ??
 
     glm::vec3 limitMagnitude(glm::vec3 vec, float maxMag) const; // Helper function for behavior calculations
 
@@ -56,8 +54,6 @@ public:
     /*Before updating the bird's motion for each frame, we need to accumulate and calculate every force acting upon it,
     and then apply these updates collectively via the `update`*/
     void update(float dt); // Update this boid for every single simulation step
-
-    void handleBoundary(double width, double length); // THIS IS FOR 2D - need to talk with kyle about 3d boundaries
 
     glm::vec3 getPosition() const;
     glm::vec3 getVelocity() const;
