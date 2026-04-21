@@ -81,23 +81,23 @@ glm::vec3 Boids::separate(const vector<const Boids *> &neighbors)
         if (distance > 0 && distance < desiredSeperation) // is dist > 0 necesary? Would it ever be less than 0
         {
             glm::vec3 diff = position - other_boid->getPosition(); // Vector to neighobring boid
-            diff = glm::normalize(diff);                      // Normalized, position to other boid
+            diff = glm::normalize(diff);                           // Normalized, position to other boid
 
             diff /= distance; // Weight by distance
 
             steer += diff; // Add onto overall steering vector
             count++;
         }
+    }
 
-        if (count > 0) // If there are any neighbors to avoid
-        {
-            steer /= static_cast<float>(count); // Get average steer vector direction
-            steer = glm::normalize(steer);        // Average steer direction
-            steer *= maxSpeed;                  // Boids want to go max speed
-            steer -= velocity; // Vector for how to steer to get to desired
-            steer = limitMagnitude(steer, maxForce);
-            return steer;
-        }
+    if (count > 0) // If there are any neighbors to avoid
+    {
+        steer /= static_cast<float>(count); // Get average steer vector direction
+        steer = glm::normalize(steer);      // Average steer direction
+        steer *= maxSpeed;                  // Boids want to go max speed
+        steer -= velocity;                  // Vector for how to steer to get to desired
+        steer = limitMagnitude(steer, maxForce);
+        return steer;
     }
 }
 
@@ -106,28 +106,25 @@ glm::vec3 Boids::align(const vector<const Boids *> &neighbors)
     glm::vec3 steer(0.0f);
     int count = 0;
 
-    for (const Boids* other_boid : neighbors)
+    for (const Boids *other_boid : neighbors)
     {
         float distance = distanceTo(*other_boid);
-        if (distance > 0 && distance < neighborDist) //if within range
+        if (distance > 0 && distance < neighborDist) // if within range
         {
             steer += other_boid->getVelocity(); // collect flock velocity
             count++;
         }
-
-        if (count > 0)
-        {
-            steer /= static_cast<float>(count); // Average flock velocity
-            steer = glm::normalize(steer); // Avg flock direction
-            steer *= maxSpeed; // Boid wants to go max speed
-
-            steer -= velocity;
-            steer = limitMagnitude(steer, maxForce); 
-        }
-        return steer;
     }
+    if (count > 0)
+    {
+        steer /= static_cast<float>(count); // Average flock velocity
+        steer = glm::normalize(steer);      // Avg flock direction
+        steer *= maxSpeed;                  // Boid wants to go max speed
 
-
+        steer -= velocity;
+        steer = limitMagnitude(steer, maxForce);
+    }
+    return steer;
 }
 
 glm::vec3 Boids::cohere(const vector<const Boids *> &neighbors)
@@ -135,7 +132,7 @@ glm::vec3 Boids::cohere(const vector<const Boids *> &neighbors)
     glm::vec3 sum(0.0f);
     int count = 0;
 
-    for (const Boids* other_boid : neighbors)
+    for (const Boids *other_boid : neighbors)
     {
         float distance = distanceTo(*other_boid);
 
@@ -144,17 +141,16 @@ glm::vec3 Boids::cohere(const vector<const Boids *> &neighbors)
             sum += other_boid->getPosition();
             count++;
         }
-
-        if (count > 0)
-        {
-            sum /= static_cast<float>(count);
-            return seek(sum);
-        }
-
-        return sum;
     }
-}
 
+    if (count > 0)
+    {
+        sum /= static_cast<float>(count);
+        return seek(sum);
+    }
+
+    return sum;
+}
 
 void Boids::flock(const vector<const Boids *> &neighbors)
 {
@@ -174,11 +170,12 @@ void Boids::flock(const vector<const Boids *> &neighbors)
 
 vector<const Boids *> Boids::findNeighbors(const vector<Boids> &allBoids) const
 {
-    vector<const Boids*> neighbors;
-    
-    for (const Boids& other_boid : allBoids)
+    vector<const Boids *> neighbors;
+
+    for (const Boids &other_boid : allBoids)
     {
-        if (other_boid.getID() == this->id) {
+        if (other_boid.getID() == this->id)
+        {
             continue;
         }
 
@@ -191,7 +188,8 @@ vector<const Boids *> Boids::findNeighbors(const vector<Boids> &allBoids) const
     return neighbors;
 }
 
-void Boids::update(float dt){
+void Boids::update(float dt)
+{
 
     velocity += acceleration * dt;
     velocity = limitMagnitude(velocity, maxSpeed);
@@ -199,7 +197,7 @@ void Boids::update(float dt){
     acceleration = glm::vec3(0.0f);
 }
 
-// Getters 
+// Getters
 
 glm::vec3 Boids::getPosition() const
 {
@@ -233,7 +231,7 @@ int Boids::getID() const
 
 glm::vec3 Boids::limitMagnitude(glm::vec3 vec, float maxMag) const
 {
-    float magnitude_squared = glm::dot(vec, vec); //dot product of self gives mag squared
+    float magnitude_squared = glm::dot(vec, vec); // dot product of self gives mag squared
     if (magnitude_squared > (maxMag * maxMag))
     {
         vec = glm::normalize(vec) * maxMag; // If magnitude is too large, return vector w/ same direction but max magnitude
