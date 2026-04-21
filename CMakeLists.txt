@@ -58,23 +58,3 @@ target_link_libraries(EC327-Boids
     glfw 
     OpenGL::GL 
 )
-
-add_executable(test_boids
-    test_file.cpp
-    src/behavior/Boids.cpp
-    src/behavior/Flock.cpp
-    src/behavior/Friendly.cpp
-    src/BoidGenTemp.cpp
-)
-
-target_include_directories(test_boids PRIVATE
-    external
-    external/glm
-    src
-    src/behavior
-)
-
-target_link_libraries(test_boids
-    glfw
-    OpenGL::GL
-)
