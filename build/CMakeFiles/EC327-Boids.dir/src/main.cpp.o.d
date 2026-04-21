@@ -503,8 +503,6 @@ CMakeFiles/EC327-Boids.dir/src/main.cpp.o: \
   /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Boids.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/random \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/numeric \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Point2D.h \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Vector2D.h \
   /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Window.h \
   /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/Callbacks.h \
   /Users/tzezn/Desktop/ec327/EC327-Boids/src/visual/UIManager.h \

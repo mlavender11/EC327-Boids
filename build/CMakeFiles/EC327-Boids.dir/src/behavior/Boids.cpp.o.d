@@ -384,7 +384,4 @@ CMakeFiles/EC327-Boids.dir/src/behavior/Boids.cpp.o: \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/matrix.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/vector_relational.hpp \
   /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/integer.hpp \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/detail/func_integer.inl \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Point2D.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/iostream \
-  /Users/tzezn/Desktop/ec327/EC327-Boids/src/behavior/Vector2D.h
+  /Users/tzezn/Desktop/ec327/EC327-Boids/external/glm/detail/func_integer.inl

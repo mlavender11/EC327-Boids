@@ -15,6 +15,6 @@ void main()
     
     gl_Position = projection * view * vec4(FragPos, 1.0);
     
-    // Light grey
-    vertexColor = vec3(0.9, 0.9, 0.9); 
+    // Color of the boids
+    vertexColor = vec3(0.8, 0.7, 0.3); 
 }
