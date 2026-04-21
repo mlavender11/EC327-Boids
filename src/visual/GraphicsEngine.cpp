@@ -1,13 +1,24 @@
 #include "GraphicsEngine.h"
 
-GraphicsEngine::GraphicsEngine() : window(nullptr) {}
+GraphicsEngine::GraphicsEngine()
+    : window(nullptr),
+      mainShader(nullptr),
+      sunShader(nullptr),
+      boidShader(nullptr),
+      atmosphereShader(nullptr),
+      earth(nullptr),
+      atmosphere(nullptr),
+      sun(nullptr),
+      boidRenderer(nullptr) {}
 
 GraphicsEngine::~GraphicsEngine()
 {
     delete mainShader;
     delete sunShader;
     delete boidShader;
+    delete atmosphereShader;
     delete earth;
+    delete atmosphere;
     delete sun;
     delete boidRenderer;
     glfwTerminate();
