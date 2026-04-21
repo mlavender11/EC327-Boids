@@ -5,7 +5,6 @@
 
 #include <GLFW/glfw3.h>
 
-
 Application::Application()
 {
     graphics.Initialize(1280, 720, "Boids");
@@ -93,46 +92,27 @@ void Application::RunSetupState()
     if (startClicked)
     {
         // TODO (Michael/Yicong/Ilias): Replace this with actual boid generation code one that's done
-        // TEMPORARY_dummyBoidData = GenerateTestBoids(configBoidCount, configMinAltitude, configMaxAltitude);
-        preyFlock = Flock(configBoidCount);
+        TEMPORARY_dummyBoidData = GenerateTestBoids(configBoidCount, configMinAltitude, configMaxAltitude);
+        // preyFlock = Flock(configBoidCount); // Uncomment when it works - Kyle
         currentState = AppState::SIMULATION;
     }
 }
 
-
-/*
+// Here's a finalised RunSimState func -Ilias // Edited - Kyle
 void Application::RunSimulationState(float deltaTime)
 {
-    // Advance the game clock
     simulationTime += deltaTime;
 
-    // =========================================================================
-    // TODO: time update for behavior simulations
-    // =========================================================================
-    // 1. Update the boids using 'deltaTime' (like how PA3 worked)
-    //    [behavior simulation or whatever the class is called].Update(deltaTime);
-    //
-    // 2. Convert the Boid objects into 3D matrices
-    //    (replace the input of BoidsToMatrices here with a vector of Boid objects from your simulation)
-    //    std::vector<glm::mat4> boidDataToRender = BoidRenderer::BoidsToMatrices(std::vector of Boid objects);
-    // =========================================================================
+    // preyFlock.update(); // Uncomment when it works - Kyle
 
-    // TODO (Michael/Yicong/Ilias): Swap out TEMPORARY_dummyBoidData for boidDataToRender
-    // or whatever variable holds the real boid data once the simulation is ready
-    graphics.Render(TEMPORARY_dummyBoidData, true, simulationTime, configMaxAltitude, configEarthRadius);
-}
-*/
-
-//Here's a finalised RunSimState func -Ilias 
-void Application::RunSimulationState(float deltaTime){
-    simulationTime += deltaTime;
-
-    preyFlock.update();
-
+    // Uncomment when it works - Kyle
+    /*
     std::vector<glm::mat4> boidDataToRender =
         BoidRenderer::BoidsToMatrices(preyFlock.GetAllFriendlies());
 
     graphics.Render(boidDataToRender, true, simulationTime, configMaxAltitude, configEarthRadius);
+    */
+    graphics.Render(TEMPORARY_dummyBoidData, true, simulationTime, configMaxAltitude, configEarthRadius);
 }
 
 void Application::RunPausedState()
