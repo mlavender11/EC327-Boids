@@ -109,7 +109,8 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData, bool drawSim
         atmosphereShader->setMat4("view", view);
         atmosphereShader->setMat4("projection", projection);
 
-        glm::mat4 atmoModel = glm::scale(glm::mat4(1.0f), glm::vec3(maxAltitude));
+        float atmosphereRadius = maxAltitude + 0.5f; // Add a small offset to prevent boids from clipping into the atmosphere
+        glm::mat4 atmoModel = glm::scale(glm::mat4(1.0f), glm::vec3(atmosphereRadius));
         atmosphereShader->setMat4("model", atmoModel);
 
         // Extract the exact camera position from the view matrix
