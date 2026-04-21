@@ -43,8 +43,9 @@ void BoidRenderer::setupMesh()
 
     // --- INSTANCING SETUP ---
     glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
-    // We don't fill it with data yet, just allocate memory (e.g., for up to 10,000 boids)
-    glBufferData(GL_ARRAY_BUFFER, 10000 * sizeof(glm::mat4), NULL, GL_DYNAMIC_DRAW);
+    // We don't fill it with data yet, just allocate memory.
+    // Must be >= the maximum boid count exposed by the UI slider in UIManager.cpp.
+    glBufferData(GL_ARRAY_BUFFER, 20000 * sizeof(glm::mat4), NULL, GL_DYNAMIC_DRAW);
 
     // A mat4 is 4 vec4s. We must configure attribute locations 1, 2, 3, and 4
     std::size_t vec4Size = sizeof(glm::vec4);
