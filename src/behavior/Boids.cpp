@@ -18,6 +18,12 @@ Boids::Boids()
     maxSpeed = 3.0f; // we can adjust it later
     maxForce = 0.5f;
     id = nextID++;
+
+    float xDir = distrib(gen);
+    float yDir = distrib(gen);
+    float zDir = distrib(gen);
+    direction = glm::vec3(xDir, yDir, zDir);
+    direction = glm::normalize(direction);
 }
 
 Boids::Boids(double in_x, double in_y, double in_z)
@@ -28,6 +34,15 @@ Boids::Boids(double in_x, double in_y, double in_z)
     maxSpeed = 3;
     maxForce = 0.5;
     id = nextID++;
+
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<float> distrib(0.0f, COORDINATE_MAX);
+    float xDir = distrib(gen);
+    float yDir = distrib(gen);
+    float zDir = distrib(gen);
+    direction = glm::vec3(xDir, yDir, zDir);
+    direction = glm::normalize(direction);
 }
 
 Boids::Boids(double in_x, double in_y, double in_z, glm::vec3 in_vel)
@@ -35,6 +50,7 @@ Boids::Boids(double in_x, double in_y, double in_z, glm::vec3 in_vel)
     position = glm::vec3(in_x, in_y, in_z);
     velocity = in_vel;
     acceleration = glm::vec3(0.0f, 0.0f, 0.0f);
+    direction = glm::normalize(velocity);
     maxSpeed = 2.0;
     maxForce = 0.1;
     id = nextID++;
@@ -203,6 +219,8 @@ void Boids::update(float dt)
     velocity = limitMagnitude(velocity, maxSpeed);
     position += velocity * dt;
     acceleration = glm::vec3(0.0f);
+
+    direction = glm::normalize(velocity);
 }
 
 // Getters

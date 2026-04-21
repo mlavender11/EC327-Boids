@@ -12,7 +12,7 @@ const double COORDINATE_MAX = 0.0; // Maximum x and y coordinate, to be used in 
 class Boids
 {
 private:
-    // Do we still need direction member??
+    glm::vec3 direction; // needs to be a unit vector
     glm::vec3 position;
     glm::vec3 velocity;     // Current velocity
     glm::vec3 acceleration; // Current steering force
