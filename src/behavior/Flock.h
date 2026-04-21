@@ -9,16 +9,16 @@
 class Flock
 {
 private:                    // should be made public or friend for my predator
-    vector<Friendly> flock; // I think that for flock we should make the vector out of Friedly or make a get func- Ilias
-
+    // vector<Friendly> flock; // I think that for flock we should make the vector out of Friedly or make a get func- Ilias
+    vector<Boids*> flock;
 public:
     Flock();
     Flock(int n);
     Friendly &Get_Friendly(int i);
-    size_t GetSizeOfFLock() const;
+    size_t GetSizeOfFlock() const; 
 
     void AddFriendly(const Friendly &new_friendly);
-    void update();
+    void update(double dt);
     const std::vector<Friendly> &GetAllFriendlies() const;
 };
 

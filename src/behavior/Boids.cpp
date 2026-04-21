@@ -18,6 +18,12 @@ Boids::Boids()
     maxSpeed = 3.0f; // we can adjust it later
     maxForce = 0.5f;
     id = nextID++;
+
+    float xDir = distrib(gen);
+    float yDir = distrib(gen);
+    float zDir = distrib(gen);
+    direction = glm::vec3(xDir, yDir, zDir);
+    direction = glm::normalize(direction);
 }
 
 Boids::Boids(double in_x, double in_y, double in_z)
@@ -28,6 +34,15 @@ Boids::Boids(double in_x, double in_y, double in_z)
     maxSpeed = 3;
     maxForce = 0.5;
     id = nextID++;
+
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<float> distrib(0.0f, COORDINATE_MAX);
+    float xDir = distrib(gen);
+    float yDir = distrib(gen);
+    float zDir = distrib(gen);
+    direction = glm::vec3(xDir, yDir, zDir);
+    direction = glm::normalize(direction);
 }
 
 Boids::Boids(double in_x, double in_y, double in_z, glm::vec3 in_vel)
@@ -35,6 +50,7 @@ Boids::Boids(double in_x, double in_y, double in_z, glm::vec3 in_vel)
     position = glm::vec3(in_x, in_y, in_z);
     velocity = in_vel;
     acceleration = glm::vec3(0.0f, 0.0f, 0.0f);
+    direction = glm::normalize(velocity);
     maxSpeed = 2.0;
     maxForce = 0.1;
     id = nextID++;
@@ -63,7 +79,7 @@ void Boids::applyForce(const glm::vec3 &force)
 glm::vec3 Boids::seek(const glm::vec3 target)
 {
     glm::vec3 desired = target - position;
-    
+
     if (glm::length(desired) < 0.001f) // If already there
     {
         return glm::vec3(0.0f);
@@ -162,6 +178,7 @@ glm::vec3 Boids::cohere(const vector<const Boids *> &neighbors)
 
 void Boids::flock(const vector<const Boids *> &neighbors)
 {
+
     glm::vec3 seperate_vec = separate(neighbors);
     glm::vec3 align_vec = align(neighbors);
     glm::vec3 cohere_vec = cohere(neighbors);
@@ -176,21 +193,21 @@ void Boids::flock(const vector<const Boids *> &neighbors)
     applyForce(cohere_vec);
 }
 
-vector<const Boids *> Boids::findNeighbors(const vector<Boids> &allBoids) const
+vector<const Boids *> Boids::findNeighbors(const vector<Boids*> &allBoids) const
 {
     vector<const Boids *> neighbors;
 
-    for (const Boids &other_boid : allBoids)
+    for (const Boids *other_boid : allBoids)
     {
-        if (other_boid.getID() == this->id)
+        if (other_boid->getID() == this->id)
         {
             continue;
         }
 
-        float distance = distanceTo(other_boid); // This may be computationally expensive, a lot of square roots - could implement DistanceToSquared function
+        float distance = distanceTo(*other_boid); // This may be computationally expensive, a lot of square roots - could implement DistanceToSquared function
         if (distance < perceptionRadius)
         {
-            neighbors.push_back(&other_boid);
+            neighbors.push_back(other_boid);
         }
     }
     return neighbors;
@@ -198,11 +215,12 @@ vector<const Boids *> Boids::findNeighbors(const vector<Boids> &allBoids) const
 
 void Boids::update(float dt)
 {
-
     velocity += acceleration * dt;
     velocity = limitMagnitude(velocity, maxSpeed);
     position += velocity * dt;
     acceleration = glm::vec3(0.0f);
+
+    direction = glm::normalize(velocity);
 }
 
 // Getters
