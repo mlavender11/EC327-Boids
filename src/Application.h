@@ -9,7 +9,6 @@
 
 #include "behavior/Flock.h" // Ilias
 
-
 enum class AppState
 {
     SETUP,
@@ -29,8 +28,7 @@ private:
     void RunSimulationState(float deltaTime);
     void RunPausedState();
 
-
-    // Flock preyFlock;  // Adding a flock - Ilias 
+    // Flock preyFlock;  // Adding a flock - Ilias
 
     // --- Core Engine Variables ---
     GraphicsEngine graphics;
@@ -56,6 +54,8 @@ private:
     std::vector<glm::mat4> TEMPORARY_dummyBoidData;
 
     Flock flock;
+
+    std::vector<glm::mat4> boidDataToRender;
 };
 
 #endif
