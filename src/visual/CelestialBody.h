@@ -5,10 +5,12 @@
 #include <cmath>
 #include <glad/glad.h>
 #include <glm/glm.hpp>
+#include <cstddef>
 
 struct Vertex
 {
     glm::vec3 Position;
+    glm::vec2 TexCoords;
 };
 
 class CelestialBody

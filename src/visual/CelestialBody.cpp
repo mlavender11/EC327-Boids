@@ -32,7 +32,7 @@ void CelestialBody::generateGeometry(float radius, int sectors, int stacks)
             float y = radius * std::cos(phi);
             float z = radius * std::sin(phi) * std::sin(theta);
 
-            vertices.push_back({glm::vec3(x, y, z)});
+            vertices.push_back({glm::vec3(x, y, z), glm::vec2(U, V)});
         }
     }
 
@@ -73,6 +73,14 @@ void CelestialBody::setupMesh()
     // Set the vertex attribute pointers (Position is at layout location 0)
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)0);
+
+    // Set the vertex attribute pointers (Position is at layout location 0)
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)0);
+
+    // Set the texture attribute pointers (TexCoords is at layout location 1)
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex, TexCoords));
 
     glBindVertexArray(0);
 }
