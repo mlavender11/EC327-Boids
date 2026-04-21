@@ -74,13 +74,13 @@ glm::vec3 Boids::separate(const vector<const Boids *> &neighbors)
     glm::vec3 steer(0.0f);
     int count = 0;
 
-    for (const Boids *other : neighbors)
+    for (const Boids *other_boid : neighbors)
     {
-        float distance = distanceTo(*other);
+        float distance = distanceTo(*other_boid);
 
         if (distance > 0 && distance < desiredSeperation) // is dist > 0 necesary? Would it ever be less than 0
         {
-            glm::vec3 diff = position - other->getPosition(); // Vector to neighobring boid
+            glm::vec3 diff = position - other_boid->getPosition(); // Vector to neighobring boid
             diff = glm::normalize(diff);                      // Normalized, position to other boid
 
             diff /= distance; // Weight by distance
@@ -106,12 +106,12 @@ glm::vec3 Boids::align(const vector<const Boids *> &neighbors)
     glm::vec3 steer(0.0f);
     int count = 0;
 
-    for (const Boids* other : neighbors)
+    for (const Boids* other_boid : neighbors)
     {
-        float distance = distanceTo(*other);
+        float distance = distanceTo(*other_boid);
         if (distance > 0 && distance < neighborDist) //if within range
         {
-            steer += other->velocity; // collect flock velocity
+            steer += other_boid->getVelocity(); // collect flock velocity
             count++;
         }
 
@@ -130,7 +130,32 @@ glm::vec3 Boids::align(const vector<const Boids *> &neighbors)
 
 }
 
-// glm::vec3 Boids::cohere(const vector<const Boids *> &neighbors);
+glm::vec3 Boids::cohere(const vector<const Boids *> &neighbors)
+{
+    glm::vec3 sum(0.0f);
+    int count = 0;
+
+    for (const Boids* other_boid : neighbors)
+    {
+        float distance = distanceTo(*other_boid);
+
+        if (distance > 0 && distance < neighborDist)
+        {
+            sum += other_boid->getPosition();
+            count++;
+        }
+
+        if (count > 0)
+        {
+            sum /= static_cast<float>(count);
+            return seek(sum);
+        }
+
+        return sum;
+    }
+}
+
+
 void Boids::flock(const vector<const Boids *> &neighbors)
 {
     glm::vec3 seperate_vec = separate(neighbors);
@@ -182,6 +207,13 @@ int Boids::getID() const
     return id;
 }
 
-static glm::vec3 limitMagnitude(glm::vec3 vec, float maxMag)
+glm::vec3 Boids::limitMagnitude(glm::vec3 vec, float maxMag) const
 {
+    float magnitude_squared = glm::dot(vec, vec); //dot product of self gives mag squared
+    if (magnitude_squared > (maxMag * maxMag))
+    {
+        vec = glm::normalize(vec) * maxMag; // If magnitude is too large, return vector w/ same direction but max magnitude
+    }
+
+    return vec;
 }
