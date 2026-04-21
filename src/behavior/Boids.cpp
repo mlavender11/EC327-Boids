@@ -1,6 +1,8 @@
 #include "Boids.h"
 using namespace std;
 
+int Boids::nextID = 0;
+
 Boids::Boids()
 {
     random_device rd;
@@ -15,7 +17,7 @@ Boids::Boids()
     acceleration = glm::vec3(0.0f, 0.0f, 0.0f);
     maxSpeed = 3.0f; // we can adjust it later
     maxForce = 0.5f;
-    id = 1;
+    id = nextID++;
 }
 
 Boids::Boids(double in_x, double in_y, double in_z)
@@ -25,7 +27,7 @@ Boids::Boids(double in_x, double in_y, double in_z)
     acceleration = glm::vec3(0.0f, 0.0f, 0.0f);
     maxSpeed = 3;
     maxForce = 0.5;
-    id = 1;
+    id = nextID++;
 }
 
 Boids::Boids(double in_x, double in_y, double in_z, glm::vec3 in_vel)
@@ -35,7 +37,7 @@ Boids::Boids(double in_x, double in_y, double in_z, glm::vec3 in_vel)
     acceleration = glm::vec3(0.0f, 0.0f, 0.0f);
     maxSpeed = 2.0;
     maxForce = 0.1;
-    id = 1;
+    id = nextID++;
 }
 
 glm::vec3 Boids::operator-(const Boids &other_boid)
@@ -61,6 +63,12 @@ void Boids::applyForce(const glm::vec3 &force)
 glm::vec3 Boids::seek(const glm::vec3 target)
 {
     glm::vec3 desired = target - position;
+    
+    if (glm::length(desired) < 0.001f) // If already there
+    {
+        return glm::vec3(0.0f);
+    }
+
     desired = glm::normalize(desired) * maxSpeed;
 
     glm::vec3 steer = desired - velocity;

@@ -27,6 +27,8 @@ private:
 
     glm::vec3 limitMagnitude(glm::vec3 vec, float maxMag) const; // Helper function for behavior calculations
 
+    static int nextID;
+
 public:
     // Will add more parameter constructors as we add more parameters (ex coherence, speed)
     Boids();                                                        // Initializes a bird with random position
