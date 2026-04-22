@@ -34,7 +34,7 @@ private:
 
 public:
     // Will add more parameter constructors as we add more parameters (ex coherence, speed)
-    virtual ~Boids() =default;
+    virtual ~Boids() = default;
     Boids(float maxAlt, float minAlt);                              // Initializes a bird with random position
     Boids(double in_x, double in_y, double in_z);                   // Initializes a bird with a given position
     Boids(double in_x, double in_y, double in_z, glm::vec3 in_vel); // Initialize a bird with goiven position and velocity
@@ -60,6 +60,9 @@ public:
     glm::vec3 cohere(const vector<const Boids *> &neighbors, float visualRange);
     void flock(const vector<const Boids *> &neighbors, float weightCohesion, float weightSeparation, float weightAlignment, float visualRange);
     vector<const Boids *> findNeighbors(const vector<Boids *> &allBoids, float visualRange) const;
+
+    void setMaxSpeed(float newSpeed); // For UI slider to adjust max speed - Kyle
+    void setMaxForce(float newForce); // For UI slider to adjust max force - Kyle
 
     glm::vec3 handleBoundary(); // Need to implement this
 

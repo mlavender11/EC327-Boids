@@ -362,3 +362,13 @@ glm::vec3 Boids::limitMagnitude(glm::vec3 vec, float maxMag) const
 
     return vec;
 }
+
+void Boids::setMaxSpeed(float newSpeed)
+{
+    maxSpeed = newSpeed;
+}
+
+void Boids::setMaxForce(float newForce)
+{
+    maxForce = newForce;
+}

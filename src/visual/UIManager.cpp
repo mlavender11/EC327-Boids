@@ -80,6 +80,7 @@ bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAl
     ImGui::SliderFloat("Max Altitude", &maxAlt, minAlt, maxAllowedAlt);
     ImGui::SliderFloat("Day/Night Speed", &sunSpeed, 0.0f, 2.0f);
 
+    // --- RESET BUTTON ---
     ImGui::Spacing();
     ImGui::Separator();
     ImGui::Spacing();
@@ -128,7 +129,7 @@ void UIManager::RenderPauseMenu(bool &resume, bool &setup, bool &quit)
     ImGui::End();
 }
 
-void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, float &alignment, float &visualRange)
+void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, float &alignment, float &visualRange, float &maxSpeed, float &maxForce)
 {
     // Position the window in the top left corner automatically
     ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_FirstUseEver);
@@ -146,6 +147,29 @@ void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, floa
     ImGui::SliderFloat("Alignment", &alignment, 0.0f, 5.0f);
     ImGui::SliderFloat("Cohesion", &cohesion, 0.0f, 5.0f);
     ImGui::SliderFloat("Visual Range", &visualRange, 1.0f, 20.0f);
+
+    ImGui::Spacing();
+    ImGui::Separator();
+    ImGui::Spacing();
+
+    ImGui::Text("Physical Limits");
+    ImGui::SliderFloat("Max Speed", &maxSpeed, 0.1f, 30.0f);
+    ImGui::SliderFloat("Max Turning Force", &maxForce, 0.1f, 30.0f);
+
+    // --- RESET BUTTON ---
+    ImGui::Spacing();
+    ImGui::Separator();
+    ImGui::Spacing();
+
+    if (ImGui::Button("Reset to Defaults", ImVec2(200, 30)))
+    {
+        cohesion = 1.0f;
+        separation = 1.0f;
+        alignment = 1.0f;
+        visualRange = 5.0f;
+        maxSpeed = 5.0f;
+        maxForce = 10.0f;
+    }
 
     ImGui::End();
 }

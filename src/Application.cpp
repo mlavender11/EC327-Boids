@@ -105,8 +105,8 @@ void Application::RunSimulationState(float deltaTime)
     simulationTime += deltaTime;
 
     // Live update of boid parameters from the UI sliders first
-    uiManager.RenderSimulationOverlay(boidCohesion, boidSeparation, boidAlignment, boidVisualRange);
-    flock.Update(deltaTime, boidCohesion, boidSeparation, boidAlignment, boidVisualRange);
+    uiManager.RenderSimulationOverlay(boidCohesion, boidSeparation, boidAlignment, boidVisualRange, boidMaxSpeed, boidMaxForce);
+    flock.Update(deltaTime, boidCohesion, boidSeparation, boidAlignment, boidVisualRange, boidMaxSpeed, boidMaxForce);
 
     // Render the boids using Graphics Engine
     boidDataToRender = BoidRenderer::BoidsToMatrices(flock.GetFlock());

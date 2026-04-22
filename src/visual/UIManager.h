@@ -22,7 +22,7 @@ public:
     void RenderPauseMenu(bool &resume, bool &setup, bool &quit);
 
     // Draws the simulation overlay for boid parameters. Returns TRUE if the user changed any of the parameters.
-    void RenderSimulationOverlay(float &cohesion, float &separation, float &alignment, float &visualRange);
+    void RenderSimulationOverlay(float &cohesion, float &separation, float &alignment, float &visualRange, float &maxSpeed, float &maxForce);
 };
 
 #endif

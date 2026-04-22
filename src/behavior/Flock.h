@@ -20,7 +20,7 @@ public:
     size_t GetSizeOfFlock() const;
 
     // void AddFriendly(const Friendly &new_friendly);
-    void Update(double dt, float cohesion, float separation, float alignment, float visualRange); // Added parameters - Kyle
+    void Update(double dt, float cohesion, float separation, float alignment, float visualRange, float maxSpeed, float maxForce); // Added even more parameters - Kyle
     // const vector<Friendly> &GetAllFriendlies() const;
     const vector<Boids *> GetFlock() const;
 

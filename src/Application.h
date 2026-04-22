@@ -49,6 +49,8 @@ private:
     float boidSeparation = 1.0f;
     float boidAlignment = 1.0f;
     float boidVisualRange = 5.0f;
+    float boidMaxSpeed = 5.0f;
+    float boidMaxForce = 10.0f;
 
     Flock flock;
 

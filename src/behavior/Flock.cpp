@@ -11,8 +11,8 @@ Flock::Flock(int n, float minAlt, float maxAlt)
 {
     for (size_t i = 0; i < n; i++)
     {
-        //Boids *new_boid = new Boids(maxAlt, minAlt);
-        Boids *new_boid = new Friendly(maxAlt, minAlt); //try Friendly instead
+        // Boids *new_boid = new Boids(maxAlt, minAlt);
+        Boids *new_boid = new Friendly(maxAlt, minAlt); // try Friendly instead
         flock.push_back(new_boid);
     }
 }
@@ -22,7 +22,7 @@ Flock::Flock(int n, float minAlt, float maxAlt)
 //     flock.push_back(new_friendly);
 // }
 
-void Flock::Update(double dt, float cohesion, float separation, float alignment, float visualRange)
+void Flock::Update(double dt, float cohesion, float separation, float alignment, float visualRange, float maxSpeed, float maxForce)
 {
     vector<vector<const Boids *>> allNeighbors;
     allNeighbors.reserve(flock.size());
@@ -36,7 +36,9 @@ void Flock::Update(double dt, float cohesion, float separation, float alignment,
 
     for (size_t i = 0; i < flock.size(); i++)
     {
-        // Pass all UI weights into flock
+        // Pass all UI weights into flock, update max speed and force before moving - Kyle
+        flock[i]->setMaxSpeed(maxSpeed);
+        flock[i]->setMaxForce(maxForce);
         flock[i]->flock(allNeighbors[i], cohesion, separation, alignment, visualRange);
     }
 
