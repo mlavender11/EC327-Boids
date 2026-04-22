@@ -41,6 +41,7 @@ public:
     static double getDistance(const Boids &boid1, const Boids &boid2); // Static function for distance between two boids
     double distanceTo(const Boids &other_boid) const;                  // Member function for distance to another boid
 
+<<<<<<< Updated upstream
     // Boids algorithm
     void applyForce(const glm::vec3 &force);                                    // Apply one steering force to this boid
     glm::vec3 seek(const glm::vec3 target);                                     // Head towards a position
@@ -52,6 +53,21 @@ public:
     glm::vec3 handleBoundary();                                                 // Need to implement this
 
     /*Before updating the bird's motion for each frame, we need to accumulate and calculate every force acting upon it,
+=======
+
+    // Boids algorithm
+    void applyForce(const glm::vec3& force);//Apply one steering force to this boid
+    glm::vec3 seek(glm::vec3 target); //Head towards a position
+    glm::vec3 separate(const vector<Boids>& boids); //Seperate if boids are too close
+    glm::vec3 align(const vector<Boids>& boids); //steer towards avg velocity of neighbors
+    glm::vec3 cohere(const vector<Boids>& boids); //Steer toward average position of neighbors
+    void flock(const vector<Boids>& boids); //Calculate forces from all other boids in the flock
+
+
+
+
+    /*Before updating the bird's motion for each frame, we need to accumulate and calculate every force acting upon it, 
+>>>>>>> Stashed changes
     and then apply these updates collectively via the `update`*/
     void update(float dt); // Update this boid for every single simulation step
 
