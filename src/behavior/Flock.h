@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 #include <cassert>
 #include <vector>
+#include "Boids.h"
 
 class Flock
 {
@@ -13,13 +14,24 @@ private:                    // should be made public or friend for my predator
     vector<Boids*> flock;
 public:
     Flock();
-    Flock(int n);
-    Friendly &Get_Friendly(int i);
+    Flock(int n, float minAlt, float maxAlt);
+    // Friendly &Get_Friendly(int i);
     size_t GetSizeOfFlock() const; 
 
-    void AddFriendly(const Friendly &new_friendly);
-    void update(double dt);
-    const std::vector<Friendly> &GetAllFriendlies() const;
+    // void AddFriendly(const Friendly &new_friendly);
+    void Update(double dt);
+    // const vector<Friendly> &GetAllFriendlies() const;
+    vector<Boids*> GetFlock() const;
+
+    ~Flock();
+    // Delete copy operations
+    Flock(const Flock&) = delete;
+    Flock& operator=(const Flock&) = delete;
+    
+    // Add move operations
+    Flock(Flock&& other) noexcept;
+    Flock& operator=(Flock&& other) noexcept;
+
 };
 
 #endif

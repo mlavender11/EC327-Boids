@@ -43,8 +43,9 @@ void BoidRenderer::setupMesh()
 
     // --- INSTANCING SETUP ---
     glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
-    // We don't fill it with data yet, just allocate memory (e.g., for up to 10,000 boids)
-    glBufferData(GL_ARRAY_BUFFER, 10000 * sizeof(glm::mat4), NULL, GL_DYNAMIC_DRAW);
+    // We don't fill it with data yet, just allocate memory.
+    // Must be >= the maximum boid count exposed by the UI slider in UIManager.cpp.
+    glBufferData(GL_ARRAY_BUFFER, 20000 * sizeof(glm::mat4), NULL, GL_DYNAMIC_DRAW);
 
     // A mat4 is 4 vec4s. We must configure attribute locations 1, 2, 3, and 4
     std::size_t vec4Size = sizeof(glm::vec4);
@@ -107,14 +108,14 @@ void BoidRenderer::DrawInstanced(const std::vector<glm::mat4> &instanceTransform
 }
 
 // My BoidsToMatrices class - Ilias
-std::vector<glm::mat4> BoidRenderer::BoidsToMatrices(const std::vector<Friendly>& boids){
+std::vector<glm::mat4> BoidRenderer::BoidsToMatrices(const std::vector<Boids*>& boids){
     std::vector<glm::mat4> matrices;
     matrices.reserve(boids.size());
 
     for (const auto &boid : boids)
     {
-        glm::vec3 position = boid.getPosition();
-        glm::vec3 velocity = boid.getVelocity();
+        glm::vec3 position = boid->getPosition();
+        glm::vec3 velocity = boid->getVelocity();
 
         glm::vec3 direction =
             (glm::length(velocity) < 0.001f)

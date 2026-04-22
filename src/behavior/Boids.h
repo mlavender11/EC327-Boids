@@ -18,17 +18,20 @@ private:
     int id;
 
     // Behavior params - will need to edit based on Kyle's map
-    float desiredSeperation = 25.0f; // Desired distance to maintain - used in seperate func - implemenr variation in this?
-    float neighborDist = 50.0f;      // Distance for alignment and cohesion - used in aligh func
-    float perceptionRadius = 50.0f;  // junk value, need to fix ??
+    float desiredSeperation = 2.5f; // Desired distance to maintain - used in seperate func - implemenr variation in this?
+    float neighborDist = 5.0f;      // Distance for alignment and cohesion - used in aligh func
+    float perceptionRadius = 5.0f;  // junk value, need to fix ??
 
     glm::vec3 limitMagnitude(glm::vec3 vec, float maxMag) const; // Helper function for behavior calculations
 
     static int nextID;
 
+    float minAlt;
+    float maxAlt;
+
 public:
     // Will add more parameter constructors as we add more parameters (ex coherence, speed)
-    Boids();                                                        // Initializes a bird with random position
+    Boids(float maxAlt, float minAlt);                              // Initializes a bird with random position
     Boids(double in_x, double in_y, double in_z);                   // Initializes a bird with a given position
     Boids(double in_x, double in_y, double in_z, glm::vec3 in_vel); // Initialize a bird with goiven position and velocity
 
@@ -37,6 +40,7 @@ public:
     static double getDistance(const Boids &boid1, const Boids &boid2); // Static function for distance between two boids
     double distanceTo(const Boids &other_boid) const;                  // Member function for distance to another boid
 
+<<<<<<< Updated upstream
     // Boids algorithm
     void applyForce(const glm::vec3 &force);                                    // Apply one steering force to this boid
     glm::vec3 seek(const glm::vec3 target);                                     // Head towards a position
@@ -48,10 +52,23 @@ public:
     glm::vec3 handleBoundary();                                                 // Need to implement this
 
     /*Before updating the bird's motion for each frame, we need to accumulate and calculate every force acting upon it,
+=======
+
+    // Boids algorithm
+    void applyForce(const glm::vec3& force);//Apply one steering force to this boid
+    glm::vec3 seek(glm::vec3 target); //Head towards a position
+    glm::vec3 separate(const vector<Boids>& boids); //Seperate if boids are too close
+    glm::vec3 align(const vector<Boids>& boids); //steer towards avg velocity of neighbors
+    glm::vec3 cohere(const vector<Boids>& boids); //Steer toward average position of neighbors
+    void flock(const vector<Boids>& boids); //Calculate forces from all other boids in the flock
+
+
+
+
+    /*Before updating the bird's motion for each frame, we need to accumulate and calculate every force acting upon it,
+>>>>>>> Stashed changes
     and then apply these updates collectively via the `update`*/
     void update(float dt); // Update this boid for every single simulation step
-
-    void handleBoundary(double width, double length); // THIS IS FOR 2D - need to talk with kyle about 3d boundaries
 
     glm::vec3 getPosition() const;
     glm::vec3 getVelocity() const;

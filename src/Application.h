@@ -5,9 +5,9 @@
 #include "visual/UIManager.h"
 #include <vector> // Dont think its really needed cause flock is already a vector
 #include <glm/glm.hpp>
+#include "Flock.h"
 
 #include "behavior/Flock.h" // Ilias
-
 
 enum class AppState
 {
@@ -28,8 +28,7 @@ private:
     void RunSimulationState(float deltaTime);
     void RunPausedState();
 
-
-    Flock preyFlock;  // Adding a flock - Ilias 
+    // Flock preyFlock;  // Adding a flock - Ilias
 
     // --- Core Engine Variables ---
     GraphicsEngine graphics;
@@ -53,6 +52,10 @@ private:
     // ==========================================
     // This holds the static boids until the behavior simulation class is built.
     std::vector<glm::mat4> TEMPORARY_dummyBoidData;
+
+    Flock flock;
+
+    std::vector<glm::mat4> boidDataToRender;
 };
 
 #endif
