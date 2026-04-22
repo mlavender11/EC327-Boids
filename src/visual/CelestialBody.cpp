@@ -25,8 +25,13 @@ void CelestialBody::generateGeometry(float radius, int sectors, int stacks)
 
         for (int j = 0; j <= sectors; ++j)
         {
-            float U = (float)j / (float)sectors; // Longitude
-            float theta = U * (PI * 2.0f);       // from 0 to 2PI
+            // Reverse the U coordinate to mirror the texture horizontally
+            float U = 1.0f - ((float)j / (float)sectors);
+
+            // Keep theta calculating normally so your 3D geometry doesn't break!
+            // Note: we have to calculate theta using the original forward ratio
+            float originalU = (float)j / (float)sectors;
+            float theta = originalU * (PI * 2.0f);
 
             float x = radius * std::sin(phi) * std::cos(theta);
             float y = radius * std::cos(phi);

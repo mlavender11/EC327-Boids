@@ -10,22 +10,25 @@ void BoidRenderer::setupMesh()
     // Define a low-poly tetrahedron for basic boid shape
     // It points forward along the positive Z-axis
     std::vector<float> vertices = {
-        // Base triangle
-        -0.5f, 0.0f, -0.5f,
-        0.5f, 0.0f, -0.5f,
-        0.0f, 0.2f, -0.5f,
-        // Left triangle
-        -0.5f, 0.0f, -0.5f,
-        0.0f, 0.0f, 1.0f, // Tip
-        0.0f, 0.2f, -0.5f,
-        // Right triangle
-        0.5f, 0.0f, -0.5f,
-        0.0f, 0.0f, 1.0f, // Tip
-        0.0f, 0.2f, -0.5f,
-        // Bottom triangle
-        -0.5f, 0.0f, -0.5f,
-        0.5f, 0.0f, -0.5f,
-        0.0f, 0.0f, 1.0f // Tip
+        // 1. Back Face (Normal points backwards, -Z)
+        -0.5f, 0.0f, -0.5f, // Bottom Left
+        0.0f, 0.2f, -0.5f,  // Top Center
+        0.5f, 0.0f, -0.5f,  // Bottom Right
+
+        // 2. Left Face (Normal points left, -X)
+        -0.5f, 0.0f, -0.5f, // Bottom Back Left
+        0.0f, 0.0f, 1.0f,   // Front Tip
+        0.0f, 0.2f, -0.5f,  // Top Center
+
+        // 3. Right Face (Normal points right, +X)
+        0.5f, 0.0f, -0.5f, // Bottom Back Right
+        0.0f, 0.2f, -0.5f, // Top Center
+        0.0f, 0.0f, 1.0f,  // Front Tip
+
+        // 4. Bottom Face (Normal points down, -Y)
+        -0.5f, 0.0f, -0.5f, // Bottom Back Left
+        0.5f, 0.0f, -0.5f,  // Bottom Back Right
+        0.0f, 0.0f, 1.0f    // Front Tip
     };
     vertexCount = vertices.size() / 3;
 
@@ -47,46 +50,19 @@ void BoidRenderer::setupMesh()
     // Must be >= the maximum boid count exposed by the UI slider in UIManager.cpp.
     glBufferData(GL_ARRAY_BUFFER, 20000 * sizeof(glm::mat4), NULL, GL_DYNAMIC_DRAW);
 
-    // A mat4 is 4 vec4s. We must configure attribute locations 1, 2, 3, and 4
+    // Give ALL boids a default color at layout location 1
+    glVertexAttrib3f(1, 0.8, 0.7, 0.3);
+
     std::size_t vec4Size = sizeof(glm::vec4);
     for (int i = 0; i < 4; i++)
     {
-        glEnableVertexAttribArray(1 + i);
-        glVertexAttribPointer(1 + i, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void *)(i * vec4Size));
-        // Tell OpenGL to update this attribute once per instance, not once per vertex
-        // Otherwise it'd take ages to load each frame
-        glVertexAttribDivisor(1 + i, 1);
+        glEnableVertexAttribArray(2 + i);
+        glVertexAttribPointer(2 + i, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void *)(i * vec4Size));
+        glVertexAttribDivisor(2 + i, 1);
     }
 
     glBindVertexArray(0);
 }
-
-/*
-std::vector<glm::mat4> BoidRenderer::BoidsToMatrices(const std::vector<Boids> &in_boids)
-{
-    std::vector<glm::mat4> matrices;
-    matrices.reserve(in_boids.size());
-
-    for (const auto &boid : in_boids)
-    {
-        // Use the struct's data to build the orientation vectors
-        glm::vec3 earthNormal = glm::normalize(boid.position);
-        glm::vec3 right = glm::normalize(glm::cross(earthNormal, boid.heading));
-        glm::vec3 localUp = glm::normalize(glm::cross(boid.heading, right));
-
-        // Build the 4x4 matrix
-        glm::mat4 model = glm::mat4(1.0f);
-        model[0] = glm::vec4(right, 0.0f);
-        model[1] = glm::vec4(localUp, 0.0f);
-        model[2] = glm::vec4(boid.heading, 0.0f);
-        model[3] = glm::vec4(boid.position, 1.0f);
-
-        model = glm::scale(model, glm::vec3(0.2f));
-        matrices.push_back(model);
-    }
-    return matrices;
-}
-*/
 
 void BoidRenderer::DrawInstanced(const std::vector<glm::mat4> &instanceTransforms)
 {
@@ -108,7 +84,8 @@ void BoidRenderer::DrawInstanced(const std::vector<glm::mat4> &instanceTransform
 }
 
 // My BoidsToMatrices class - Ilias
-std::vector<glm::mat4> BoidRenderer::BoidsToMatrices(const std::vector<Boids*>& boids){
+std::vector<glm::mat4> BoidRenderer::BoidsToMatrices(const std::vector<Boids *> &boids)
+{
     std::vector<glm::mat4> matrices;
     matrices.reserve(boids.size());
 
@@ -119,8 +96,8 @@ std::vector<glm::mat4> BoidRenderer::BoidsToMatrices(const std::vector<Boids*>& 
 
         glm::vec3 direction =
             (glm::length(velocity) < 0.001f)
-            ? glm::vec3(0.0f, 0.0f, 1.0f)
-            : glm::normalize(velocity);
+                ? glm::vec3(0.0f, 0.0f, 1.0f)
+                : glm::normalize(velocity);
 
         glm::vec3 up = glm::normalize(position);
         glm::vec3 right = glm::normalize(glm::cross(up, direction));

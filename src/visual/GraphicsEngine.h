@@ -14,6 +14,8 @@
 #include "Window.h"
 #include "Callbacks.h"
 
+#include "stb_image.h"
+
 class GraphicsEngine
 {
 public:
@@ -37,15 +39,17 @@ private:
     GLFWwindow *window;
     CameraState camera;
 
-    Shader *mainShader;
-    Shader *sunShader;
+    Shader *earthShader;
     Shader *boidShader;
+    Shader *sunShader;
     Shader *atmosphereShader;
 
     CelestialBody *earth;
     CelestialBody *atmosphere;
     Star *sun;
     BoidRenderer *boidRenderer;
+
+    unsigned int earthTexture;
 };
 
 #endif

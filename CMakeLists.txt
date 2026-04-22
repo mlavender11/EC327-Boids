@@ -16,7 +16,9 @@ include_directories(
     external
     external/imgui
     external/imgui/backends
+    external/stb
     shaders
+    assets
 )
 
 # Collect all ImGui source files
@@ -48,8 +50,9 @@ add_executable(EC327-Boids
 
     src/BoidGenTemp.cpp
 
-    # External libraries (library rn)
+    # External libraries
     external/glad/src/glad.c
+    external/stb/stb_image.cpp
     ${IMGUI_SOURCES}
 )
 

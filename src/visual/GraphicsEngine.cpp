@@ -2,7 +2,7 @@
 
 GraphicsEngine::GraphicsEngine()
     : window(nullptr),
-      mainShader(nullptr),
+      earthShader(nullptr),
       sunShader(nullptr),
       boidShader(nullptr),
       atmosphereShader(nullptr),
@@ -13,7 +13,7 @@ GraphicsEngine::GraphicsEngine()
 
 GraphicsEngine::~GraphicsEngine()
 {
-    delete mainShader;
+    delete earthShader;
     delete sunShader;
     delete boidShader;
     delete atmosphereShader;
@@ -21,6 +21,9 @@ GraphicsEngine::~GraphicsEngine()
     delete atmosphere;
     delete sun;
     delete boidRenderer;
+
+    glDeleteTextures(1, &earthTexture);
+
     glfwTerminate();
 }
 
@@ -37,16 +40,46 @@ bool GraphicsEngine::Initialize(int width, int height, const char *title)
     glfwSetCursorPosCallback(window, cursor_position_callback);
     glfwSetScrollCallback(window, scroll_callback);
 
-    mainShader = new Shader("shaders/VertexShader.glsl", "shaders/FragmentShader.glsl");
+    earthShader = new Shader("shaders/EarthVertexShader.glsl", "shaders/EarthFragmentShader.glsl");
+    boidShader = new Shader("shaders/BoidVertexShader.glsl", "shaders/BoidFragmentShader.glsl");
     atmosphereShader = new Shader("shaders/AtmosphereVertexShader.glsl", "shaders/AtmosphereFragmentShader.glsl");
-    sunShader = new Shader("shaders/VertexShader.glsl", "shaders/StarFragmentShader.glsl");
-    boidShader = new Shader("shaders/BoidVertexShader.glsl", "shaders/FragmentShader.glsl");
+    sunShader = new Shader("shaders/StarVertexShader.glsl", "shaders/StarFragmentShader.glsl");
 
     // Radii for the Earth and atmosphere will be scaled by the user during setup
     earth = new CelestialBody(10.0f, 24, 24);
     atmosphere = new CelestialBody(1.0f, 32, 32);
     sun = new Star(50.0f, 400.0f, 0.5f, glm::vec3(1.0f, 0.95f, 0.5f));
     boidRenderer = new BoidRenderer();
+
+    // -- Load Earth Texture --
+    glGenTextures(1, &earthTexture);
+    glBindTexture(GL_TEXTURE_2D, earthTexture);
+
+    // Set texture wrapping and filtering options
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    stbi_set_flip_vertically_on_load(false);
+
+    int imageWidth, imageHeight, nrChannels;
+    unsigned char *data = stbi_load("assets/earth.jpg", &imageWidth, &imageHeight, &nrChannels, 0);
+    // Taken from https://svs.gsfc.nasa.gov/3615/
+
+    if (data)
+    {
+        // If image is a PNG with transparency, change GL_RGB to GL_RGBA
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    }
+    else
+    {
+        std::cout << "Failed to load Earth texture" << std::endl;
+    }
+    stbi_image_free(data);
+
+    glEnable(GL_DEPTH_TEST);
 
     return true;
 }
@@ -97,19 +130,33 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData, bool drawSim
         {
             height = 1;
         }
+
+        // This forces the OpenGL drawing area to match the window dimensions
+        glViewport(0, 0, width, height);
+
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 3000.0f);
         glm::vec3 lightDir = sun->GetDirection();
         glm::vec3 ambient(1.0f, 1.0f, 1.0f);
 
         // Draw Earth
-        mainShader->use();
-        mainShader->setMat4("view", view);
-        mainShader->setMat4("projection", projection);
+        earthShader->use();
+        earthShader->setMat4("view", view);
+        earthShader->setMat4("projection", projection);
         glm::mat4 earthModelMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(earthRadius / 10.0f));
         // (Divide by 10.0f because the base CelestialBody was created with a radius of 10.0f)
-        mainShader->setMat4("model", earthModelMatrix);
-        glUniform3fv(glGetUniformLocation(mainShader->ID, "lightDir"), 1, glm::value_ptr(lightDir));
-        glUniform3fv(glGetUniformLocation(mainShader->ID, "ambientColor"), 1, glm::value_ptr(ambient));
+        earthShader->setMat4("model", earthModelMatrix);
+        glUniform3fv(glGetUniformLocation(earthShader->ID, "lightDir"), 1, glm::value_ptr(lightDir));
+        glUniform3fv(glGetUniformLocation(earthShader->ID, "ambientColor"), 1, glm::value_ptr(ambient));
+
+        // Bind Earth texture to texture unit 0 and set the shader uniform to use it
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, earthTexture);
+        earthShader->setInt("earthTextureMap", 0);
+
+        glEnable(GL_CULL_FACE); // Turn on culling
+        glFrontFace(GL_CW);     // Tell OpenGL that Clockwise means "Front"
+        earth->Draw();
+        glFrontFace(GL_CCW); // Reset to default (Counter-Clockwise is front) so that the atmosphere shader doesn't break
 
         earth->Draw();
 
@@ -122,6 +169,7 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData, bool drawSim
         boidRenderer->DrawInstanced(boidData);
 
         // Draw Sun
+        // the use(), setMat4(), and glUniform3fv() calls are all handled inside the Star::Draw() function
         sun->Draw(*sunShader, view, projection);
 
         // Draw atmosphere
@@ -152,7 +200,7 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData, bool drawSim
 
         // Reset OpenGL state so we don't break the opaque objects on the next frame
         glDepthMask(GL_TRUE);
-        glDisable(GL_CULL_FACE);
+        glEnable(GL_CULL_FACE);
         glDisable(GL_BLEND);
     }
 }
