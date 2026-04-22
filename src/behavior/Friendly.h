@@ -1,6 +1,6 @@
-// #ifndef FRIENDLY_H
-// #define FRIENDLY_H
-// #include "Boids.h" // CMakeFiles.txt is set up to find this header file - Kyle
+#ifndef FRIENDLY_H
+#define FRIENDLY_H
+#include "Boids.h" // CMakeFiles.txt is set up to find this header file - Kyle
 // #include "glm/glm.hpp"
 
 // class Flock;
@@ -11,11 +11,11 @@
 //     ALIVE
 // };
 
-// class Friendly : public Boids
-// {
-// public:
+class Friendly : public Boids
+{
+public:
 //     STATE state;
-//     Friendly();
-// };
+    Friendly(float maxAlt, float minAlt);
+};
 
-// #endif
+#endif

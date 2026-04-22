@@ -11,7 +11,8 @@ Flock::Flock(int n, float minAlt, float maxAlt)
 {
     for (size_t i = 0; i < n; i++)
     {
-        Boids *new_boid = new Boids(maxAlt, minAlt);
+        //Boids *new_boid = new Boids(maxAlt, minAlt);
+        Boids *new_boid = new Friendly(maxAlt, minAlt); //try Friendly instead
         flock.push_back(new_boid);
     }
 }
@@ -61,7 +62,7 @@ size_t Flock::GetSizeOfFlock() const
 //     return flock;
 // }
 
-vector<Boids *> Flock::GetFlock() const
+const vector<Boids *> Flock::GetFlock() const
 {
     return flock;
 }
