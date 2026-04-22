@@ -17,6 +17,8 @@ public:
     // Renders the physical sphere
     void Draw(Shader &shader, const glm::mat4 &view, const glm::mat4 &projection);
 
+    void SetSpeed(float newSpeed);
+
     // Getters so the rest of the engine can use the light data
     glm::vec3 GetDirection() const;
     glm::vec3 GetColor() const;

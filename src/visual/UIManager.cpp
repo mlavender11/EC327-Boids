@@ -36,7 +36,7 @@ void UIManager::EndFrame()
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAlt, float &maxAlt, float sunOrbitDistance)
+bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAlt, float &maxAlt, float sunOrbitDistance, float &sunSpeed)
 {
     bool startClicked = false;
 
@@ -78,6 +78,7 @@ bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAl
     // of the ImGui sliders, the sliders will visually stop dragging.
     ImGui::SliderFloat("Min Altitude", &minAlt, earthRadius, maxAlt);
     ImGui::SliderFloat("Max Altitude", &maxAlt, minAlt, maxAllowedAlt);
+    ImGui::SliderFloat("Day/Night Speed", &sunSpeed, 0.0f, 2.0f);
 
     ImGui::Spacing();
     ImGui::Separator();
@@ -89,6 +90,7 @@ bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAl
         earthRadius = 10.0f;
         minAlt = 10.0f;
         maxAlt = 20.0f;
+        sunSpeed = 0.3f;
     }
 
     ImGui::Spacing();

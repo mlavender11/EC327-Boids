@@ -89,10 +89,12 @@ void Application::RunSetupState()
         configEarthRadius,
         configMinAltitude,
         configMaxAltitude,
-        graphics.GetSunOrbitDistance());
+        graphics.GetSunOrbitDistance(),
+        configSunSpeed);
 
     if (startClicked)
     {
+        graphics.SetSunSpeed(configSunSpeed);
         flock = Flock(configBoidCount, configMinAltitude, configMaxAltitude);
         currentState = AppState::SIMULATION;
     }

@@ -42,6 +42,7 @@ private:
     float configEarthRadius = 10.0f;
     float configMinAltitude = 10.0f;
     float configMaxAltitude = 20.0f;
+    float configSunSpeed = 0.3f;
 
     // --- Live Config Variables ---
     float boidCohesion = 1.0f;

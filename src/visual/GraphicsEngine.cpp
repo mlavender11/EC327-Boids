@@ -173,3 +173,11 @@ float GraphicsEngine::GetSunOrbitDistance() const
 {
     return sun->GetOrbitDistance();
 }
+
+void GraphicsEngine::SetSunSpeed(float speed)
+{
+    if (sun)
+    {
+        sun->SetSpeed(speed);
+    }
+}

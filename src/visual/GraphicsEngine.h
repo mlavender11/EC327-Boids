@@ -29,8 +29,9 @@ public:
     GLFWwindow *GetWindow() const;
     void SwapBuffers();
 
-    // Pass-through getter for sun distance
+    // Pass-through things for sun
     float GetSunOrbitDistance() const;
+    void SetSunSpeed(float speed);
 
 private:
     GLFWwindow *window;
