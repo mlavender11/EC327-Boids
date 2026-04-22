@@ -22,7 +22,7 @@ public:
     // void AddFriendly(const Friendly &new_friendly);
     void Update(double dt, float cohesion, float separation, float alignment, float visualRange); // Added parameters - Kyle
     // const vector<Friendly> &GetAllFriendlies() const;
-    vector<Boids *> GetFlock() const;
+    const vector<Boids *> GetFlock() const;
 
     ~Flock();
     // Delete copy operations
