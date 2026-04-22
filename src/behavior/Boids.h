@@ -42,6 +42,7 @@ public:
     glm::vec3 operator-(const Boids &other_boid);                      // Vector from another boid to this boid
     static double getDistance(const Boids &boid1, const Boids &boid2); // Static function for distance between two boids
     double distanceTo(const Boids &other_boid) const;                  // Member function for distance to another boid
+    double distanceToSquared(const Boids &other_boid) const;
 
     // Boids algorithm
     void applyForce(const glm::vec3 &force); // Apply one steering force to this boid
