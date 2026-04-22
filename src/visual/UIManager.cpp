@@ -46,7 +46,7 @@ bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAl
     ImGui::Text("Configure your starting parameters:");
     ImGui::Spacing();
 
-    ImGui::SliderInt("Number of Boids", &boidCount, 100, 20000);
+    ImGui::SliderInt("Number of Boids", &boidCount, 100, 2000);
     ImGui::SliderFloat("Earth Radius", &earthRadius, 1.0f, 50.0f);
 
     // --- CASCADING CLAMP LOGIC ---
@@ -85,10 +85,10 @@ bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAl
 
     if (ImGui::Button("Reset to Defaults", ImVec2(200, 30)))
     {
-        boidCount = 5000;
+        boidCount = 500;
         earthRadius = 10.0f;
         minAlt = 10.0f;
-        maxAlt = 15.0f;
+        maxAlt = 20.0f;
     }
 
     ImGui::Spacing();

@@ -38,10 +38,10 @@ private:
     float lastFrameTime;
 
     // --- Setup Configuration Variables ---
-    int configBoidCount = 1000;
+    int configBoidCount = 500;
     float configEarthRadius = 10.0f;
     float configMinAltitude = 10.0f;
-    float configMaxAltitude = 15.0f;
+    float configMaxAltitude = 20.0f;
 
     // --- Live Config Variables ---
     float boidCohesion = 1.0f;
