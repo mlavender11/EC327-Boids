@@ -141,7 +141,7 @@ glm::vec3 Boids::separate(const vector<const Boids *> &neighbors, float visualRa
     {
         float distanceSq = distanceToSquared(*other_boid);
 
-        if (distanceSq > 0 && distanceSq < desiredSeperationSquared) // is dist > 0 necesary? Would it ever be less than 0
+        if (distanceSq > 0 && distanceSq < desiredSeparation * desiredSeparation) // is dist > 0 necesary? Would it ever be less than 0
         {
             glm::vec3 diff = position - other_boid->getPosition(); // Vector to neighobring boid
 
@@ -181,7 +181,7 @@ glm::vec3 Boids::align(const vector<const Boids *> &neighbors, float visualRange
     for (const Boids *other_boid : neighbors)
     {
         float distanceSq = distanceToSquared(*other_boid);
-        if (distanceSq > 0 && distanceSq < visualRangeSq) // Changed - Kyle
+        if (distanceSq > 0 && distanceSq < visualRange * visualRange) // Changed - Kyle
         {
             steer += other_boid->getVelocity(); // collect flock velocity
             count++;
@@ -219,7 +219,7 @@ glm::vec3 Boids::cohere(const vector<const Boids *> &neighbors, float visualRang
     {
         float distanceSq = distanceToSquared(*other_boid);
 
-        if (distanceSq > 0 && distanceSq < visualRangeSq)
+        if (distanceSq > 0 && distanceSq < visualRange * visualRange) // Changed - Kyle
         {
             sum += other_boid->getPosition();
             count++;
@@ -294,7 +294,7 @@ vector<const Boids *> Boids::findNeighbors(const vector<Boids *> &allBoids, floa
         }
 
         float distanceSq = distanceToSquared(*other_boid); // This may be computationally expensive, a lot of square roots - could implement DistanceToSquared function
-        if (distanceSq < visualRangeSq)
+        if (distanceSq < visualRange * visualRange)        // Changed - Kyle
         {
             neighbors.push_back(other_boid);
         }
