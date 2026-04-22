@@ -125,3 +125,25 @@ void UIManager::RenderPauseMenu(bool &resume, bool &setup, bool &quit)
 
     ImGui::End();
 }
+
+void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, float &alignment, float &visualRange)
+{
+    // Position the window in the top left corner automatically
+    ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_FirstUseEver);
+
+    // Create a window without a background or title bar for a cleaner look
+    ImGuiWindowFlags windowFlags = ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
+    ImGui::SetNextWindowBgAlpha(0.6f); // Semi-transparent background
+
+    ImGui::Begin("Flocking Controls", nullptr, windowFlags);
+    ImGui::Text("Real-Time Flocking Weights");
+    ImGui::Separator();
+
+    // Sliders to tweak the math live
+    ImGui::SliderFloat("Separation", &separation, 0.0f, 5.0f);
+    ImGui::SliderFloat("Alignment", &alignment, 0.0f, 5.0f);
+    ImGui::SliderFloat("Cohesion", &cohesion, 0.0f, 5.0f);
+    ImGui::SliderFloat("Visual Range", &visualRange, 1.0f, 20.0f);
+
+    ImGui::End();
+}

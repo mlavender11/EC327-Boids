@@ -123,16 +123,16 @@ glm::vec3 Boids::seek(const glm::vec3 target)
     return steer;
 }
 
-glm::vec3 Boids::separate(const vector<const Boids *> &neighbors)
+glm::vec3 Boids::separate(const vector<const Boids *> &neighbors, float visualRange)
 {
     glm::vec3 steer(0.0f);
     int count = 0;
+    float desiredSeparation = visualRange * 0.5f; // Changed - Kyle
 
     for (const Boids *other_boid : neighbors)
     {
         float distance = distanceTo(*other_boid);
-
-        if (distance > 0 && distance < desiredSeperation) // is dist > 0 necesary? Would it ever be less than 0
+        if (distance > 0 && distance < desiredSeparation) // Changed - Kyle
         {
             glm::vec3 diff = position - other_boid->getPosition(); // Vector to neighobring boid
             diff = glm::normalize(diff);                           // Normalized, position to other boid
@@ -150,9 +150,9 @@ glm::vec3 Boids::separate(const vector<const Boids *> &neighbors)
         // Guard: if neighbor positions cancel out, steer is ~0 and normalize() produces NaN.
         if (glm::dot(steer, steer) > 1e-10f)
         {
-            steer = glm::normalize(steer);      // Average steer direction
-            steer *= maxSpeed;                  // Boids want to go max speed
-            steer -= velocity;                  // Vector for how to steer to get to desired
+            steer = glm::normalize(steer); // Average steer direction
+            steer *= maxSpeed;             // Boids want to go max speed
+            steer -= velocity;             // Vector for how to steer to get to desired
             steer = limitMagnitude(steer, maxForce);
         }
         else
@@ -163,7 +163,7 @@ glm::vec3 Boids::separate(const vector<const Boids *> &neighbors)
     return steer;
 }
 
-glm::vec3 Boids::align(const vector<const Boids *> &neighbors)
+glm::vec3 Boids::align(const vector<const Boids *> &neighbors, float visualRange)
 {
     glm::vec3 steer(0.0f);
     int count = 0;
@@ -171,7 +171,7 @@ glm::vec3 Boids::align(const vector<const Boids *> &neighbors)
     for (const Boids *other_boid : neighbors)
     {
         float distance = distanceTo(*other_boid);
-        if (distance > 0 && distance < neighborDist) // if within range
+        if (distance > 0 && distance < visualRange) // Changed - Kyle
         {
             steer += other_boid->getVelocity(); // collect flock velocity
             count++;
@@ -184,8 +184,8 @@ glm::vec3 Boids::align(const vector<const Boids *> &neighbors)
         // propagates through update() into position and the boid renders off-screen.
         if (glm::dot(steer, steer) > 1e-10f)
         {
-            steer = glm::normalize(steer);      // Avg flock direction
-            steer *= maxSpeed;                  // Boid wants to go max speed
+            steer = glm::normalize(steer); // Avg flock direction
+            steer *= maxSpeed;             // Boid wants to go max speed
             steer -= velocity;
             steer = limitMagnitude(steer, maxForce);
         }
@@ -197,7 +197,7 @@ glm::vec3 Boids::align(const vector<const Boids *> &neighbors)
     return steer;
 }
 
-glm::vec3 Boids::cohere(const vector<const Boids *> &neighbors)
+glm::vec3 Boids::cohere(const vector<const Boids *> &neighbors, float visualRange)
 {
     glm::vec3 sum(0.0f);
     int count = 0;
@@ -205,8 +205,7 @@ glm::vec3 Boids::cohere(const vector<const Boids *> &neighbors)
     for (const Boids *other_boid : neighbors)
     {
         float distance = distanceTo(*other_boid);
-
-        if (distance > 0 && distance < neighborDist)
+        if (distance > 0 && distance < visualRange) // Changed - Kyle
         {
             sum += other_boid->getPosition();
             count++;
@@ -247,19 +246,19 @@ glm::vec3 Boids::handleBoundary()
     return steer;
 }
 
-void Boids::flock(const vector<const Boids *> &neighbors)
+// Changed - Kyle
+void Boids::flock(const vector<const Boids *> &neighbors, float weightCohesion, float weightSeparation, float weightAlignment, float visualRange)
 {
-
-    glm::vec3 seperate_vec = separate(neighbors);
-    glm::vec3 align_vec = align(neighbors);
-    glm::vec3 cohere_vec = cohere(neighbors);
+    glm::vec3 seperate_vec = separate(neighbors, visualRange);
+    glm::vec3 align_vec = align(neighbors, visualRange);
+    glm::vec3 cohere_vec = cohere(neighbors, visualRange);
     glm::vec3 boundary_vec = handleBoundary();
 
-    // Weighting factors - maybe we want to make sliders for these
-    seperate_vec *= 1.5f;
-    align_vec *= 1.0f;
-    cohere_vec *= 1.0f;
-    boundary_vec *= 2.0f;
+    // Replace the hardcoded numbers with live UI sliders
+    seperate_vec *= weightSeparation;
+    align_vec *= weightAlignment;
+    cohere_vec *= weightCohesion;
+    boundary_vec *= 2.0f; // Keep boundary strong so they don't fly into space
 
     applyForce(seperate_vec);
     applyForce(align_vec);
@@ -267,7 +266,7 @@ void Boids::flock(const vector<const Boids *> &neighbors)
     applyForce(boundary_vec);
 }
 
-vector<const Boids *> Boids::findNeighbors(const vector<Boids *> &allBoids) const
+vector<const Boids *> Boids::findNeighbors(const vector<Boids *> &allBoids, float visualRange) const
 {
     vector<const Boids *> neighbors;
 
@@ -278,8 +277,8 @@ vector<const Boids *> Boids::findNeighbors(const vector<Boids *> &allBoids) cons
             continue;
         }
 
-        float distance = distanceTo(*other_boid); // This may be computationally expensive, a lot of square roots - could implement DistanceToSquared function
-        if (distance < perceptionRadius)
+        float distance = distanceTo(*other_boid);
+        if (distance < visualRange) // Changed - Kyle
         {
             neighbors.push_back(other_boid);
         }

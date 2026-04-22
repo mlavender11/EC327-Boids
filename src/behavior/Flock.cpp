@@ -4,14 +4,14 @@ using namespace std;
 
 Flock::Flock()
 { // How do we want to implement this? // you could probably copy from my BoidGenTemp - Kyle
-    // boids(0);
+  // boids(0);
 }
 
 Flock::Flock(int n, float minAlt, float maxAlt)
 {
     for (size_t i = 0; i < n; i++)
     {
-        Boids* new_boid = new Boids(maxAlt, minAlt);
+        Boids *new_boid = new Boids(maxAlt, minAlt);
         flock.push_back(new_boid);
     }
 }
@@ -21,27 +21,29 @@ Flock::Flock(int n, float minAlt, float maxAlt)
 //     flock.push_back(new_friendly);
 // }
 
-void Flock::Update(double dt){
-    vector<vector<const Boids*>> allNeighbors; // List of lists of neighbors
+void Flock::Update(double dt, float cohesion, float separation, float alignment, float visualRange)
+{
+    vector<vector<const Boids *>> allNeighbors;
     allNeighbors.reserve(flock.size());
 
-    for (const Boids* boid : flock)
+    for (const Boids *boid : flock)
     {
-        vector<const Boids*> neighbors = boid->findNeighbors(flock); // Get bird neighbors
+        // Pass visualRange into findNeighbors
+        vector<const Boids *> neighbors = boid->findNeighbors(flock, visualRange);
         allNeighbors.push_back(neighbors);
     }
 
     for (size_t i = 0; i < flock.size(); i++)
     {
-        flock[i]->flock(allNeighbors[i]); //Call flock function on all boids
+        // Pass all UI weights into flock
+        flock[i]->flock(allNeighbors[i], cohesion, separation, alignment, visualRange);
     }
 
-    for (Boids* boid : flock)
+    for (Boids *boid : flock)
     {
-        boid->update(dt); // Update all boids
+        boid->update(dt);
     }
 }
-
 
 // Friendly &Flock::Get_Friendly(int i)
 // {
@@ -59,36 +61,36 @@ size_t Flock::GetSizeOfFlock() const
 //     return flock;
 // }
 
-vector<Boids*> Flock::GetFlock() const
+vector<Boids *> Flock::GetFlock() const
 {
     return flock;
 }
 
 Flock::~Flock()
 {
-    for (Boids* boid : flock)
+    for (Boids *boid : flock)
     {
         delete boid;
     }
     flock.clear();
 }
 
-Flock::Flock(Flock&& other) noexcept
+Flock::Flock(Flock &&other) noexcept
     : flock(std::move(other.flock))
 {
     // other.flock is now empty, so its destructor won't delete anything
 }
 
-Flock& Flock::operator=(Flock&& other) noexcept
+Flock &Flock::operator=(Flock &&other) noexcept
 {
     if (this != &other)
     {
         // Delete our current boids
-        for (Boids* boid : flock)
+        for (Boids *boid : flock)
         {
             delete boid;
         }
-        
+
         // Take ownership of other's boids
         flock = std::move(other.flock);
     }

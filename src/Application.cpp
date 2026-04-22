@@ -1,8 +1,5 @@
 #include "Application.h"
 
-// TODO (Michael/Yicong/Ilias): Replace this with your boid gen and behavior stuff when it works
-#include "BoidGenTemp.h"
-
 #include <GLFW/glfw3.h>
 
 Application::Application()
@@ -84,7 +81,8 @@ void Application::Run()
 
 void Application::RunSetupState()
 {
-    graphics.Render(TEMPORARY_dummyBoidData, false, simulationTime, configMaxAltitude, configEarthRadius);
+    boidDataToRender = BoidRenderer::BoidsToMatrices(flock.GetFlock());
+    graphics.Render(boidDataToRender, true, simulationTime, configMaxAltitude, configEarthRadius);
 
     bool startClicked = uiManager.RenderSetupMenu(
         configBoidCount,
@@ -95,37 +93,27 @@ void Application::RunSetupState()
 
     if (startClicked)
     {
-        // TODO (Michael/Yicong/Ilias): Replace this with actual boid generation code one that's done
-        // TEMPORARY_dummyBoidData = GenerateTestBoids(configBoidCount, configMinAltitude, configMaxAltitude);
-        // preyFlock = Flock(configBoidCount); // Uncomment when it works - Kyle
-
         flock = Flock(configBoidCount, configMinAltitude, configMaxAltitude);
         currentState = AppState::SIMULATION;
     }
 }
 
-// Here's a finalised RunSimState func -Ilias // Edited - Kyle
 void Application::RunSimulationState(float deltaTime)
 {
     simulationTime += deltaTime;
 
-    // preyFlock.update(); // Uncomment when it works - Kyle
+    // Live update of boid parameters from the UI sliders first
+    uiManager.RenderSimulationOverlay(boidCohesion, boidSeparation, boidAlignment, boidVisualRange);
+    flock.Update(deltaTime, boidCohesion, boidSeparation, boidAlignment, boidVisualRange);
 
-    // Uncomment when it works - Kyle
-
+    // Render the boids using Graphics Engine
     boidDataToRender = BoidRenderer::BoidsToMatrices(flock.GetFlock());
-
     graphics.Render(boidDataToRender, true, simulationTime, configMaxAltitude, configEarthRadius);
-
-    flock.Update(deltaTime);
-
-    // graphics.Render(TEMPORARY_dummyBoidData, true, simulationTime, configMaxAltitude, configEarthRadius);
 }
 
 void Application::RunPausedState()
 {
     // Draw everything frozen in the background
-    // graphics.Render(TEMPORARY_dummyBoidData, true, simulationTime, configMaxAltitude, configEarthRadius);
     graphics.Render(boidDataToRender, true, simulationTime, configMaxAltitude, configEarthRadius);
 
     bool resumeClicked, setupClicked, quitClicked;

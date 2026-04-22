@@ -17,10 +17,13 @@ private:
     float maxForce;         // Maximum force that allowed per update
     int id;
 
+    /*
     // Behavior params - will need to edit based on Kyle's map
     float desiredSeperation = 2.5f; // Desired distance to maintain - used in seperate func - implemenr variation in this?
     float neighborDist = 5.0f;      // Distance for alignment and cohesion - used in aligh func
     float perceptionRadius = 5.0f;  // junk value, need to fix ??
+    */
+    // Removed these - Kyle
 
     glm::vec3 limitMagnitude(glm::vec3 vec, float maxMag) const; // Helper function for behavior calculations
 
@@ -41,14 +44,22 @@ public:
     double distanceTo(const Boids &other_boid) const;                  // Member function for distance to another boid
 
     // Boids algorithm
-    void applyForce(const glm::vec3 &force);                                    // Apply one steering force to this boid
-    glm::vec3 seek(const glm::vec3 target);                                     // Head towards a position
-    glm::vec3 separate(const vector<const Boids *> &neighbors);                 // Seperate if boids are too close
-    glm::vec3 align(const vector<const Boids *> &neighbors);                    // steer towards avg velocity of neighbors
-    glm::vec3 cohere(const vector<const Boids *> &neighbors);                   // Steer toward average position of neighbors
-    void flock(const vector<const Boids *> &neighbors);                         // Calculate forces from neighboring boids in the flock
-    vector<const Boids *> findNeighbors(const vector<Boids *> &allBoids) const; // Find neighbors within perception radius
-    glm::vec3 handleBoundary();                                                 // Need to implement this
+    void applyForce(const glm::vec3 &force); // Apply one steering force to this boid
+    glm::vec3 seek(const glm::vec3 target);  // Head towards a position
+
+    // updated these to take external parameters - Kyle
+    // glm::vec3 separate(const vector<const Boids *> &neighbors);                 // Seperate if boids are too close
+    // glm::vec3 align(const vector<const Boids *> &neighbors);                    // steer towards avg velocity of neighbors
+    // glm::vec3 cohere(const vector<const Boids *> &neighbors);                   // Steer toward average position of neighbors
+    // void flock(const vector<const Boids *> &neighbors);                         // Calculate forces from neighboring boids in the flock
+    // vector<const Boids *> findNeighbors(const vector<Boids *> &allBoids) const; // Find neighbors within perception radius
+    glm::vec3 separate(const vector<const Boids *> &neighbors, float visualRange);
+    glm::vec3 align(const vector<const Boids *> &neighbors, float visualRange);
+    glm::vec3 cohere(const vector<const Boids *> &neighbors, float visualRange);
+    void flock(const vector<const Boids *> &neighbors, float weightCohesion, float weightSeparation, float weightAlignment, float visualRange);
+    vector<const Boids *> findNeighbors(const vector<Boids *> &allBoids, float visualRange) const;
+
+    glm::vec3 handleBoundary(); // Need to implement this
 
     /*Before updating the bird's motion for each frame, we need to accumulate and calculate every force acting upon it,
     and then apply these updates collectively via the `update`*/

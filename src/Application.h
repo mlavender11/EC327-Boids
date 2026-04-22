@@ -7,8 +7,6 @@
 #include <glm/glm.hpp>
 #include "Flock.h"
 
-#include "behavior/Flock.h" // Ilias
-
 enum class AppState
 {
     SETUP,
@@ -28,8 +26,6 @@ private:
     void RunSimulationState(float deltaTime);
     void RunPausedState();
 
-    // Flock preyFlock;  // Adding a flock - Ilias
-
     // --- Core Engine Variables ---
     GraphicsEngine graphics;
     UIManager uiManager;
@@ -41,17 +37,17 @@ private:
     float simulationTime;
     float lastFrameTime;
 
-    // --- Configuration Variables ---
-    int configBoidCount = 5000;
+    // --- Setup Configuration Variables ---
+    int configBoidCount = 1000;
     float configEarthRadius = 10.0f;
     float configMinAltitude = 10.0f;
     float configMaxAltitude = 15.0f;
 
-    // ==========================================
-    // TODO: TEMPORARY VARIABLES TO BE REPLACED
-    // ==========================================
-    // This holds the static boids until the behavior simulation class is built.
-    std::vector<glm::mat4> TEMPORARY_dummyBoidData;
+    // --- Live Config Variables ---
+    float boidCohesion = 1.0f;
+    float boidSeparation = 1.0f;
+    float boidAlignment = 1.0f;
+    float boidVisualRange = 5.0f;
 
     Flock flock;
 
