@@ -64,7 +64,7 @@ bool GraphicsEngine::Initialize(int width, int height, const char *title)
     stbi_set_flip_vertically_on_load(false);
 
     int imageWidth, imageHeight, nrChannels;
-    unsigned char *data = stbi_load("assets/earth.jpg", &imageWidth, &imageHeight, &nrChannels, 0);
+    unsigned char *data = stbi_load("assets/earth_crystal2.jpg", &imageWidth, &imageHeight, &nrChannels, 0);
     // Taken from https://svs.gsfc.nasa.gov/3615/
 
     if (data)
