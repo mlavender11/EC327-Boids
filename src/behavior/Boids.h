@@ -18,9 +18,9 @@ private:
     int id;
 
     // Behavior params - will need to edit based on Kyle's map
-    float desiredSeperation = 2.5f; // Desired distance to maintain - used in seperate func - implemenr variation in this?
-    float neighborDist = 5.0f;      // Distance for alignment and cohesion - used in aligh func
-    float perceptionRadius = 5.0f;  // junk value, need to fix ??
+    float desiredSeperationSquared = 6.25f; // Desired distance to maintain - used in seperate func - implemenr variation in this?
+    float neighborDistSquared = 25.0f;      // Distance for alignment and cohesion - used in aligh func
+    float perceptionRadiusSquared = 25.0f;  // junk value, need to fix ??
 
     glm::vec3 limitMagnitude(glm::vec3 vec, float maxMag) const; // Helper function for behavior calculations
 
@@ -39,6 +39,7 @@ public:
     glm::vec3 operator-(const Boids &other_boid);                      // Vector from another boid to this boid
     static double getDistance(const Boids &boid1, const Boids &boid2); // Static function for distance between two boids
     double distanceTo(const Boids &other_boid) const;                  // Member function for distance to another boid
+    double distanceToSquared(const Boids &other_boid) const;
 
     // Boids algorithm
     void applyForce(const glm::vec3 &force);                                    // Apply one steering force to this boid

@@ -101,6 +101,12 @@ double Boids::distanceTo(const Boids &other_boid) const
     return glm::distance(this->position, other_boid.getPosition());
 }
 
+double Boids::distanceToSquared(const Boids &other_boid) const
+{
+    glm::vec3 delta = this->position - other_boid.getPosition();
+    return glm::dot(delta, delta);
+}
+
 void Boids::applyForce(const glm::vec3 &force)
 {
     acceleration += force;
@@ -110,12 +116,14 @@ glm::vec3 Boids::seek(const glm::vec3 target)
 {
     glm::vec3 desired = target - position;
 
-    if (glm::length(desired) < 0.001f) // If already there
+    float desiredLengthSq = glm::dot(desired, desired);
+    if (desiredLengthSq < 0.001f * 0.001f) // If already there (squared threshold)
     {
         return glm::vec3(0.0f);
     }
 
-    desired = glm::normalize(desired) * maxSpeed;
+    float desiredLength = sqrt(desiredLengthSq);
+    desired = (desired / desiredLength) * maxSpeed;
 
     glm::vec3 steer = desired - velocity;
     steer = limitMagnitude(steer, maxForce);
@@ -130,14 +138,13 @@ glm::vec3 Boids::separate(const vector<const Boids *> &neighbors)
 
     for (const Boids *other_boid : neighbors)
     {
-        float distance = distanceTo(*other_boid);
+        float distanceSq = distanceToSquared(*other_boid);
 
-        if (distance > 0 && distance < desiredSeperation) // is dist > 0 necesary? Would it ever be less than 0
+        if (distanceSq > 0 && distanceSq < desiredSeperationSquared) // is dist > 0 necesary? Would it ever be less than 0
         {
             glm::vec3 diff = position - other_boid->getPosition(); // Vector to neighobring boid
-            diff = glm::normalize(diff);                           // Normalized, position to other boid
 
-            diff /= distance; // Weight by distance
+            diff /= distanceSq; // Weight by distance
 
             steer += diff; // Add onto overall steering vector
             count++;
@@ -148,9 +155,11 @@ glm::vec3 Boids::separate(const vector<const Boids *> &neighbors)
     {
         steer /= static_cast<float>(count); // Get average steer vector direction
         // Guard: if neighbor positions cancel out, steer is ~0 and normalize() produces NaN.
-        if (glm::dot(steer, steer) > 1e-10f)
+        float steerLenSq = glm::dot(steer, steer);
+        if (steerLenSq > 1e-10f)
         {
-            steer = glm::normalize(steer);      // Average steer direction
+            float steerLen = sqrt(steerLenSq);
+            steer /= steerLen;
             steer *= maxSpeed;                  // Boids want to go max speed
             steer -= velocity;                  // Vector for how to steer to get to desired
             steer = limitMagnitude(steer, maxForce);
@@ -170,8 +179,8 @@ glm::vec3 Boids::align(const vector<const Boids *> &neighbors)
 
     for (const Boids *other_boid : neighbors)
     {
-        float distance = distanceTo(*other_boid);
-        if (distance > 0 && distance < neighborDist) // if within range
+        float distanceSq = distanceToSquared(*other_boid);
+        if (distanceSq > 0 && distanceSq < neighborDistSquared) // if within range
         {
             steer += other_boid->getVelocity(); // collect flock velocity
             count++;
@@ -179,12 +188,15 @@ glm::vec3 Boids::align(const vector<const Boids *> &neighbors)
     }
     if (count > 0)
     {
+        
         steer /= static_cast<float>(count); // Average flock velocity
+        float steerLenSq = glm::dot(steer, steer);
         // Guard: if neighbor velocities sum to ~0, normalize() produces NaN that
         // propagates through update() into position and the boid renders off-screen.
-        if (glm::dot(steer, steer) > 1e-10f)
+        if (steerLenSq > 1e-10f)
         {
-            steer = glm::normalize(steer);      // Avg flock direction
+            float steerLength = sqrt(steerLenSq);
+            steer /= steerLength;  // Only one sqrt instead of normalize()
             steer *= maxSpeed;                  // Boid wants to go max speed
             steer -= velocity;
             steer = limitMagnitude(steer, maxForce);
@@ -204,9 +216,9 @@ glm::vec3 Boids::cohere(const vector<const Boids *> &neighbors)
 
     for (const Boids *other_boid : neighbors)
     {
-        float distance = distanceTo(*other_boid);
+        float distanceSq = distanceToSquared(*other_boid);
 
-        if (distance > 0 && distance < neighborDist)
+        if (distanceSq > 0 && distanceSq < neighborDistSquared)
         {
             sum += other_boid->getPosition();
             count++;
@@ -224,23 +236,25 @@ glm::vec3 Boids::cohere(const vector<const Boids *> &neighbors)
 
 glm::vec3 Boids::handleBoundary()
 {
-    float altitude = glm::length(position);
+    float altitudeSq = glm::dot(position, position);
 
     glm::vec3 steer(0.0f);
-    float turnForce = maxForce * 2.0f; // Stronger force for boundaries
+    float turnForce = maxForce * 2.0f;
 
     // Check if below minimum altitude
-    if (altitude < minAlt)
+    if (altitudeSq < minAlt * minAlt)
     {
         // Push away from center (up)
-        glm::vec3 radialDirection = glm::normalize(position);
+        float altitude = sqrt(altitudeSq);
+        glm::vec3 radialDirection = position / altitude; // Manual normalize
         steer = radialDirection * turnForce;
     }
     // Check if above maximum altitude
-    else if (altitude > maxAlt)
+    else if (altitudeSq > maxAlt * maxAlt)
     {
         // Pull toward center (down)
-        glm::vec3 radialDirection = glm::normalize(position);
+        float altitude = sqrt(altitudeSq);
+        glm::vec3 radialDirection = position / altitude; // Manual normalize
         steer = -radialDirection * turnForce;
     }
 
@@ -278,8 +292,8 @@ vector<const Boids *> Boids::findNeighbors(const vector<Boids *> &allBoids) cons
             continue;
         }
 
-        float distance = distanceTo(*other_boid); // This may be computationally expensive, a lot of square roots - could implement DistanceToSquared function
-        if (distance < perceptionRadius)
+        float distanceSq = distanceToSquared(*other_boid); // This may be computationally expensive, a lot of square roots - could implement DistanceToSquared function
+        if (distanceSq < perceptionRadiusSquared)
         {
             neighbors.push_back(other_boid);
         }
@@ -336,10 +350,13 @@ int Boids::getID() const
 
 glm::vec3 Boids::limitMagnitude(glm::vec3 vec, float maxMag) const
 {
-    float magnitude_squared = glm::dot(vec, vec); // dot product of self gives mag squared
-    if (magnitude_squared > (maxMag * maxMag))
+    float magnitudeSq = glm::dot(vec, vec);
+    float maxMagSq = maxMag * maxMag;
+    
+    if (magnitudeSq > maxMagSq)
     {
-        vec = glm::normalize(vec) * maxMag; // If magnitude is too large, return vector w/ same direction but max magnitude
+        float magnitude = sqrt(magnitudeSq);
+        vec = (vec / magnitude) * maxMag;
     }
 
     return vec;
