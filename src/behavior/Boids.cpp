@@ -235,30 +235,58 @@ glm::vec3 Boids::cohere(const vector<const Boids *> &neighbors, float visualRang
     return sum;
 }
 
+// glm::vec3 Boids::handleBoundary()
+// {
+//     float altitudeSq = glm::dot(position, position);
+
+//     glm::vec3 steer(0.0f);
+//     float turnForce = maxForce * 2.0f;
+
+//     // Check if below minimum altitude
+//     if (altitudeSq < minAlt * minAlt)
+//     {
+//         // Push away from center (up)
+//         float altitude = sqrt(altitudeSq);
+//         glm::vec3 radialDirection = position / altitude; // Manual normalize
+//         steer = radialDirection * turnForce;
+//     }
+//     // Check if above maximum altitude
+//     else if (altitudeSq > maxAlt * maxAlt)
+//     {
+//         // Pull toward center (down)
+//         float altitude = sqrt(altitudeSq);
+//         glm::vec3 radialDirection = position / altitude; // Manual normalize
+//         steer = -radialDirection * turnForce;
+//     }
+
+//     return steer;
+// }
+
 glm::vec3 Boids::handleBoundary()
 {
     float altitudeSq = glm::dot(position, position);
-
+    float altitude = sqrt(altitudeSq);
+    
+    glm::vec3 radialDirection = position / altitude;
     glm::vec3 steer(0.0f);
-    float turnForce = maxForce * 2.0f;
-
-    // Check if below minimum altitude
-    if (altitudeSq < minAlt * minAlt)
+    
+    float margin = (maxAlt - minAlt) * 0.1f;  // 10% margin
+    float innerDanger = minAlt + margin;
+    float outerDanger = maxAlt - margin;
+    
+    if (altitude < innerDanger)
     {
-        // Push away from center (up)
-        float altitude = sqrt(altitudeSq);
-        glm::vec3 radialDirection = position / altitude; // Manual normalize
-        steer = radialDirection * turnForce;
+        // Getting close to inner boundary - push outward
+        float urgency = (innerDanger - altitude) / margin;  // 0 to 1
+        steer = radialDirection * maxForce * 3.0f * urgency;
     }
-    // Check if above maximum altitude
-    else if (altitudeSq > maxAlt * maxAlt)
+    else if (altitude > outerDanger)
     {
-        // Pull toward center (down)
-        float altitude = sqrt(altitudeSq);
-        glm::vec3 radialDirection = position / altitude; // Manual normalize
-        steer = -radialDirection * turnForce;
+        // Getting close to outer boundary - pull inward
+        float urgency = (altitude - outerDanger) / margin;  // 0 to 1
+        steer = -radialDirection * maxForce * 6.0f * urgency;
     }
-
+    
     return steer;
 }
 
