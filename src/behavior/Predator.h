@@ -1,19 +1,30 @@
-// #ifndef PREDATOR_H
-// #define PREDATOR_H
-// #include "Boids.h" // CMakeFiles.txt is set up to find this header file - Kyle
-// #include "Friendly.h"
-// #include "Flock.h"
+#ifndef PREDATOR_H
+#define PREDATOR_H
 
-// class Predator : public Boids
-// {
-// public:
-//     Friendly *target;
-//     Flock *target_flock;
+#include <glm/glm.hpp>
+#include <vector>
+#include "Friendly.h"
 
-//     Predator();
-//     Predator(Flock &new_target_flock);
-//     void get_target();
-//     void update();
-// };
+class Predator {
+private:
+    glm::vec3 position;
+    glm::vec3 velocity;
+    glm::vec3 acceleration;
 
-// #endif
+    float maxSpeed;
+    float maxForce;
+    float minAltitude;
+    float maxAltitude;
+
+    glm::vec3 HandleBoundary() const;
+
+public:
+    Predator(glm::vec3 pos, float minAlt, float maxAlt);
+
+    void Update(float dt, std::vector<Friendly>& friendlies);
+
+    glm::vec3 GetPosition() const;
+    glm::vec3 GetVelocity() const;
+};
+
+#endif

@@ -1,102 +1,39 @@
 #include "Flock.h"
 
-using namespace std;
-
-Flock::Flock()
-{ // How do we want to implement this? // you could probably copy from my BoidGenTemp - Kyle
-    // boids(0);
+void Flock::AddFriendly(Friendly f) {
+    friendlies.push_back(f);
 }
 
-Flock::Flock(int n, float minAlt, float maxAlt)
+std::vector<Friendly>& Flock::GetFriendlies() {
+    return friendlies;
+}
+
+// FIX: Accept and forward the live UI slider values (speed, force, weights,
+// visual range) into each Friendly so the controls actually take effect.
+void Flock::Update(float dt,
+                   std::vector<Predator>& predators,
+                   float weightCohesion,
+                   float weightSeparation,
+                   float weightAlignment,
+                   float visualRange,
+                   float maxSpeed,
+                   float maxForce)
 {
-    for (size_t i = 0; i < n; i++)
-    {
-        Boids* new_boid = new Friendly(maxAlt, minAlt);
-        flock.push_back(new_boid);
-    }
-}
+    for (auto& f : friendlies) {
+        if (!f.IsAlive()) continue;
 
-// void Flock::AddFriendly(const Friendly &new_friendly)
-// {
-//     flock.push_back(new_friendly);
-// }
+        // Apply current slider values before computing forces.
+        f.SetMaxSpeed(maxSpeed);
+        f.SetMaxForce(maxForce);
 
-void Flock::Update(double dt){
-    vector<vector<const Boids*>> allNeighbors; // List of lists of neighbors
-    allNeighbors.reserve(flock.size());
-
-    for (const Boids* boid : flock)
-    {
-        vector<const Boids*> neighbors = boid->findNeighbors(flock); // Get bird neighbors
-        allNeighbors.push_back(neighbors);
-    }
-
-    for (size_t i = 0; i < flock.size(); i++)
-    {
-    if (flock[i]->IsAlive())
-        {
-            flock[i]->flock(allNeighbors[i]);
-        }    
-    }
-
-    for (Boids* boid : flock)
-    {
-            if (boid->IsAlive())
-        {
-            boid->update(dt);
+        // Flee all predators.
+        for (auto& p : predators) {
+            f.Flee(p.GetPosition());
         }
+
+        // Flock with neighbours using the live weight sliders.
+        f.FlockWith(friendlies, weightCohesion, weightSeparation, weightAlignment, visualRange);
+
+        f.Update(dt);
     }
-}
-
-
-// Friendly &Flock::Get_Friendly(int i)
-// {
-//     assert(i >= 0 && i < flock.size());
-//     return flock[i];
-// }
-
-size_t Flock::GetSizeOfFlock() const
-{
-    return flock.size();
-}
-
-// const std::vector<Friendly> &Flock::GetAllFriendlies() const
-// {
-//     return flock;
-// }
-
-vector<Boids*> Flock::GetFlock() const
-{
-    return flock;
-}
-
-Flock::~Flock()
-{
-    for (Boids* boid : flock)
-    {
-        delete boid;
-    }
-    flock.clear();
-}
-
-Flock::Flock(Flock&& other) noexcept
-    : flock(std::move(other.flock))
-{
-    // other.flock is now empty, so its destructor won't delete anything
-}
-
-Flock& Flock::operator=(Flock&& other) noexcept
-{
-    if (this != &other)
-    {
-        // Delete our current boids
-        for (Boids* boid : flock)
-        {
-            delete boid;
-        }
-        
-        // Take ownership of other's boids
-        flock = std::move(other.flock);
-    }
-    return *this;
 }
