@@ -21,7 +21,8 @@ public:
     glm::vec3 GetDirection() const;
     glm::vec3 GetColor() const;
     float GetOrbitDistance() const;
-
+    void SetSpeed(float speed);
+    
 private:
     CelestialBody geometry;
     glm::vec3 color;

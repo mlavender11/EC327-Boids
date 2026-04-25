@@ -7,7 +7,6 @@ UIManager::UIManager() {}
 
 UIManager::~UIManager()
 {
-    // Clean up ImGui when the program closes
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
@@ -18,7 +17,6 @@ void UIManager::Initialize(GLFWwindow *window)
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGui::StyleColorsLight();
-    // ImGui::StyleColorsDark();
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 330 core");
 }
@@ -36,11 +34,11 @@ void UIManager::EndFrame()
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAlt, float &maxAlt, float sunOrbitDistance)
+bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAlt, float &maxAlt, float sunOrbitDistance, float &sunSpeed)
 {
     bool startClicked = false;
 
-    float maxAllowedAlt = 100; // Arbitrary
+    float maxAllowedAlt = 100;
 
     ImGui::Begin("Simulation Setup");
     ImGui::Text("Configure your starting parameters:");
@@ -49,35 +47,27 @@ bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAl
     ImGui::SliderInt("Number of Boids", &boidCount, 100, 20000);
     ImGui::SliderFloat("Earth Radius", &earthRadius, 1.0f, 50.0f);
 
-    // --- CASCADING CLAMP LOGIC ---
-
-    // 1. Earth pushes Min Up
     if (minAlt < earthRadius)
         minAlt = earthRadius;
-
-    // 2. Min pushes Max Up
     if (maxAlt < minAlt)
         maxAlt = minAlt;
-
-    // 3. Max hits the limit, and pushes everything back down
     if (maxAlt > maxAllowedAlt)
     {
         maxAlt = maxAllowedAlt;
-
         if (minAlt > maxAlt)
-        {
             minAlt = maxAlt;
-        }
         if (earthRadius > minAlt)
-        {
             earthRadius = minAlt;
-        }
     }
 
-    // By passing the dynamically checked variables into the min/max parameters
-    // of the ImGui sliders, the sliders will visually stop dragging.
     ImGui::SliderFloat("Min Altitude", &minAlt, earthRadius, maxAlt);
     ImGui::SliderFloat("Max Altitude", &maxAlt, minAlt, maxAllowedAlt);
+
+    ImGui::Spacing();
+    ImGui::Separator();
+    ImGui::Spacing();
+
+    ImGui::SliderFloat("Sun Speed", &sunSpeed, 0.0f, 5.0f);
 
     ImGui::Spacing();
     ImGui::Separator();
@@ -89,17 +79,33 @@ bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAl
         earthRadius = 10.0f;
         minAlt = 10.0f;
         maxAlt = 15.0f;
+        sunSpeed = 0.5f;
     }
 
     ImGui::Spacing();
 
     if (ImGui::Button("START SIMULATION", ImVec2(200, 50)))
-    {
         startClicked = true;
-    }
-    ImGui::End();
 
+    ImGui::End();
     return startClicked;
+}
+
+void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, float &alignment,
+                                         float &visualRange, float &maxSpeed, float &maxForce)
+{
+    ImGui::Begin("Simulation Controls");
+    ImGui::Text("Boid Behavior");
+    ImGui::Spacing();
+
+    ImGui::SliderFloat("Cohesion",     &cohesion,    0.0f, 5.0f);
+    ImGui::SliderFloat("Separation",   &separation,  0.0f, 5.0f);
+    ImGui::SliderFloat("Alignment",    &alignment,   0.0f, 5.0f);
+    ImGui::SliderFloat("Visual Range", &visualRange, 0.1f, 20.0f);
+    ImGui::SliderFloat("Max Speed",    &maxSpeed,    0.1f, 20.0f);
+    ImGui::SliderFloat("Max Force",    &maxForce,    0.0f, 5.0f);
+
+    ImGui::End();
 }
 
 void UIManager::RenderPauseMenu(bool &resume, bool &setup, bool &quit)
@@ -108,7 +114,6 @@ void UIManager::RenderPauseMenu(bool &resume, bool &setup, bool &quit)
     setup = false;
     quit = false;
 
-    // Center the pause menu on the screen
     ImVec2 center = ImGui::GetMainViewport()->GetCenter();
     ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
 
