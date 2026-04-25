@@ -57,7 +57,7 @@ float Star::GetOrbitDistance() const
     return distance;
 }
 
-void Star::SetSpeed(float newSpeed)
+void Star::SetSpeed(float speed)
 {
-    speed = newSpeed;
+    this->speed = speed;
 }
