@@ -91,13 +91,18 @@ jobs:
         mkdir -p package/assets package/shaders
         cp -r assets/* package/assets/
         cp -r shaders/* package/shaders/
-        if [ "${{ matrix.os }}" = "windows-latest" ]; then
+        
+        if [ "$RUNNER_OS" == "Windows" ]; then
+          # Find and copy the Windows executable
           cp build/Release/EC327-Boids.exe package/ || cp build/EC327-Boids.exe package/
+          # Use 7z (7-Zip) which is available on GitHub's Windows runners
+          7z a -tzip ../${{ matrix.artifact_name }}.zip ./package/*
         else
+          # Standard Linux packaging
           cp build/EC327-Boids package/
+          cd package
+          zip -r ../${{ matrix.artifact_name }}.zip ./*
         fi
-        cd package
-        zip -r ../${{ matrix.artifact_name }}.zip ./*
 
     # Upload Artifacts
     - name: Upload Artifacts
