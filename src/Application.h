@@ -11,7 +11,8 @@ enum class AppState
 {
     SETUP,
     SIMULATION,
-    PAUSED
+    PAUSED,
+    GRAPHICS_SETTINGS
 };
 
 class Application

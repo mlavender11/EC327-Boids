@@ -17,10 +17,20 @@ void UIManager::Initialize(GLFWwindow *window)
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGui::StyleColorsLight();
-    // ImGui::StyleColorsDark();
+
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 330 core");
+
+    ImGuiIO &io = ImGui::GetIO();
+    // Default font (Classic)
+    io.Fonts->AddFontDefault();
+
+    // Load specific fonts for themes
+    modernFont = io.Fonts->AddFontFromFileTTF("assets/fonts/SF-Pro-Text-Regular.otf", 18.0f);
+    retroFont = io.Fonts->AddFontFromFileTTF("assets/fonts/PressStart2P-Regular.ttf", 10.0f);
+    synthFont = io.Fonts->AddFontFromFileTTF("assets/fonts/Alien-Encounters-Regular.ttf", 17.0f);
+
+    ApplyTheme(activeTheme);
 }
 
 void UIManager::BeginFrame()
@@ -28,10 +38,37 @@ void UIManager::BeginFrame()
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
+
+    ImFont *fontToUse = nullptr;
+    if (activeTheme == UITheme::MODERN)
+        fontToUse = modernFont;
+    else if (activeTheme == UITheme::RETRO)
+        fontToUse = retroFont;
+    else if (activeTheme == UITheme::SYNTHWAVE)
+        fontToUse = synthFont;
+
+    // If a custom font is successfully loaded and selected, push it
+    if (fontToUse != nullptr)
+    {
+        ImGui::PushFont(fontToUse);
+        fontPushedThisFrame = true; // Remember that we pushed it
+    }
+    else
+    {
+        fontPushedThisFrame = false;
+    }
 }
 
 void UIManager::EndFrame()
 {
+    // Check what actually happened at the start of this frame,
+    // ignoring any button clicks that happened in the menus.
+    if (fontPushedThisFrame)
+    {
+        ImGui::PopFont();
+        fontPushedThisFrame = false; // Reset for safety
+    }
+
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
@@ -39,10 +76,21 @@ void UIManager::EndFrame()
 bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAlt, float &maxAlt, float sunOrbitDistance, float &sunSpeed)
 {
     bool startClicked = false;
+    ImGuiIO &io = ImGui::GetIO();
+
+    // Center the window and prevent it from being moved/resized too small
+    ImVec2 windowSize = ImVec2(450, 500); // Fixed size to ensure everything fits
+    ImVec2 windowPos = ImVec2(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f);
+
+    ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+
+    ImGui::SetNextWindowSizeConstraints(ImVec2(400, -1), ImVec2(io.DisplaySize.x, io.DisplaySize.y));
+
+    ImGuiWindowFlags flags = ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse;
+    ImGui::Begin("Simulation Setup", nullptr, flags);
 
     float maxAllowedAlt = 100; // Arbitrary
 
-    ImGui::Begin("Simulation Setup");
     ImGui::Text("Configure your starting parameters:");
     ImGui::Spacing();
 
@@ -105,25 +153,33 @@ bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAl
     return startClicked;
 }
 
-void UIManager::RenderPauseMenu(bool &resume, bool &setup, bool &quit)
+void UIManager::RenderPauseMenu(bool &resume, bool &setup, bool &quit, bool &graphics)
 {
     resume = false;
     setup = false;
     quit = false;
+    graphics = false;
 
-    // Center the pause menu on the screen
-    ImVec2 center = ImGui::GetMainViewport()->GetCenter();
-    ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+    ImGuiIO &io = ImGui::GetIO();
 
-    ImGui::Begin("Paused", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove);
+    // SetNextWindowPos with Always to lock it in the center
+    ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+
+    ImGui::SetNextWindowSizeConstraints(ImVec2(200, -1), ImVec2(io.DisplaySize.x, io.DisplaySize.y));
+
+    ImGuiWindowFlags flags = ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse;
+
+    ImGui::Begin("Paused", nullptr, flags);
     ImGui::Text("Simulation Paused");
     ImGui::Spacing();
 
-    if (ImGui::Button("Resume", ImVec2(200, 50)))
+    if (ImGui::Button("Resume", ImVec2(200, 40)))
         resume = true;
-    if (ImGui::Button("Setup", ImVec2(200, 50)))
+    if (ImGui::Button("Graphics Settings", ImVec2(200, 40)))
+        graphics = true; // Fix: Added the button
+    if (ImGui::Button("Return to Setup", ImVec2(200, 40)))
         setup = true;
-    if (ImGui::Button("Quit", ImVec2(200, 50)))
+    if (ImGui::Button("Quit Game", ImVec2(200, 40)))
         quit = true;
 
     ImGui::End();
@@ -131,12 +187,27 @@ void UIManager::RenderPauseMenu(bool &resume, bool &setup, bool &quit)
 
 void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, float &alignment, float &visualRange, float &maxSpeed, float &maxForce)
 {
+    ImVec2 pos = ImGui::GetWindowPos();
+    ImVec2 size = ImGui::GetWindowSize();
+    ImVec2 screen = ImGui::GetIO().DisplaySize;
+
+    // Keep x-axis in bounds
+    if (pos.x < 0)
+        pos.x = 0;
+    if (pos.x + size.x > screen.x)
+        pos.x = screen.x - size.x;
+
+    // Keep y-axis in bounds
+    if (pos.y < 0)
+        pos.y = 0;
+    if (pos.y + size.y > screen.y)
+        pos.y = screen.y - size.y;
+
     // Position the window in the top left corner automatically
     ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_FirstUseEver);
 
     // Create a window without a background or title bar for a cleaner look
     ImGuiWindowFlags windowFlags = ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
-    ImGui::SetNextWindowBgAlpha(0.6f); // Semi-transparent background
 
     ImGui::Begin("Flocking Controls", nullptr, windowFlags);
     ImGui::Text("Real-Time Flocking Weights");
@@ -172,4 +243,67 @@ void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, floa
     }
 
     ImGui::End();
+}
+
+void UIManager::ApplyTheme(UITheme theme)
+{
+    activeTheme = theme;
+    ImGuiStyle &style = ImGui::GetStyle();
+
+    switch (theme)
+    {
+    case UITheme::MODERN:
+        UIThemes::ApplyModern(style);
+        break;
+    case UITheme::RETRO:
+        UIThemes::ApplyRetro(style);
+        break;
+    case UITheme::SYNTHWAVE:
+        UIThemes::ApplySynthwave(style);
+        break;
+    case UITheme::CLASSIC:
+        ImGui::StyleColorsDark(); // Built-in ImGui default
+        break;
+    }
+}
+
+void UIManager::RenderGraphicsMenu(UITheme &currentTheme, bool &backClicked)
+{
+    ImGuiIO &io = ImGui::GetIO();
+    ImGui::SetNextWindowSizeConstraints(ImVec2(400, -1), ImVec2(io.DisplaySize.x, io.DisplaySize.y));
+    ImGui::Begin("Graphics Settings", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+
+    if (ImGui::RadioButton("Modern Dark", currentTheme == UITheme::MODERN))
+    {
+        currentTheme = UITheme::MODERN;
+        ApplyTheme(UITheme::MODERN);
+    }
+    if (ImGui::RadioButton("Retro Terminal", currentTheme == UITheme::RETRO))
+    {
+        currentTheme = UITheme::RETRO;
+        ApplyTheme(UITheme::RETRO);
+    }
+    if (ImGui::RadioButton("Synthwave", currentTheme == UITheme::SYNTHWAVE))
+    {
+        currentTheme = UITheme::SYNTHWAVE;
+        ApplyTheme(UITheme::SYNTHWAVE);
+    }
+    if (ImGui::RadioButton("Classic", currentTheme == UITheme::CLASSIC))
+    {
+        currentTheme = UITheme::CLASSIC;
+        ApplyTheme(UITheme::CLASSIC);
+    }
+
+    ImGui::Separator();
+    if (ImGui::Button("Back"))
+    {
+        backClicked = true;
+    }
+
+    ImGui::End();
+}
+
+UITheme UIManager::GetActiveTheme() const
+{
+    return activeTheme;
 }

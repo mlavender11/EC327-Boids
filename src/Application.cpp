@@ -17,59 +17,43 @@ Application::Application()
 
 void Application::Run()
 {
-    // The Main Game Loop
     while (!graphics.ShouldClose())
     {
-
-        // 1. Calculate Time
         float currentFrameTime = glfwGetTime();
         float deltaTime = currentFrameTime - lastFrameTime;
         lastFrameTime = currentFrameTime;
 
-        // 2. Process OS movement input when unpaused
         if (currentState == AppState::SIMULATION)
         {
             graphics.ProcessInput();
         }
 
-        // 3. Handle Pause Toggle (Escape Key)
+        // Handle Escape Logic
         bool escapeIsPressed = (glfwGetKey(graphics.GetWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS);
-
         if (escapeIsPressed && !escapeWasPressed)
         {
             if (currentState == AppState::SIMULATION)
             {
-                // Only allow pausing if the game is actively running
                 previousState = currentState;
                 currentState = AppState::PAUSED;
             }
-            else if (currentState == AppState::PAUSED)
+            else if (currentState == AppState::PAUSED || currentState == AppState::GRAPHICS_SETTINGS)
             {
-                // Unpause and return to where we were
-                currentState = previousState;
+                currentState = (currentState == AppState::PAUSED) ? previousState : AppState::PAUSED;
             }
-            // If the user is in the setup menu, the Escape key is completely ignored.
         }
         escapeWasPressed = escapeIsPressed;
 
-        // 4. Start UI Frame
         uiManager.BeginFrame();
 
-        // 5. Execute Current State
+        // State handling
         if (currentState == AppState::SETUP)
-        {
             RunSetupState();
-        }
         else if (currentState == AppState::SIMULATION)
-        {
             RunSimulationState(deltaTime);
-        }
-        else if (currentState == AppState::PAUSED)
-        {
+        else if (currentState == AppState::PAUSED || currentState == AppState::GRAPHICS_SETTINGS)
             RunPausedState();
-        }
 
-        // 6. Draw UI and Swap Buffers
         uiManager.EndFrame();
         graphics.SwapBuffers();
     }
@@ -115,16 +99,30 @@ void Application::RunSimulationState(float deltaTime)
 
 void Application::RunPausedState()
 {
-    // Draw everything frozen in the background
+    // Fix: Always render the background so the screen isn't black
     graphics.Render(boidDataToRender, true, simulationTime, configMaxAltitude, configEarthRadius);
 
-    bool resumeClicked, setupClicked, quitClicked;
-    uiManager.RenderPauseMenu(resumeClicked, setupClicked, quitClicked);
+    if (currentState == AppState::PAUSED)
+    {
+        bool resumeClicked, setupClicked, quitClicked, graphicsClicked;
+        uiManager.RenderPauseMenu(resumeClicked, setupClicked, quitClicked, graphicsClicked);
 
-    if (resumeClicked)
-        currentState = previousState;
-    if (setupClicked)
-        currentState = AppState::SETUP;
-    if (quitClicked)
-        glfwSetWindowShouldClose(graphics.GetWindow(), true);
+        if (resumeClicked)
+            currentState = previousState;
+        if (setupClicked)
+            currentState = AppState::SETUP;
+        if (graphicsClicked)
+            currentState = AppState::GRAPHICS_SETTINGS; // Switches to sub-menu
+        if (quitClicked)
+            glfwSetWindowShouldClose(graphics.GetWindow(), true);
+    }
+    else if (currentState == AppState::GRAPHICS_SETTINGS)
+    {
+        bool backToPause = false;
+        UITheme currentUITheme = uiManager.GetActiveTheme();
+        uiManager.RenderGraphicsMenu(currentUITheme, backToPause);
+
+        if (backToPause)
+            currentState = AppState::PAUSED;
+    }
 }

@@ -59,11 +59,12 @@ add_executable(EC327-Boids MACOSX_BUNDLE
 # Force copy assets and shaders into the Apple .app bundle
 add_custom_command(TARGET EC327-Boids POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${CMAKE_CURRENT_SOURCE_DIR}/assets"
-        "$<TARGET_BUNDLE_DIR:EC327-Boids>/Contents/Resources/assets"
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
         "${CMAKE_CURRENT_SOURCE_DIR}/shaders"
         "$<TARGET_BUNDLE_DIR:EC327-Boids>/Contents/Resources/shaders"
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_CURRENT_SOURCE_DIR}/assets"
+        "$<TARGET_BUNDLE_DIR:EC327-Boids>/Contents/Resources/assets"
+    
 )
 
 # Link the libraries to executable
