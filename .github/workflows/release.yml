@@ -42,19 +42,35 @@ jobs:
                                libxrandr-dev libxft-dev libwayland-dev libxkbcommon-dev
 
     # Install Windows & Linux GLFW via VCPKG
+    - name: Install GLFW (Windows & Linux)
+      if: matrix.os != 'macos-latest'
+      shell: bash
+      run: |
+        # Force vcpkg to integrate with the shell
+        $VCPKG_INSTALLATION_ROOT/vcpkg integrate install
+        
+        if [ "$RUNNER_OS" == "Windows" ]; then
+          $VCPKG_INSTALLATION_ROOT/vcpkg install glfw3:x64-windows
+        else
+          # On Linux, we need to ensure vcpkg uses the system's libraries to build
+          export VCPKG_FORCE_SYSTEM_BINARIES=1
+          $VCPKG_INSTALLATION_ROOT/vcpkg install glfw3:x64-linux
+        fi
+      
+    # Configure CMake
+    - name: Configure CMake
+      if: matrix.os == 'macos-latest'
+      run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+    # Configure CMake (Windows & Linux)
     - name: Configure CMake (Windows & Linux)
       if: matrix.os != 'macos-latest'
       shell: bash
       run: |
-        export VCPKG_FORCE_SYSTEM_BINARIES=1
         cmake -B build \
           -DCMAKE_BUILD_TYPE=Release \
           -DCMAKE_TOOLCHAIN_FILE="$VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake" \
           -DVCPKG_TARGET_TRIPLET=${{ matrix.os == 'windows-latest' && 'x64-windows' || 'x64-linux' }}
-      
-    # Configure CMake
-    - name: Configure CMake
-      run: cmake -B build -DCMAKE_BUILD_TYPE=Release
 
     # Build the Project
     - name: Build

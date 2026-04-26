@@ -8,16 +8,7 @@ endif()
 set(CMAKE_CXX_STANDARD 17)
 
 # Find GLFW and OpenGL
-# Try to find GLFW (vcpkg usually uses 'glfw3', but some systems use 'glfw')
-find_package(glfw3 CONFIG)
-if(NOT glfw3_FOUND)
-    find_package(glfw CONFIG REQUIRED)
-    # Map 'glfw' target to 'glfw' for consistency if needed
-    set(GLFW_LIBRARIES glfw)
-else()
-    set(GLFW_LIBRARIES glfw)
-endif()
-
+find_package(glfw3 CONFIG REQUIRED)
 find_package(OpenGL REQUIRED)
 
 # Include directories
@@ -100,6 +91,6 @@ endif()
 
 # Link the libraries to executable
 target_link_libraries(EC327-Boids 
-    ${GLFW_LIBRARIES}
+    glfw
     OpenGL::GL
 )
