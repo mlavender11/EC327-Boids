@@ -50,8 +50,6 @@ add_executable(EC327-Boids MACOSX_BUNDLE
 
     shaders/Shader.cpp
 
-    src/BoidGenTemp.cpp
-
     # External libraries
     external/glad/src/glad.c
     external/stb/stb_image.cpp
