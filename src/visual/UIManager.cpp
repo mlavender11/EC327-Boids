@@ -27,7 +27,7 @@ void UIManager::Initialize(GLFWwindow *window)
 
     // Load specific fonts for themes
     modernFont = io.Fonts->AddFontFromFileTTF("assets/fonts/SF-Pro-Text-Regular.otf", 18.0f);
-    retroFont = io.Fonts->AddFontFromFileTTF("assets/fonts/PressStart2P-Regular.ttf", 10.0f);
+    retroFont = io.Fonts->AddFontFromFileTTF("assets/fonts/PressStart2P-Regular.ttf", 11.0f);
     synthFont = io.Fonts->AddFontFromFileTTF("assets/fonts/Alien-Encounters-Regular.ttf", 17.0f);
 
     ApplyTheme(activeTheme);
@@ -185,7 +185,7 @@ void UIManager::RenderPauseMenu(bool &resume, bool &setup, bool &quit, bool &gra
     ImGui::End();
 }
 
-void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, float &alignment, float &visualRange, float &maxSpeed, float &maxForce)
+void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, float &alignment, float &visualRange, float &maxSpeed, float &maxForce, float simulationTime)
 {
     ImVec2 pos = ImGui::GetWindowPos();
     ImVec2 size = ImGui::GetWindowSize();
@@ -240,6 +240,33 @@ void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, floa
         visualRange = 5.0f;
         maxSpeed = 5.0f;
         maxForce = 10.0f;
+    }
+
+    // --- TEMPORARY CONTROLS PROMPT ---
+    // Show the prompt for the first 6.0 seconds of the simulation
+    if (simulationTime < 6.0f)
+    {
+        ImGuiIO &io = ImGui::GetIO();
+
+        // Position it at the bottom center of the screen
+        ImVec2 promptPos = ImVec2(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.85f);
+        ImGui::SetNextWindowPos(promptPos, ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+
+        // Remove all window styling (borders, titles, backgrounds) for a clean text overlay
+        ImGuiWindowFlags promptFlags = ImGuiWindowFlags_NoDecoration |
+                                       ImGuiWindowFlags_AlwaysAutoResize |
+                                       ImGuiWindowFlags_NoMove |
+                                       ImGuiWindowFlags_NoSavedSettings |
+                                       ImGuiWindowFlags_NoFocusOnAppearing;
+
+        ImGui::Begin("ControlsPrompt", nullptr, promptFlags);
+
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+
+        ImGui::Text("CONTROLS: Click & Drag to Rotate | Scroll to Zoom");
+
+        ImGui::PopStyleColor();
+        ImGui::End();
     }
 
     ImGui::End();

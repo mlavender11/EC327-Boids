@@ -40,7 +40,7 @@ public:
     void RenderPauseMenu(bool &resume, bool &setup, bool &quit, bool &graphics);
 
     // Draws the simulation overlay for boid parameters. Returns TRUE if the user changed any of the parameters.
-    void RenderSimulationOverlay(float &cohesion, float &separation, float &alignment, float &visualRange, float &maxSpeed, float &maxForce);
+    void RenderSimulationOverlay(float &cohesion, float &separation, float &alignment, float &visualRange, float &maxSpeed, float &maxForce, float simulationTime);
 
     // Draws the graphics settings menu. Returns TRUE if the user clicked "Back"
     void RenderGraphicsMenu(UITheme &currentTheme, bool &backClicked);
