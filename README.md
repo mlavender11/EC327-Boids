@@ -1,14 +1,16 @@
 ### Project Description 📌
-**Spherical Boids** is a high-performance 3D graphics engine and flocking simulation built from scratch in C++ and OpenGL. The simulation features thousands of boids dynamically orbiting a 3D textured Earth in real-time. By utilizing advanced graphics programming techniques like **Instanced Rendering**, **Custom GLSL Shaders**, and **Face Culling**, the engine renders 5,000+ individual boids alongside dynamic lighting, an atmosphere, and a day/night cycle. 
+We built a high-performance 3D graphics engine and flocking simulation from scratch in C++ and OpenGL. The simulation features (up to) thousands of boids dynamically orbiting Earth in real-time. **EXPLAIN WHAT BOIDS ARE IN A LOT OF DETAIL FOR DUMMIES**
+
+
+By utilizing advanced graphics programming techniques like Instanced Rendering, Custom GLSL Shaders, and Face Culling, the engine renders 5,000+ individual boids alongside dynamic lighting, an atmosphere, and a day/night cycle. 
 
 ---
 
 ### Developers 🎓
-- **Vugar Amirov** - *Computer Engineering*
-- **Zhakhangir Mamayev** - *Computer Engineering*
-- **Pree Simphliphan** - *Computer Engineering*
-- **Rawisara Chairat** - *Computer Engineering*
-- **Cole Shaigec** - *Electrical and Computer Engineering*
+- **Kyle Armstrong** - *Biomedical Engineering*
+- **Michael ...** - *... Engineering*
+- **Ilias ...** - *... Engineering*
+- **Yicong ...** - *... Engineering*
 
 ---
 
@@ -34,7 +36,7 @@ If you have downloaded the pre-compiled `EC327-Boids.app` from the Releases tab:
 #### 2. Build from Source (Mac/Linux)
 1. **Clone the Repo:**
    ```bash
-   git clone https://github.com/your-username/EC327-Boids.git
+   git clone https://github.com/mlavender11/EC327-Boids.git
    cd EC327-Boids
    ```
 2. **Automatic Build Script:**
@@ -47,7 +49,7 @@ If you have downloaded the pre-compiled `EC327-Boids.app` from the Releases tab:
 ```bash
 mkdir build && cd build
 cmake ..
-cmake --build . --parallel
+cmake --build .
 cd ..
 ./build/EC327-Boids
 ```
@@ -98,25 +100,62 @@ cd ..
 ### Software Architecture Diagrams 🗺️
 *(Add Image/Diagram links here, e.g., Class Diagrams or Shader Pipelines)*
 
-
+#### File Diagram
 Important folders and files are listed here. Descriptions for folder contents are in parentheses.
 ```text
 EC327-Boids/
 ├── build/
-│   ├── EC327-Boids.exe
-│   └── (Other stuff CMake needs)
+│   ├── EC327-Boids.app
+│   └── (Other CMake stuff stuff)
 ├── external/
 │   └── (A bunch of external libraries we use)
 ├── shaders/
-│   └── (Shaders for boids and the earth)
+│   └── (Shaders for all rendered objects)
 ├── src/
 │   ├── main.cpp
 │   ├── Application.cpp
-│   ├── (Temporary boid generation files)
+│   ├── PathResolver.cpp
 │   ├── behavior/
 │   │   └── (Behavior things)
 │   └── visual/
 │       └── (Visual things)
 └── CMakeLists.txt
 ```
+
+#### The Shader Pipeline
+
+A shader pipeline (or Graphics Pipeline) is the sequence of mathematical and logical steps the GPU takes to turn 3D geometric data into the 2D pixels displayed on your screen. In this project, we utilize a programmable pipeline via GLSL (OpenGL Shading Language) to control everything from the positioning of boids to the glow of the atmosphere.
+
+**1. Vertex Processing (Shaping the World)**
+
+The pipeline begins by receiving raw vertex data—such as 3D coordinates, colors, and texture positions—from the CPU.
+
+Transformation: The Vertex Shader transforms 3D coordinates into "Clip Space" using Matrix math (Model, View, and Projection matrices).
+
+Instancing: To render 5,000+ boids, we inject an instanceMatrix at this stage, allowing the GPU to calculate the unique position and orientation of every boid simultaneously.
+
+**2. Rasterization (Geometry to Pixels)**
+
+Once vertices are positioned, the GPU assembles them into triangles.
+
+Face Culling: To optimize performance, the pipeline discards "back-facing" triangles that are hidden from the camera's view.
+
+Interpolation: The GPU determines which screen pixels are covered by a triangle and mathematically "blends" data (like texture coordinates) across the surface.
+
+**3. Fragment Processing (Color & Light)**
+
+This stage determines the final color of every individual pixel (fragment).
+
+Texturing: The Fragment Shader samples colors from the Earth texture map based on the interpolated coordinates.
+
+Lighting Calculations: We use the Sun's lightDir to calculate how light hits each surface, creating realistic highlights on the boids and a day/night cycle on the planet.
+
+**4. Testing & Blending (The Final Pass)**
+
+Before a pixel is drawn, the GPU performs final checks to ensure visual consistency:
+
+Depth Testing: The pipeline compares the depth of a new pixel against the "Depth Buffer" to ensure that boids in front of the Earth are visible, while those behind it are hidden.
+
+Alpha Blending: For transparent objects like the Atmosphere, the pipeline blends the fragment color with the existing background colors using specific blend functions.
+
 ---
