@@ -1,10 +1,105 @@
-***THE MAIN PROJECT DIRECTORY MUST BE CALLED "EC327-Boids"***
+### Project Description 📌
+**Spherical Boids** is a high-performance 3D graphics engine and flocking simulation built from scratch in C++ and OpenGL. The simulation features thousands of boids dynamically orbiting a 3D textured Earth in real-time. By utilizing advanced graphics programming techniques like **Instanced Rendering**, **Custom GLSL Shaders**, and **Face Culling**, the engine renders 5,000+ individual boids alongside dynamic lighting, an atmosphere, and a day/night cycle. 
 
-How to format stuff: https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
+---
 
-# Folder Hierarchy
+### Developers 🎓
+- **Vugar Amirov** - *Computer Engineering*
+- **Zhakhangir Mamayev** - *Computer Engineering*
+- **Pree Simphliphan** - *Computer Engineering*
+- **Rawisara Chairat** - *Computer Engineering*
+- **Cole Shaigec** - *Electrical and Computer Engineering*
+
+---
+
+### Tech Stack ⚙️
+- **Language:** C++17
+- **Graphics API:** OpenGL 3.3 (Core Profile)
+- **Libraries:** GLFW, GLAD, GLM, Dear ImGui, stb_image
+- **Build System:** CMake
+
+---
+
+### Quick Start: Run the Simulation 🚀
+
+#### 1. Mac Release (.app Bundle) - Recommended on Mac
+If you have downloaded the pre-compiled `EC327-Boids.app` from the Releases tab:
+1. **Unzip** the folder.
+2. **Bypass Apple Gatekeeper:** Because this app is unsigned (we didn't pay Apple $99 so we aren't registered developers), macOS may flag it as damaged. Open **Terminal** and run:
+   ```bash
+   xattr -cr /path/to/EC327-Boids.app
+   ```
+3. **Launch:** Double-click the `.app` icon to run.
+
+#### 2. Build from Source (Mac/Linux)
+1. **Clone the Repo:**
+   ```bash
+   git clone https://github.com/your-username/EC327-Boids.git
+   cd EC327-Boids
+   ```
+2. **Automatic Build Script:**
+   ```bash
+   chmod +x run.sh
+   ./run.sh
+   ```
+
+#### 3. Manual CMake Build (Cross-Platform)
+```bash
+mkdir build && cd build
+cmake ..
+cmake --build . --parallel
+cd ..
+./build/EC327-Boids
+```
+
+---
+
+### Software Architecture & Features 🖥️
+
+#### Visual Engine
+- **Custom GLSL Shaders:** Features separate shader programs for the Earth, Atmosphere, Star (Sun), and Boids, supporting Blinn-Phong lighting and transparency blending.
+- **Instanced Rendering:** Utilizes matrix instancing to pass transformation data for 5,000+ boids to the GPU in a single draw call, maintaining high frame rates.
+- **Dynamic Lighting & Day/Night Cycle:** A light-source "Sun" orbits the Earth, dynamically updating the lighting vectors for all objects in the scene.
+- **Atmospheric Scattering:** A secondary celestial sphere with alpha blending and back-face culling to simulate a glowing atmospheric shell.
+
+#### Behavior & Simulation
+- **Spherical Boids Algorithm:** An implementation of Reynolds' Flocking Algorithm (Cohesion, Separation, and Alignment) constrained to a spherical orbital volume.
+- **Live Parameter Tuning:** Integrated **Dear ImGui** overlay allows for real-time adjustment of boid speed, visual range, and steering forces.
+- **Dynamic Camera:** A custom camera controller with zoom-clamping to prevent clipping into the Earth's surface or wandering too far into space.
+
+#### Logistics & Framework
+- **Smart Path Resolution:** Includes a custom `PathResolver` utility that uses Apple's `_NSGetExecutablePath` to automatically locate shaders and textures whether the app is run from a terminal, a build folder, or a `.app` bundle.
+- **State Management:** A robust `Application` state machine handling `SETUP`, `SIMULATION`, and `PAUSED` states.
+- **Post-Build Automation:** CMake is configured to automatically package assets and shaders into the Apple bundle `Resources` directory during compilation.
+
+---
+
+### Dependencies [Required for source builds] 🗝️
+- **CMake** (3.12+)
+- **OpenGL-compatible Hardware**
+- **C++17 Compiler** (Clang/GCC/MSVC)
+- **GLFW** (System-level installation recommended on Mac: `brew install glfw`)
+
+---
+
+### Key Controls ⌨️
+- **Mouse Drag:** Rotate camera around the Earth
+- **Scroll:** Zoom in/out (Clamped to Atmosphere/Surface)
+- **Escape:** Toggle Pause/Menu
+- **UI Sliders:** Adjust Boid behavior in real-time
+
+---
+
+### Gallery / Demo 📺
+*(Add screenshots or a YouTube link here)*
+
+---
+
+### Software Architecture Diagrams 🗺️
+*(Add Image/Diagram links here, e.g., Class Diagrams or Shader Pipelines)*
+
+
 Important folders and files are listed here. Descriptions for folder contents are in parentheses.
-
 ```text
 EC327-Boids/
 ├── build/
@@ -24,52 +119,4 @@ EC327-Boids/
 │       └── (Visual things)
 └── CMakeLists.txt
 ```
-
-# How to Run
-For the visual part, how you run it is a bit complicated because you need to use cmake
-
-Here are the steps:
-
-1. On Mac, if you haven't run it before, navigate to the main directory and enter "chmod +x run.sh"
-2. To run, use "./run.sh"
-
-# Behavior
-Whatever you guys wanna put here
-
-# Visuals
-## BoidRenderer.h/cpp
-These files have two important functions:
-
-```std::vector<glm::mat4> BoidsToMatrices(const std::vector<Boids> &)```
-
-```void DrawInstanced(const std::vector<glm::mat4> &)```
-
-The first function, `BoidsToMatrices`, takes in a vector of boids objects, loops through each of them, and extracts each of their position and heading values (which need to be of type `glm::vec3`).
-
-Those values are then added to a 4x4 matrix (of type `glm::mat4`). This is the most basic form so if we want to add colors or other characteristics that would need visualization, I would probably need to increase the size of this matrix.
-
-It then returns a vector (of type `std::vector<glm::mat4>`) that contains the relevant information of all boids objects. 
-
-The second function, `DrawInstanced`, draws all the boids from the vector returned by the first function. I did it this way because it's much more efficient than having each object draw itself like we did in PA3.
-
-## Camera.h/cpp, Callbacks.h/cpp, and Window.h/cpp
-These three modules handle the application setup and how the user interacts with the 3D world. 
-
-**Window** contains `InitializeWindow`, which starts up GLFW, GLAD, and creates the OpenGL window. It also has `ProcessInput`, which is always waiting for the user to press escape to close the window (can add more things here as well--if we do want to add more inputs, keyboard inputs would be listened for here). 
-
-**Camera** has `CalculateViewMatrix`, which converts the spherical coordinates of the camera into a matrix of cartesian coordinates. This matrix is sent to the shaders every frame so OpenGL knows where the camera is and what angle it is looking from. It also has the `CameraState` struct, which holds the following:
-- The camera's spherical coordinates (radius, yaw, pitch)
-- The camera's minimum and maximum zooms
-- A bool of whether the mouse is being dragged
-- The mouse's last coordinates on the screen
-
-**Callbacks** intercepts mouse clicks, mouse movement, and scroll wheel actions. It uses these inputs to update `Camera.h`'s `CameraState` struct. It is apparently better to use callbacks for tracking mouse and scroll inputs. The bounds for the camera position and orientation are stored here.
-
-## Earth.h/cpp
-This class generates and renders the central planet that the boids fly around.
-
-```Earth(float radius, int sectors, int stacks)```
-The constructor procedurally generates a 3D sphere using math. The `sectors` and `stacks` parameters control the resolution (longitude and latitude lines).
-
-```void Draw()```
-During setup, the generated vertices are sent over to the GPU's memory using Vertex Buffer Objects (VBOs). The `Draw` function tells the GPU to render those pre-loaded buffers. It's okay that it has a generic name because it's `Earth::Draw()`.
+---
