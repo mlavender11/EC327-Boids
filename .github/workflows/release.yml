@@ -37,19 +37,20 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       run: |
         sudo apt-get update
-        # Added pkg-config and ninja-build to the list
-        sudo apt-get install -y pkg-config ninja-build libgl1-mesa-dev xorg-dev libx11-dev libxcursor-dev libxi-dev libxinerama-dev libxrandr-dev
+        sudo apt-get install -y pkg-config ninja-build libgl1-mesa-dev xorg-dev \
+                               libx11-dev libxcursor-dev libxi-dev libxinerama-dev \
+                               libxrandr-dev libxft-dev libwayland-dev libxkbcommon-dev
 
     # Install Windows & Linux GLFW via VCPKG
-    - name: Install GLFW (Windows & Linux)
+    - name: Configure CMake (Windows & Linux)
       if: matrix.os != 'macos-latest'
       shell: bash
       run: |
-        if [ "$RUNNER_OS" == "Windows" ]; then
-          vcpkg install glfw3:x64-windows
-        else
-          vcpkg install glfw3:x64-linux
-        fi
+        export VCPKG_FORCE_SYSTEM_BINARIES=1
+        cmake -B build \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_TOOLCHAIN_FILE="$VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake" \
+          -DVCPKG_TARGET_TRIPLET=${{ matrix.os == 'windows-latest' && 'x64-windows' || 'x64-linux' }}
       
     # Configure CMake
     - name: Configure CMake
