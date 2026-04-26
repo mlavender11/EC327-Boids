@@ -5,6 +5,10 @@ on:
     tags:
       - 'v*'
 
+# Force all actions to use Node 24 runtime like GitHub wants
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build:
     name: Build on ${{ matrix.os }}
@@ -29,6 +33,11 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y libglfw3-dev libgl1-mesa-dev xorg-dev
+    
+    # Install Mac dependencies
+    - name: Install macOS Dependencies
+      if: matrix.os == 'macos-latest'
+      run: brew install glfw
 
     # Configure CMake
     - name: Configure CMake
