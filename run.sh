@@ -14,4 +14,4 @@ cmake --build .
 cd ..
 
 echo "🚀 Running Boids..."
-./build/EC327-Boids
+./build/EC327-Boids.app/Contents/MacOS/EC327-Boids

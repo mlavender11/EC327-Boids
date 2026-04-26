@@ -29,9 +29,10 @@ file(GLOB IMGUI_SOURCES
 )
 
 # Define the executable and its source files
-add_executable(EC327-Boids 
+add_executable(EC327-Boids MACOSX_BUNDLE
     src/main.cpp 
     src/Application.cpp
+    src/PathResolver.cpp
 
     src/visual/GraphicsEngine.cpp
     src/visual/UIManager.cpp
@@ -39,7 +40,6 @@ add_executable(EC327-Boids
     src/visual/Camera.cpp
     src/visual/Window.cpp
     src/visual/BoidRenderer.cpp
-    shaders/Shader.cpp
     src/visual/CelestialBody.cpp
     src/visual/Star.cpp
 
@@ -48,12 +48,19 @@ add_executable(EC327-Boids
     src/behavior/Predator.cpp
     src/behavior/Flock.cpp
 
+    shaders/Shader.cpp
+
     src/BoidGenTemp.cpp
 
     # External libraries
     external/glad/src/glad.c
     external/stb/stb_image.cpp
     ${IMGUI_SOURCES}
+)
+
+# Set resource files (assets and shaders) to be included in the .app bundle
+set_target_properties(EC327-Boids PROPERTIES 
+    RESOURCE "assets;shaders"
 )
 
 # Link the libraries to executable
