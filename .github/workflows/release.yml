@@ -26,23 +26,22 @@ jobs:
     steps:
     - name: Checkout Code
       uses: actions/checkout@v4
-
-    # Install Linux dependencies
-    - name: Install Linux Dependencies
-      if: matrix.os == 'ubuntu-latest'
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y libglfw3-dev libgl1-mesa-dev xorg-dev
     
     # Install Mac dependencies
     - name: Install macOS Dependencies
       if: matrix.os == 'macos-latest'
       run: brew install glfw
 
-    # Install Windows dependencies
-    - name: Install Windows Dependencies
-      if: matrix.os == 'windows-latest'
-      run: vcpkg install glfw3:x64-windows
+    # Install Windows & Linux GLFW via VCPKG
+    - name: Install GLFW (Windows & Linux)
+      if: matrix.os != 'macos-latest'
+      shell: bash
+      run: |
+        if [ "$RUNNER_OS" == "Windows" ]; then
+          vcpkg install glfw3:x64-windows
+        else
+          vcpkg install glfw3:x64-linux
+        fi
       
     # Configure CMake
     - name: Configure CMake
