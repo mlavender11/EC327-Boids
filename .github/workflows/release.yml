@@ -1,6 +1,5 @@
 name: Build and Release
 
-# This makes the action run every time you push a new "tag" (like v1.0)
 on:
   push:
     tags:
@@ -22,9 +21,9 @@ jobs:
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    # Install Linux dependencies (OpenGL and GLFW requirements)
+    # Install Linux dependencies
     - name: Install Linux Dependencies
       if: matrix.os == 'ubuntu-latest'
       run: |
@@ -39,14 +38,14 @@ jobs:
     - name: Build
       run: cmake --build build --config Release --parallel 4
 
-    # Package Mac (.app bundle is already self-contained)
+    # Package Mac
     - name: Package Mac
       if: matrix.os == 'macos-latest'
       run: |
         cd build
         zip -r ../${{ matrix.artifact_name }}.zip EC327-Boids.app
 
-    # Package Windows and Linux (Bundle executable with assets & shaders)
+    # Package Windows and Linux
     - name: Package Windows & Linux
       if: matrix.os != 'macos-latest'
       shell: bash
@@ -54,7 +53,6 @@ jobs:
         mkdir -p package/assets package/shaders
         cp -r assets/* package/assets/
         cp -r shaders/* package/shaders/
-        # Copy the executable (Windows adds .exe, Linux has no extension)
         if [ "${{ matrix.os }}" = "windows-latest" ]; then
           cp build/Release/EC327-Boids.exe package/ || cp build/EC327-Boids.exe package/
         else
@@ -63,23 +61,26 @@ jobs:
         cd package
         zip -r ../${{ matrix.artifact_name }}.zip ./*
 
-    # Upload the ZIP files to GitHub Actions artifacts
+    # Upload Artifacts
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4 
       with:
         name: ${{ matrix.artifact_name }}
         path: ${{ matrix.artifact_name }}.zip
 
-  # This job takes the uploaded zip files and creates a GitHub Release
   release:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      # Download Artifacts
       - name: Download Artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
+        with:
+          path: .
         
+      # Create GitHub Release
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: |
             EC327-Boids-Mac/EC327-Boids-Mac.zip
