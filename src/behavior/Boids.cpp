@@ -3,6 +3,8 @@ using namespace std;
 
 int Boids::nextID = 0;
 
+float pi = 3.14159265358979323846f; // Hardcode because M_PI was causing issues when building on Windows - Kyle
+
 Boids::Boids(float maxAlt, float minAlt)
 {
     maxSpeed = 5.0f;
@@ -12,7 +14,7 @@ Boids::Boids(float maxAlt, float minAlt)
 
     // Uniform distribution on spherical shell between minAlt and maxAlt
     uniform_real_distribution<float> distrib_radius(minAlt, maxAlt);
-    uniform_real_distribution<float> distrib_theta(0.0f, 2.0f * M_PI);
+    uniform_real_distribution<float> distrib_theta(0.0f, 2.0f * pi);
     uniform_real_distribution<float> distrib_cos_phi(-1.0f, 1.0f);
 
     float r = distrib_radius(gen);
@@ -266,27 +268,27 @@ glm::vec3 Boids::handleBoundary()
 {
     float altitudeSq = glm::dot(position, position);
     float altitude = sqrt(altitudeSq);
-    
+
     glm::vec3 radialDirection = position / altitude;
     glm::vec3 steer(0.0f);
-    
-    float margin = (maxAlt - minAlt) * 0.1f;  // 10% margin
+
+    float margin = (maxAlt - minAlt) * 0.1f; // 10% margin
     float innerDanger = minAlt + margin;
     float outerDanger = maxAlt - margin;
-    
+
     if (altitude < innerDanger)
     {
         // Getting close to inner boundary - push outward
-        float urgency = (innerDanger - altitude) / margin;  // 0 to 1
+        float urgency = (innerDanger - altitude) / margin; // 0 to 1
         steer = radialDirection * maxForce * 3.0f * urgency;
     }
     else if (altitude > outerDanger)
     {
         // Getting close to outer boundary - pull inward
-        float urgency = (altitude - outerDanger) / margin;  // 0 to 1
+        float urgency = (altitude - outerDanger) / margin; // 0 to 1
         steer = -radialDirection * maxForce * 6.0f * urgency;
     }
-    
+
     return steer;
 }
 
