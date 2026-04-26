@@ -91,20 +91,24 @@ jobs:
       if: matrix.os != 'macos-latest'
       shell: bash
       run: |
-        mkdir -p package/assets package/shaders
-        cp -r assets/* package/assets/
-        cp -r shaders/* package/shaders/
+        # 1. Create a clean staging area
+        mkdir -p dist/assets dist/shaders
+        
+        # 2. Copy the content
+        cp -r assets/* dist/assets/
+        cp -r shaders/* dist/shaders/
         
         if [ "$RUNNER_OS" == "Windows" ]; then
-          # Find and copy the Windows executable
-          cp build/Release/EC327-Boids.exe package/ || cp build/EC327-Boids.exe package/
-          # Use 7z (7-Zip) which is available on GitHub's Windows runners
-          7z a -tzip ../${{ matrix.artifact_name }}.zip ./package/*
+          # Windows executable location check
+          cp build/Release/EC327-Boids.exe dist/ || cp build/EC327-Boids.exe dist/
+          # Create zip from the dist folder, saving it in the root directory
+          7z a -tzip "${{ matrix.artifact_name }}.zip" ./dist/*
         else
-          # Standard Linux packaging
-          cp build/EC327-Boids package/
-          cd package
-          zip -r ../${{ matrix.artifact_name }}.zip ./*
+          # Linux executable
+          cp build/EC327-Boids dist/
+          # Use zip on the dist folder
+          cd dist
+          zip -r "../${{ matrix.artifact_name }}.zip" ./*
         fi
 
     # Upload Artifacts
@@ -118,19 +122,17 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      # Download Artifacts
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
-          path: .
-        
-      # Create GitHub Release
+          path: artifacts # Download everything into an 'artifacts' folder
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            EC327-Boids-Mac/EC327-Boids-Mac.zip
-            EC327-Boids-Windows/EC327-Boids-Windows.zip
-            EC327-Boids-Linux/EC327-Boids-Linux.zip
+            artifacts/EC327-Boids-Mac/EC327-Boids-Mac.zip
+            artifacts/EC327-Boids-Windows/EC327-Boids-Windows.zip
+            artifacts/EC327-Boids-Linux/EC327-Boids-Linux.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
