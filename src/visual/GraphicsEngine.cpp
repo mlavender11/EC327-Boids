@@ -158,8 +158,6 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData, bool drawSim
         earth->Draw();
         glFrontFace(GL_CCW); // Reset to default (Counter-Clockwise is front) so that the atmosphere shader doesn't break
 
-        earth->Draw();
-
         // Draw boids
         boidShader->use();
         boidShader->setMat4("view", view);
