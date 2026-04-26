@@ -2,36 +2,75 @@
 #include <filesystem>
 #include <iostream>
 
-#ifdef __APPLE__
+// Include OS-specific headers
+#if defined(_WIN32)
+#include <windows.h>
+#elif defined(__APPLE__)
 #include <mach-o/dyld.h>
+#elif defined(__linux__)
+#include <unistd.h>
+#include <limits.h>
 #endif
 
-void SetupWorkingDirectory()
+std::string PathResolver::GetExecutableDir()
 {
-#ifdef __APPLE__
+    std::filesystem::path execDirPath;
+
+#if defined(_WIN32)
+    // --- WINDOWS LOGIC ---
+    char path[MAX_PATH];
+    GetModuleFileNameA(NULL, path, MAX_PATH);
+    execDirPath = std::filesystem::path(path).parent_path();
+
+#elif defined(__APPLE__)
+    // --- MACOS LOGIC ---
     char path[1024];
     uint32_t size = sizeof(path);
     if (_NSGetExecutablePath(path, &size) == 0)
     {
-        std::filesystem::path execPath(path);
+        execDirPath = std::filesystem::path(path).parent_path();
+    }
 
-        // Scenario A: We are inside a .app bundle!
-        std::filesystem::path bundleResources = execPath.parent_path().parent_path() / "Resources";
+#elif defined(__linux__)
+    // --- LINUX LOGIC ---
+    char path[PATH_MAX];
+    ssize_t count = readlink("/proc/self/exe", path, PATH_MAX);
+    if (count != -1)
+    {
+        path[count] = '\0';
+        execDirPath = std::filesystem::path(path).parent_path();
+    }
+#else
+    // Fallback if OS is unknown
+    execDirPath = std::filesystem::current_path();
+#endif
 
-        if (std::filesystem::exists(bundleResources))
-        {
-            std::filesystem::current_path(bundleResources);
-            std::cout << "🍎 Running inside .app bundle. Path set to Resources." << std::endl;
-            return;
-        }
+    return execDirPath.string();
+}
 
-        // Scenario B: We are running from the Terminal build folder!
-        std::filesystem::path projectRoot = execPath.parent_path().parent_path();
-        if (std::filesystem::exists(projectRoot / "assets"))
-        {
-            std::filesystem::current_path(projectRoot);
-            std::cout << "💻 Running from build folder. Path set to Project Root." << std::endl;
-        }
+void PathResolver::Initialize()
+{
+    std::filesystem::path basePath = GetExecutableDir();
+
+#if defined(__APPLE__)
+    // If running inside a macOS .app bundle, step over to the Resources folder
+    std::string baseStr = basePath.string();
+    if (baseStr.find("Contents/MacOS") != std::string::npos)
+    {
+        basePath = basePath.parent_path() / "Resources";
     }
 #endif
+
+    // Change the Global Current Working Directory
+    std::error_code ec;
+    std::filesystem::current_path(basePath, ec);
+
+    if (ec)
+    {
+        std::cerr << "Warning: Failed to set working directory: " << ec.message() << std::endl;
+    }
+    else
+    {
+        std::cout << "Working directory successfully set to: " << std::filesystem::current_path() << std::endl;
+    }
 }

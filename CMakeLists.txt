@@ -29,6 +29,7 @@ file(GLOB IMGUI_SOURCES
 )
 
 # Define the executable and its source files
+# CMake ignores the MACOSX_BUNDLE flag on non-macOS platforms, so it's safe
 add_executable(EC327-Boids MACOSX_BUNDLE
     src/main.cpp 
     src/Application.cpp
@@ -66,6 +67,34 @@ add_custom_command(TARGET EC327-Boids POST_BUILD
         "$<TARGET_BUNDLE_DIR:EC327-Boids>/Contents/Resources/assets"
     
 )
+
+# Check if compiling on a Mac
+if(APPLE)
+    set_target_properties(EC327-Boids PROPERTIES MACOSX_BUNDLE TRUE)
+    
+    add_custom_command(TARGET EC327-Boids POST_BUILD
+        # 1. Copy Assets
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            "${CMAKE_CURRENT_SOURCE_DIR}/assets"
+            "$<TARGET_BUNDLE_DIR:EC327-Boids>/Contents/Resources/assets"
+        # 2. Copy Shaders
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            "${CMAKE_CURRENT_SOURCE_DIR}/shaders"
+            "$<TARGET_BUNDLE_DIR:EC327-Boids>/Contents/Resources/shaders"
+    )
+else()
+    # For Windows and Linux
+    add_custom_command(TARGET EC327-Boids POST_BUILD
+        # 1. Copy Assets next to the .exe
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            "${CMAKE_CURRENT_SOURCE_DIR}/assets"
+            "$<TARGET_FILE_DIR:EC327-Boids>/assets"
+        # 2. Copy Shaders next to the .exe
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            "${CMAKE_CURRENT_SOURCE_DIR}/shaders"
+            "$<TARGET_FILE_DIR:EC327-Boids>/shaders"
+    )
+endif()
 
 # Link the libraries to executable
 target_link_libraries(EC327-Boids 

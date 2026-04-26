@@ -4,7 +4,7 @@
 int main()
 {
     // Call the path resolver before starting the engine
-    SetupWorkingDirectory();
+    PathResolver::Initialize();
 
     Application app;
     app.Run();
