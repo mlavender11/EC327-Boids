@@ -9,6 +9,11 @@ namespace UIThemes
     // Helper to apply the Modern Slate style
     inline void ApplyModern(ImGuiStyle &style)
     {
+        // Start with default style to ensure all properties are set
+        ImGui::StyleColorsDark();
+        ImGui::GetStyle() = ImGuiStyle();
+        ImVec4 *colors = style.Colors;
+
         // Concentricity: High rounding for windows, capsule shapes for controls
         style.WindowRounding = 16.0f;
         style.FrameRounding = 12.0f;
@@ -18,8 +23,6 @@ namespace UIThemes
         // Specular Highlights: Thin borders simulate light hitting the glass edge
         style.WindowBorderSize = 1.0f;
         style.FrameBorderSize = 1.0f;
-
-        ImVec4 *colors = style.Colors;
 
         // Translucent material that lets the background show through
         colors[ImGuiCol_WindowBg] = ImVec4(0.12f, 0.12f, 0.14f, 0.55f);
@@ -54,7 +57,9 @@ namespace UIThemes
     // Helper to apply the Neon Synthwave style
     inline void ApplySynthwave(ImGuiStyle &style)
     {
-        ImGui::GetStyle() = ImGuiStyle(); // Start with default style to ensure all properties are set
+        // Start with default style to ensure all properties are set
+        ImGui::StyleColorsDark();
+        ImGui::GetStyle() = ImGuiStyle();
         ImVec4 *colors = style.Colors;
 
         // Sharp, aggressive geometry
@@ -111,7 +116,9 @@ namespace UIThemes
 
     inline void ApplyColdWar(ImGuiStyle &style)
     {
-        ImGui::GetStyle() = ImGuiStyle(); // Start with default style to ensure all properties are set
+        // Start with default style to ensure all properties are set
+        ImGui::StyleColorsDark();
+        ImGui::GetStyle() = ImGuiStyle();
         ImVec4 *colors = style.Colors;
 
         // Complete removal of rounded edges for that harsh, early-computing look
@@ -181,7 +188,9 @@ namespace UIThemes
 
     inline void ApplyFallout(ImGuiStyle &style)
     {
-        ImGui::GetStyle() = ImGuiStyle(); // Start with default style to ensure all properties are set
+        // Start with default style to ensure all properties are set
+        ImGui::StyleColorsDark();
+        ImGui::GetStyle() = ImGuiStyle();
         ImVec4 *colors = style.Colors;
 
         // Blocky terminal aesthetic

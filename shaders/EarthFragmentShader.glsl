@@ -19,7 +19,7 @@ void main()
     float ambientStrength = 0.2;
     // Higher ambient lighting because Cold War map is meant to be a screen
     if (u_ColdWar) {
-        ambientStrength = 0.5;
+        ambientStrength = 0.8;
     }
     vec3 ambient = ambientStrength * ambientColor;
 

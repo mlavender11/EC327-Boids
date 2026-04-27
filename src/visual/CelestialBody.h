@@ -5,6 +5,7 @@
 #include <cmath>
 #include <glad/glad.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/constants.hpp>
 #include <cstddef>
 
 struct Vertex
@@ -25,8 +26,8 @@ public:
     void Draw();
 
 private:
-    void generateGeometry(float, int, int);
-    void setupMesh();
+    void GenerateGeometry(float, int, int);
+    void SetupMesh();
 };
 
 #endif

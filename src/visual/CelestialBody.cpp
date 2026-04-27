@@ -2,8 +2,8 @@
 
 CelestialBody::CelestialBody(float radius, int sectors, int stacks)
 {
-    generateGeometry(radius, sectors, stacks);
-    setupMesh();
+    GenerateGeometry(radius, sectors, stacks);
+    SetupMesh();
 }
 
 void CelestialBody::Draw()
@@ -13,54 +13,62 @@ void CelestialBody::Draw()
     glBindVertexArray(0);
 }
 
-void CelestialBody::generateGeometry(float radius, int sectors, int stacks)
+void CelestialBody::GenerateGeometry(float radius, int sectors, int stacks)
 {
-    const float PI = 3.14159265359f;
+    vertices.clear();
+    indices.clear();
 
-    // Generate vertices
+    // 1. GENERATE VERTICES
     for (int i = 0; i <= stacks; ++i)
     {
-        float V = (float)i / (float)stacks; // Latitude
-        float phi = V * PI;                 // from 0 to PI
+        float V = static_cast<float>(i) / static_cast<float>(stacks);
+        float phi = V * glm::pi<float>();
 
         for (int j = 0; j <= sectors; ++j)
         {
-            // Reverse the U coordinate to mirror the texture horizontally
-            float U = 1.0f - ((float)j / (float)sectors);
+            float U = static_cast<float>(j) / static_cast<float>(sectors);
+            float theta = U * 2.0f * glm::pi<float>();
 
-            // Keep theta calculating normally so your 3D geometry doesn't break!
-            // Note: we have to calculate theta using the original forward ratio
-            float originalU = (float)j / (float)sectors;
-            float theta = originalU * (PI * 2.0f);
+            float x = cos(theta) * sin(phi);
+            float y = cos(phi);
+            float z = sin(theta) * sin(phi);
 
-            float x = radius * std::sin(phi) * std::cos(theta);
-            float y = radius * std::cos(phi);
-            float z = radius * std::sin(phi) * std::sin(theta);
+            Vertex vertex;
+            vertex.Position = glm::vec3(x * radius, y * radius, z * radius);
 
-            vertices.push_back({glm::vec3(x, y, z), glm::vec2(U, V)});
+            // Invert U so the texture wraps correctly left-to-right
+            vertex.TexCoords = glm::vec2(1.0f - U, V);
+
+            vertices.push_back(vertex);
         }
     }
 
-    // Generate indices (connect vertices into triangles)
+    // 2. GENERATE INDICES (This part remains exactly the same)
     for (int i = 0; i < stacks; ++i)
     {
-        for (int j = 0; j < sectors; ++j)
+        int k1 = i * (sectors + 1);
+        int k2 = k1 + sectors + 1;
+
+        for (int j = 0; j < sectors; ++j, ++k1, ++k2)
         {
-            int first = (i * (sectors + 1)) + j;
-            int second = first + sectors + 1;
+            if (i != 0)
+            {
+                indices.push_back(k1);
+                indices.push_back(k2);
+                indices.push_back(k1 + 1);
+            }
 
-            indices.push_back(first);
-            indices.push_back(second);
-            indices.push_back(first + 1);
-
-            indices.push_back(second);
-            indices.push_back(second + 1);
-            indices.push_back(first + 1);
+            if (i != (stacks - 1))
+            {
+                indices.push_back(k1 + 1);
+                indices.push_back(k2);
+                indices.push_back(k2 + 1);
+            }
         }
     }
 }
 
-void CelestialBody::setupMesh()
+void CelestialBody::SetupMesh()
 {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -75,17 +83,13 @@ void CelestialBody::setupMesh()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
 
-    // Set the vertex attribute pointers (Position is at layout location 0)
-    glEnableVertexAttribArray(0);
+    // Position attribute (Layout Location 0)
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)0);
-
-    // Set the vertex attribute pointers (Position is at layout location 0)
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)0);
 
-    // Set the texture attribute pointers (TexCoords is at layout location 1)
-    glEnableVertexAttribArray(1);
+    // Texture Coordinate attribute (Layout Location 1)
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex, TexCoords));
+    glEnableVertexAttribArray(1);
 
     glBindVertexArray(0);
 }
