@@ -162,66 +162,35 @@ glm::vec3 Boids::seek(const glm::vec3 target)
 // }
 
 // v2
-//  glm::vec3 Boids::handleBoundary()
-//  {
-//      float altitudeSq = glm::dot(position, position);
-//      float altitude = sqrt(altitudeSq);
+ glm::vec3 Boids::handleBoundary()
+ {
+     float altitudeSq = glm::dot(position, position);
+     float altitude = sqrt(altitudeSq);
 
-//     glm::vec3 radialDirection = position / altitude;
-//     glm::vec3 steer(0.0f);
-
-//     float margin = (maxAlt - minAlt) * 0.1f; // 10% margin
-//     float innerDanger = minAlt + margin;
-//     float outerDanger = maxAlt - margin;
-
-//     if (altitude < innerDanger)
-//     {
-//         // Getting close to inner boundary - push outward
-//         float urgency = (innerDanger - altitude) / margin; // 0 to 1
-//         steer = radialDirection * maxForce * 3.0f * urgency;
-//     }
-//     else if (altitude > outerDanger)
-//     {
-//         // Getting close to outer boundary - pull inward
-//         float urgency = (altitude - outerDanger) / margin; // 0 to 1
-//         steer = -radialDirection * maxForce * 6.0f * urgency;
-//     }
-
-//     return steer;
-// }
-
-glm::vec3 Boids::handleBoundary()
-{
-    float altitudeSq = glm::dot(position, position);
-    float altitude = sqrt(altitudeSq);
     glm::vec3 radialDirection = position / altitude;
     glm::vec3 steer(0.0f);
 
-    // Target altitude (centerline)
-    float targetAlt = (minAlt + maxAlt) / 2.0f;
-
-    // Gentle spring-like force toward centerline
-    float displacement = altitude - targetAlt;
-    steer = -radialDirection * displacement * 0.5f; // Adjust strength as needed
-
-    // Original boundary forces (much stronger near edges)
-    float margin = (maxAlt - minAlt) * 0.1f;
+    float margin = (maxAlt - minAlt) * 0.1f; // 10% margin
     float innerDanger = minAlt + margin;
     float outerDanger = maxAlt - margin;
 
     if (altitude < innerDanger)
     {
-        float urgency = (innerDanger - altitude) / margin;
-        steer += radialDirection * maxForce * 3.0f * urgency;
+        // Getting close to inner boundary - push outward
+        float urgency = (innerDanger - altitude) / margin; // 0 to 1
+        steer = radialDirection * maxForce * 3.0f * urgency;
     }
     else if (altitude > outerDanger)
     {
-        float urgency = (altitude - outerDanger) / margin;
-        steer += -radialDirection * maxForce * 6.0f * urgency;
+        // Getting close to outer boundary - pull inward
+        float urgency = (altitude - outerDanger) / margin; // 0 to 1
+        steer = -radialDirection * maxForce * 6.0f * urgency;
     }
 
     return steer;
 }
+
+
 
 /* Combined into one function to reduce repeated for loops
 glm::vec3 Boids::separate(const vector<const Boids *> &neighbors, float visualRange)
