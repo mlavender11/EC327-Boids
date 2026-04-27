@@ -136,9 +136,9 @@ bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAl
     if (ImGui::Button("Reset to Defaults", ImVec2(200, 30)))
     {
         boidCount = 500;
-        earthRadius = 10.0f;
-        minAlt = 10.0f;
-        maxAlt = 20.0f;
+        earthRadius = 5.0f;
+        minAlt = 5.0f;
+        maxAlt = 10.0f;
         sunSpeed = 0.3f;
     }
 

@@ -40,9 +40,9 @@ private:
 
     // --- Setup Configuration Variables ---
     int configBoidCount = 500;
-    float configEarthRadius = 10.0f;
-    float configMinAltitude = 10.0f;
-    float configMaxAltitude = 20.0f;
+    float configEarthRadius = 5.0f;
+    float configMinAltitude = 5.0f;
+    float configMaxAltitude = 10.0f;
     float configSunSpeed = 0.3f;
 
     // --- Live Config Variables ---

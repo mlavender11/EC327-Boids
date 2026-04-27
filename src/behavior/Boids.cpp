@@ -133,6 +133,97 @@ glm::vec3 Boids::seek(const glm::vec3 target)
     return steer;
 }
 
+// v1
+//  glm::vec3 Boids::handleBoundary()
+//  {
+//      float altitudeSq = glm::dot(position, position);
+
+//     glm::vec3 steer(0.0f);
+//     float turnForce = maxForce * 2.0f;
+
+//     // Check if below minimum altitude
+//     if (altitudeSq < minAlt * minAlt)
+//     {
+//         // Push away from center (up)
+//         float altitude = sqrt(altitudeSq);
+//         glm::vec3 radialDirection = position / altitude; // Manual normalize
+//         steer = radialDirection * turnForce;
+//     }
+//     // Check if above maximum altitude
+//     else if (altitudeSq > maxAlt * maxAlt)
+//     {
+//         // Pull toward center (down)
+//         float altitude = sqrt(altitudeSq);
+//         glm::vec3 radialDirection = position / altitude; // Manual normalize
+//         steer = -radialDirection * turnForce;
+//     }
+
+//     return steer;
+// }
+
+// v2
+//  glm::vec3 Boids::handleBoundary()
+//  {
+//      float altitudeSq = glm::dot(position, position);
+//      float altitude = sqrt(altitudeSq);
+
+//     glm::vec3 radialDirection = position / altitude;
+//     glm::vec3 steer(0.0f);
+
+//     float margin = (maxAlt - minAlt) * 0.1f; // 10% margin
+//     float innerDanger = minAlt + margin;
+//     float outerDanger = maxAlt - margin;
+
+//     if (altitude < innerDanger)
+//     {
+//         // Getting close to inner boundary - push outward
+//         float urgency = (innerDanger - altitude) / margin; // 0 to 1
+//         steer = radialDirection * maxForce * 3.0f * urgency;
+//     }
+//     else if (altitude > outerDanger)
+//     {
+//         // Getting close to outer boundary - pull inward
+//         float urgency = (altitude - outerDanger) / margin; // 0 to 1
+//         steer = -radialDirection * maxForce * 6.0f * urgency;
+//     }
+
+//     return steer;
+// }
+
+glm::vec3 Boids::handleBoundary()
+{
+    float altitudeSq = glm::dot(position, position);
+    float altitude = sqrt(altitudeSq);
+    glm::vec3 radialDirection = position / altitude;
+    glm::vec3 steer(0.0f);
+
+    // Target altitude (centerline)
+    float targetAlt = (minAlt + maxAlt) / 2.0f;
+
+    // Gentle spring-like force toward centerline
+    float displacement = altitude - targetAlt;
+    steer = -radialDirection * displacement * 0.5f; // Adjust strength as needed
+
+    // Original boundary forces (much stronger near edges)
+    float margin = (maxAlt - minAlt) * 0.1f;
+    float innerDanger = minAlt + margin;
+    float outerDanger = maxAlt - margin;
+
+    if (altitude < innerDanger)
+    {
+        float urgency = (innerDanger - altitude) / margin;
+        steer += radialDirection * maxForce * 3.0f * urgency;
+    }
+    else if (altitude > outerDanger)
+    {
+        float urgency = (altitude - outerDanger) / margin;
+        steer += -radialDirection * maxForce * 6.0f * urgency;
+    }
+
+    return steer;
+}
+
+/* Combined into one function to reduce repeated for loops
 glm::vec3 Boids::separate(const vector<const Boids *> &neighbors, float visualRange)
 {
     glm::vec3 steer(0.0f);
@@ -235,116 +326,77 @@ glm::vec3 Boids::cohere(const vector<const Boids *> &neighbors, float visualRang
     }
 
     return sum;
-}
-
-//v1
-// glm::vec3 Boids::handleBoundary()
-// {
-//     float altitudeSq = glm::dot(position, position);
-
-//     glm::vec3 steer(0.0f);
-//     float turnForce = maxForce * 2.0f;
-
-//     // Check if below minimum altitude
-//     if (altitudeSq < minAlt * minAlt)
-//     {
-//         // Push away from center (up)
-//         float altitude = sqrt(altitudeSq);
-//         glm::vec3 radialDirection = position / altitude; // Manual normalize
-//         steer = radialDirection * turnForce;
-//     }
-//     // Check if above maximum altitude
-//     else if (altitudeSq > maxAlt * maxAlt)
-//     {
-//         // Pull toward center (down)
-//         float altitude = sqrt(altitudeSq);
-//         glm::vec3 radialDirection = position / altitude; // Manual normalize
-//         steer = -radialDirection * turnForce;
-//     }
-
-//     return steer;
-// }
-
-
-//v2
-// glm::vec3 Boids::handleBoundary()
-// {
-//     float altitudeSq = glm::dot(position, position);
-//     float altitude = sqrt(altitudeSq);
-
-//     glm::vec3 radialDirection = position / altitude;
-//     glm::vec3 steer(0.0f);
-
-//     float margin = (maxAlt - minAlt) * 0.1f; // 10% margin
-//     float innerDanger = minAlt + margin;
-//     float outerDanger = maxAlt - margin;
-
-//     if (altitude < innerDanger)
-//     {
-//         // Getting close to inner boundary - push outward
-//         float urgency = (innerDanger - altitude) / margin; // 0 to 1
-//         steer = radialDirection * maxForce * 3.0f * urgency;
-//     }
-//     else if (altitude > outerDanger)
-//     {
-//         // Getting close to outer boundary - pull inward
-//         float urgency = (altitude - outerDanger) / margin; // 0 to 1
-//         steer = -radialDirection * maxForce * 6.0f * urgency;
-//     }
-
-//     return steer;
-// }
-
-glm::vec3 Boids::handleBoundary()
-{
-    float altitudeSq = glm::dot(position, position);
-    float altitude = sqrt(altitudeSq);
-    glm::vec3 radialDirection = position / altitude;
-    glm::vec3 steer(0.0f);
-
-    // Target altitude (centerline)
-    float targetAlt = (minAlt + maxAlt) / 2.0f;
-    
-    // Gentle spring-like force toward centerline
-    float displacement = altitude - targetAlt;
-    steer = -radialDirection * displacement * 0.5f; // Adjust strength as needed
-    
-    // Original boundary forces (much stronger near edges)
-    float margin = (maxAlt - minAlt) * 0.1f;
-    float innerDanger = minAlt + margin;
-    float outerDanger = maxAlt - margin;
-
-    if (altitude < innerDanger)
-    {
-        float urgency = (innerDanger - altitude) / margin;
-        steer += radialDirection * maxForce * 3.0f * urgency;
-    }
-    else if (altitude > outerDanger)
-    {
-        float urgency = (altitude - outerDanger) / margin;
-        steer += -radialDirection * maxForce * 6.0f * urgency;
-    }
-
-    return steer;
-}
+}*/
 
 // Changed - Kyle
 void Boids::flock(const vector<const Boids *> &neighbors, float weightCohesion, float weightSeparation, float weightAlignment, float visualRange)
 {
-    glm::vec3 seperate_vec = separate(neighbors, visualRange);
-    glm::vec3 align_vec = align(neighbors, visualRange);
-    glm::vec3 cohere_vec = cohere(neighbors, visualRange);
-    glm::vec3 boundary_vec = handleBoundary();
+    glm::vec3 steer_separate(0.0f);
+    glm::vec3 steer_align(0.0f);
+    glm::vec3 steer_cohere(0.0f);
 
-    // Replace the hardcoded numbers with live UI sliders
-    seperate_vec *= weightSeparation;
-    align_vec *= weightAlignment;
-    cohere_vec *= weightCohesion;
-    boundary_vec *= 2.0f; // Keep boundary strong so they don't fly into space
+    int count_separate = 0;
+    int count_align_cohere = 0; // Neighbors already filtered by visualRange
 
-    applyForce(seperate_vec);
-    applyForce(align_vec);
-    applyForce(cohere_vec);
+    float desiredSeparationSq = (visualRange * 0.5f) * (visualRange * 0.5f);
+
+    // Calculate all three behaviors
+    for (const Boids *other_boid : neighbors)
+    {
+        // Alignment and Cohesion
+        steer_align += other_boid->getVelocity();
+        steer_cohere += other_boid->getPosition();
+        count_align_cohere++;
+
+        // Separation
+        float distanceSq = distanceToSquared(*other_boid);
+        if (distanceSq < desiredSeparationSq)
+        {
+            glm::vec3 diff = position - other_boid->getPosition();
+            diff /= distanceSq; // Weight by inverse distance
+            steer_separate += diff;
+            count_separate++;
+        }
+    }
+
+    // Change separation
+    if (count_separate > 0)
+    {
+        steer_separate /= static_cast<float>(count_separate);
+        if (glm::dot(steer_separate, steer_separate) > 1e-10f)
+        {
+            steer_separate = glm::normalize(steer_separate) * maxSpeed;
+            steer_separate -= velocity;
+            steer_separate = limitMagnitude(steer_separate, maxForce);
+        }
+    }
+
+    // Change alignment and cohesion
+    if (count_align_cohere > 0)
+    {
+        // Alignment
+        steer_align /= static_cast<float>(count_align_cohere);
+        if (glm::dot(steer_align, steer_align) > 1e-10f)
+        {
+            steer_align = glm::normalize(steer_align) * maxSpeed;
+            steer_align -= velocity;
+            steer_align = limitMagnitude(steer_align, maxForce);
+        }
+
+        // Cohesion
+        steer_cohere /= static_cast<float>(count_align_cohere);
+        steer_cohere = seek(steer_cohere);
+    }
+
+    // Apply weights and forces
+    steer_separate *= weightSeparation;
+    steer_align *= weightAlignment;
+    steer_cohere *= weightCohesion;
+    glm::vec3 boundary_vec = handleBoundary() * 2.0f;
+
+    applyForce(steer_separate);
+    applyForce(steer_align);
+    applyForce(steer_cohere);
     applyForce(boundary_vec);
 }
 
@@ -412,7 +464,7 @@ int Boids::getID() const
     return id;
 }
 
-glm::vec3 Boids::limitMagnitude(glm::vec3 vec, float maxMag) const
+glm::vec3 Boids::limitMagnitude(glm::vec3 &vec, float maxMag) const
 {
     float magnitudeSq = glm::dot(vec, vec);
     float maxMagSq = maxMag * maxMag;

@@ -25,7 +25,7 @@ private:
     */
     // Removed these - Kyle
 
-    glm::vec3 limitMagnitude(glm::vec3 vec, float maxMag) const; // Helper function for behavior calculations
+    glm::vec3 limitMagnitude(glm::vec3 &vec, float maxMag) const; // Helper function for behavior calculations
 
     static int nextID;
 
