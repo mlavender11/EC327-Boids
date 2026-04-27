@@ -22,6 +22,7 @@ Flock::Flock(int n, float minAlt, float maxAlt)
 //     flock.push_back(new_friendly);
 // }
 
+/* Replaced for performance (see below) - Kyle
 void Flock::Update(double dt, float cohesion, float separation, float alignment, float visualRange, float maxSpeed, float maxForce)
 {
     vector<vector<const Boids *>> allNeighbors;
@@ -45,6 +46,31 @@ void Flock::Update(double dt, float cohesion, float separation, float alignment,
     for (Boids *boid : flock)
     {
         boid->update(dt);
+    }
+}*/
+
+void Flock::Update(double dt, float cohesion, float separation, float alignment, float visualRange, float maxSpeed, float maxForce)
+{
+    // Reuse a single neighbors vector for all boids to avoid multiple memory allocations - Kyle
+    vector<const Boids *> neighbors;
+    neighbors.reserve(flock.size()); // Reserve maximum possible size
+
+    // Removed vector of vectors of neighbors and instead find neighbors and apply forces in the same loop to save memory and avoid double looping - Kyle
+    for (Boids *boid : flock)
+    {
+        boid->setMaxSpeed(maxSpeed);
+        boid->setMaxForce(maxForce);
+
+        neighbors.clear(); // Resets count to 0, but keeps memory intact
+        boid->findNeighbors(flock, visualRange, neighbors);
+
+        boid->flock(neighbors, cohesion, separation, alignment, visualRange);
+    }
+
+    // Movement
+    for (Boids *boid : flock)
+    {
+        boid->update(static_cast<float>(dt));
     }
 }
 

@@ -210,7 +210,7 @@ void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, floa
     ImGuiWindowFlags windowFlags = ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
 
     ImGui::Begin("Flocking Controls", nullptr, windowFlags);
-    ImGui::Text("Real-Time Flocking Weights");
+    ImGui::Text("Boid Behavior Parameters");
     ImGui::Separator();
 
     // Sliders to tweak the math live

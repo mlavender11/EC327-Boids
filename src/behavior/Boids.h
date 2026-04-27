@@ -59,7 +59,7 @@ public:
     glm::vec3 align(const vector<const Boids *> &neighbors, float visualRange);
     glm::vec3 cohere(const vector<const Boids *> &neighbors, float visualRange);
     void flock(const vector<const Boids *> &neighbors, float weightCohesion, float weightSeparation, float weightAlignment, float visualRange);
-    vector<const Boids *> findNeighbors(const vector<Boids *> &allBoids, float visualRange) const;
+    void findNeighbors(const vector<Boids *> &allBoids, float visualRange, vector<const Boids *> &outNeighbors) const; // Pass in an output vector instead of returning a new vector to save memory - Kyle
 
     void setMaxSpeed(float newSpeed); // For UI slider to adjust max speed - Kyle
     void setMaxForce(float newForce); // For UI slider to adjust max force - Kyle

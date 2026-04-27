@@ -312,24 +312,21 @@ void Boids::flock(const vector<const Boids *> &neighbors, float weightCohesion, 
     applyForce(boundary_vec);
 }
 
-vector<const Boids *> Boids::findNeighbors(const vector<Boids *> &allBoids, float visualRange) const
+// Updated to reduce memory allocations - Kyle
+void Boids::findNeighbors(const vector<Boids *> &allBoids, float visualRange, vector<const Boids *> &outNeighbors) const
 {
-    vector<const Boids *> neighbors;
+    float visualRangeSq = visualRange * visualRange;
 
-    for (const Boids *other_boid : allBoids)
+    for (const Boids *other : allBoids)
     {
-        if (other_boid->getID() == this->id)
-        {
+        if (other->getID() == this->id)
             continue;
-        }
 
-        float distanceSq = distanceToSquared(*other_boid); // This may be computationally expensive, a lot of square roots - could implement DistanceToSquared function
-        if (distanceSq < visualRange * visualRange)        // Changed - Kyle
+        if (distanceToSquared(*other) < visualRangeSq)
         {
-            neighbors.push_back(other_boid);
+            outNeighbors.push_back(other);
         }
     }
-    return neighbors;
 }
 
 void Boids::update(float dt)
