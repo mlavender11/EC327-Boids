@@ -12,17 +12,17 @@ void BoidRenderer::setupMesh()
     std::vector<float> vertices = {
         // 1. Back Face (Normal points backwards, -Z)
         -0.5f, 0.0f, -0.5f, // Bottom Left
-        0.0f, 0.2f, -0.5f,  // Top Center
+        0.0f, 0.4f, -0.5f,  // Top Center
         0.5f, 0.0f, -0.5f,  // Bottom Right
 
         // 2. Left Face (Normal points left, -X)
         -0.5f, 0.0f, -0.5f, // Bottom Back Left
         0.0f, 0.0f, 1.0f,   // Front Tip
-        0.0f, 0.2f, -0.5f,  // Top Center
+        0.0f, 0.4f, -0.5f,  // Top Center
 
         // 3. Right Face (Normal points right, +X)
         0.5f, 0.0f, -0.5f, // Bottom Back Right
-        0.0f, 0.2f, -0.5f, // Top Center
+        0.0f, 0.4f, -0.5f, // Top Center
         0.0f, 0.0f, 1.0f,  // Front Tip
 
         // 4. Bottom Face (Normal points down, -Y)
