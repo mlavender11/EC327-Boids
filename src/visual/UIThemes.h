@@ -109,40 +109,130 @@ namespace UIThemes
         colors[ImGuiCol_SeparatorActive] = cyberCyan;
     }
 
-    // Helper to apply the Matrix Retro style
-    inline void ApplyRetro(ImGuiStyle &style)
+    inline void ApplyColdWar(ImGuiStyle &style)
     {
         ImGui::GetStyle() = ImGuiStyle(); // Start with default style to ensure all properties are set
         ImVec4 *colors = style.Colors;
 
-        // --- Sharp Retro Settings ---
-        style.WindowRounding = 0.0f; // Hard corners only
+        // Complete removal of rounded edges for that harsh, early-computing look
+        style.WindowRounding = 0.0f;
         style.FrameRounding = 0.0f;
+        style.ScrollbarRounding = 0.0f;
         style.GrabRounding = 0.0f;
-        style.WindowBorderSize = 1.0f; // Thin outline
+        style.TabRounding = 0.0f;
+        style.PopupRounding = 0.0f;
+
+        // Distinct, sharp borders are crucial for this aesthetic
+        style.WindowBorderSize = 1.0f;
+        style.FrameBorderSize = 1.0f;
+        style.PopupBorderSize = 1.0f;
+
+        // The Monochrome Palette
+        ImVec4 terminalBlack = ImVec4(0.00f, 0.00f, 0.00f, 1.00f); // Pure black
+        ImVec4 phosphorWhite = ImVec4(0.85f, 0.85f, 0.85f, 1.00f); // Crisp CRT white/gray
+        ImVec4 highlightGray = ImVec4(0.40f, 0.40f, 0.40f, 1.00f); // Mid-gray for selections
+
+        // Backgrounds
+        colors[ImGuiCol_WindowBg] = terminalBlack;
+        colors[ImGuiCol_ChildBg] = terminalBlack;
+        colors[ImGuiCol_PopupBg] = terminalBlack;
+
+        // Borders
+        colors[ImGuiCol_Border] = phosphorWhite;
+        colors[ImGuiCol_BorderShadow] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+
+        // Text
+        colors[ImGuiCol_Text] = phosphorWhite;
+        colors[ImGuiCol_TextDisabled] = highlightGray;
+
+        // Headers (Used for Menus, Collapsing Headers, and highlighted list items)
+        colors[ImGuiCol_Header] = terminalBlack;
+        colors[ImGuiCol_HeaderHovered] = highlightGray;
+        colors[ImGuiCol_HeaderActive] = phosphorWhite;
+
+        // Title Bars (Window headers like "- CONSOLE TERMINAL")
+        colors[ImGuiCol_TitleBg] = terminalBlack;
+        colors[ImGuiCol_TitleBgActive] = terminalBlack;
+        colors[ImGuiCol_TitleBgCollapsed] = terminalBlack;
+
+        // Frames (Checkboxes, Text Inputs, Sliders backgrounds)
+        colors[ImGuiCol_FrameBg] = terminalBlack;
+        colors[ImGuiCol_FrameBgHovered] = highlightGray;
+        colors[ImGuiCol_FrameBgActive] = phosphorWhite;
+
+        // Buttons
+        colors[ImGuiCol_Button] = terminalBlack;
+        colors[ImGuiCol_ButtonHovered] = highlightGray;
+        colors[ImGuiCol_ButtonActive] = phosphorWhite;
+
+        // Sliders and Scrollbars
+        colors[ImGuiCol_ScrollbarBg] = terminalBlack;
+        colors[ImGuiCol_ScrollbarGrab] = phosphorWhite;
+        colors[ImGuiCol_ScrollbarGrabHovered] = highlightGray;
+        colors[ImGuiCol_ScrollbarGrabActive] = phosphorWhite;
+
+        colors[ImGuiCol_SliderGrab] = phosphorWhite;
+        colors[ImGuiCol_SliderGrabActive] = phosphorWhite;
+        colors[ImGuiCol_CheckMark] = phosphorWhite;
+
+        // Text Selection
+        colors[ImGuiCol_TextSelectedBg] = highlightGray;
+    }
+
+    inline void ApplyFallout(ImGuiStyle &style)
+    {
+        ImGui::GetStyle() = ImGuiStyle(); // Start with default style to ensure all properties are set
+        ImVec4 *colors = style.Colors;
+
+        // Blocky terminal aesthetic
+        style.WindowRounding = 0.0f;
+        style.FrameRounding = 0.0f;
+        style.ScrollbarRounding = 0.0f;
+        style.GrabRounding = 0.0f;
+        style.TabRounding = 0.0f;
+
+        // Thick borders to simulate CRT scanline UI
+        style.WindowBorderSize = 2.0f;
         style.FrameBorderSize = 1.0f;
 
-        // --- Matrix/CRT Color Palette ---
-        ImVec4 neonGreen = ImVec4(0.00f, 1.00f, 0.00f, 1.00f);
-        ImVec4 darkGreen = ImVec4(0.00f, 0.20f, 0.00f, 1.00f);
-        ImVec4 black = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);
+        // Classic Pip-Boy Phosphor Green
+        ImVec4 pipBoyGreen = ImVec4(0.12f, 0.88f, 0.12f, 1.00f);
+        ImVec4 pipBoyGreenDim = ImVec4(0.06f, 0.44f, 0.06f, 1.00f);
+        ImVec4 crtBackground = ImVec4(0.02f, 0.05f, 0.02f, 0.95f); // Very dark green-tinted black
+        ImVec4 crtPanel = ImVec4(0.04f, 0.10f, 0.04f, 1.00f);
 
-        colors[ImGuiCol_Text] = neonGreen;
-        colors[ImGuiCol_WindowBg] = black;
-        colors[ImGuiCol_Border] = neonGreen;
+        // Apply the monochrome green look
+        colors[ImGuiCol_Text] = pipBoyGreen;
+        colors[ImGuiCol_TextDisabled] = pipBoyGreenDim;
+        colors[ImGuiCol_WindowBg] = crtBackground;
+        colors[ImGuiCol_Border] = pipBoyGreen;
+        colors[ImGuiCol_BorderShadow] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
+        colors[ImGuiCol_FrameBg] = crtPanel;
+        colors[ImGuiCol_FrameBgHovered] = pipBoyGreenDim;
+        colors[ImGuiCol_FrameBgActive] = pipBoyGreen;
+        colors[ImGuiCol_TitleBg] = crtPanel;
+        colors[ImGuiCol_TitleBgActive] = pipBoyGreenDim;
+        colors[ImGuiCol_TitleBgCollapsed] = crtBackground;
+        colors[ImGuiCol_MenuBarBg] = crtPanel;
+        colors[ImGuiCol_ScrollbarBg] = crtBackground;
+        colors[ImGuiCol_ScrollbarGrab] = pipBoyGreenDim;
+        colors[ImGuiCol_ScrollbarGrabHovered] = pipBoyGreen;
+        colors[ImGuiCol_ScrollbarGrabActive] = pipBoyGreen;
+        colors[ImGuiCol_CheckMark] = pipBoyGreen;
+        colors[ImGuiCol_SliderGrab] = pipBoyGreen;
+        colors[ImGuiCol_SliderGrabActive] = pipBoyGreen;
+        colors[ImGuiCol_Button] = crtPanel;
+        colors[ImGuiCol_ButtonHovered] = pipBoyGreenDim;
+        colors[ImGuiCol_ButtonActive] = pipBoyGreen;
+        colors[ImGuiCol_Header] = crtPanel;
+        colors[ImGuiCol_HeaderHovered] = pipBoyGreenDim;
+        colors[ImGuiCol_HeaderActive] = pipBoyGreen;
 
-        // Sliders & Frames
-        colors[ImGuiCol_FrameBg] = black;
-        colors[ImGuiCol_FrameBgHovered] = darkGreen;
-        colors[ImGuiCol_SliderGrab] = neonGreen;
-        colors[ImGuiCol_SliderGrabActive] = ImVec4(0.00f, 0.80f, 0.00f, 1.00f);
-
-        // Titles & Headers
-        colors[ImGuiCol_TitleBg] = black;
-        colors[ImGuiCol_TitleBgActive] = darkGreen;
-        colors[ImGuiCol_Header] = darkGreen;
-        colors[ImGuiCol_HeaderHovered] = neonGreen;
-        colors[ImGuiCol_HeaderActive] = neonGreen;
+        // Make text selections and separators match the theme
+        colors[ImGuiCol_Separator] = pipBoyGreen;
+        colors[ImGuiCol_SeparatorHovered] = pipBoyGreen;
+        colors[ImGuiCol_SeparatorActive] = pipBoyGreen;
+        colors[ImGuiCol_TextSelectedBg] = pipBoyGreenDim;
     }
 }
 

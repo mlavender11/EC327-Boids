@@ -7,8 +7,9 @@
 enum class UITheme
 {
     MODERN,
-    RETRO,
     SYNTHWAVE,
+    COLDWAR,
+    FALLOUT,
     CLASSIC
 };
 
@@ -18,8 +19,9 @@ private:
     UITheme activeTheme = UITheme::MODERN; // Default theme is Modern
 
     ImFont *modernFont;
-    ImFont *retroFont;
     ImFont *synthFont;
+    ImFont *cwFont;
+    ImFont *falloutFont;
 
     bool fontPushedThisFrame = false;
     bool promptDismissed = false;

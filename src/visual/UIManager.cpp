@@ -27,8 +27,9 @@ void UIManager::Initialize(GLFWwindow *window)
 
     // Load specific fonts for themes
     modernFont = io.Fonts->AddFontFromFileTTF("assets/fonts/SF-Pro-Text-Regular.otf", 18.0f);
-    retroFont = io.Fonts->AddFontFromFileTTF("assets/fonts/PressStart2P-Regular.ttf", 11.0f);
     synthFont = io.Fonts->AddFontFromFileTTF("assets/fonts/Alien-Encounters-Regular.ttf", 17.0f);
+    cwFont = io.Fonts->AddFontFromFileTTF("assets/fonts/WarGamesTerminalRT.ttf", 18.0f);
+    falloutFont = io.Fonts->AddFontFromFileTTF("assets/fonts/JH_Fallout.ttf", 17.0f);
 
     ApplyTheme(activeTheme);
 }
@@ -42,10 +43,12 @@ void UIManager::BeginFrame()
     ImFont *fontToUse = nullptr;
     if (activeTheme == UITheme::MODERN)
         fontToUse = modernFont;
-    else if (activeTheme == UITheme::RETRO)
-        fontToUse = retroFont;
     else if (activeTheme == UITheme::SYNTHWAVE)
         fontToUse = synthFont;
+    else if (activeTheme == UITheme::COLDWAR)
+        fontToUse = cwFont;
+    else if (activeTheme == UITheme::FALLOUT)
+        fontToUse = falloutFont;
 
     // If a custom font is successfully loaded and selected, push it
     if (fontToUse != nullptr)
@@ -297,11 +300,14 @@ void UIManager::ApplyTheme(UITheme theme)
     case UITheme::MODERN:
         UIThemes::ApplyModern(style);
         break;
-    case UITheme::RETRO:
-        UIThemes::ApplyRetro(style);
-        break;
     case UITheme::SYNTHWAVE:
         UIThemes::ApplySynthwave(style);
+        break;
+    case UITheme::COLDWAR:
+        UIThemes::ApplyColdWar(style);
+        break;
+    case UITheme::FALLOUT:
+        UIThemes::ApplyFallout(style);
         break;
     case UITheme::CLASSIC:
         ImGui::StyleColorsDark(); // Built-in ImGui default
@@ -320,15 +326,20 @@ void UIManager::RenderGraphicsMenu(UITheme &currentTheme, bool &backClicked)
         currentTheme = UITheme::MODERN;
         ApplyTheme(UITheme::MODERN);
     }
-    if (ImGui::RadioButton("Retro Terminal", currentTheme == UITheme::RETRO))
-    {
-        currentTheme = UITheme::RETRO;
-        ApplyTheme(UITheme::RETRO);
-    }
     if (ImGui::RadioButton("Synthwave", currentTheme == UITheme::SYNTHWAVE))
     {
         currentTheme = UITheme::SYNTHWAVE;
         ApplyTheme(UITheme::SYNTHWAVE);
+    }
+    if (ImGui::RadioButton("WarGames", currentTheme == UITheme::COLDWAR))
+    {
+        currentTheme = UITheme::COLDWAR;
+        ApplyTheme(UITheme::COLDWAR);
+    }
+    if (ImGui::RadioButton("Fallout", currentTheme == UITheme::FALLOUT))
+    {
+        currentTheme = UITheme::FALLOUT;
+        ApplyTheme(UITheme::FALLOUT);
     }
     if (ImGui::RadioButton("Classic", currentTheme == UITheme::CLASSIC))
     {

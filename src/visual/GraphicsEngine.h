@@ -35,6 +35,8 @@ public:
     float GetSunOrbitDistance() const;
     void SetSunSpeed(float speed);
 
+    void ToggleColdWar(bool cw);
+
 private:
     GLFWwindow *window;
     CameraState camera;
@@ -50,6 +52,8 @@ private:
     BoidRenderer *boidRenderer;
 
     unsigned int earthTexture;
+
+    bool isColdWar = false;
 };
 
 #endif

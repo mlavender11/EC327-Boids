@@ -52,8 +52,7 @@ bool GraphicsEngine::Initialize(int width, int height, const char *title)
     sun = new Star(50.0f, 400.0f, 0.5f, glm::vec3(1.0f, 0.95f, 0.5f));
     boidRenderer = new BoidRenderer();
 
-    // -- Cleaned up texture loading --
-    earthTexture = TextureLoader::Load("assets/earth_crystal2.jpg");
+    earthTexture = TextureLoader::Load("assets/earth_crystal2.jpg"); // Default texture is normal Earth
 
     glEnable(GL_DEPTH_TEST);
 
@@ -103,6 +102,7 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData, bool drawSim
 
         // --- 1. Draw Earth ---
         earthShader->use();
+        earthShader->setInt("u_ColdWar", isColdWar);
         earthShader->setMat4("view", view);
         earthShader->setMat4("projection", projection);
 
@@ -122,8 +122,19 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData, bool drawSim
         earth->Draw();
         glFrontFace(GL_CCW);
 
+        // If Cold War, turn on wireframes for everything but Earth
+        if (isColdWar)
+        {
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        }
+        else
+        {
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        }
+
         // --- 2. Draw Boids ---
         boidShader->use();
+        boidShader->setInt("u_ColdWar", isColdWar);
         boidShader->setMat4("view", view);
         boidShader->setMat4("projection", projection);
         glUniform3fv(glGetUniformLocation(boidShader->ID, "lightDir"), 1, glm::value_ptr(lightDir));
@@ -140,6 +151,7 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData, bool drawSim
         glDisable(GL_CULL_FACE);
 
         atmosphereShader->use();
+        atmosphereShader->setInt("u_ColdWar", isColdWar);
         atmosphereShader->setMat4("view", view);
         atmosphereShader->setMat4("projection", projection);
 
@@ -164,6 +176,7 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData, bool drawSim
         glDepthMask(GL_TRUE);
         glEnable(GL_CULL_FACE);
         glDisable(GL_BLEND);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     }
 }
 
@@ -188,5 +201,19 @@ void GraphicsEngine::SetSunSpeed(float speed)
     if (sun)
     {
         sun->SetSpeed(speed);
+    }
+}
+
+void GraphicsEngine::ToggleColdWar(bool cw)
+{
+    isColdWar = cw;
+    if (cw)
+    {
+        // https://wall.alphacoders.com/big.php?i=692355
+        earthTexture = TextureLoader::Load("assets/earth_WarGames.jpg");
+    }
+    else
+    {
+        earthTexture = TextureLoader::Load("assets/earth_crystal2.jpg");
     }
 }

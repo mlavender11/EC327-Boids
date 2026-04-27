@@ -135,6 +135,8 @@ void Application::RunPausedState()
         UITheme currentUITheme = uiManager.GetActiveTheme();
         uiManager.RenderGraphicsMenu(currentUITheme, backToPause);
 
+        graphics.ToggleColdWar(uiManager.GetActiveTheme() == UITheme::COLDWAR);
+
         if (backToPause)
             currentState = AppState::PAUSED;
     }
