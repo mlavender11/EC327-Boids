@@ -73,7 +73,7 @@ void UIManager::EndFrame()
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAlt, float &maxAlt, float sunOrbitDistance, float &sunSpeed)
+bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAlt, float &maxAlt, float sunOrbitDistance, float &sunSpeed, bool &quit)
 {
     bool startClicked = false;
     ImGuiIO &io = ImGui::GetIO();
@@ -142,12 +142,22 @@ bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAl
         sunSpeed = 0.3f;
     }
 
-    ImGui::Spacing();
+    ImGui::SameLine();
 
-    if (ImGui::Button("START SIMULATION", ImVec2(200, 50)))
+    if (ImGui::Button("Start Simulation", ImVec2(200, 30)))
     {
         startClicked = true;
     }
+
+    ImGui::Spacing();
+
+    // center the quit button at the bottom
+    ImGui::SetCursorPosX((ImGui::GetWindowWidth() - 200) * 0.5f);
+    if (ImGui::Button("Quit Game", ImVec2(200, 30)))
+    {
+        quit = true;
+    }
+
     ImGui::End();
 
     return startClicked;
@@ -170,12 +180,11 @@ void UIManager::RenderPauseMenu(bool &resume, bool &setup, bool &quit, bool &gra
     ImGuiWindowFlags flags = ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse;
 
     ImGui::Begin("Paused", nullptr, flags);
-    ImGui::Text("Simulation Paused");
     ImGui::Spacing();
 
     if (ImGui::Button("Resume", ImVec2(200, 40)))
         resume = true;
-    if (ImGui::Button("Graphics Settings", ImVec2(200, 40)))
+    if (ImGui::Button("GUI Theme", ImVec2(200, 40)))
         graphics = true; // Fix: Added the button
     if (ImGui::Button("Return to Setup", ImVec2(200, 40)))
         setup = true;
@@ -243,8 +252,8 @@ void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, floa
     }
 
     // --- TEMPORARY CONTROLS PROMPT ---
-    // Show the prompt for the first 6.0 seconds of the simulation
-    if (simulationTime < 6.0f)
+    // Show the prompt for the first 10.0 seconds of the simulation
+    if (simulationTime < 10.0f)
     {
         ImGuiIO &io = ImGui::GetIO();
 
@@ -298,7 +307,7 @@ void UIManager::RenderGraphicsMenu(UITheme &currentTheme, bool &backClicked)
 {
     ImGuiIO &io = ImGui::GetIO();
     ImGui::SetNextWindowSizeConstraints(ImVec2(400, -1), ImVec2(io.DisplaySize.x, io.DisplaySize.y));
-    ImGui::Begin("Graphics Settings", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+    ImGui::Begin("GUI Theme", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 
     if (ImGui::RadioButton("Modern Dark", currentTheme == UITheme::MODERN))
     {

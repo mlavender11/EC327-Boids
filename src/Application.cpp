@@ -68,13 +68,21 @@ void Application::RunSetupState()
     boidDataToRender = BoidRenderer::BoidsToMatrices(flock.GetFlock());
     graphics.Render(boidDataToRender, true, simulationTime, configMaxAltitude, configMinAltitude, configEarthRadius);
 
+    bool quitClicked = false;
+
     bool startClicked = uiManager.RenderSetupMenu(
         configBoidCount,
         configEarthRadius,
         configMinAltitude,
         configMaxAltitude,
         graphics.GetSunOrbitDistance(),
-        configSunSpeed);
+        configSunSpeed,
+        quitClicked);
+
+    if (quitClicked)
+    {
+        glfwSetWindowShouldClose(graphics.GetWindow(), true);
+    }
 
     if (startClicked)
     {

@@ -34,7 +34,7 @@ public:
     void EndFrame();
 
     // Draws the setup menu. Returns TRUE if the user clicked "Start"
-    bool RenderSetupMenu(int &boidCount, float &earthRadius, float &minAlt, float &maxAlt, float sunOrbitDistance, float &sunSpeed);
+    bool RenderSetupMenu(int &boidCount, float &earthRadius, float &minAlt, float &maxAlt, float sunOrbitDistance, float &sunSpeed, bool &quit);
 
     // Draws the pause menu. Returns TRUE if the user clicked "Resume"
     void RenderPauseMenu(bool &resume, bool &setup, bool &quit, bool &graphics);
