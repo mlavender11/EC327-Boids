@@ -22,6 +22,7 @@ private:
     ImFont *synthFont;
 
     bool fontPushedThisFrame = false;
+    bool promptDismissed = false;
 
 public:
     UIManager();
@@ -46,6 +47,8 @@ public:
     void RenderGraphicsMenu(UITheme &currentTheme, bool &backClicked);
     void ApplyTheme(UITheme theme);
     UITheme GetActiveTheme() const;
+
+    void ResetPromptDismissal();
 };
 
 #endif

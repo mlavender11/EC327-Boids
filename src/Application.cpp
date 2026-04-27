@@ -68,7 +68,12 @@ void Application::RunSetupState()
     boidDataToRender = BoidRenderer::BoidsToMatrices(flock.GetFlock());
     graphics.Render(boidDataToRender, true, simulationTime, configMaxAltitude, configMinAltitude, configEarthRadius);
 
+    // Reset simulation time
+    simulationTime = 0.0f;
+    lastFrameTime = glfwGetTime();
+
     bool quitClicked = false;
+    uiManager.ResetPromptDismissal(); // Reset prompt dismissal for new simulation
 
     bool startClicked = uiManager.RenderSetupMenu(
         configBoidCount,
@@ -107,7 +112,7 @@ void Application::RunSimulationState(float deltaTime)
 
 void Application::RunPausedState()
 {
-    // Fix: Always render the background so the screen isn't black
+    // Always render the background so the screen isn't black
     graphics.Render(boidDataToRender, true, simulationTime, configMaxAltitude, configMinAltitude, configEarthRadius);
 
     if (currentState == AppState::PAUSED)

@@ -252,8 +252,8 @@ void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, floa
     }
 
     // --- TEMPORARY CONTROLS PROMPT ---
-    // Show the prompt for the first 10.0 seconds of the simulation
-    if (simulationTime < 10.0f)
+    // Show the prompt for the first 10.0 seconds of the simulation or until clicked
+    if (simulationTime < 10.0f && !promptDismissed)
     {
         ImGuiIO &io = ImGui::GetIO();
 
@@ -272,7 +272,13 @@ void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, floa
 
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
 
-        ImGui::Text("CONTROLS: Click & Drag to Rotate | Scroll to Zoom");
+        ImGui::Text("CONTROLS: Click and Drag to Rotate, Scroll to Zoom, Escape for Menu");
+
+        // If the user clicks the prompt, dismiss it
+        if (ImGui::IsWindowHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+        {
+            promptDismissed = true;
+        }
 
         ImGui::PopStyleColor();
         ImGui::End();
@@ -342,4 +348,9 @@ void UIManager::RenderGraphicsMenu(UITheme &currentTheme, bool &backClicked)
 UITheme UIManager::GetActiveTheme() const
 {
     return activeTheme;
+}
+
+void UIManager::ResetPromptDismissal()
+{
+    promptDismissed = false;
 }
