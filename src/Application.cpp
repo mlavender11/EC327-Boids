@@ -66,7 +66,7 @@ void Application::Run()
 void Application::RunSetupState()
 {
     boidDataToRender = BoidRenderer::BoidsToMatrices(flock.GetFlock());
-    graphics.Render(boidDataToRender, true, simulationTime, configMaxAltitude, configEarthRadius);
+    graphics.Render(boidDataToRender, true, simulationTime, configMaxAltitude, configMinAltitude, configEarthRadius);
 
     bool startClicked = uiManager.RenderSetupMenu(
         configBoidCount,
@@ -94,13 +94,13 @@ void Application::RunSimulationState(float deltaTime)
 
     // Render the boids using Graphics Engine
     boidDataToRender = BoidRenderer::BoidsToMatrices(flock.GetFlock());
-    graphics.Render(boidDataToRender, true, simulationTime, configMaxAltitude, configEarthRadius);
+    graphics.Render(boidDataToRender, true, simulationTime, configMaxAltitude, configMinAltitude, configEarthRadius);
 }
 
 void Application::RunPausedState()
 {
     // Fix: Always render the background so the screen isn't black
-    graphics.Render(boidDataToRender, true, simulationTime, configMaxAltitude, configEarthRadius);
+    graphics.Render(boidDataToRender, true, simulationTime, configMaxAltitude, configMinAltitude, configEarthRadius);
 
     if (currentState == AppState::PAUSED)
     {

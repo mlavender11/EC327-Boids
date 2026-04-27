@@ -27,7 +27,7 @@ public:
     // The main visual operations
     void ProcessInput();
     bool ShouldClose() const;
-    void Render(const std::vector<glm::mat4> &boidData, bool drawSimulation, float simulationTime, float maxAltitude, float earthRadius);
+    void Render(const std::vector<glm::mat4> &boidData, bool drawSimulation, float simulationTime, float maxAltitude, float minAltitude, float earthRadius);
     GLFWwindow *GetWindow() const;
     void SwapBuffers();
 

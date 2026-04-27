@@ -47,6 +47,7 @@ add_executable(EC327-Boids MACOSX_BUNDLE
     src/visual/BoidRenderer.cpp
     src/visual/CelestialBody.cpp
     src/visual/Star.cpp
+    src/visual/TextureLoader.cpp
 
     src/behavior/Boids.cpp
     src/behavior/Friendly.cpp
