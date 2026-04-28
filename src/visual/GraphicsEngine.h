@@ -24,14 +24,15 @@ public:
 
     bool Initialize(int, int, const char *);
 
-    // The main visual operations
     void ProcessInput();
     bool ShouldClose() const;
-    void Render(const std::vector<glm::mat4> &boidData, bool drawSimulation, float simulationTime, float maxAltitude, float minAltitude, float earthRadius);
+    void Render(const std::vector<glm::mat4> &boidData,
+                const std::vector<glm::mat4> &predatorData,
+                bool drawSimulation, float simulationTime,
+                float maxAltitude, float minAltitude, float earthRadius);
     GLFWwindow *GetWindow() const;
     void SwapBuffers();
 
-    // Pass-through things for sun
     float GetSunOrbitDistance() const;
     void SetSunSpeed(float speed);
 
