@@ -37,6 +37,8 @@ public:
     void SetMaxSpeed(float speed);
     void SetMaxForce(float force);
     void SetHungerRate(float rate);
+
+    bool IsHunting() const;
 };
 
 #endif

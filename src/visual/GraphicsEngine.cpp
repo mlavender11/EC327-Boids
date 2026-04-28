@@ -68,7 +68,8 @@ bool GraphicsEngine::ShouldClose() const
 }
 
 void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData,
-                            const std::vector<glm::mat4> &predatorData,
+                            const std::vector<glm::mat4> &huntingPredators,
+                            const std::vector<glm::mat4> &fullPredators,
                             bool drawSimulation, float simulationTime,
                             float maxAltitude, float minAltitude, float earthRadius)
 {
@@ -133,17 +134,28 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData,
         glUniform3fv(glGetUniformLocation(boidShader->ID, "lightDir"), 1, glm::value_ptr(lightDir));
         glUniform3fv(glGetUniformLocation(boidShader->ID, "ambientColor"), 1, glm::value_ptr(ambient));
 
+        // 1. Determine the colors based on the theme
+        glm::vec3 flockColor;
+        glm::vec3 huntingColor;
+        glm::vec3 fullColor;
+
         if (isColdWar)
         {
-            boidRenderer->DrawInstancedColored(boidData, glm::vec3(0.2f, 0.6f, 1.0f));     // Blue boids
-            boidRenderer->DrawInstancedColored(predatorData, glm::vec3(1.0f, 0.1f, 0.1f)); // Red predators
+            flockColor = glm::vec3(0.2f, 0.6f, 1.0f);   // Cyan Radar
+            huntingColor = glm::vec3(1.0f, 0.1f, 0.1f); // Hostile Red Blip
+            fullColor = glm::vec3(1.0f, 0.8f, 0.0f);    // Docile Amber/Yellow Blip
         }
         else
         {
-            // Standard lighting colors for when the theme is turned off
-            boidRenderer->DrawInstanced(boidData);                                         // Default is yellow
-            boidRenderer->DrawInstancedColored(predatorData, glm::vec3(1.0f, 0.1f, 0.1f)); // Red predators
+            flockColor = glm::vec3(0.8f, 0.7f, 0.3f);   // Standard Gold
+            huntingColor = glm::vec3(0.8f, 0.2f, 0.2f); // Aggressive Red
+            fullColor = glm::vec3(0.8f, 0.5f, 0.4f);    // Brown
         }
+
+        // 2. Draw all three groups separately
+        boidRenderer->DrawInstancedColored(boidData, flockColor);
+        boidRenderer->DrawInstancedColored(huntingPredators, huntingColor);
+        boidRenderer->DrawInstancedColored(fullPredators, fullColor);
 
         // --- 3. Draw Sun ---
         sun->Draw(*sunShader, view, projection);

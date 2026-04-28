@@ -27,9 +27,10 @@ public:
     void ProcessInput();
     bool ShouldClose() const;
     void Render(const std::vector<glm::mat4> &boidData,
-                const std::vector<glm::mat4> &predatorData,
+                const std::vector<glm::mat4> &huntingPredators,
+                const std::vector<glm::mat4> &fullPredators,
                 bool drawSimulation, float simulationTime,
-                float maxAltitude, float minAltitude, float earthRadius);
+                float maxAlt, float minAlt, float earthRadius);
     GLFWwindow *GetWindow() const;
     void SwapBuffers();
 

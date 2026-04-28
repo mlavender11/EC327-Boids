@@ -28,7 +28,7 @@ private:
     void RunPausedState();
 
     void CreatePredators();
-    std::vector<glm::mat4> BuildPredatorMatrices();
+    void BuildPredatorMatrices(std::vector<glm::mat4> &hunting, std::vector<glm::mat4> &full);
 
     GraphicsEngine graphics;
     UIManager uiManager;

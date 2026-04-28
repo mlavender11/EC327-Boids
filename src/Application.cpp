@@ -114,17 +114,26 @@ void Application::CreatePredators()
             configMinAltitude, configMaxAltitude));
 }
 
-std::vector<glm::mat4> Application::BuildPredatorMatrices()
+void Application::BuildPredatorMatrices(std::vector<glm::mat4> &hunting, std::vector<glm::mat4> &full)
 {
-    std::vector<glm::mat4> matrices;
+    hunting.clear();
+    full.clear();
     for (Predator &p : predators)
-        matrices.push_back(OrientedModel(p.GetPosition(), p.GetVelocity(), 0.45f));
-    return matrices;
+    {
+        if (p.IsHunting())
+        {
+            hunting.push_back(OrientedModel(p.GetPosition(), p.GetVelocity(), 0.45f));
+        }
+        else
+        {
+            full.push_back(OrientedModel(p.GetPosition(), p.GetVelocity(), 0.45f));
+        }
+    }
 }
 
 void Application::RunSetupState()
 {
-    graphics.Render(boidDataToRender, {}, true, simulationTime,
+    graphics.Render(boidDataToRender, {}, {}, true, simulationTime,
                     configMaxAltitude, configMinAltitude, configEarthRadius);
 
     simulationTime = 0.0f;
@@ -183,15 +192,18 @@ void Application::RunSimulationState(float deltaTime)
 
     // Boids (alive only) in gold, predators in red — separate draw calls
     boidDataToRender = BoidRenderer::BoidsToMatricesAlive(flock.GetFlock());
-    std::vector<glm::mat4> predatorMatrices = BuildPredatorMatrices();
 
-    graphics.Render(boidDataToRender, predatorMatrices, true, simulationTime,
+    std::vector<glm::mat4> huntingPredators;
+    std::vector<glm::mat4> fullPredators;
+    BuildPredatorMatrices(huntingPredators, fullPredators);
+
+    graphics.Render(boidDataToRender, huntingPredators, fullPredators, true, simulationTime,
                     configMaxAltitude, configMinAltitude, configEarthRadius);
 }
 
 void Application::RunPausedState()
 {
-    graphics.Render(boidDataToRender, {}, true, simulationTime,
+    graphics.Render(boidDataToRender, {}, {}, true, simulationTime,
                     configMaxAltitude, configMinAltitude, configEarthRadius);
 
     if (currentState == AppState::PAUSED)

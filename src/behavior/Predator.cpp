@@ -114,3 +114,8 @@ void Predator::Update(float dt, std::vector<Boids *> &flock)
 void Predator::SetMaxSpeed(float speed) { maxSpeed = speed; }
 void Predator::SetMaxForce(float force) { maxForce = force; }
 void Predator::SetHungerRate(float rate) { hungerRate = rate; }
+
+bool Predator::IsHunting() const
+{
+    return (hunger >= hungerThreshold) && (huntCooldown <= 0.0f);
+}
