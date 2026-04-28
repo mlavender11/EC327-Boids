@@ -7,9 +7,25 @@ endif()
 
 set(CMAKE_CXX_STANDARD 17)
 
-# Find GLFW and OpenGL
-find_package(glfw3 CONFIG REQUIRED)
+# Find OpenGL
 find_package(OpenGL REQUIRED)
+
+# Download and build GLFW from source
+include(FetchContent)
+FetchContent_Declare(
+    glfw
+    GIT_REPOSITORY https://github.com/glfw/glfw.git
+    GIT_TAG        3.4 # Use the latest stable release
+)
+
+# Turn off GLFW settings we don't need to speed up compile time
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+# FORCE STATIC LINKING - No DLLs required!
+set(GLFW_BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE) 
+
+FetchContent_MakeAvailable(glfw)
 
 # Include directories
 include_directories(
