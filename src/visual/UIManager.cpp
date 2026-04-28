@@ -23,9 +23,9 @@ void UIManager::Initialize(GLFWwindow *window)
     ImGuiIO &io = ImGui::GetIO();
     io.Fonts->AddFontDefault();
 
-    modernFont  = io.Fonts->AddFontFromFileTTF("assets/fonts/SF-Pro-Text-Regular.otf", 18.0f);
-    synthFont   = io.Fonts->AddFontFromFileTTF("assets/fonts/Alien-Encounters-Regular.ttf", 17.0f);
-    cwFont      = io.Fonts->AddFontFromFileTTF("assets/fonts/WarGamesTerminalRT.ttf", 18.0f);
+    modernFont = io.Fonts->AddFontFromFileTTF("assets/fonts/SF-Pro-Text-Regular.otf", 18.0f);
+    synthFont = io.Fonts->AddFontFromFileTTF("assets/fonts/Alien-Encounters-Regular.ttf", 17.0f);
+    cwFont = io.Fonts->AddFontFromFileTTF("assets/fonts/WarGamesTerminalRT.ttf", 18.0f);
     falloutFont = io.Fonts->AddFontFromFileTTF("assets/fonts/JH_Fallout.ttf", 17.0f);
 
     ApplyTheme(activeTheme);
@@ -87,21 +87,25 @@ bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAl
     ImGui::Text("Configure your starting parameters:");
     ImGui::Spacing();
 
-    ImGui::SliderInt("Number of Boids",     &boidCount,     100, 2000);
-    ImGui::SliderInt("Number of Predators", &predatorCount, 0,   10);  // *** NEW ***
+    ImGui::SliderInt("Number of Boids", &boidCount, 100, 2000);
+    ImGui::SliderInt("Number of Predators", &predatorCount, 0, 10); // *** NEW ***
     ImGui::SliderFloat("Earth Radius", &earthRadius, 1.0f, 50.0f);
 
-    if (minAlt < earthRadius) minAlt = earthRadius;
-    if (maxAlt < minAlt)      maxAlt = minAlt;
+    if (minAlt < earthRadius)
+        minAlt = earthRadius;
+    if (maxAlt < minAlt)
+        maxAlt = minAlt;
     if (maxAlt > maxAllowedAlt)
     {
         maxAlt = maxAllowedAlt;
-        if (minAlt > maxAlt)      minAlt = maxAlt;
-        if (earthRadius > minAlt) earthRadius = minAlt;
+        if (minAlt > maxAlt)
+            minAlt = maxAlt;
+        if (earthRadius > minAlt)
+            earthRadius = minAlt;
     }
 
-    ImGui::SliderFloat("Min Altitude",    &minAlt,   earthRadius, maxAlt);
-    ImGui::SliderFloat("Max Altitude",    &maxAlt,   minAlt, maxAllowedAlt);
+    ImGui::SliderFloat("Min Altitude", &minAlt, earthRadius, maxAlt);
+    ImGui::SliderFloat("Max Altitude", &maxAlt, minAlt, maxAllowedAlt);
     ImGui::SliderFloat("Day/Night Speed", &sunSpeed, 0.0f, 2.0f);
 
     ImGui::Spacing();
@@ -110,12 +114,12 @@ bool UIManager::RenderSetupMenu(int &boidCount, float &earthRadius, float &minAl
 
     if (ImGui::Button("Reset to Defaults", ImVec2(200, 30)))
     {
-        boidCount      = 500;
-        predatorCount  = 3;    // *** NEW ***
-        earthRadius    = 5.0f;
-        minAlt         = 5.0f;
-        maxAlt         = 10.0f;
-        sunSpeed       = 0.3f;
+        boidCount = 500;
+        predatorCount = 3; // *** NEW ***
+        earthRadius = 5.0f;
+        minAlt = 5.0f;
+        maxAlt = 10.0f;
+        sunSpeed = 0.3f;
     }
 
     ImGui::SameLine();
@@ -147,15 +151,19 @@ void UIManager::RenderPauseMenu(bool &resume, bool &setup, bool &quit, bool &gra
     ImGui::Begin("Paused", nullptr, flags);
     ImGui::Spacing();
 
-    if (ImGui::Button("Resume",          ImVec2(200, 40))) resume   = true;
-    if (ImGui::Button("GUI Theme",       ImVec2(200, 40))) graphics = true;
-    if (ImGui::Button("Return to Setup", ImVec2(200, 40))) setup    = true;
-    if (ImGui::Button("Quit Game",       ImVec2(200, 40))) quit     = true;
+    if (ImGui::Button("Resume", ImVec2(200, 40)))
+        resume = true;
+    if (ImGui::Button("GUI Theme", ImVec2(200, 40)))
+        graphics = true;
+    if (ImGui::Button("Return to Setup", ImVec2(200, 40)))
+        setup = true;
+    if (ImGui::Button("Quit Game", ImVec2(200, 40)))
+        quit = true;
 
     ImGui::End();
 }
 
-void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, float &alignment, float &visualRange, float &maxSpeed, float &maxForce, float simulationTime)
+void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, float &alignment, float &visualRange, float &maxSpeed, float &maxForce, float &predatorMaxSpeed, float &predatorMaxForce, float &predatorHungRate, float simulationTime)
 {
     ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_FirstUseEver);
 
@@ -165,9 +173,9 @@ void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, floa
     ImGui::Text("Boid Behavior Parameters");
     ImGui::Separator();
 
-    ImGui::SliderFloat("Separation",   &separation,  0.0f, 5.0f);
-    ImGui::SliderFloat("Alignment",    &alignment,   0.0f, 5.0f);
-    ImGui::SliderFloat("Cohesion",     &cohesion,    0.0f, 5.0f);
+    ImGui::SliderFloat("Separation", &separation, 0.0f, 5.0f);
+    ImGui::SliderFloat("Alignment", &alignment, 0.0f, 5.0f);
+    ImGui::SliderFloat("Cohesion", &cohesion, 0.0f, 5.0f);
     ImGui::SliderFloat("Visual Range", &visualRange, 1.0f, 20.0f);
 
     ImGui::Spacing();
@@ -175,8 +183,19 @@ void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, floa
     ImGui::Spacing();
 
     ImGui::Text("Physical Limits");
-    ImGui::SliderFloat("Max Speed",         &maxSpeed, 0.1f, 30.0f);
+    ImGui::SliderFloat("Max Speed", &maxSpeed, 0.1f, 30.0f);
     ImGui::SliderFloat("Max Turning Force", &maxForce, 0.1f, 30.0f);
+
+    ImGui::Spacing();
+    ImGui::Separator();
+    ImGui::Spacing();
+
+    // --- NEW PREDATOR SLIDERS ---
+
+    ImGui::Text("Predator Attributes");
+    ImGui::SliderFloat("Predator Speed", &predatorMaxSpeed, 0.1f, 30.0f);
+    ImGui::SliderFloat("Predator Turn Force", &predatorMaxForce, 0.1f, 30.0f);
+    ImGui::SliderFloat("Hunger Rate", &predatorHungRate, 0.0f, 0.2f);
 
     ImGui::Spacing();
     ImGui::Separator();
@@ -184,12 +203,15 @@ void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, floa
 
     if (ImGui::Button("Reset to Defaults", ImVec2(200, 30)))
     {
-        cohesion    = 1.0f;
-        separation  = 1.0f;
-        alignment   = 1.0f;
+        cohesion = 1.0f;
+        separation = 1.0f;
+        alignment = 1.0f;
         visualRange = 5.0f;
-        maxSpeed    = 5.0f;
-        maxForce    = 10.0f;
+        maxSpeed = 5.0f;
+        maxForce = 10.0f;
+        predatorMaxSpeed = 4.0f;
+        predatorMaxForce = 0.6f;
+        predatorHungRate = 0.04f;
     }
 
     if (simulationTime < 10.0f && !promptDismissed)
@@ -222,11 +244,21 @@ void UIManager::ApplyTheme(UITheme theme)
 
     switch (theme)
     {
-    case UITheme::MODERN:    UIThemes::ApplyModern(style);    break;
-    case UITheme::SYNTHWAVE: UIThemes::ApplySynthwave(style); break;
-    case UITheme::COLDWAR:   UIThemes::ApplyColdWar(style);   break;
-    case UITheme::FALLOUT:   UIThemes::ApplyFallout(style);   break;
-    case UITheme::CLASSIC:   ImGui::StyleColorsDark();         break;
+    case UITheme::MODERN:
+        UIThemes::ApplyModern(style);
+        break;
+    case UITheme::SYNTHWAVE:
+        UIThemes::ApplySynthwave(style);
+        break;
+    case UITheme::COLDWAR:
+        UIThemes::ApplyColdWar(style);
+        break;
+    case UITheme::FALLOUT:
+        UIThemes::ApplyFallout(style);
+        break;
+    case UITheme::CLASSIC:
+        ImGui::StyleColorsDark();
+        break;
     }
 }
 
@@ -236,11 +268,31 @@ void UIManager::RenderGraphicsMenu(UITheme &currentTheme, bool &backClicked)
     ImGui::SetNextWindowSizeConstraints(ImVec2(400, -1), ImVec2(io.DisplaySize.x, io.DisplaySize.y));
     ImGui::Begin("GUI Theme", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 
-    if (ImGui::RadioButton("Modern Dark", currentTheme == UITheme::MODERN))   { currentTheme = UITheme::MODERN;    ApplyTheme(UITheme::MODERN); }
-    if (ImGui::RadioButton("Synthwave",   currentTheme == UITheme::SYNTHWAVE)) { currentTheme = UITheme::SYNTHWAVE; ApplyTheme(UITheme::SYNTHWAVE); }
-    if (ImGui::RadioButton("WarGames",    currentTheme == UITheme::COLDWAR))   { currentTheme = UITheme::COLDWAR;   ApplyTheme(UITheme::COLDWAR); }
-    if (ImGui::RadioButton("Fallout",     currentTheme == UITheme::FALLOUT))   { currentTheme = UITheme::FALLOUT;   ApplyTheme(UITheme::FALLOUT); }
-    if (ImGui::RadioButton("Classic",     currentTheme == UITheme::CLASSIC))   { currentTheme = UITheme::CLASSIC;   ApplyTheme(UITheme::CLASSIC); }
+    if (ImGui::RadioButton("Modern Dark", currentTheme == UITheme::MODERN))
+    {
+        currentTheme = UITheme::MODERN;
+        ApplyTheme(UITheme::MODERN);
+    }
+    if (ImGui::RadioButton("Synthwave", currentTheme == UITheme::SYNTHWAVE))
+    {
+        currentTheme = UITheme::SYNTHWAVE;
+        ApplyTheme(UITheme::SYNTHWAVE);
+    }
+    if (ImGui::RadioButton("WarGames", currentTheme == UITheme::COLDWAR))
+    {
+        currentTheme = UITheme::COLDWAR;
+        ApplyTheme(UITheme::COLDWAR);
+    }
+    if (ImGui::RadioButton("Fallout", currentTheme == UITheme::FALLOUT))
+    {
+        currentTheme = UITheme::FALLOUT;
+        ApplyTheme(UITheme::FALLOUT);
+    }
+    if (ImGui::RadioButton("Classic", currentTheme == UITheme::CLASSIC))
+    {
+        currentTheme = UITheme::CLASSIC;
+        ApplyTheme(UITheme::CLASSIC);
+    }
 
     ImGui::Separator();
     if (ImGui::Button("Back"))

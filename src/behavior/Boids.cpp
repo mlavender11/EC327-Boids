@@ -133,63 +133,6 @@ glm::vec3 Boids::seek(const glm::vec3 target)
     return steer;
 }
 
-// v1
-//  glm::vec3 Boids::handleBoundary()
-//  {
-//      float altitudeSq = glm::dot(position, position);
-
-//     glm::vec3 steer(0.0f);
-//     float turnForce = maxForce * 2.0f;
-
-//     // Check if below minimum altitude
-//     if (altitudeSq < minAlt * minAlt)
-//     {
-//         // Push away from center (up)
-//         float altitude = sqrt(altitudeSq);
-//         glm::vec3 radialDirection = position / altitude; // Manual normalize
-//         steer = radialDirection * turnForce;
-//     }
-//     // Check if above maximum altitude
-//     else if (altitudeSq > maxAlt * maxAlt)
-//     {
-//         // Pull toward center (down)
-//         float altitude = sqrt(altitudeSq);
-//         glm::vec3 radialDirection = position / altitude; // Manual normalize
-//         steer = -radialDirection * turnForce;
-//     }
-
-//     return steer;
-// }
-
-// v2
-//  glm::vec3 Boids::handleBoundary()
-//  {
-//      float altitudeSq = glm::dot(position, position);
-//      float altitude = sqrt(altitudeSq);
-
-//     glm::vec3 radialDirection = position / altitude;
-//     glm::vec3 steer(0.0f);
-
-//     float margin = (maxAlt - minAlt) * 0.1f; // 10% margin
-//     float innerDanger = minAlt + margin;
-//     float outerDanger = maxAlt - margin;
-
-//     if (altitude < innerDanger)
-//     {
-//         // Getting close to inner boundary - push outward
-//         float urgency = (innerDanger - altitude) / margin; // 0 to 1
-//         steer = radialDirection * maxForce * 3.0f * urgency;
-//     }
-//     else if (altitude > outerDanger)
-//     {
-//         // Getting close to outer boundary - pull inward
-//         float urgency = (altitude - outerDanger) / margin; // 0 to 1
-//         steer = -radialDirection * maxForce * 6.0f * urgency;
-//     }
-
-//     return steer;
-// }
-
 glm::vec3 Boids::handleBoundary()
 {
     float altitudeSq = glm::dot(position, position);
@@ -223,111 +166,6 @@ glm::vec3 Boids::handleBoundary()
     return steer;
 }
 
-/* Combined into one function to reduce repeated for loops
-glm::vec3 Boids::separate(const vector<const Boids *> &neighbors, float visualRange)
-{
-    glm::vec3 steer(0.0f);
-    int count = 0;
-    float desiredSeparation = visualRange * 0.5f; // Changed - Kyle
-
-    for (const Boids *other_boid : neighbors)
-    {
-        float distanceSq = distanceToSquared(*other_boid);
-
-        if (distanceSq > 0 && distanceSq < desiredSeparation * desiredSeparation) // is dist > 0 necesary? Would it ever be less than 0
-        {
-            glm::vec3 diff = position - other_boid->getPosition(); // Vector to neighobring boid
-
-            diff /= distanceSq; // Weight by distance
-
-            steer += diff; // Add onto overall steering vector
-            count++;
-        }
-    }
-
-    if (count > 0) // If there are any neighbors to avoid
-    {
-        steer /= static_cast<float>(count); // Get average steer vector direction
-        // Guard: if neighbor positions cancel out, steer is ~0 and normalize() produces NaN.
-        float steerLenSq = glm::dot(steer, steer);
-        if (steerLenSq > 1e-10f)
-        {
-            float steerLen = sqrt(steerLenSq);
-            steer /= steerLen;
-            steer *= maxSpeed; // Boids want to go max speed
-            steer -= velocity; // Vector for how to steer to get to desired
-            steer = limitMagnitude(steer, maxForce);
-        }
-        else
-        {
-            steer = glm::vec3(0.0f);
-        }
-    }
-    return steer;
-}
-
-glm::vec3 Boids::align(const vector<const Boids *> &neighbors, float visualRange)
-{
-    glm::vec3 steer(0.0f);
-    int count = 0;
-
-    for (const Boids *other_boid : neighbors)
-    {
-        float distanceSq = distanceToSquared(*other_boid);
-        if (distanceSq > 0 && distanceSq < visualRange * visualRange) // Changed - Kyle
-        {
-            steer += other_boid->getVelocity(); // collect flock velocity
-            count++;
-        }
-    }
-    if (count > 0)
-    {
-
-        steer /= static_cast<float>(count); // Average flock velocity
-        float steerLenSq = glm::dot(steer, steer);
-        // Guard: if neighbor velocities sum to ~0, normalize() produces NaN that
-        // propagates through update() into position and the boid renders off-screen.
-        if (steerLenSq > 1e-10f)
-        {
-            float steerLength = sqrt(steerLenSq);
-            steer /= steerLength; // Only one sqrt instead of normalize()
-            steer *= maxSpeed;    // Boid wants to go max speed
-            steer -= velocity;
-            steer = limitMagnitude(steer, maxForce);
-        }
-        else
-        {
-            steer = glm::vec3(0.0f);
-        }
-    }
-    return steer;
-}
-
-glm::vec3 Boids::cohere(const vector<const Boids *> &neighbors, float visualRange)
-{
-    glm::vec3 sum(0.0f);
-    int count = 0;
-
-    for (const Boids *other_boid : neighbors)
-    {
-        float distanceSq = distanceToSquared(*other_boid);
-
-        if (distanceSq > 0 && distanceSq < visualRange * visualRange) // Changed - Kyle
-        {
-            sum += other_boid->getPosition();
-            count++;
-        }
-    }
-
-    if (count > 0)
-    {
-        sum /= static_cast<float>(count);
-        return seek(sum);
-    }
-
-    return sum;
-}*/
-
 // Changed - Kyle
 void Boids::flock(const vector<const Boids *> &neighbors, float weightCohesion, float weightSeparation, float weightAlignment, float visualRange)
 {
@@ -338,7 +176,12 @@ void Boids::flock(const vector<const Boids *> &neighbors, float weightCohesion, 
     int count_separate = 0;
     int count_align_cohere = 0; // Neighbors already filtered by visualRange
 
-    float desiredSeparationSq = (visualRange * 0.5f) * (visualRange * 0.5f);
+    // The minimum physical space a boid takes up
+    float physicalBoidRadius = 5.0f; // Approximation
+
+    // Use either half the visual range, OR the physical size, whichever is larger
+    float separationDist = std::max(visualRange * 0.5f, physicalBoidRadius);
+    float desiredSeparationSq = separationDist * separationDist;
 
     // Calculate all three behaviors
     for (const Boids *other_boid : neighbors)
@@ -353,6 +196,14 @@ void Boids::flock(const vector<const Boids *> &neighbors, float weightCohesion, 
         if (distanceSq < desiredSeparationSq)
         {
             glm::vec3 diff = position - other_boid->getPosition();
+
+            // If they're very close, give a tiny random nudge
+            if (distanceSq < 0.01f)
+            {
+                diff = glm::vec3(0.1f, 0.1f, 0.1f);
+                distanceSq = 0.01f;
+            }
+
             diff /= distanceSq; // Weight by inverse distance
             steer_separate += diff;
             count_separate++;
@@ -367,7 +218,9 @@ void Boids::flock(const vector<const Boids *> &neighbors, float weightCohesion, 
         {
             steer_separate = glm::normalize(steer_separate) * maxSpeed;
             steer_separate -= velocity;
-            steer_separate = limitMagnitude(steer_separate, maxForce);
+
+            // Multiply maxForce to give it priority
+            steer_separate = limitMagnitude(steer_separate, maxForce * 3.0f);
         }
     }
 

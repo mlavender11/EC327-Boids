@@ -9,8 +9,8 @@ static glm::vec3 RandomSphericalPoint(float minR, float maxR)
     std::uniform_real_distribution<float> dtheta(0.0f, 2.0f * 3.14159265f);
     std::uniform_real_distribution<float> dcosphi(-1.0f, 1.0f);
 
-    float r      = dr(gen);
-    float theta  = dtheta(gen);
+    float r = dr(gen);
+    float theta = dtheta(gen);
     float cosPhi = dcosphi(gen);
     float sinPhi = std::sqrt(1.0f - cosPhi * cosPhi);
     return glm::vec3(r * sinPhi * std::cos(theta),
@@ -24,26 +24,31 @@ static glm::mat4 OrientedModel(glm::vec3 position, glm::vec3 velocity, float sca
                             ? glm::normalize(velocity)
                             : glm::vec3(0.0f, 0.0f, 1.0f);
 
-    float posLen       = glm::length(position);
+    float posLen = glm::length(position);
     glm::vec3 radialUp = (posLen > 1e-6f) ? position / posLen : glm::vec3(0.0f, 1.0f, 0.0f);
 
-    glm::vec3 right   = glm::cross(radialUp, forward);
-    float rightLen    = glm::length(right);
-    if (rightLen < 1e-6f) {
-        right    = glm::cross(glm::vec3(1.0f, 0.0f, 0.0f), forward);
+    glm::vec3 right = glm::cross(radialUp, forward);
+    float rightLen = glm::length(right);
+    if (rightLen < 1e-6f)
+    {
+        right = glm::cross(glm::vec3(1.0f, 0.0f, 0.0f), forward);
         rightLen = glm::length(right);
-        if (rightLen < 1e-6f) right = glm::vec3(1.0f, 0.0f, 0.0f);
-        else                  right /= rightLen;
-    } else {
+        if (rightLen < 1e-6f)
+            right = glm::vec3(1.0f, 0.0f, 0.0f);
+        else
+            right /= rightLen;
+    }
+    else
+    {
         right /= rightLen;
     }
 
     glm::vec3 localUp = glm::normalize(glm::cross(forward, right));
 
     glm::mat4 model(1.0f);
-    model[0] = glm::vec4(right,    0.0f);
-    model[1] = glm::vec4(localUp,  0.0f);
-    model[2] = glm::vec4(forward,  0.0f);
+    model[0] = glm::vec4(right, 0.0f);
+    model[1] = glm::vec4(localUp, 0.0f);
+    model[2] = glm::vec4(forward, 0.0f);
     model[3] = glm::vec4(position, 1.0f);
     return glm::scale(model, glm::vec3(scale));
 }
@@ -53,11 +58,11 @@ Application::Application()
     graphics.Initialize(1280, 720, "Boids");
     uiManager.Initialize(graphics.GetWindow());
 
-    currentState     = AppState::SETUP;
-    previousState    = AppState::SETUP;
+    currentState = AppState::SETUP;
+    previousState = AppState::SETUP;
     escapeWasPressed = false;
-    simulationTime   = 0.0f;
-    lastFrameTime    = glfwGetTime();
+    simulationTime = 0.0f;
+    lastFrameTime = glfwGetTime();
 }
 
 void Application::Run()
@@ -65,8 +70,8 @@ void Application::Run()
     while (!graphics.ShouldClose())
     {
         float currentFrameTime = glfwGetTime();
-        float deltaTime        = currentFrameTime - lastFrameTime;
-        lastFrameTime          = currentFrameTime;
+        float deltaTime = currentFrameTime - lastFrameTime;
+        lastFrameTime = currentFrameTime;
 
         if (currentState == AppState::SIMULATION)
             graphics.ProcessInput();
@@ -77,7 +82,7 @@ void Application::Run()
             if (currentState == AppState::SIMULATION)
             {
                 previousState = currentState;
-                currentState  = AppState::PAUSED;
+                currentState = AppState::PAUSED;
             }
             else if (currentState == AppState::PAUSED || currentState == AppState::GRAPHICS_SETTINGS)
             {
@@ -123,7 +128,7 @@ void Application::RunSetupState()
                     configMaxAltitude, configMinAltitude, configEarthRadius);
 
     simulationTime = 0.0f;
-    lastFrameTime  = glfwGetTime();
+    lastFrameTime = glfwGetTime();
 
     bool quitClicked = false;
     uiManager.ResetPromptDismissal();
@@ -152,14 +157,21 @@ void Application::RunSimulationState(float deltaTime)
 
     uiManager.RenderSimulationOverlay(boidCohesion, boidSeparation, boidAlignment,
                                       boidVisualRange, boidMaxSpeed, boidMaxForce,
+                                      predatorMaxSpeed, predatorMaxForce, predatorHungerRate,
                                       simulationTime);
 
     flock.Update(deltaTime, predators,
                  boidCohesion, boidSeparation, boidAlignment,
                  boidVisualRange, boidMaxSpeed, boidMaxForce);
 
+    // Update the predators with the live variables before calculating physics
     for (Predator &p : predators)
+    {
+        p.SetMaxSpeed(predatorMaxSpeed);
+        p.SetMaxForce(predatorMaxForce);
+        p.SetHungerRate(predatorHungerRate);
         p.Update(deltaTime, flock.GetFriendlies());
+    }
 
     // Boids (alive only) in gold, predators in red — separate draw calls
     boidDataToRender = BoidRenderer::BoidsToMatricesAlive(flock.GetFlock());
@@ -179,10 +191,14 @@ void Application::RunPausedState()
         bool resumeClicked, setupClicked, quitClicked, graphicsClicked;
         uiManager.RenderPauseMenu(resumeClicked, setupClicked, quitClicked, graphicsClicked);
 
-        if (resumeClicked)   currentState = previousState;
-        if (setupClicked)    currentState = AppState::SETUP;
-        if (graphicsClicked) currentState = AppState::GRAPHICS_SETTINGS;
-        if (quitClicked)     glfwSetWindowShouldClose(graphics.GetWindow(), true);
+        if (resumeClicked)
+            currentState = previousState;
+        if (setupClicked)
+            currentState = AppState::SETUP;
+        if (graphicsClicked)
+            currentState = AppState::GRAPHICS_SETTINGS;
+        if (quitClicked)
+            glfwSetWindowShouldClose(graphics.GetWindow(), true);
     }
     else if (currentState == AppState::GRAPHICS_SETTINGS)
     {
@@ -190,6 +206,7 @@ void Application::RunPausedState()
         UITheme currentUITheme = uiManager.GetActiveTheme();
         uiManager.RenderGraphicsMenu(currentUITheme, backToPause);
         graphics.ToggleColdWar(uiManager.GetActiveTheme() == UITheme::COLDWAR);
-        if (backToPause) currentState = AppState::PAUSED;
+        if (backToPause)
+            currentState = AppState::PAUSED;
     }
 }

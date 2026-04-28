@@ -5,7 +5,8 @@
 #include <vector>
 #include "Boids.h"
 
-class Predator {
+class Predator
+{
 private:
     glm::vec3 position;
     glm::vec3 velocity;
@@ -30,7 +31,12 @@ public:
 
     glm::vec3 GetPosition() const;
     glm::vec3 GetVelocity() const;
-    float     GetHunger()   const;  // so UI or renderer can read it later
+    float GetHunger() const; // so UI or renderer can read it later
+
+    // Setters
+    void SetMaxSpeed(float speed);
+    void SetMaxForce(float force);
+    void SetHungerRate(float rate);
 };
 
 #endif
