@@ -1,7 +1,8 @@
 #ifndef FLOCK_H
 #define FLOCK_H
 
-#include "Friendly.h" // CMakeFiles.txt is set up to find this header file - Kyle
+#include "Friendly.h"
+#include "Predator.h"
 #include <glm/glm.hpp>
 #include <cassert>
 #include <vector>
@@ -9,29 +10,27 @@
 
 class Flock
 {
-private: // should be made public or friend for my predator
-    // vector<Friendly> flock; // I think that for flock we should make the vector out of Friedly or make a get func- Ilias
+private:
     vector<Boids *> flock;
 
 public:
     Flock();
     Flock(int n, float minAlt, float maxAlt);
-    // Friendly &Get_Friendly(int i);
     size_t GetSizeOfFlock() const;
 
-    // void AddFriendly(const Friendly &new_friendly);
-    void Update(double dt, float cohesion, float separation, float alignment, float visualRange, float maxSpeed, float maxForce); // Added even more parameters - Kyle
-    // const vector<Friendly> &GetAllFriendlies() const;
+    void Update(double dt,
+                std::vector<Predator> &predators,
+                float cohesion, float separation, float alignment,
+                float visualRange, float maxSpeed, float maxForce);
+
     const vector<Boids *> GetFlock() const;
 
     ~Flock();
-    // Delete copy operations
     Flock(const Flock &) = delete;
     Flock &operator=(const Flock &) = delete;
-
-    // Add move operations
     Flock(Flock &&other) noexcept;
     Flock &operator=(Flock &&other) noexcept;
+    std::vector<Boids *> &GetFriendlies();
 };
 
 #endif
