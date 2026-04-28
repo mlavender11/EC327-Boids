@@ -155,10 +155,18 @@ void Application::RunSimulationState(float deltaTime)
 {
     simulationTime += deltaTime;
 
+    bool optionsClicked = false;
+
     uiManager.RenderSimulationOverlay(boidCohesion, boidSeparation, boidAlignment,
                                       boidVisualRange, boidMaxSpeed, boidMaxForce,
                                       predatorMaxSpeed, predatorMaxForce, predatorHungerRate,
-                                      simulationTime);
+                                      simulationTime, optionsClicked);
+
+    if (optionsClicked)
+    {
+        previousState = currentState; // Remember we were in SIMULATION
+        currentState = AppState::PAUSED;
+    }
 
     flock.Update(deltaTime, predators,
                  boidCohesion, boidSeparation, boidAlignment,

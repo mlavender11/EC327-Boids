@@ -163,8 +163,10 @@ void UIManager::RenderPauseMenu(bool &resume, bool &setup, bool &quit, bool &gra
     ImGui::End();
 }
 
-void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, float &alignment, float &visualRange, float &maxSpeed, float &maxForce, float &predatorMaxSpeed, float &predatorMaxForce, float &predatorHungRate, float simulationTime)
+void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, float &alignment, float &visualRange, float &maxSpeed, float &maxForce, float &predatorMaxSpeed, float &predatorMaxForce, float &predatorHungRate, float simulationTime, bool &optionsClicked)
 {
+    optionsClicked = false;
+
     ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_FirstUseEver);
 
     ImGuiWindowFlags windowFlags = ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
@@ -212,6 +214,13 @@ void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, floa
         predatorMaxSpeed = 4.0f;
         predatorMaxForce = 0.6f;
         predatorHungRate = 0.04f;
+    }
+
+    ImGui::SameLine();
+
+    if (ImGui::Button("Pause and Options", ImVec2(200, 30)))
+    {
+        optionsClicked = true;
     }
 
     if (simulationTime < 10.0f && !promptDismissed)
