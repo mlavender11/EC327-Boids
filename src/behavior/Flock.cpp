@@ -8,7 +8,9 @@ Flock::Flock(int n, float minAlt, float maxAlt)
 {
     for (size_t i = 0; i < n; i++)
     {
-        Boids *new_boid = new Friendly(maxAlt, minAlt);
+        // Boids *new_boid = new Friendly(maxAlt, minAlt);
+        Boids *new_boid = new Boids(maxAlt, minAlt);
+
         flock.push_back(new_boid);
     }
 }
