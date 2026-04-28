@@ -96,7 +96,8 @@ By utilizing advanced graphics programming techniques like Instanced Rendering, 
 ### Software Architecture Diagrams 🗺️
 *(Add Image/Diagram links here, e.g., Class Diagrams or Shader Pipelines)*
 *Class Diagram (Visual)*
-<img width="2692" height="2140" alt="image" src="https://github.com/user-attachments/assets/e243f447-b3f5-4cbc-90e8-aac85f78b7e9" />
+<img width="2551" height="2229" alt="final project UML diagram-3" src="https://github.com/user-attachments/assets/7a0acc69-8257-421d-9b44-bb90934062fe" />
+
 
 
 
