@@ -23,7 +23,7 @@ jobs:
             artifact_name: EC327-Boids-Mac
           - os: windows-latest
             artifact_name: EC327-Boids-Windows
-          - os: ubuntu-20.04
+          - os: ubuntu-22.04
             artifact_name: EC327-Boids-Linux
 
     steps:
@@ -37,7 +37,7 @@ jobs:
 
     # Install Linux OS prerequisites for Linux build
     - name: Install Linux Dependencies
-      if: matrix.os == 'ubuntu-20.04'
+      if: matrix.os == 'ubuntu-22.04'
       run: |
         sudo apt-get update
         sudo apt-get install -y pkg-config ninja-build libgl1-mesa-dev xorg-dev \
@@ -120,7 +120,7 @@ jobs:
 
   release:
     needs: build
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
