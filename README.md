@@ -99,6 +99,10 @@ cd ..
 
 ### Software Architecture Diagrams 🗺️
 *(Add Image/Diagram links here, e.g., Class Diagrams or Shader Pipelines)*
+*Class Diagram (Visual)*
+<img width="2602" height="2140" alt="image" src="https://github.com/user-attachments/assets/3501035b-5c01-448b-90a8-10bf0925edbc" />
+
+
 
 #### File Diagram
 Important folders and files are listed here. Descriptions for folder contents are in parentheses.
