@@ -25,15 +25,20 @@ By utilizing advanced graphics programming techniques like Instanced Rendering, 
 ### Quick Start: Run the Simulation 🚀
 
 #### 1. Mac Release (.app Bundle) - Recommended on Mac
-If you have downloaded the pre-compiled `EC327-Boids.app` from the Releases tab:
-1. **Unzip** the folder.
-2. **Bypass Apple Gatekeeper:** Because this app is unsigned (we didn't pay Apple $99 so we aren't registered developers), macOS may flag it as damaged. Open **Terminal** and run:
+1. Download `EC327-Boids-Mac.zip` from the latest release.
+2. Unzip the folder if your Mac doesn't automatically unzip it.
+3. Bypass Apple Gatekeeper: Because this app is unsigned (we didn't pay Apple $99 so we aren't registered developers), macOS may flag it as damaged. Open Terminal and run:
    ```bash
    xattr -cr /path/to/EC327-Boids.app
    ```
-3. **Launch:** Double-click the `.app` icon to run.
+4. Double-click the `.app` icon to run.
 
-#### 2. Build from Source (Mac/Linux)
+#### 2. Windows/Linux Release - Recommended on Windows/Linux
+1. Download `EC327-Boids-Windows.zip` or `EC327-Boids-Linux.zip`, depending on your platform, from the latest release.
+2. **Unzip** the folder.
+3. In the folder, double-click the `.exe` file to run.
+
+#### 3. Build from Source (Mac/Linux)
 1. **Clone the Repo:**
    ```bash
    git clone https://github.com/mlavender11/EC327-Boids.git
@@ -44,15 +49,6 @@ If you have downloaded the pre-compiled `EC327-Boids.app` from the Releases tab:
    chmod +x run.sh
    ./run.sh
    ```
-
-#### 3. Manual CMake Build (Cross-Platform)
-```bash
-mkdir build && cd build
-cmake ..
-cmake --build .
-cd ..
-./build/EC327-Boids
-```
 
 ---
 
@@ -104,9 +100,12 @@ cd ..
 Important folders and files are listed here. Descriptions for folder contents are in parentheses.
 ```text
 EC327-Boids/
+├── assets/
+│   ├── fonts/
+│   │   └── (Fonts)
+│   └── (Texture images)
 ├── build/
-│   ├── EC327-Boids.app
-│   └── (Other CMake stuff stuff)
+│   └── (CMake stuff - this folder is deleted and re-made each run)
 ├── external/
 │   └── (A bunch of external libraries we use)
 ├── shaders/
