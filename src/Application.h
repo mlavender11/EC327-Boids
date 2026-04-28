@@ -3,9 +3,10 @@
 
 #include "visual/GraphicsEngine.h"
 #include "visual/UIManager.h"
-#include <vector> // Dont think its really needed cause flock is already a vector
+#include <vector>
 #include <glm/glm.hpp>
 #include "Flock.h"
+#include "behavior/Predator.h"
 
 enum class AppState
 {
@@ -22,12 +23,13 @@ public:
     void Run();
 
 private:
-    // --- State Handlers ---
     void RunSetupState();
     void RunSimulationState(float deltaTime);
     void RunPausedState();
 
-    // --- Core Engine Variables ---
+    void CreatePredators();
+    std::vector<glm::mat4> BuildPredatorMatrices();
+
     GraphicsEngine graphics;
     UIManager uiManager;
 
@@ -38,23 +40,22 @@ private:
     float simulationTime;
     float lastFrameTime;
 
-    // --- Setup Configuration Variables ---
-    int configBoidCount = 500;
+    int configBoidCount     = 500;
+    int configPredatorCount = 3;
     float configEarthRadius = 5.0f;
     float configMinAltitude = 5.0f;
     float configMaxAltitude = 10.0f;
-    float configSunSpeed = 0.3f;
+    float configSunSpeed    = 0.3f;
 
-    // --- Live Config Variables ---
-    float boidCohesion = 1.0f;
-    float boidSeparation = 1.0f;
-    float boidAlignment = 1.0f;
+    float boidCohesion    = 1.0f;
+    float boidSeparation  = 1.0f;
+    float boidAlignment   = 1.0f;
     float boidVisualRange = 5.0f;
-    float boidMaxSpeed = 5.0f;
-    float boidMaxForce = 10.0f;
+    float boidMaxSpeed    = 5.0f;
+    float boidMaxForce    = 10.0f;
 
     Flock flock;
-
+    std::vector<Predator> predators;
     std::vector<glm::mat4> boidDataToRender;
 };
 

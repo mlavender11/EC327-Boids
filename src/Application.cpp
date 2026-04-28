@@ -1,18 +1,63 @@
 #include "Application.h"
-
 #include <GLFW/glfw3.h>
+#include <cmath>
+
+static glm::vec3 RandomSphericalPoint(float minR, float maxR)
+{
+    static std::mt19937 gen(std::random_device{}());
+    std::uniform_real_distribution<float> dr(minR, maxR);
+    std::uniform_real_distribution<float> dtheta(0.0f, 2.0f * 3.14159265f);
+    std::uniform_real_distribution<float> dcosphi(-1.0f, 1.0f);
+
+    float r      = dr(gen);
+    float theta  = dtheta(gen);
+    float cosPhi = dcosphi(gen);
+    float sinPhi = std::sqrt(1.0f - cosPhi * cosPhi);
+    return glm::vec3(r * sinPhi * std::cos(theta),
+                     r * sinPhi * std::sin(theta),
+                     r * cosPhi);
+}
+
+static glm::mat4 OrientedModel(glm::vec3 position, glm::vec3 velocity, float scale)
+{
+    glm::vec3 forward = (glm::dot(velocity, velocity) > 1e-6f)
+                            ? glm::normalize(velocity)
+                            : glm::vec3(0.0f, 0.0f, 1.0f);
+
+    float posLen       = glm::length(position);
+    glm::vec3 radialUp = (posLen > 1e-6f) ? position / posLen : glm::vec3(0.0f, 1.0f, 0.0f);
+
+    glm::vec3 right   = glm::cross(radialUp, forward);
+    float rightLen    = glm::length(right);
+    if (rightLen < 1e-6f) {
+        right    = glm::cross(glm::vec3(1.0f, 0.0f, 0.0f), forward);
+        rightLen = glm::length(right);
+        if (rightLen < 1e-6f) right = glm::vec3(1.0f, 0.0f, 0.0f);
+        else                  right /= rightLen;
+    } else {
+        right /= rightLen;
+    }
+
+    glm::vec3 localUp = glm::normalize(glm::cross(forward, right));
+
+    glm::mat4 model(1.0f);
+    model[0] = glm::vec4(right,    0.0f);
+    model[1] = glm::vec4(localUp,  0.0f);
+    model[2] = glm::vec4(forward,  0.0f);
+    model[3] = glm::vec4(position, 1.0f);
+    return glm::scale(model, glm::vec3(scale));
+}
 
 Application::Application()
 {
     graphics.Initialize(1280, 720, "Boids");
     uiManager.Initialize(graphics.GetWindow());
 
-    currentState = AppState::SETUP;
-    previousState = AppState::SETUP;
+    currentState     = AppState::SETUP;
+    previousState    = AppState::SETUP;
     escapeWasPressed = false;
-
-    simulationTime = 0.0f;
-    lastFrameTime = glfwGetTime();
+    simulationTime   = 0.0f;
+    lastFrameTime    = glfwGetTime();
 }
 
 void Application::Run()
@@ -20,22 +65,19 @@ void Application::Run()
     while (!graphics.ShouldClose())
     {
         float currentFrameTime = glfwGetTime();
-        float deltaTime = currentFrameTime - lastFrameTime;
-        lastFrameTime = currentFrameTime;
+        float deltaTime        = currentFrameTime - lastFrameTime;
+        lastFrameTime          = currentFrameTime;
 
         if (currentState == AppState::SIMULATION)
-        {
             graphics.ProcessInput();
-        }
 
-        // Handle Escape Logic
         bool escapeIsPressed = (glfwGetKey(graphics.GetWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS);
         if (escapeIsPressed && !escapeWasPressed)
         {
             if (currentState == AppState::SIMULATION)
             {
                 previousState = currentState;
-                currentState = AppState::PAUSED;
+                currentState  = AppState::PAUSED;
             }
             else if (currentState == AppState::PAUSED || currentState == AppState::GRAPHICS_SETTINGS)
             {
@@ -46,7 +88,6 @@ void Application::Run()
 
         uiManager.BeginFrame();
 
-        // State handling
         if (currentState == AppState::SETUP)
             RunSetupState();
         else if (currentState == AppState::SIMULATION)
@@ -59,40 +100,48 @@ void Application::Run()
     }
 }
 
-// ---------------------------------------------------------
-// STATE HANDLERS
-// ---------------------------------------------------------
+void Application::CreatePredators()
+{
+    predators.clear();
+    for (int i = 0; i < configPredatorCount; i++)
+        predators.push_back(Predator(
+            RandomSphericalPoint(configMinAltitude, configMaxAltitude),
+            configMinAltitude, configMaxAltitude));
+}
+
+std::vector<glm::mat4> Application::BuildPredatorMatrices()
+{
+    std::vector<glm::mat4> matrices;
+    for (Predator &p : predators)
+        matrices.push_back(OrientedModel(p.GetPosition(), p.GetVelocity(), 0.45f));
+    return matrices;
+}
 
 void Application::RunSetupState()
 {
-    boidDataToRender = BoidRenderer::BoidsToMatrices(flock.GetFlock());
-    graphics.Render(boidDataToRender, true, simulationTime, configMaxAltitude, configMinAltitude, configEarthRadius);
+    graphics.Render(boidDataToRender, {}, true, simulationTime,
+                    configMaxAltitude, configMinAltitude, configEarthRadius);
 
-    // Reset simulation time
     simulationTime = 0.0f;
-    lastFrameTime = glfwGetTime();
+    lastFrameTime  = glfwGetTime();
 
     bool quitClicked = false;
-    uiManager.ResetPromptDismissal(); // Reset prompt dismissal for new simulation
+    uiManager.ResetPromptDismissal();
 
     bool startClicked = uiManager.RenderSetupMenu(
-        configBoidCount,
-        configEarthRadius,
-        configMinAltitude,
-        configMaxAltitude,
-        graphics.GetSunOrbitDistance(),
-        configSunSpeed,
-        quitClicked);
+        configBoidCount, configEarthRadius,
+        configMinAltitude, configMaxAltitude,
+        graphics.GetSunOrbitDistance(), configSunSpeed,
+        configPredatorCount, quitClicked);
 
     if (quitClicked)
-    {
         glfwSetWindowShouldClose(graphics.GetWindow(), true);
-    }
 
     if (startClicked)
     {
         graphics.SetSunSpeed(configSunSpeed);
         flock = Flock(configBoidCount, configMinAltitude, configMaxAltitude);
+        CreatePredators();
         currentState = AppState::SIMULATION;
     }
 }
@@ -101,43 +150,46 @@ void Application::RunSimulationState(float deltaTime)
 {
     simulationTime += deltaTime;
 
-    // Live update of boid parameters from the UI sliders first
-    uiManager.RenderSimulationOverlay(boidCohesion, boidSeparation, boidAlignment, boidVisualRange, boidMaxSpeed, boidMaxForce, simulationTime);
-    flock.Update(deltaTime, boidCohesion, boidSeparation, boidAlignment, boidVisualRange, boidMaxSpeed, boidMaxForce);
+    uiManager.RenderSimulationOverlay(boidCohesion, boidSeparation, boidAlignment,
+                                      boidVisualRange, boidMaxSpeed, boidMaxForce,
+                                      simulationTime);
 
-    // Render the boids using Graphics Engine
-    boidDataToRender = BoidRenderer::BoidsToMatrices(flock.GetFlock());
-    graphics.Render(boidDataToRender, true, simulationTime, configMaxAltitude, configMinAltitude, configEarthRadius);
+    flock.Update(deltaTime, predators,
+                 boidCohesion, boidSeparation, boidAlignment,
+                 boidVisualRange, boidMaxSpeed, boidMaxForce);
+
+    for (Predator &p : predators)
+        p.Update(deltaTime, flock.GetFriendlies());
+
+    // Boids (alive only) in gold, predators in red — separate draw calls
+    boidDataToRender = BoidRenderer::BoidsToMatricesAlive(flock.GetFlock());
+    std::vector<glm::mat4> predatorMatrices = BuildPredatorMatrices();
+
+    graphics.Render(boidDataToRender, predatorMatrices, true, simulationTime,
+                    configMaxAltitude, configMinAltitude, configEarthRadius);
 }
 
 void Application::RunPausedState()
 {
-    // Always render the background so the screen isn't black
-    graphics.Render(boidDataToRender, true, simulationTime, configMaxAltitude, configMinAltitude, configEarthRadius);
+    graphics.Render(boidDataToRender, {}, true, simulationTime,
+                    configMaxAltitude, configMinAltitude, configEarthRadius);
 
     if (currentState == AppState::PAUSED)
     {
         bool resumeClicked, setupClicked, quitClicked, graphicsClicked;
         uiManager.RenderPauseMenu(resumeClicked, setupClicked, quitClicked, graphicsClicked);
 
-        if (resumeClicked)
-            currentState = previousState;
-        if (setupClicked)
-            currentState = AppState::SETUP;
-        if (graphicsClicked)
-            currentState = AppState::GRAPHICS_SETTINGS; // Switches to sub-menu
-        if (quitClicked)
-            glfwSetWindowShouldClose(graphics.GetWindow(), true);
+        if (resumeClicked)   currentState = previousState;
+        if (setupClicked)    currentState = AppState::SETUP;
+        if (graphicsClicked) currentState = AppState::GRAPHICS_SETTINGS;
+        if (quitClicked)     glfwSetWindowShouldClose(graphics.GetWindow(), true);
     }
     else if (currentState == AppState::GRAPHICS_SETTINGS)
     {
         bool backToPause = false;
         UITheme currentUITheme = uiManager.GetActiveTheme();
         uiManager.RenderGraphicsMenu(currentUITheme, backToPause);
-
         graphics.ToggleColdWar(uiManager.GetActiveTheme() == UITheme::COLDWAR);
-
-        if (backToPause)
-            currentState = AppState::PAUSED;
+        if (backToPause) currentState = AppState::PAUSED;
     }
 }
