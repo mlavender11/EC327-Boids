@@ -8,7 +8,7 @@ By utilizing advanced graphics programming techniques like Instanced Rendering, 
 
 ### Developers 🎓
 - **Kyle Armstrong** - *Biomedical Engineering*
-- **Michael ...** - *... Engineering*
+- **Michael Lavender** - *Electrical Engineering*
 - **Ilias ...** - *... Engineering*
 - **Yicong ...** - *... Engineering*
 
