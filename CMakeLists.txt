@@ -66,7 +66,6 @@ add_executable(EC327-Boids MACOSX_BUNDLE
     src/visual/TextureLoader.cpp
 
     src/behavior/Boids.cpp
-    src/behavior/Friendly.cpp
     src/behavior/Predator.cpp
     src/behavior/Flock.cpp
 

@@ -1,7 +1,6 @@
 #ifndef FLOCK_H
 #define FLOCK_H
 
-#include "Friendly.h"
 #include "Predator.h"
 #include <glm/glm.hpp>
 #include <cassert>

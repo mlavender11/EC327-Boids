@@ -8,7 +8,9 @@ Flock::Flock(int n, float minAlt, float maxAlt)
 {
     for (size_t i = 0; i < n; i++)
     {
-        Boids *new_boid = new Friendly(maxAlt, minAlt);
+        // Boids *new_boid = new Friendly(maxAlt, minAlt);
+        Boids *new_boid = new Boids(maxAlt, minAlt);
+
         flock.push_back(new_boid);
     }
 }
@@ -35,7 +37,7 @@ void Flock::Update(double dt,
         {
             glm::vec3 away = boid->getPosition() - p.GetPosition();
             float distSq = glm::dot(away, away);
-            if (distSq < 20.0f * 20.0f && distSq > 1e-6f)
+            if (distSq < (visualRange * visualRange) && distSq > 1e-6f)
             {
                 // Steer away, weighted stronger than regular flocking
                 glm::vec3 steer = glm::normalize(away) * maxSpeed - boid->getVelocity();
