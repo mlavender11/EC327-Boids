@@ -40,14 +40,14 @@ bool GraphicsEngine::Initialize(int width, int height, const char *title)
     glfwSetCursorPosCallback(window, cursor_position_callback);
     glfwSetScrollCallback(window, scroll_callback);
 
-    earthShader      = new Shader("shaders/EarthVertexShader.glsl",      "shaders/EarthFragmentShader.glsl");
-    boidShader       = new Shader("shaders/BoidVertexShader.glsl",       "shaders/BoidFragmentShader.glsl");
+    earthShader = new Shader("shaders/EarthVertexShader.glsl", "shaders/EarthFragmentShader.glsl");
+    boidShader = new Shader("shaders/BoidVertexShader.glsl", "shaders/BoidFragmentShader.glsl");
     atmosphereShader = new Shader("shaders/AtmosphereVertexShader.glsl", "shaders/AtmosphereFragmentShader.glsl");
-    sunShader        = new Shader("shaders/StarVertexShader.glsl",       "shaders/StarFragmentShader.glsl");
+    sunShader = new Shader("shaders/StarVertexShader.glsl", "shaders/StarFragmentShader.glsl");
 
-    earth      = new CelestialBody(10.0f, 24, 24);
+    earth = new CelestialBody(10.0f, 24, 24);
     atmosphere = new CelestialBody(1.0f, 32, 32);
-    sun        = new Star(50.0f, 400.0f, 0.5f, glm::vec3(1.0f, 0.95f, 0.5f));
+    sun = new Star(50.0f, 400.0f, 0.5f, glm::vec3(1.0f, 0.95f, 0.5f));
     boidRenderer = new BoidRenderer();
 
     earthTexture = TextureLoader::Load("assets/earth_crystal2.jpg");
@@ -68,9 +68,9 @@ bool GraphicsEngine::ShouldClose() const
 }
 
 void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData,
-                             const std::vector<glm::mat4> &predatorData,
-                             bool drawSimulation, float simulationTime,
-                             float maxAltitude, float minAltitude, float earthRadius)
+                            const std::vector<glm::mat4> &predatorData,
+                            bool drawSimulation, float simulationTime,
+                            float maxAltitude, float minAltitude, float earthRadius)
 {
     glClearColor(0.05f, 0.05f, 0.1f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -78,8 +78,10 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData,
     camera.minZoom = earthRadius + 2.0f;
     camera.maxZoom = maxAltitude * 3.0f + 20.0f;
 
-    if (camera.radius < camera.minZoom) camera.radius = camera.minZoom;
-    if (camera.radius > camera.maxZoom) camera.radius = camera.maxZoom;
+    if (camera.radius < camera.minZoom)
+        camera.radius = camera.minZoom;
+    if (camera.radius > camera.maxZoom)
+        camera.radius = camera.maxZoom;
 
     if (drawSimulation)
     {
@@ -88,7 +90,8 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData,
         glm::mat4 view = CalculateViewMatrix(camera);
         int width, height;
         glfwGetFramebufferSize(window, &width, &height);
-        if (height == 0) height = 1;
+        if (height == 0)
+            height = 1;
 
         glViewport(0, 0, width, height);
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 3000.0f);
@@ -105,7 +108,7 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData,
         glm::mat4 earthModelMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(earthRadius / 10.0f));
         earthShader->setMat4("model", earthModelMatrix);
 
-        glUniform3fv(glGetUniformLocation(earthShader->ID, "lightDir"),     1, glm::value_ptr(lightDir));
+        glUniform3fv(glGetUniformLocation(earthShader->ID, "lightDir"), 1, glm::value_ptr(lightDir));
         glUniform3fv(glGetUniformLocation(earthShader->ID, "ambientColor"), 1, glm::value_ptr(ambient));
 
         glActiveTexture(GL_TEXTURE0);
@@ -127,11 +130,20 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData,
         boidShader->setInt("u_ColdWar", isColdWar);
         boidShader->setMat4("view", view);
         boidShader->setMat4("projection", projection);
-        glUniform3fv(glGetUniformLocation(boidShader->ID, "lightDir"),     1, glm::value_ptr(lightDir));
+        glUniform3fv(glGetUniformLocation(boidShader->ID, "lightDir"), 1, glm::value_ptr(lightDir));
         glUniform3fv(glGetUniformLocation(boidShader->ID, "ambientColor"), 1, glm::value_ptr(ambient));
 
-        boidRenderer->DrawInstanced(boidData);                                           // gold boids
-        boidRenderer->DrawInstancedColored(predatorData, glm::vec3(1.0f, 0.1f, 0.1f)); // red predators
+        if (isColdWar)
+        {
+            boidRenderer->DrawInstancedColored(boidData, glm::vec3(0.2f, 0.6f, 1.0f));     // Blue boids
+            boidRenderer->DrawInstancedColored(predatorData, glm::vec3(1.0f, 0.1f, 0.1f)); // Red predators
+        }
+        else
+        {
+            // Standard lighting colors for when the theme is turned off
+            boidRenderer->DrawInstanced(boidData);                                         // Default is yellow
+            boidRenderer->DrawInstancedColored(predatorData, glm::vec3(1.0f, 0.1f, 0.1f)); // Red predators
+        }
 
         // --- 3. Draw Sun ---
         sun->Draw(*sunShader, view, projection);
@@ -148,7 +160,7 @@ void GraphicsEngine::Render(const std::vector<glm::mat4> &boidData,
         atmosphereShader->setMat4("projection", projection);
 
         glm::vec3 camPos = glm::vec3(glm::inverse(view)[3]);
-        glUniform3fv(glGetUniformLocation(atmosphereShader->ID, "viewPos"),  1, glm::value_ptr(camPos));
+        glUniform3fv(glGetUniformLocation(atmosphereShader->ID, "viewPos"), 1, glm::value_ptr(camPos));
         glUniform3fv(glGetUniformLocation(atmosphereShader->ID, "lightDir"), 1, glm::value_ptr(lightDir));
 
         float outerVisualRadius = maxAltitude + 0.5f;
@@ -180,7 +192,8 @@ float GraphicsEngine::GetSunOrbitDistance() const { return sun->GetOrbitDistance
 
 void GraphicsEngine::SetSunSpeed(float speed)
 {
-    if (sun) sun->SetSpeed(speed);
+    if (sun)
+        sun->SetSpeed(speed);
 }
 
 void GraphicsEngine::ToggleColdWar(bool cw)

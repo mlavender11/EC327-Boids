@@ -2,7 +2,7 @@
 out vec4 FragColor;
 
 in vec3 FragPos;
-in vec3 vertexColor;
+in vec3 vertexColor; // Receive the color from the Vertex Shader
 
 uniform vec3 lightDir;
 uniform vec3 ambientColor;
@@ -12,7 +12,7 @@ uniform bool u_ColdWar;
 void main()
 {
     if (u_ColdWar) {
-        FragColor = vec4(1.0, 0.1, 0.1, 1.0); // Red
+        FragColor = vec4(vertexColor, 1.0); // Wireframe of boid
     }
     else {
         // dFdx and dFdy find the rate of change of the 3D position of given pixels on the screen

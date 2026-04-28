@@ -13,6 +13,7 @@ out vec3 vertexColor;
 
 void main()
 {
+    
     // Multiply by the instanced matrix so the boids actually move
     FragPos = vec3(instanceMatrix * vec4(aPos, 1.0));
 
