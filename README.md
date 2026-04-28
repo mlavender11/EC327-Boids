@@ -100,7 +100,8 @@ cd ..
 ### Software Architecture Diagrams 🗺️
 *(Add Image/Diagram links here, e.g., Class Diagrams or Shader Pipelines)*
 *Class Diagram (Visual)*
-<img width="2602" height="2140" alt="image" src="https://github.com/user-attachments/assets/3501035b-5c01-448b-90a8-10bf0925edbc" />
+<img width="2692" height="2140" alt="image" src="https://github.com/user-attachments/assets/e243f447-b3f5-4cbc-90e8-aac85f78b7e9" />
+
 
 
 
