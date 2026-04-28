@@ -9,66 +9,49 @@ using namespace std;
 class Boids
 {
 private:
-    glm::vec3 direction; // needs to be a unit vector
+    glm::vec3 direction;
     glm::vec3 position;
-    glm::vec3 velocity;     // Current velocity
-    glm::vec3 acceleration; // Current steering force
-    float maxSpeed;         // Maximum speed
-    float maxForce;         // Maximum force that allowed per update
+    glm::vec3 velocity;
+    glm::vec3 acceleration;
+    float maxSpeed;
+    float maxForce;
     int id;
 
-    /*
-    // Behavior params - will need to edit based on Kyle's map
-    float desiredSeperation = 2.5f; // Desired distance to maintain - used in seperate func - implemenr variation in this?
-    float neighborDist = 5.0f;      // Distance for alignment and cohesion - used in aligh func
-    float perceptionRadius = 5.0f;  // junk value, need to fix ??
-    */
-    // Removed these - Kyle
-
-    glm::vec3 limitMagnitude(glm::vec3 &vec, float maxMag) const; // Helper function for behavior calculations
+    glm::vec3 limitMagnitude(glm::vec3 &vec, float maxMag) const;
 
     static int nextID;
 
     float minAlt;
     float maxAlt;
 
-public:
-    // Will add more parameter constructors as we add more parameters (ex coherence, speed)
-    virtual ~Boids() = default;
-    Boids(float maxAlt, float minAlt);                              // Initializes a bird with random position
-    Boids(double in_x, double in_y, double in_z);                   // Initializes a bird with a given position
-    Boids(double in_x, double in_y, double in_z, glm::vec3 in_vel); // Initialize a bird with goiven position and velocity
+protected:
+    bool alive = true;  // *** NEW ***
 
-    // just want to read a boid's position don't need to copy the entire boid
-    glm::vec3 operator-(const Boids &other_boid);                      // Vector from another boid to this boid
-    static double getDistance(const Boids &boid1, const Boids &boid2); // Static function for distance between two boids
-    double distanceTo(const Boids &other_boid) const;                  // Member function for distance to another boid
+public:
+    virtual ~Boids() = default;
+    Boids(float maxAlt, float minAlt);
+    Boids(double in_x, double in_y, double in_z);
+    Boids(double in_x, double in_y, double in_z, glm::vec3 in_vel);
+
+    glm::vec3 operator-(const Boids &other_boid);
+    static double getDistance(const Boids &boid1, const Boids &boid2);
+    double distanceTo(const Boids &other_boid) const;
     double distanceToSquared(const Boids &other_boid) const;
 
-    // Boids algorithm
-    void applyForce(const glm::vec3 &force); // Apply one steering force to this boid
-    glm::vec3 seek(const glm::vec3 target);  // Head towards a position
+    void applyForce(const glm::vec3 &force);
+    glm::vec3 seek(const glm::vec3 target);
 
-    // updated these to take external parameters - Kyle
-    // glm::vec3 separate(const vector<const Boids *> &neighbors);                 // Seperate if boids are too close
-    // glm::vec3 align(const vector<const Boids *> &neighbors);                    // steer towards avg velocity of neighbors
-    // glm::vec3 cohere(const vector<const Boids *> &neighbors);                   // Steer toward average position of neighbors
-    // void flock(const vector<const Boids *> &neighbors);                         // Calculate forces from neighboring boids in the flock
-    // vector<const Boids *> findNeighbors(const vector<Boids *> &allBoids) const; // Find neighbors within perception radius
     glm::vec3 separate(const vector<const Boids *> &neighbors, float visualRange);
     glm::vec3 align(const vector<const Boids *> &neighbors, float visualRange);
     glm::vec3 cohere(const vector<const Boids *> &neighbors, float visualRange);
     void flock(const vector<const Boids *> &neighbors, float weightCohesion, float weightSeparation, float weightAlignment, float visualRange);
-    void findNeighbors(const vector<Boids *> &allBoids, float visualRange, vector<const Boids *> &outNeighbors) const; // Pass in an output vector instead of returning a new vector to save memory - Kyle
+    void findNeighbors(const vector<Boids *> &allBoids, float visualRange, vector<const Boids *> &outNeighbors) const;
 
-    void setMaxSpeed(float newSpeed); // For UI slider to adjust max speed - Kyle
-    void setMaxForce(float newForce); // For UI slider to adjust max force - Kyle
+    void setMaxSpeed(float newSpeed);
+    void setMaxForce(float newForce);
 
-    glm::vec3 handleBoundary(); // Need to implement this
-
-    /*Before updating the bird's motion for each frame, we need to accumulate and calculate every force acting upon it,
-    and then apply these updates collectively via the `update`*/
-    void update(float dt); // Update this boid for every single simulation step
+    glm::vec3 handleBoundary();
+    void update(float dt);
 
     glm::vec3 getPosition() const;
     glm::vec3 getVelocity() const;
@@ -76,5 +59,8 @@ public:
     double getMaxSpeed() const;
     double getMaxForce() const;
     int getID() const;
+
+    bool isAlive() const { return alive; }  // *** NEW ***
+    void kill()          { alive = false; } // *** NEW ***
 };
 #endif

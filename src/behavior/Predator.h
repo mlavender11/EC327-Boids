@@ -1,24 +1,36 @@
 #ifndef PREDATOR_H
 #define PREDATOR_H
-#include "Boids.h" // CMakeFiles.txt is set up to find this header file - Kyle
-// #include "Friendly.h"
-//#include "Flock.h"
 
-class Flock;
-class Predator : public Boids{
+#include <glm/glm.hpp>
+#include <vector>
+#include "Boids.h"
+
+class Predator {
 private:
-    const Flock *targetFlock; //Points to the flock of boids currently being hunted
+    glm::vec3 position;
+    glm::vec3 velocity;
+    glm::vec3 acceleration;
+
+    float maxSpeed;
+    float maxForce;
+    float minAltitude;
+    float maxAltitude;
+
+    float hunger;          // 0 = full, 1 = starving
+    float hungerRate;      // how fast hunger grows per second
+    float hungerThreshold; // only hunts when hunger exceeds this
+    float huntCooldown;    // pause after a kill before hunting again
+
+    glm::vec3 HandleBoundary() const;
+
 public:
-//     Friendly *target;
-//     Flock *target_flock;
+    Predator(glm::vec3 pos, float minAlt, float maxAlt);
 
-    Predator(float maxAlt, float minAlt);// create a Predator without an initial target flock
-    Predator(float maxAlt,float minAlt,const Flock *newTargetFlock); //bind a specific target flock directly upon creation
+    void Update(float dt, std::vector<Boids *> &flock);
 
-    //void get_target();
-    //void update();
-    void SetTargetFlock(const Flock *newTargetFlock);//dynamically modify the target flock to be tracked later
-    void Hunt(float dt); // find nearest target and hunt per sec
+    glm::vec3 GetPosition() const;
+    glm::vec3 GetVelocity() const;
+    float     GetHunger()   const;  // so UI or renderer can read it later
 };
 
 #endif

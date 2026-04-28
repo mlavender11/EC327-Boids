@@ -1,63 +1,98 @@
 #include "Predator.h"
-#include "Flock.h"
-#include <limits>
-Predator::Predator(float maxAlt, float minAlt): Boids(maxAlt,minAlt), targetFlock(nullptr) 
-{
-//     target_flock = nullptr;
-//     target = nullptr;
+
+Predator::Predator(glm::vec3 pos, float minAlt, float maxAlt) {
+    position     = pos;
+    velocity     = glm::vec3(0.0f);
+    acceleration = glm::vec3(0.0f);
+
+    maxSpeed     = 4.0f;
+    maxForce     = 0.6f;
+    minAltitude  = minAlt;
+    maxAltitude  = maxAlt;
+
+    hunger          = 0.0f;  // starts full
+    hungerRate      = 0.04f; // gets hungry over ~25 seconds
+    hungerThreshold = 0.4f;  // starts hunting at 40% hunger
+    huntCooldown    = 0.0f;
 }
 
-Predator::Predator(float maxAlt, float minAlt, const Flock* newTargetFlock): Boids(maxAlt, minAlt), targetFlock(newTargetFlock)
-{//specify which flock the Predator should track at the time of its creation
-//     target_flock = &new_target_flock;
-//     target = nullptr;
-}
+glm::vec3 Predator::GetPosition() const { return position; }
+glm::vec3 Predator::GetVelocity() const { return velocity; }
+float     Predator::GetHunger()   const { return hunger; }
 
+glm::vec3 Predator::HandleBoundary() const {
+    float altitude = glm::length(position);
+    if (altitude < 1e-6f) return glm::vec3(0.0f);
 
-void Predator::SetTargetFlock(const Flock *newTargetFlock)
-{// modify the targetflock
-    targetFlock = newTargetFlock;
-}
+    glm::vec3 radialDir = position / altitude;
+    float margin      = (maxAltitude - minAltitude) * 0.1f;
+    float innerDanger = minAltitude + margin;
+    float outerDanger = maxAltitude - margin;
 
-
-//void Predator::get_target(){
-//     if(target_flock == nullptr || target_flock->GetSizeOfFlock() == 0) return;
-
-//     target = &target_flock->Get_Friendly(0);
-
-//     if(target_flock->GetSizeOfFlock() == 1)return;
-
-
-//     for(int i = 1; i < target_flock->GetSizeOfFlock(); i++){
-//         if (getDistance(*this, target_flock->Get_Friendly(i)) < getDistance(*this, *target)){
-//             target = &target_flock->Get_Friendly(i);
-//             }
-//     }
-// }
-void Predator::Hunt(float dt)
-{
-    if (targetFlock == nullptr || targetFlock->GetSizeOfFlock() == 0)
-    //if there is no target flock has been bound yet, or if the flock is empty, do nothing
-    {
-        return;
+    if (altitude < innerDanger) {
+        float urgency = (innerDanger - altitude) / margin;
+        return radialDir * maxForce * 3.0f * urgency;
     }
-    const std::vector<Boids *> &allBoids = targetFlock->GetFlock();//consistently use Boids* as the container element type.
-    const Boids *closestTarget = nullptr;//set null at first means havent found any targets yet
-    double closestDistSq = std::numeric_limits<double>::max();
+    if (altitude > outerDanger) {
+        float urgency = (altitude - outerDanger) / margin;
+        return -radialDir * maxForce * 6.0f * urgency;
+    }
+    return glm::vec3(0.0f);
+}
 
-    for (const Boids *boid : allBoids)
-    {
-        double distSq = distanceToSquared(*boid);
-        if (distSq < closestDistSq)
-        {
-            closestDistSq = distSq;
-            closestTarget = boid;
+void Predator::Update(float dt, std::vector<Boids *> &flock) {
+
+    // Hunger always grows over time, capped at 1
+    hunger = std::min(1.0f, hunger + hungerRate * dt);
+
+    // Cool down after a kill
+    if (huntCooldown > 0.0f) {
+        huntCooldown -= dt;
+    }
+
+    // Only hunt when hungry enough and not in cooldown
+    bool isHungry = (hunger >= hungerThreshold) && (huntCooldown <= 0.0f);
+
+    if (isHungry) {
+        float closestDist = 1e9f;
+        int   targetIndex = -1;
+
+        for (int i = 0; i < (int)flock.size(); i++) {
+            if (!flock[i]->isAlive()) continue;
+
+            float dist = glm::length(flock[i]->getPosition() - position);
+            if (dist < closestDist) {
+                closestDist = dist;
+                targetIndex = i;
+            }
+        }
+
+        if (targetIndex != -1) {
+            if (closestDist < 1.5f) {
+                flock[targetIndex]->kill();
+                hunger       = 0.0f;   // eating resets hunger
+                huntCooldown = 5.0f;   // rest 5 seconds after a kill
+            }
+
+            // Steer toward target
+            glm::vec3 desired = flock[targetIndex]->getPosition() - position;
+            float desiredLen  = glm::length(desired);
+            if (desiredLen > 1e-6f) {
+                desired = (desired / desiredLen) * maxSpeed;
+                glm::vec3 steer = desired - velocity;
+                if (glm::length(steer) > maxForce)
+                    steer = glm::normalize(steer) * maxForce;
+                acceleration += steer;
+            }
         }
     }
-    if (closestTarget != nullptr) //start chasing when found closet target
-    {
-        glm::vec3 chaseForce = seek(closestTarget->getPosition());// return a steering force for the target
-        applyForce(chaseForce);
-        update(dt);
-    }
+    // When not hungry, just cruise — no steering force added,
+    // the predator naturally glides and boundary-corrects
+
+    acceleration += HandleBoundary();
+    velocity     += acceleration * dt;
+    if (glm::length(velocity) > maxSpeed)
+        velocity = glm::normalize(velocity) * maxSpeed;
+    position     += velocity * dt;
+    acceleration  = glm::vec3(0.0f);
 }
