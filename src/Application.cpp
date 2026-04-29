@@ -166,7 +166,9 @@ void Application::RunSimulationState(float deltaTime)
 
     bool optionsClicked = false;
 
-    uiManager.RenderSimulationOverlay(boidCohesion, boidSeparation, boidAlignment,
+    int aliveCount = static_cast<int>(boidDataToRender.size());
+
+    uiManager.RenderSimulationOverlay(aliveCount, boidCohesion, boidSeparation, boidAlignment,
                                       boidVisualRange, boidMaxSpeed, boidMaxForce,
                                       predatorMaxSpeed, predatorMaxForce, predatorHungerRate,
                                       simulationTime, optionsClicked);
