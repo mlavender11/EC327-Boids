@@ -1,6 +1,11 @@
 <h1 align="center"> 3D Boids Simulator </h1>
 <p align="center">
 
+https://github.com/user-attachments/assets/dbd4f6e2-bcf0-4d92-842f-2377e8ffdd8c
+
+
+---
+
 ### Project Description 📌
 We built a high-performance 3D graphics engine and flocking simulation from scratch in C++ and OpenGL. The simulation features (up to) thousands of boids dynamically orbiting Earth in real-time.
 
