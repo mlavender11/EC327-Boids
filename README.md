@@ -1,7 +1,8 @@
 <h1 align="center"> 3D Boids Simulator </h1>
 <p align="center">
 
-https://github.com/user-attachments/assets/dbd4f6e2-bcf0-4d92-842f-2377e8ffdd8c
+<img width="960" height="720" alt="EC327-project-shorter" src="https://github.com/user-attachments/assets/845e5913-fd13-4cde-a5b2-a2948558a65e" />
+
 
 
 ---
