@@ -163,7 +163,7 @@ void UIManager::RenderPauseMenu(bool &resume, bool &setup, bool &quit, bool &gra
     ImGui::End();
 }
 
-void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, float &alignment, float &visualRange, float &maxSpeed, float &maxForce, float &predatorMaxSpeed, float &predatorMaxForce, float &predatorHungRate, float simulationTime, bool &optionsClicked)
+void UIManager::RenderSimulationOverlay(int aliveBoidsCount, float &cohesion, float &separation, float &alignment, float &visualRange, float &maxSpeed, float &maxForce, float &predatorMaxSpeed, float &predatorMaxForce, float &predatorHungRate, float simulationTime, bool &optionsClicked)
 {
     optionsClicked = false;
 
@@ -171,6 +171,11 @@ void UIManager::RenderSimulationOverlay(float &cohesion, float &separation, floa
 
     ImGuiWindowFlags windowFlags = ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav;
     ImGui::Begin("Flocking Controls", nullptr, windowFlags);
+
+    ImGui::Text("Alive Boids: %d", aliveBoidsCount);
+    ImGui::Spacing();
+    ImGui::Separator();
+    ImGui::Spacing();
 
     ImGui::Text("Boid Behavior Parameters");
     ImGui::Separator();
