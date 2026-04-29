@@ -1,5 +1,5 @@
 ### Project Description 📌
-We built a high-performance 3D graphics engine and flocking simulation from scratch in C++ and OpenGL. The simulation features (up to) thousands of boids dynamically orbiting Earth in real-time. **EXPLAIN WHAT BOIDS ARE IN A LOT OF DETAIL FOR DUMMIES**
+We built a high-performance 3D graphics engine and flocking simulation from scratch in C++ and OpenGL. The simulation features (up to) thousands of boids dynamically orbiting Earth in real-time.
 
 
 By utilizing advanced graphics programming techniques like Instanced Rendering, Custom GLSL Shaders, and Face Culling, the engine renders 5,000+ individual boids alongside dynamic lighting, an atmosphere, and a day/night cycle. 
@@ -9,8 +9,8 @@ By utilizing advanced graphics programming techniques like Instanced Rendering, 
 ### Developers 🎓
 - **Kyle Armstrong** - *Biomedical Engineering*
 - **Michael Lavender** - *Electrical Engineering*
-- **Ilias ...** - *... Engineering*
-- **Yicong ...** - *... Engineering*
+- **Ilias Blal** - *Computer Engineering*
+- **Yicong Lei** - *Computer Engineering*
 
 ---
 
@@ -22,7 +22,7 @@ By utilizing advanced graphics programming techniques like Instanced Rendering, 
 
 ---
 
-### Quick Start: Run the Simulation 🚀
+### How to Run the Simulation 🚀
 
 #### 1. Mac Release (.app Bundle) - Recommended on Mac
 1. Download `EC327-Boids-Mac.zip` from the latest release.
@@ -33,7 +33,7 @@ By utilizing advanced graphics programming techniques like Instanced Rendering, 
    ```
 4. Double-click the `.app` icon to run.
 
-#### 2. Windows/Linux Release - Recommended on Windows/Linux
+#### 2. Windows/Linux Release - Recommended on Windows (Linux not working)
 1. Download `EC327-Boids-Windows.zip` or `EC327-Boids-Linux.zip`, depending on your platform, from the latest release.
 2. **Unzip** the folder.
 3. In the folder, double-click the `.exe` file to run.

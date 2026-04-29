@@ -3,7 +3,7 @@
 
 int main()
 {
-    // Call the path resolver before starting the engine
+    // Find where it is before running
     PathResolver::Initialize();
 
     Application app;
